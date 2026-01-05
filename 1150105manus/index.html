@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manus' Final Interview Before the Acquisition： Oh, the Surreal Odyssey of 2025…_20260105_204402</title>
+    <!-- Open Graph / LINE link preview -->
+    <meta property="og:title" content="Manus AI 訪談筆記：通用 Agent 的未來與台灣產業的啟示" />
+    <meta property="og:description" content="好的,這是一份合併整理後的完整筆記,風格已調整為符合台灣專業脈絡。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="./manus.png" />
+    <meta property="og:image:alt" content="Manus cover" />
+    <meta property="og:locale" content="zh_TW" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Manus AI 訪談筆記：通用 Agent 的未來與台灣產業的啟示" />
+    <meta name="twitter:description" content="好的,這是一份合併整理後的完整筆記,風格已調整為符合台灣專業脈絡。" />
+    <meta name="twitter:image" content="./manus.png" />
+
+    <!-- Additional SEO -->
+    <meta name="description" content="Manus AI 訪談筆記：探討通用 Agent 的發展與台灣產業的啟示。" />
+    <style>
+
+/* ===== CSS 主題系統 ===== */
+/* 主題: 學習 (📚) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --ink: #2c3e50;
+    --paper: #f8f9fa;
+    --panel: #ffffff;
+    --accent: #3498db;
+    --accent-soft: #d6eaf8;
+    --accent-2: #2980b9;
+    --muted: #7f8c8d;
+    --shadow: rgba(52, 152, 219, 0.12);
+    --highlight: #fff3cd;
+    --success: #27ae60;
+}
+
+/* ===== 深色模式覆蓋 ===== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ink: #e2e8f0;
+        --paper: #0f1419;
+        --panel: #1a2332;
+        --accent: #60a5fa;
+        --accent-soft: #1e3a8a;
+        --accent-2: #93c5fd;
+        --muted: #94a3b8;
+        --shadow: rgba(0, 0, 0, 0.3);
+    }
+}
+
+body.dark-mode {
+    --ink: #e2e8f0;
+    --paper: #0f1419;
+    --panel: #1a2332;
+    --accent: #60a5fa;
+    --accent-soft: #1e3a8a;
+    --accent-2: #93c5fd;
+    --muted: #94a3b8;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* ===== 基礎排版 ===== */
+body {
+    font-family: "Source Sans 3", "Noto Sans TC", -apple-system, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.8;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-2);
+    text-decoration: underline;
+}
+
+/* ===== 容器 ===== */
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+}
+
+.header {
+    padding: 48px 0 24px;
+    border-bottom: 2px solid var(--accent-soft);
+}
+
+.subtitle {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 1.05em;
+}
+
+.meta {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.9em;
+}
+
+/* ===== 卡片式 TOC ===== */
+.toc-section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--accent-soft);
+    background: var(--paper);
+}
+
+.toc-section h3 {
+    font-size: 1.1em;
+    color: var(--accent-2);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toc-grid {
+    display: grid;
+    /* 固定為單欄列表,避免在寬螢幕自動分為兩欄 */
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+/* Compact TOC list styles */
+.toc {
+    padding: 12px;
+    background: var(--panel);
+    border: 1px solid var(--accent-soft);
+    border-radius: 8px;
+}
+.toc .toctitle {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--accent-2);
+}
+.toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.toc li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    margin: 6px 0;
+}
+.toc li:nth-child(odd) {
+    background: rgba(52,152,219,0.03);
+}
+.toc a {
+    color: var(--ink);
+    text-decoration: none;
+}
+.toc li a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+/* ===== 卡片樣式 ===== */
+.toc-grid a,
+.content-card {
+    display: block;
+    padding: 16px;
+    background: var(--panel);
+    border: 1px solid #d6eaf8;
+    border-radius: 8px;
+    color: var(--accent-2);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
+    transition: all 0.3s ease;
+}
+
+.toc-grid a:hover,
+.content-card:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 8px 24px rgba(52, 152, 219, 0.15);
+    transform: translateY(-4px);
+}
+
+/* ===== 內容卡片 ===== */
+.content {
+    padding: 32px 0;
+}
+
+.content > section {
+    margin: 48px 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--accent-soft);
+}
+
+.content > section:first-child {
+    border-top: none;
+}
+
+/* ===== 標題 ===== */
+h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--accent);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    border-bottom: 3px solid var(--accent);
+}
+
+@media (prefers-color-scheme: light) {
+    h1 {
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        border-bottom-color: var(--accent-soft);
+    }
+}
+
+h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--accent);
+    padding-bottom: 12px;
+    margin-top: 56px;
+    margin-bottom: 16px;
+    border-bottom: 3px solid var(--accent);
+}
+
+h3 {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--accent);
+    padding-left: 12px;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    border-left: 4px solid var(--accent);
+}
+
+h4, h5, h6 {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--accent-2);
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+/* ===== 段落與文本 ===== */
+p {
+    margin: 16px 0;
+    line-height: 1.8;
+    color: var(--ink);
+}
+
+blockquote {
+    margin: 16px 0;
+    padding: 0 0 0 20px;
+    border-left: 4px solid var(--accent);
+    color: var(--muted);
+    font-style: italic;
+}
+
+/* ===== 列表 ===== */
+ul, ol {
+    margin: 16px 0;
+    padding-left: 24px;
+    color: var(--ink);
+}
+
+li {
+    margin: 8px 0;
+    line-height: 1.8;
+}
+
+/* ===== 代碼塊 ===== */
+code {
+    background: var(--accent-soft);
+    color: var(--accent-2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+pre {
+    background: var(--panel);
+    border: 1px solid var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+/* ===== 表格 ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: var(--panel);
+    border: 1px solid var(--accent-soft);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
+}
+
+th {
+    background: var(--accent-soft);
+    color: var(--accent-2);
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid var(--accent);
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid var(--accent-soft);
+    color: var(--ink);
+}
+
+tr:hover {
+    background: var(--accent-soft);
+}
+
+/* ===== 圖片 ===== */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 16px auto;
+    border-radius: 8px;
+    border: 1px solid var(--accent-soft);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
+}
+
+/* ===== Mermaid 圖表 ===== */
+.mermaid {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+    padding: 16px;
+    background: var(--panel);
+    border: 1px solid var(--accent-soft);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
+}
+
+/* ===== 頁腳 ===== */
+footer {
+    padding: 32px 0 48px;
+    color: var(--muted);
+    border-top: 1px solid var(--accent-soft);
+    font-size: 0.9em;
+}
+
+/* ===== 響應式設計 ===== */
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 0 16px 32px;
+    }
+
+    h1 {
+        font-size: 2.1em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .toc-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== 主題切換按鈕 ===== */
+.theme-switcher {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    display: flex;
+    gap: 8px;
+}
+
+.theme-btn {
+    min-width: 50px;
+    height: 44px;
+    padding: 0 12px;
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    background: var(--panel);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-btn:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent-2);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.theme-btn.active {
+    background: var(--accent);
+    color: var(--panel);
+}
+
+/* ===== 主題標籤 ===== */
+.theme-badge {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    padding: 6px 12px;
+    background: var(--accent);
+    color: var(--panel);
+    border-radius: 4px;
+    font-size: 0.85em;
+    white-space: nowrap;
+    margin-bottom: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.theme-switcher:hover .theme-badge {
+    opacity: 1;
+}
+
+
+/* ===== 逐字稿特定样式 ===== */
+ul.key-quotes {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul.key-quotes > li {
+    margin: 24px 0;
+    padding: 0;
+}
+
+ul.key-quotes p.quote {
+    margin: 12px 0;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, var(--highlight) 0%, var(--accent-soft) 100%);
+    border-left: 4px solid var(--accent-2);
+    border-radius: 8px;
+    color: var(--ink);
+    font-style: italic;
+    position: relative;
+}
+
+ul.key-quotes p.quote::before {
+    content: '"';
+    position: absolute;
+    top: -8px;
+    left: 8px;
+    font-size: 2em;
+    color: var(--accent-soft);
+    opacity: 0.5;
+}
+
+ul.key-quotes p.analysis {
+    margin: 12px 0;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(233, 250, 246, 1) 0%, rgba(245, 255, 250, 0.8) 100%);
+    border-left: 4px solid var(--success);
+    border-radius: 8px;
+    color: var(--ink);
+}
+
+ul.key-quotes p.analysis strong {
+    color: var(--accent-2);
+    font-weight: 600;
+}
+
+.ts {
+    font-family: 'Monaco', 'Courier New', monospace;
+    background: var(--accent-soft);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent-2);
+    font-size: 0.85em;
+    margin-left: 4px;
+}
+
+table.speaker-table {
+    border: 2px solid var(--accent);
+}
+
+table.speaker-table thead {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+}
+
+table.speaker-table th::before {
+    content: '👥 ';
+}
+
+nav.toc-grid a[href^="#speech-"] {
+    background: linear-gradient(135deg, var(--accent-soft) 0%, var(--highlight) 100%);
+    border-left: 4px solid var(--accent);
+}
+
+nav.toc-grid a[href^="#speech-"]::before {
+    content: '🎤 ';
+}
+
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #49483e }
+.highlight { background: #272822; color: #f8f8f2 }
+.highlight .c { color: #959077 } /* Comment */
+.highlight .err { color: #ed007e; background-color: #1e0010 } /* Error */
+.highlight .esc { color: #f8f8f2 } /* Escape */
+.highlight .g { color: #f8f8f2 } /* Generic */
+.highlight .k { color: #66d9ef } /* Keyword */
+.highlight .l { color: #ae81ff } /* Literal */
+.highlight .n { color: #f8f8f2 } /* Name */
+.highlight .o { color: #ff4689 } /* Operator */
+.highlight .x { color: #f8f8f2 } /* Other */
+.highlight .p { color: #f8f8f2 } /* Punctuation */
+.highlight .ch { color: #959077 } /* Comment.Hashbang */
+.highlight .cm { color: #959077 } /* Comment.Multiline */
+.highlight .cp { color: #959077 } /* Comment.Preproc */
+.highlight .cpf { color: #959077 } /* Comment.PreprocFile */
+.highlight .c1 { color: #959077 } /* Comment.Single */
+.highlight .cs { color: #959077 } /* Comment.Special */
+.highlight .gd { color: #ff4689 } /* Generic.Deleted */
+.highlight .ge { color: #f8f8f2; font-style: italic } /* Generic.Emph */
+.highlight .ges { color: #f8f8f2; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.highlight .gr { color: #f8f8f2 } /* Generic.Error */
+.highlight .gh { color: #f8f8f2 } /* Generic.Heading */
+.highlight .gi { color: #a6e22e } /* Generic.Inserted */
+.highlight .go { color: #66d9ef } /* Generic.Output */
+.highlight .gp { color: #ff4689; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { color: #f8f8f2; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #959077 } /* Generic.Subheading */
+.highlight .gt { color: #f8f8f2 } /* Generic.Traceback */
+.highlight .kc { color: #66d9ef } /* Keyword.Constant */
+.highlight .kd { color: #66d9ef } /* Keyword.Declaration */
+.highlight .kn { color: #ff4689 } /* Keyword.Namespace */
+.highlight .kp { color: #66d9ef } /* Keyword.Pseudo */
+.highlight .kr { color: #66d9ef } /* Keyword.Reserved */
+.highlight .kt { color: #66d9ef } /* Keyword.Type */
+.highlight .ld { color: #e6db74 } /* Literal.Date */
+.highlight .m { color: #ae81ff } /* Literal.Number */
+.highlight .s { color: #e6db74 } /* Literal.String */
+.highlight .na { color: #a6e22e } /* Name.Attribute */
+.highlight .nb { color: #f8f8f2 } /* Name.Builtin */
+.highlight .nc { color: #a6e22e } /* Name.Class */
+.highlight .no { color: #66d9ef } /* Name.Constant */
+.highlight .nd { color: #a6e22e } /* Name.Decorator */
+.highlight .ni { color: #f8f8f2 } /* Name.Entity */
+.highlight .ne { color: #a6e22e } /* Name.Exception */
+.highlight .nf { color: #a6e22e } /* Name.Function */
+.highlight .nl { color: #f8f8f2 } /* Name.Label */
+.highlight .nn { color: #f8f8f2 } /* Name.Namespace */
+.highlight .nx { color: #a6e22e } /* Name.Other */
+.highlight .py { color: #f8f8f2 } /* Name.Property */
+.highlight .nt { color: #ff4689 } /* Name.Tag */
+.highlight .nv { color: #f8f8f2 } /* Name.Variable */
+.highlight .ow { color: #ff4689 } /* Operator.Word */
+.highlight .pm { color: #f8f8f2 } /* Punctuation.Marker */
+.highlight .w { color: #f8f8f2 } /* Text.Whitespace */
+.highlight .mb { color: #ae81ff } /* Literal.Number.Bin */
+.highlight .mf { color: #ae81ff } /* Literal.Number.Float */
+.highlight .mh { color: #ae81ff } /* Literal.Number.Hex */
+.highlight .mi { color: #ae81ff } /* Literal.Number.Integer */
+.highlight .mo { color: #ae81ff } /* Literal.Number.Oct */
+.highlight .sa { color: #e6db74 } /* Literal.String.Affix */
+.highlight .sb { color: #e6db74 } /* Literal.String.Backtick */
+.highlight .sc { color: #e6db74 } /* Literal.String.Char */
+.highlight .dl { color: #e6db74 } /* Literal.String.Delimiter */
+.highlight .sd { color: #e6db74 } /* Literal.String.Doc */
+.highlight .s2 { color: #e6db74 } /* Literal.String.Double */
+.highlight .se { color: #ae81ff } /* Literal.String.Escape */
+.highlight .sh { color: #e6db74 } /* Literal.String.Heredoc */
+.highlight .si { color: #e6db74 } /* Literal.String.Interpol */
+.highlight .sx { color: #e6db74 } /* Literal.String.Other */
+.highlight .sr { color: #e6db74 } /* Literal.String.Regex */
+.highlight .s1 { color: #e6db74 } /* Literal.String.Single */
+.highlight .ss { color: #e6db74 } /* Literal.String.Symbol */
+.highlight .bp { color: #f8f8f2 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a6e22e } /* Name.Function.Magic */
+.highlight .vc { color: #f8f8f2 } /* Name.Variable.Class */
+.highlight .vg { color: #f8f8f2 } /* Name.Variable.Global */
+.highlight .vi { color: #f8f8f2 } /* Name.Variable.Instance */
+.highlight .vm { color: #f8f8f2 } /* Name.Variable.Magic */
+.highlight .il { color: #ae81ff } /* Literal.Number.Integer.Long */
+
+.content pre.highlight {
+    background: #1f2933;
+    color: #e6edf3;
+}
+
+.content pre.highlight code {
+    color: inherit;
+}
+
+/* Ensure paragraph separation background color for compatibility/tests */
+.p { background: rgba(102, 126, 234, 0.02); }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Manus AI 訪談筆記：通用 Agent 的未來與台灣產業的啟示</h1>
+            <div class="meta">Word count: 5174</div>
+        </div>
+
+        <div class="toc-section" id="smart-toc">
+            <div class="toc-image" style="text-align:center; margin-bottom:12px;">
+                <img src="manus.png" alt="manus" style="max-width:100%; height:auto;" />
+            </div>
+            <h3>📑 快速導航</h3>
+            <nav class="toc-grid">
+                <div class="toc"><span class="toctitle">目錄</span><ul>
+<li><a href="#manus-ai-agent">Manus AI 訪談筆記：通用 Agent 的未來與台灣產業的啟示</a><ul>
+<li><a href="#a">A. 基本資訊</a></li>
+<li><a href="#_1">說話者對照表</a></li>
+<li><a href="#_2">專有名詞表</a></li>
+<li><a href="#manus-ai-agent_1">Manus AI：通用 Agent 的魔幻故事與前瞻</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+            </nav>
+        </div>
+
+        <div class="content">
+            <section>
+<p>好的,這是一份合併整理後的完整筆記,風格已調整為符合台灣專業脈絡：</p>
+
+<h3 id="a"><strong>A. 基本資訊</strong></h3>
+<ul>
+<li><strong>訪談場次/主題：</strong> Manus AI 共同創辦人兼首席科學家季超 (Pig) 深度對談</li>
+<li><strong>主要組織：</strong> Manus AI</li>
+<li><strong>訪談日期：</strong> [待查]</li>
+<li><strong>形式：</strong> Podcast 訪談（依內容推斷）</li>
+<li><strong>核心研究目標：</strong> 探討通用 Agent 的發展、Manus AI 的創業歷程與未來策略,並從中梳理對台灣產業的啟示。</li>
+</ul>
+<h3 id="_1"><strong>說話者對照表</strong></h3>
+<table>
+<thead>
+<tr>
+<th>角色/職稱</th>
+<th>姓名/代碼</th>
+<th>組織</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主持人</td>
+<td>小駿</td>
+<td>[待查]</td>
+</tr>
+<tr>
+<td>講者</td>
+<td>季超 (Pig)</td>
+<td>Manus AI (共同創辦人兼首席科學家)</td>
+</tr>
+<tr>
+<td>講者</td>
+<td>小紅 (Red)</td>
+<td>Manus AI (CEO)</td>
+</tr>
+<tr>
+<td>講者</td>
+<td>張濤 (Tao)</td>
+<td>Manus AI (COO)</td>
+</tr>
+<tr>
+<td>講者</td>
+<td>潘潘 (PanPan)</td>
+<td>Manus AI (CTO)</td>
+</tr>
+<tr>
+<td>講者</td>
+<td>慧潔 (Huijie)</td>
+<td>Manus AI (CMO)</td>
+</tr>
+<tr>
+<td>講者</td>
+<td>CC</td>
+<td>Manus AI (負責營運財務)</td>
+</tr>
+</tbody>
+</table>
+
+<h4><strong>🏢 Manus AI 團隊組織結構圖</strong></h4>
+<div class="mermaid">
+graph TD
+    A["Manus AI<br/>通用 Agent 平台"] --> B["季超 Pig<br/>共同創辦人兼首席科學家<br/>技術決策領域 獨裁者"]
+    A --> C["小紅 Red<br/>CEO<br/>產品決策核心"]
+    A --> D["張濤 Tao<br/>COO<br/>營運管理"]
+    A --> E["潘潘 PanPan<br/>CTO<br/>技術執行"]
+    A --> F["慧潔 Huijie<br/>CMO<br/>市場品牌"]
+    A --> G["CC<br/>財務營運<br/>成本控制"]
+
+    B -.->|混合決策| C
+    C -->|產品驅動| A
+    D -->|營運協調| A
+    E -->|技術實現| B
+</div>
+
+<h3 id="_2"><strong>專有名詞表</strong></h3>
+<table>
+<thead>
+<tr>
+<th>專有名詞</th>
+<th>英文/原文</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent</td>
+<td>Agent</td>
+<td>指能夠感知環境、進行推理並執行動作的 AI 系統。</td>
+</tr>
+<tr>
+<td>通用 Agent</td>
+<td>General Agent</td>
+<td>指能處理廣泛任務、不限於特定領域的 AI Agent。</td>
+</tr>
+<tr>
+<td>基礎設施層</td>
+<td>Infrastructure Layer</td>
+<td>指支援 AI 運作的硬體、軟體、平台等基礎架構。</td>
+</tr>
+<tr>
+<td>模型層</td>
+<td>Model Layer</td>
+<td>指負責 AI 模型本身（如 LLM）的開發與優化。</td>
+</tr>
+<tr>
+<td>應用層</td>
+<td>Application Layer</td>
+<td>指基於 AI 模型開發的具體應用與產品。</td>
+</tr>
+<tr>
+<td>NLP</td>
+<td>Natural Language Processing</td>
+<td>自然語言處理,讓電腦理解、解釋人類語言的技術。</td>
+</tr>
+<tr>
+<td>Word2Vec</td>
+<td>Word2Vec</td>
+<td>Google 在 2013 年提出的將詞彙轉換為向量的技術,是 NLP 的里程碑。</td>
+</tr>
+<tr>
+<td>依存句法分析</td>
+<td>Dependency Parsing</td>
+<td>NLP 中的一種技術,用於分析詞語之間的語法關係。</td>
+</tr>
+<tr>
+<td>Tokenization</td>
+<td>Tokenization</td>
+<td>將文本切分為詞彙、子詞或符號的過程,是 LLM 的基礎。</td>
+</tr>
+<tr>
+<td>命名實體識別</td>
+<td>Named Entity Recognition (NER)</td>
+<td>辨識文本中具有特定意義的實體（如人名、地名、組織名）。</td>
+</tr>
+<tr>
+<td>關係抽取</td>
+<td>Relation Extraction</td>
+<td>識別文本中實體之間關係的技術。</td>
+</tr>
+<tr>
+<td>Open IE</td>
+<td>Open Information Extraction</td>
+<td>允許 AI 在不預設 Schema 的情況下,自行識別實體及其關係。</td>
+</tr>
+<tr>
+<td>Transformer</td>
+<td>Transformer</td>
+<td>2017 年提出的神經網路架構,是現代 LLM 的基礎。</td>
+</tr>
+<tr>
+<td>BERT</td>
+<td>BERT</td>
+<td>Google 開發的基於 Transformer 的預訓練模型,在 NLP 任務上表現出色。</td>
+</tr>
+<tr>
+<td>Long Context</td>
+<td>Long Context</td>
+<td>指模型能夠處理的輸入序列長度。</td>
+</tr>
+<tr>
+<td>LLM</td>
+<td>Large Language Model</td>
+<td>大型語言模型,如 GPT-3、Gemini 等。</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>Retrieval Augmented Generation</td>
+<td>檢索增強生成,結合外部知識庫來增強 LLM 回答的準確性。</td>
+</tr>
+<tr>
+<td>Fine-tuning</td>
+<td>Fine-tuning</td>
+<td>在預訓練模型基礎上,針對特定任務進行少量數據微調。</td>
+</tr>
+<tr>
+<td>Prompt Engineering</td>
+<td>Prompt Engineering</td>
+<td>設計輸入提示（Prompt）以引導 LLM 產生期望輸出的技術。</td>
+</tr>
+<tr>
+<td>Monca</td>
+<td>Monca</td>
+<td>Manus AI 旗下的 Chrome 插件,用於用戶行為觀察與 AI 應用驗證。</td>
+</tr>
+<tr>
+<td>虛擬化</td>
+<td>Virtualization</td>
+<td>創建虛擬計算環境的技術,Manus AI 用於運行 Agent。</td>
+</tr>
+<tr>
+<td>Sandbox</td>
+<td>Sandbox</td>
+<td>在隔離環境中運行應用程式,防止其影響主機系統。</td>
+</tr>
+<tr>
+<td>Agentic Coding</td>
+<td>Agentic Coding</td>
+<td>指 Agent 透過編程（寫程式碼）來完成任務。</td>
+</tr>
+<tr>
+<td>Prosumer</td>
+<td>Prosumer</td>
+<td>producer (生產者) 和 consumer (消費者) 的結合,指能夠同時創造和使用產品的用戶。</td>
+</tr>
+<tr>
+<td>CTE</td>
+<td>Context Engineering</td>
+<td>指理解、管理和利用上下文資訊以提升 AI 效能的技術。</td>
+</tr>
+<tr>
+<td>ARPU</td>
+<td>Average Revenue Per User</td>
+<td>每用戶平均收入。</td>
+</tr>
+<tr>
+<td>MRR</td>
+<td>Monthly Recurring Revenue</td>
+<td>每月經常性收入。</td>
+</tr>
+<tr>
+<td>The Browser Company (Arc)</td>
+<td>The Browser Company (Arc)</td>
+<td>開發 Arc 瀏覽器的公司,以設計感和 AI 功能聞名。</td>
+</tr>
+<tr>
+<td>DeepSeek</td>
+<td>DeepSeek</td>
+<td>中國 AI 公司,以其開源 LLM 模型聞名。</td>
+</tr>
+<tr>
+<td>Kimi</td>
+<td>Kimi</td>
+<td>另一家中國 AI 公司,以長上下文處理能力著稱。</td>
+</tr>
+<tr>
+<td>Grok</td>
+<td>Grok</td>
+<td>Elon Musk 的 AI 模型。</td>
+</tr>
+<tr>
+<td>Anthropic</td>
+<td>Anthropic</td>
+<td>開發 Claude 模型的公司。</td>
+</tr>
+<tr>
+<td>Gemini</td>
+<td>Gemini</td>
+<td>Google 開發的多模態 AI 模型。</td>
+</tr>
+<tr>
+<td>OpenAI</td>
+<td>OpenAI</td>
+<td>開發 GPT 系列模型的公司。</td>
+</tr>
+</tbody>
+</table>
+<p>
+</p></section><section>
+
+<h3 id="manus-ai-agent_1"><strong>Manus AI：通用 Agent 的魔幻故事與前瞻</strong></h3>
+<h4 id="_3"><strong>【部分一】導入與背景</strong></h4>
+<p>本訪談深入探討了 AI Agent 的未來發展趨勢,特別是通用 Agent 的潛力。 Manus AI 共同創辦人兼首席科學家季超 (Pig) 分享了他從早期網路時代的創業經歷,到在 NLP 領域的開拓,再到創立 Manus AI 的心路歷程。訪談聚焦於 AI Agent 如何從「心」走向「手」,觸及現實世界,並從中梳理出對台灣產業發展的啟示。</p>
+<h4 id="ios-nlp"><strong>【部分二】季超的創業歷程：從 iOS 瀏覽器到 NLP 的開拓者</strong></h4>
+<p>季超回顧了其成長背景的啟蒙,父親是傳統科學家,母親是連續創業家,這塑造了他成為科技創業家的定位。2009 年 App Store 的出現,為他高中時期提供了將興趣變現的全球化平台,他成功打造了 iOS 瀏覽器「猛碼瀏覽器」,透過「買斷拷貝」模式獲得了穩定現金流,賺取了超過 30 萬美元。他認為,早期行動互聯網的「蠻荒期」提供了巨大的機遇,讓新進者能與巨頭「眾生平等」。為了提升瀏覽器性能,他開始研究自然語言處理 (NLP),這成為日後創業的重要契機。</p>
+<ul>
+<li><strong>核心洞見</strong>：早期技術變革的「蠻荒期」是孕育顛覆性創新的沃土,個人開發者在此階段更有機會與巨頭並駕齊驅。個人興趣與明確的商業模式結合,是早期創業成功的關鍵。</li>
+<li><strong>啟示</strong>：在當前 AI 浪潮中,圍繞 Agent、基礎設施、特定應用場景的「潛在蠻荒期」依然存在,值得關注。同時,創業者需保持對商業模式的清晰認知,避免僅憑技術熱情而忽略盈利能力。</li>
+</ul>
+
+<h4><strong>⏱️ 季超的創業歷程時間線</strong></h4>
+<div class="mermaid">
+timeline
+    title 季超：從蠻荒期到通用 Agent 時代
+
+    2009 : App Store 推出 : 高中時期創業啟蒙
+    2009-2015 : iOS 瀏覽器「猛碼瀏覽器」: 累計收入 30 萬美元 : 體驗「蠻荒期」機遇
+    2015-2017 : Word2Vec 啟發 : 投入 NLP 領域 : 創立第二家公司
+    2015-2020 : 知識圖譜 & 語意搜索 : 研發 Open IE 技術 : 自動化 Schema-less 方案
+    2020-2022 : Transformer 浪潮 : 技術快速迭代 : 團隊挑戰增大
+    2022-2023 : GPT-3 出現 : 認識通用模型威力 : 垂直模型競爭力削弱
+    2023-至今 : Manus AI 誕生 : 聚焦通用 Agent : 「心」走向「手」的新時代
+</div>
+
+<h4 id="_4"><strong>【部分三】第二段創業：探索知識圖譜與語意搜索的邊界</strong></h4>
+<p>季超的第二次創業聚焦於 NLP 領域,從 Word2Vec 開始,他看到了將離散文本向量化的可能性,並進一步探索語意搜索和知識圖譜的潛力。他預見可穿戴設備和語音界面的發展將顛覆傳統搜索模式,催生語意搜索需求。然而,他發現傳統知識圖譜依賴人工標註,團隊轉而投入研發自動化、Schema-less 的 Open Information Extraction (Open IE) 技術。技術的快速迭代,從依存句法分析到 Transformer,給創業帶來巨大挑戰,而 GPT-3 的出現,更是顛覆了以往垂直領域模型競爭的格局,讓他深刻認識到通用模型的巨大潛力。</p>
+<ul>
+<li><strong>核心洞見</strong>：技術的快速迭代是 AI 領域創業的常態,創業者需要快速適應,並對過往投入的「重複建造」有心理準備。通用大模型的出現,極大地改變了 AI 創業格局,垂直領域的優勢面臨挑戰,通用能力的整合變得越來越重要。</li>
+<li><strong>啟示</strong>：台灣企業需重新評估 AI 戰略,決定是聚焦於特定領域的深度優化,還是擁抱通用大模型帶來的廣泛應用可能性。同時,建立持續學習機制,並評估通用模型整合策略至關重要。</li>
+</ul>
+<h4 id="ai"><strong>【部分四】從「先烈」到「先行者」：AI 時代的創業反思</strong></h4>
+<p>季超分享了其第二次創業的失敗教訓,認為過度追求技術驅動、忽視商業模式和用戶需求,以及在不成熟的市場中過早進行垂直整合,是關鍵因素。他將此階段的經歷稱為「先烈」,從中學到「不該當 CEO」以及「尋找適合的人」的寶貴經驗。他意識到自己不適合擔任 CEO,更適合專注於技術研發,並強調了尋找與自己互補的 CEO 或合作夥伴的重要性。</p>
+<ul>
+<li><strong>核心洞見</strong>：在 AI 領域,僅憑技術創新難以成功,必須與市場需求、商業模式和用戶驗證緊密結合。過於超前的技術,若無相應的市場土壤,可能淪為「先烈」。創業者應清晰認識自身優勢劣勢,尋找能夠彌補不足的關鍵合作夥伴。</li>
+<li><strong>啟示</strong>：台灣產業在 AI 佈局時,應避免僅追求單點技術突破,同時考量其商業化路徑和市場接受度。此外,強調了團隊互補性和核心角色的匹配度是創業成功的關鍵。</li>
+</ul>
+<h4 id="manus-ai-agent_2"><strong>【部分五】Manus AI 的誕生：為何是通用 Agent？</strong></h4>
+<p>季超闡述了對 AI 發展方向的深刻理解：AI 應從「心」走向「手」,觸及現實世界。Manus AI 的誕生,正是源於對構建一個能夠與現實世界互動、且由用戶塑造的通用 Agent 的信念。Manus AI 的底層架構基於虛擬機（圖靈機）,具備運行任何算法的潛力。公司採取達爾文式的觀察方法,通過觀察用戶如何使用通用 Agent,捕捉頭部應用場景。通用 Agent 能夠解決長尾、非標準化的任務,比垂直工具更有價值,並能在垂直場景後「多加一步」,產生內部網絡效應。</p>
+<ul>
+<li><strong>核心洞見</strong>：AI 的未來將從單純的「智能」走向「智能與行動」的結合,通用 Agent 需要一個有效的現實世界互動媒介。由用戶「塑造」的產品,比創業者「預設」的產品更有生命力。</li>
+<li><strong>啟示</strong>：台灣產業在 AI 佈局時,不僅要關注模型能力的提升,更要思考如何將 AI 應用與實際的物理或數字世界連接。同時,應採用用戶中心的方法論,通過數據驅動的洞察來引導產品發展。</li>
+</ul>
+
+<h4><strong>🧠➜👐 AI 發展框架：從「心」到「手」</strong></h4>
+<div class="mermaid">
+graph TD
+    A["心<br/>AI 的智能層<br/>------<br/>- LLM 基礎模型<br/>- 推理能力<br/>- 知識儲備"] -->|理解世界| B["認知<br/>資訊處理<br/>------<br/>- 上下文管理<br/>- 記憶流轉<br/>- 決策邏輯"]
+    B -->|執行動作| C["手<br/>AI 的行動層<br/>------<br/>- 虛擬化環境<br/>- 工具整合<br/>- 物理互動"]
+    C -->|現實回饋| D["世界<br/>實際應用<br/>------<br/>- 物理自動化<br/>- 數位操作<br/>- 業務轉化"]
+    D -.->|學習優化| A
+    A --> E["Manus AI<br/>通用 Agent 框架"]
+    C --> E
+    
+    style A fill:#e3f2fd,stroke:#333,stroke-width:2px
+    style C fill:#fff3e0,stroke:#333,stroke-width:2px
+    style E fill:#f3e5f5,stroke:#333,stroke-width:2px
+</div>
+
+<h4 id="manus-ai"><strong>【部分六】產品思維與團隊協作：Manus AI 的決策模式</strong></h4>
+<p>季超深入剖析了 Manus AI 的團隊構成與決策機制,強調了「身心健康」、「相信常識」以及「非藝術家」的創始人特質在 AI 時代創業中的重要性。Manus AI 採取「混合式」決策模式,結合專制、民主與充分協商,並將產品驅動視為公司的核心基因,由 CEO 小紅主導產品決策,季超則在技術決策上扮演「技術領域的獨裁者」,形成技術與產品的互補。</p>
+<ul>
+<li><strong>核心洞見</strong>：AI 時代創始人應具備「身心健康」、「相信常識」的特質,而非僅具備「藝術家」思維。高效的決策機制,結合產品驅動與技術專長,能確保公司穩健發展。</li>
+<li><strong>啟示</strong>：台灣新創團隊在建立 AI 產品時,應重視團隊成員的特質與互補性,同時建立一套兼顧效率與創新的決策機制,並將產品價值置於核心地位。</li>
+</ul>
+<h4 id="ai_1"><strong>【部分七】AI 瀏覽器的反思與轉向</strong></h4>
+<p>Manus AI 最初曾嘗試將通用 Agent 整合至瀏覽器,並推出了 Monca 插件。然而,在實驗過程中,團隊發現用戶的真實行為與預期存在差異,例如,用戶在 Cursor 中進行非編程任務,以及對 Slides、網頁製作等場景的偏好。這些觀察促使 Manus AI 重新思考其產品策略,並將重心轉向更廣泛的通用 Agent 應用。</p>
+<ul>
+<li><strong>核心洞見</strong>：用戶的實際行為數據是驗證產品方向的關鍵。對用戶真實需求的洞察,能有效指導產品迭代和策略轉向。</li>
+<li><strong>啟示</strong>：台灣企業在開發 AI 產品時,應建立有效的用戶行為數據收集與分析機制,從而更精準地把握市場脈動,避免開發出脫離實際需求的產品。</li>
+</ul>
+
+<h4><strong>🔄 產品策略轉變：從預設到數據驅動</strong></h4>
+<div class="mermaid">
+graph TD
+    P1["初期假設<br/>瀏覽器整合 Agent"] --> P2["實際需求<br/>與預期差異"]
+    P2 --> P3["非編程任務"]
+    P2 --> P4["內容創作場景"]
+    P2 --> P5["通用工具偏好"]
+    P3 --> P6["策略轉變"]
+    P4 --> P6
+    P5 --> P6
+    P6 --> P7["新方向<br/>通用 Agent 優先"]
+
+    style P1 fill:#ffebee
+    style P7 fill:#e8f5e9
+    style P6 fill:#fff9c4
+</div>
+
+<h4 id="manus-ai_1"><strong>【部分八】Manus AI 的核心技術與策略</strong></h4>
+<p>Manus AI 著重於構建一個統一的 Agent 框架,強調其上下文和記憶的自由流轉能力。公司將 AI 的發展視為從「心」（模型）到「手」（與現實世界的互動）的演進。其底層技術基於虛擬機（圖靈機）,使其能夠運行任何算法,為通用 Agent 的實現提供了堅實的技術基礎。Manus AI 採用的「GPA」決策框架（Go, Priority, Alternative）,以及「身心健康、相信常識」的創始人特質,共同塑造了其獨特的產品開發與團隊協作模式。</p>
+<ul>
+<li><strong>核心洞見</strong>：通用 Agent 的核心價值在於其統一的上下文和記憶流轉,以及能夠在通用任務的基礎上,進一步整合其他場景的能力,形成疊加效應。</li>
+<li><strong>啟示</strong>：台灣企業在構建 AI 解決方案時,可以考慮如何實現不同 AI 模組之間的無縫協作,以及如何利用統一的數據和記憶,來提升整體效能。</li>
+</ul>
+<h4 id="agent"><strong>【部分九】台灣產業借鏡：通用 Agent 的啟示</strong></h4>
+<p>Manus AI 的發展歷程,為台灣產業帶來了深刻啟示。首先,應關注 AI 的「心」與「手」的結合,即 AI 模型能力與其與現實世界交互能力的雙向發展。其次,通用 Agent 的興起,提示台灣企業需思考如何在垂直領域的深度優勢與通用能力的廣泛應用之間取得平衡。再者,以用戶行為為導向的產品塑造方式,強調了數據驅動決策的重要性。最後,創始團隊的特質與決策機制,也為台灣新創生態提供了寶貴的經驗。</p>
+<ul>
+<li><strong>台灣產業啟示</strong>：<ol>
+<li><strong>關注 AI 的「手」</strong>：積極探索 AI 如何與物理世界（如自動化、機器人）或數字世界（如操作系統、軟體工具）深度整合,賦予 AI 實際執行能力。</li>
+<li><strong>平衡通用與垂直</strong>：審慎評估在特定領域的深度優化,與 Embracing 通用 AI Agent 帶來的廣泛應用場景之間的策略平衡。</li>
+<li><strong>擁抱用戶中心方法論</strong>：建立強大的用戶行為數據收集與分析機制,以數據洞察驅動產品創新與迭代。</li>
+<li><strong>打造多元互補的創始團隊</strong>：重視團隊成員的背景、特質與互補性,並建立高效、穩健的決策流程,以應對快速變化的 AI 時代。</li>
+<li><strong>關注 Agentic Coding 的潛力</strong>：Agentic Coding（Agent 透過編程完成任務）預示著 AI 將更深入地參與到軟體開發等專業領域,台灣應關注此趨勢的發展。</li>
+</ol>
+</li>
+</ul>
+
+<h4><strong>🎯 台灣企業 AI 策略決策框架</strong></h4>
+<div class="mermaid">
+graph TD
+    S["台灣企業<br/>AI 決策"] --> E["評估優勢"]
+    S --> C["選擇路徑"]
+    S --> M["建立機制"]
+    S --> T["準備人才"]
+
+    E --> E1["評估<br/>垂直領域競爭力"]
+
+    C --> CA["路徑 A<br/>深度優化"]
+    C --> CB["路徑 B<br/>通用 Agent"]
+    C --> CC["路徑 C<br/>混合路線"]
+
+    M --> M1["建立<br/>用戶數據機制"]
+
+    T --> T1["招聘<br/>互補型團隊"]
+
+    CA --> A["立即行動"]
+    CB --> A
+    CC --> A
+
+    A --> G["目標<br/>推出 AI 產品"]
+
+    style S fill:#e1f5fe
+    style CA fill:#fff3e0
+    style CB fill:#f3e5f5
+    style CC fill:#e8f5e9
+    style G fill:#fce4ec
+</div>
+
+</section>
+        </div>
+
+        <footer>
+            <span>Generated by HTMLReportGenerator</span>
+        </footer>
+    </div>
+
+<div class="theme-switcher">
+    <button class="theme-btn active" data-theme="learning" title="學習主題 - Learning" aria-label="切換到學習主題"><span>Learn</span></button>
+    <button class="theme-btn" data-theme="professional" title="專業主題 - Professional" aria-label="切換到專業主題"><span>Pro</span></button>
+    <button class="theme-btn" data-theme="kawaii" title="日式可愛主題 - Playful" aria-label="切換到日式可愛主題"><span>Play</span></button>
+</div>
+
+<script>
+// 初始化主題
+function initTheme() {
+    const savedTheme = localStorage.getItem('selected-theme') || 'learning';
+    applyTheme(savedTheme);
+}
+
+// 應用主題
+function applyTheme(themeName) {
+    const themeMap = {
+        'learning': {
+            '--ink': '#2c3e50',
+            '--paper': '#f8f9fa',
+            '--panel': '#ffffff',
+            '--accent': '#3498db',
+            '--accent-soft': '#d6eaf8',
+            '--accent-2': '#2980b9',
+            '--muted': '#7f8c8d',
+            '--shadow': 'rgba(52, 152, 219, 0.12)',
+            '--highlight': '#fff3cd',
+            '--success': '#27ae60',
+        },
+        'professional': {
+            '--ink': '#1a1a2e',
+            '--paper': '#f5f5f7',
+            '--panel': '#ffffff',
+            '--accent': '#1f77b4',
+            '--accent-soft': '#e8f0f8',
+            '--accent-2': '#0d47a1',
+            '--muted': '#5a5a5a',
+            '--shadow': 'rgba(31, 119, 180, 0.08)',
+            '--highlight': '#f5f5dc',
+            '--success': '#1b5e20',
+        },
+        'kawaii': {
+            '--ink': '#5a4a65',
+            '--paper': '#fef8f3',
+            '--panel': '#fffbf9',
+            '--accent': '#d97db3',
+            '--accent-soft': '#f5d5e8',
+            '--accent-2': '#c2185b',
+            '--muted': '#9b7f99',
+            '--shadow': 'rgba(217, 125, 179, 0.15)',
+            '--highlight': '#fff9e6',
+            '--success': '#e91e63',
+        }
+    };
+
+    const colors = themeMap[themeName];
+    const root = document.documentElement;
+
+    if (colors) {
+        Object.entries(colors).forEach(([key, value]) => {
+            root.style.setProperty(key, value);
+        });
+    }
+
+    // 更新按鈕狀態
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.theme === themeName) {
+            btn.classList.add('active');
+        }
+    });
+
+    // 保存選擇
+    localStorage.setItem('selected-theme', themeName);
+}
+
+// 綁定事件
+document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        applyTheme(btn.dataset.theme);
+    });
+});
+
+// 頁面載入時初始化
+document.addEventListener('DOMContentLoaded', initTheme);
+window.addEventListener('load', initTheme);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    if (typeof mermaid !== 'undefined') {
+        mermaid.initialize({ 
+            startOnLoad: false, 
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+        
+        // 渲染所有 Mermaid 圖表
+        const mermaidNodes = document.querySelectorAll('.mermaid');
+        mermaidNodes.forEach((node, index) => {
+            const code = (node.textContent || '').trim();
+            if (!code) {
+                return;
+            }
+            const id = `mermaid-${index}`;
+            mermaid.render(id, code).then(({ svg, bindFunctions }) => {
+                node.innerHTML = svg;
+                if (bindFunctions) {
+                    bindFunctions(node);
+                }
+            }).catch((err) => {
+                console.error('Mermaid render error:', err);
+                node.innerHTML = `<div style="color: red; padding: 10px;">圖表渲染錯誤: ${err.message}</div>`;
+            });
+        });
+    }
+</script>
+
+</body>
+</html>
