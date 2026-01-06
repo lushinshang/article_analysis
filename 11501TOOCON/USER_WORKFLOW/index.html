@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exam31 使用者使用流程圖</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+            color: #333;
+        }
+
+        .description h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .description ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .description li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a1a;
+            }
+
+            .container {
+                background: #2d2d2d;
+                color: #e0e0e0;
+            }
+
+            .description {
+                background: #3a3a3a;
+                color: #e0e0e0;
+            }
+
+            .footer {
+                color: #999;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 exam31 使用者使用流程圖</h1>
+            <p>AI 智能筆記生成系統 - 使用者交互流程</p>
+        </div>
+
+        <div class="content">
+            <div class="mermaid">
+                %%{init: {'flowchart': {'curve': 'linear'}, 'theme': 'base', 'themeVariables': {'primaryColor':'#667eea', 'primaryBorderColor':'#5568d3', 'lineColor':'#764ba2', 'tertiaryColor':'#f0f0f0'}}}%%
+                flowchart TD
+                    Start([👤 使用者啟動系統]) --> Menu["🎯 主選單<br/>選擇輸入類型"]
+
+                    Menu -->|選項 1| Transcript["📝 逐字稿分析<br/>(MP3/SRT 檔案)"]
+                    Menu -->|選項 2| Web["🌐 網頁分析<br/>(URL 或 HTML)"]
+                    Menu -->|選項 3| PDF["📄 PDF 分析<br/>(PDF 檔案)"]
+
+                    Transcript --> T_Input["輸入: 逐字稿檔案<br/>- MP3/M4A 音訊<br/>- 或 SRT 字幕"]
+                    Web --> W_Input["輸入: 網頁來源<br/>- URL 連結<br/>- 或 HTML 檔案"]
+                    PDF --> P_Input["輸入: PDF 檔案<br/>- 掃描版<br/>- 或 數位版"]
+
+                    T_Input --> Process1["⚙️ 處理流程<br/>Whisper 轉錄<br/>→ 文字清理"]
+                    W_Input --> Process2["⚙️ 處理流程<br/>網頁解析<br/>→ 圖片提取"]
+                    P_Input --> Process3["⚙️ 處理流程<br/>PDF 解析<br/>→ 文字萃取<br/>→ 圖片提取"]
+
+                    Process1 --> AI["🤖 AI 分析<br/>Gemini 2.5 Flash-Lite<br/>(Copilot CLI 備選)"]
+                    Process2 --> AI
+                    Process3 --> AI
+
+                    AI --> Output["📋 生成結構化筆記<br/>- HTML 報告<br/>- Markdown<br/>- JSON 數據"]
+
+                    Output --> Themes["🎨 主題選擇<br/>- 學習風格<br/>- 專業風格<br/>- 可愛風格"]
+
+                    Themes --> Save["💾 儲存輸出<br/>output/ 目錄<br/>自動命名"]
+
+                    Save --> End(["✅ 完成<br/>使用者獲得筆記"])
+
+                    style Start fill:#90EE90
+                    style End fill:#FFB6C1
+                    style Menu fill:#87CEEB
+                    style AI fill:#FFD700
+                    style Output fill:#DDA0DD
+                    style Save fill:#F0E68C
+            </div>
+
+            <div class="description">
+                <h3>📌 流程說明</h3>
+                <ul>
+                    <li><strong>輸入階段</strong>：使用者透過主選單選擇三種輸入來源之一（逐字稿、網頁、PDF）</li>
+                    <li><strong>前處理</strong>：系統根據輸入類型進行相應的文字提取和數據清理</li>
+                    <li><strong>AI 分析</strong>：使用 Gemini 2.5 Flash-Lite 進行深度分析，生成結構化筆記</li>
+                    <li><strong>輸出格式化</strong>：生成 HTML 報告、Markdown 檔案及元數據</li>
+                    <li><strong>主題定制</strong>：使用者可選擇喜歡的 UI 主題（3 種風格）</li>
+                    <li><strong>儲存</strong>：自動儲存至 output 目錄，檔名自動生成</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            Generated for exam31_notemaker v1.6 | AI-Powered Note Generation System
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+        mermaid.contentLoaded();
+    </script>
+</body>
+</html>
