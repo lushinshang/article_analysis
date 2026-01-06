@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exam31 資訊流流程圖</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #f5576c;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+            color: #333;
+        }
+
+        .description h3 {
+            color: #f5576c;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .description ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .description li {
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #f5576c;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f5576c;
+        }
+
+        .section-content {
+            margin-left: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a1a;
+            }
+
+            .container {
+                background: #2d2d2d;
+                color: #e0e0e0;
+            }
+
+            .mermaid {
+                background: #3a3a3a;
+            }
+
+            .description {
+                background: #3a3a3a;
+                color: #e0e0e0;
+            }
+
+            .footer {
+                color: #999;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔄 exam31 資訊流流程圖</h1>
+            <p>數據轉換和處理管道</p>
+        </div>
+
+        <div class="content">
+            <div class="mermaid">
+                %%{init: {'flowchart': {'curve': 'linear'}, 'theme': 'base', 'themeVariables': {'primaryColor':'#f093fb', 'primaryBorderColor':'#f5576c', 'lineColor':'#f5576c', 'tertiaryColor':'#f0f0f0'}}}%%
+                flowchart LR
+                    subgraph Input["📥 輸入層"]
+                        Audio["🔊 音訊檔案<br/>MP3/M4A"]
+                        SRT["📝 字幕檔案<br/>SRT"]
+                        URL["🌐 URL<br/>HTML"]
+                        PDF["📄 PDF<br/>掃描版"]
+                    end
+
+                    subgraph Extract["🔍 提取層"]
+                        W1["Whisper<br/>音訊轉錄"]
+                        W2["文字解析<br/>字幕處理"]
+                        W3["BeautifulSoup<br/>網頁解析"]
+                        W4["Docling<br/>PDF 提取"]
+                    end
+
+                    subgraph Process["⚙️ 處理層"]
+                        P1["文字清理<br/>標點修復<br/>段落分割"]
+                        P2["圖片提取<br/>智能過濾<br/>相關度評分"]
+                        P3["作者分析<br/>主題識別<br/>文章分類"]
+                    end
+
+                    subgraph Analyze["🤖 分析層"]
+                        A1["多樣本評估<br/>結構化重點"]
+                        A2["思考路徑<br/>邏輯鏈"]
+                        A3["架構設計<br/>核心洞見"]
+                    end
+
+                    subgraph Format["📋 格式化層"]
+                        F1["Markdown<br/>轉換"]
+                        F2["HTML<br/>報告"]
+                        F3["JSON<br/>元數據"]
+                    end
+
+                    subgraph QA["✅ 品質保證層"]
+                        Q1["HackMD<br/>兼容性檢查"]
+                        Q2["自動修復<br/>語法糾正"]
+                        Q3["驗證成功"]
+                    end
+
+                    subgraph Output["📤 輸出層"]
+                        O1["HTML 報告<br/>3 主題選擇"]
+                        O2["Markdown"]
+                        O3["元數據 JSON"]
+                    end
+
+                    Audio --> W1
+                    SRT --> W2
+                    URL --> W3
+                    PDF --> W4
+
+                    W1 --> P1
+                    W2 --> P1
+                    W3 --> P2
+                    W4 --> P2
+
+                    P1 --> A1
+                    P2 --> A1
+                    P3 --> A1
+
+                    A1 --> A2
+                    A2 --> A3
+
+                    A3 --> F1
+                    A3 --> F2
+                    A3 --> F3
+
+                    F1 --> Q1
+                    F2 --> Q1
+                    F3 --> Q1
+
+                    Q1 --> Q2
+                    Q2 --> Q3
+
+                    Q3 --> O1
+                    Q3 --> O2
+                    Q3 --> O3
+
+                    style Input fill:#E3F2FD
+                    style Extract fill:#F3E5F5
+                    style Process fill:#FCE4EC
+                    style Analyze fill:#FFF3E0
+                    style Format fill:#E8F5E9
+                    style QA fill:#F1F8E9
+                    style Output fill:#FFE0B2
+            </div>
+
+            <div class="description">
+                <h3>📊 七層資訊流架構</h3>
+
+                <div class="section-title">📥 Layer 1: 輸入層</div>
+                <div class="section-content">
+                    <ul>
+                        <li>接收四種輸入格式：音訊 (MP3/M4A)、字幕 (SRT)、網頁 (URL/HTML)、PDF 檔案</li>
+                        <li>每種格式有專門的處理路徑</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">🔍 Layer 2: 提取層</div>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>Whisper</strong>：將音訊轉換為文字</li>
+                        <li><strong>SRT 解析</strong>：提取字幕和時間戳</li>
+                        <li><strong>BeautifulSoup</strong>：解析網頁 HTML，提取內容和元數據</li>
+                        <li><strong>Docling</strong>：高精度 PDF 解析，支持複雜版面</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">⚙️ Layer 3: 處理層</div>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>文字清理</strong>：標點修復、段落分割、重複移除</li>
+                        <li><strong>圖片處理</strong>：智能過濾圖標/頭像，Vision API 全圖分析，4 維度相關度評分</li>
+                        <li><strong>元數據提取</strong>：作者背景（三層降級）、文章主題分類</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">🤖 Layer 4: 分析層</div>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>多樣本評估</strong>：Gemini 2.5 Flash-Lite 進行多維度分析</li>
+                        <li><strong>思考路徑</strong>：生成邏輯推導鏈，展現分析過程</li>
+                        <li><strong>架構設計</strong>：提取核心洞見和系統性理解</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">📋 Layer 5: 格式化層</div>
+                <div class="section-content">
+                    <ul>
+                        <li>轉換為三種輸出格式：Markdown、HTML、JSON</li>
+                        <li>統一的模板系統確保一致性</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">✅ Layer 6: 品質保證層</div>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>兼容性檢查</strong>：HackMD 語法驗證（275 行檢查器）</li>
+                        <li><strong>自動修復</strong>：修復常見問題（310+ 行修復器）</li>
+                        <li><strong>驗證成功率 100%</strong>✅</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">📤 Layer 7: 輸出層</div>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>HTML 報告</strong>：3 個精心設計的主題（學習/專業/可愛），支援深色模式</li>
+                        <li><strong>Markdown 檔案</strong>：用於版本控制和文檔化</li>
+                        <li><strong>JSON 元數據</strong>：結構化數據，便於進一步處理</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Generated for exam31_notemaker v1.6 | Seven-Layer Information Pipeline Architecture
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+        mermaid.contentLoaded();
+    </script>
+</body>
+</html>
