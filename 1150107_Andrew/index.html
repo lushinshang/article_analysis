@@ -1,0 +1,264 @@
+import re
+from pathlib import Path
+from typing import List
+import typer
+import markdown
+from rich.console import Console
+from rich.markdown import Markdown
+from rich.panel import Panel
+
+app = typer.Typer()
+console = Console()
+
+class ReportConductor:
+    """
+    負責處理 AI 2026 展望報告的類別。
+    """
+    def __init__(self, file_path: str):
+        self.file_path = Path(file_path)
+        if not self.file_path.exists():
+            raise FileNotFoundError(f"找不到報告檔案：{file_path}")
+        self.content = self.file_path.read_text(encoding='utf-8')
+
+    def get_summary(self) -> str:
+        """提取執行摘要區塊。"""
+        pattern = r"## 📋 報告摘要\n\n(.*?)\n---"
+        match = re.search(pattern, self.content, re.DOTALL)
+        return match.group(1).strip() if match else "未找到摘要。"
+
+    def extract_mermaid_charts(self) -> List[str]:
+        """提取所有 Mermaid 圖表定義。"""
+        pattern = r"```mermaid\n(.*?)\n```"
+        return re.findall(pattern, self.content, re.DOTALL)
+
+    def list_experts(self) -> List[str]:
+        """提取介紹中提到的專家姓名。"""
+        pattern = r"Hopes for 2026 from (.*?)\""
+        match = re.search(pattern, self.content)
+        if match:
+            raw_names = match.group(1).split(',')
+            return [name.strip() for name in raw_names]
+        return []
+
+    def get_action_items(self) -> str:
+        """提取下一步行動建議。"""
+        pattern = r"\*\*下一步行動\*\*:(.*?)\n---"
+        match = re.search(pattern, self.content, re.DOTALL)
+        return match.group(1).strip() if match else "未找到行動建議。"
+
+    def render_html(self, cover_image: str = "cover.png") -> str:
+        """將報告轉換為具有主題切換功能的獨立 HTML。"""
+        # 預處理 Mermaid 區塊，將其轉換為 div 以供 mermaid.js 渲染
+        content = self.content
+        mermaid_pattern = r"```mermaid\n(.*?)\n```"
+        content = re.sub(mermaid_pattern, r'<div class="mermaid">\1</div>', content, flags=re.DOTALL)
+        
+        # 轉換 Markdown 為 HTML
+        html_body = markdown.markdown(content, extensions=['tables', 'fenced_code'])
+        
+        # 插入封面圖片
+        html_body = html_body.replace(
+            '<h2>📋 報告摘要</h2>', 
+            f'<img src="{cover_image}" alt="Cover Image" style="width:100%; margin-bottom: 20px; border-radius: 8px;">\n<h2>📋 報告摘要</h2>'
+        )
+        
+        template = """<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 AI 展望報告</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+    :root {
+        --transition-speed: 0.3s;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        transition: background-color var(--transition-speed), color var(--transition-speed);
+        line-height: 1.8;
+    }
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 40px;
+        transition: all var(--transition-speed);
+    }
+    img { max-width: 100%; height: auto; display: block; margin: 20px auto; border-radius: 8px; }
+    
+    /* Theme Switcher */
+    .theme-switch {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        gap: 10px;
+        background: rgba(255,255,255,0.8);
+        padding: 10px;
+        border-radius: 50px;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .btn {
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 20px;
+        font-weight: bold;
+        font-family: inherit;
+        transition: transform 0.2s;
+    }
+    .btn:hover { transform: scale(1.05); }
+
+    /* Academic Theme */
+    body.theme-academic {
+        background-color: #f4f4f4;
+        color: #333;
+        font-family: 'Lora', serif;
+    }
+    body.theme-academic .container {
+        background-color: #fff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        border: 1px solid #ddd;
+    }
+    body.theme-academic h1, body.theme-academic h2, body.theme-academic h3 {
+        color: #2c3e50;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+    body.theme-academic .btn { background: #e0e0e0; color: #333; }
+    body.theme-academic .btn.active { background: #2c3e50; color: #fff; }
+
+    /* Cute Theme */
+    body.theme-cute {
+        background-color: #fff0f5;
+        color: #5d4037;
+        font-family: 'Quicksand', sans-serif;
+        background-image: radial-gradient(#ffb7b2 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+    body.theme-cute .container {
+        background-color: #ffffff;
+        border-radius: 25px;
+        border: 3px dashed #ffb7b2;
+        box-shadow: 0 10px 20px rgba(255, 183, 178, 0.3);
+    }
+    body.theme-cute h1, body.theme-cute h2 {
+        color: #ff6b6b;
+        text-shadow: 2px 2px 0px #ffd1dc;
+    }
+    body.theme-cute blockquote {
+        border-left: 5px solid #ffb7b2;
+        background-color: #fff9fa;
+        padding: 10px 20px;
+        border-radius: 10px;
+    }
+    body.theme-cute .btn { background: #ffe0e6; color: #ff6b6b; }
+    body.theme-cute .btn.active { background: #ff6b6b; color: #fff; }
+    
+    /* Mermaid */
+    .mermaid { text-align: center; margin: 30px 0; }
+
+    /* RWD */
+    @media (max-width: 768px) {
+        .container { padding: 20px; margin: 20px auto; width: 90%; }
+        .theme-switch { top: auto; bottom: 20px; right: 20px; }
+    }
+</style>
+</head>
+<body class="theme-academic">
+
+<div class="theme-switch">
+    <button class="btn active" onclick="setTheme('academic', this)">🎓 學術模式</button>
+    <button class="btn" onclick="setTheme('cute', this)">🧸 可愛模式</button>
+</div>
+
+<div class="container">
+    {{CONTENT}}
+</div>
+
+<script>
+    mermaid.initialize({startOnLoad:true});
+    
+    function setTheme(themeName, btn) {
+        document.body.className = 'theme-' + themeName;
+        document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+</script>
+</body>
+</html>"""
+        return template.replace("{{CONTENT}}", html_body)
+
+@app.command()
+def summary(file_path: str = "output/new-year-special-hopes-for-2026-from-david-cox-adj_20260107_083339.md"):
+    """顯示報告的執行摘要。"""
+    try:
+        conductor = ReportConductor(file_path)
+        summary_text = conductor.get_summary()
+        console.print(Panel(Markdown(summary_text), title="📋 報告摘要", border_style="green"))
+    except Exception as e:
+        console.print(f"[red]錯誤: {e}[/red]")
+
+@app.command()
+def experts(file_path: str = "output/new-year-special-hopes-for-2026-from-david-cox-adj_20260107_083339.md"):
+    """列出貢獻報告的專家。"""
+    try:
+        conductor = ReportConductor(file_path)
+        experts_list = conductor.list_experts()
+        console.print(Panel("\n".join([f"• {name}" for name in experts_list]), title="🔬 貢獻專家", border_style="blue"))
+    except Exception as e:
+        console.print(f"[red]錯誤: {e}[/red]")
+
+@app.command()
+def diagrams(file_path: str = "output/new-year-special-hopes-for-2026-from-david-cox-adj_20260107_083339.md", export: bool = False):
+    """提取 Mermaid 圖表。使用 --export 儲存為檔案。"""
+    try:
+        conductor = ReportConductor(file_path)
+        charts = conductor.extract_mermaid_charts()
+        
+        console.print(f"找到 {len(charts)} 個 Mermaid 圖表。")
+        
+        for i, chart in enumerate(charts, 1):
+            if export:
+                output_file = Path(f"diagram_{i}.mmd")
+                output_file.write_text(chart, encoding='utf-8')
+                console.print(f"已儲存: {output_file}")
+            else:
+                console.print(Panel(chart, title=f"圖表 {i}", border_style="yellow"))
+    except Exception as e:
+        console.print(f"[red]錯誤: {e}[/red]")
+
+@app.command()
+def actions(file_path: str = "output/new-year-special-hopes-for-2026-from-david-cox-adj_20260107_083339.md"):
+    """顯示建議的下一步行動。"""
+    try:
+        conductor = ReportConductor(file_path)
+        actions_text = conductor.get_action_items()
+        console.print(Panel(Markdown(actions_text), title="🚀 下一步行動", border_style="red"))
+    except Exception as e:
+        console.print(f"[red]錯誤: {e}[/red]")
+
+@app.command()
+def html(file_path: str = "output/new-year-special-hopes-for-2026-from-david-cox-adj_20260107_083339.md", output: str = "output/html/index.html"):
+    """將報告轉換為 HTML 檔案，包含學術/可愛風格切換。"""
+    try:
+        conductor = ReportConductor(file_path)
+        output_path = Path(output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        # 自動偵測同目錄下的 PNG 檔案
+        png_files = list(output_path.parent.glob('*.png'))
+        cover_image = png_files[0].name if png_files else "cover.png"
+        
+        html_content = conductor.render_html(cover_image=cover_image)
+        output_path.write_text(html_content, encoding='utf-8')
+        console.print(f"[green]✨ 成功生成 HTML 報告: {output}[/green]")
+    except Exception as e:
+        console.print(f"[red]錯誤: {e}[/red]")
+
+if __name__ == "__main__":
+    app()
