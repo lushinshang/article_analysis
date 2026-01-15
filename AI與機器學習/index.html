@@ -198,9 +198,9 @@
 <div class="mermaid">
 graph LR
     data[資料來源]:::data --> bq[BigQuery]
-    bq --> vertex[Vertex AI\n(訓練 / 推論)]:::process
-    vertex --> dashboard[儀表板 / Looker]
-    dashboard --> decision[商業決策]
+    bq --> vertex[Vertex AI<br/>（訓練 / 推論）]:::process
+    vertex --> dashboard[儀表板 / Looker]:::ui
+    dashboard --> decision[商業決策]:::action
     classDef data fill:#e8f2ff,stroke:#0d47a1,color:#0d47a1;
     classDef process fill:#fff4e6,stroke:#ff6b6b,color:#7a2b0d;
     classDef ui fill:#e9fbe7,stroke:#2e7d32,color:#2e7d32;
@@ -283,9 +283,9 @@ graph LR
 <p>Google Cloud 提供了一個分層的基礎架構來支持 AI 專案的開發與應用。</p>
 <div class="mermaid">
 graph TB
-    infra[AI 基礎架構\n(CPU/GPU/TPU、儲存、網路)]:::infra
-    dev[AI 開發層\n(Vertex AI、BigQuery ML)]:::dev
-    app[AI 應用程式與解決方案\n(Looker 等)]:::app
+    infra[AI 基礎架構<br/>（CPU/GPU/TPU、儲存、網路）]:::infra
+    dev[AI 開發層<br/>（Vertex AI、BigQuery ML）]:::dev
+    app[AI 應用程式與解決方案<br/>（Looker 等）]:::app
     infra --> dev --> app
     classDef infra fill:#e3f2fd,stroke:#0d47a1,color:#0d47a1;
     classDef dev fill:#fff8e1,stroke:#f57f17,color:#f57f17;
