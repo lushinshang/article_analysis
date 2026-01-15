@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Cloud AI 核心基礎架構課程筆記</title>
+
+<!-- Open Graph / LINE link preview -->
+<meta property="og:title" content="Google Cloud AI 核心基礎架構課程筆記" />
+<meta property="og:description" content="模組一： AI 基礎" />
+<meta property="og:type" content="article" />
+<meta property="og:image" content="Gemini_Generated_Image_bcvtribcvtribcvt.png" />
+<meta property="og:image:alt" content="Cover Image" />
+<meta property="og:locale" content="zh_TW" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Google Cloud AI 核心基礎架構課程筆記" />
+<meta name="twitter:description" content="模組一： AI 基礎" />
+<meta name="twitter:image" content="Gemini_Generated_Image_bcvtribcvtribcvt.png" />
+
+<!-- Additional SEO -->
+<meta name="description" content="模組一： AI 基礎" />
+
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --transition-speed: 0.3s;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        transition: background-color var(--transition-speed), color var(--transition-speed);
+        line-height: 1.8;
+    }
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 40px;
+        transition: all var(--transition-speed);
+    }
+    img { max-width: 100%; height: auto; display: block; margin: 20px auto; border-radius: 8px; }
+    
+    /* Theme Switcher */
+    .theme-switch {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        gap: 10px;
+        background: rgba(255,255,255,0.8);
+        padding: 10px;
+        border-radius: 50px;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .btn {
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 20px;
+        font-weight: bold;
+        font-family: inherit;
+        transition: transform 0.2s;
+    }
+    .btn:hover { transform: scale(1.05); }
+
+    /* Academic Theme */
+    body.theme-academic {
+        background-color: #f4f4f4;
+        color: #333;
+        font-family: 'Lora', serif;
+    }
+    body.theme-academic .container {
+        background-color: #fff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        border: 1px solid #ddd;
+    }
+    body.theme-academic h1, body.theme-academic h2, body.theme-academic h3 {
+        color: #2c3e50;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+    body.theme-academic .btn { background: #e0e0e0; color: #333; }
+    body.theme-academic .btn.active { background: #2c3e50; color: #fff; }
+
+    /* Cute Theme */
+    body.theme-cute {
+        background-color: #fff0f5;
+        color: #5d4037;
+        font-family: 'Quicksand', sans-serif;
+        background-image: radial-gradient(#ffb7b2 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+    body.theme-cute .container {
+        background-color: #ffffff;
+        border-radius: 25px;
+        border: 3px dashed #ffb7b2;
+        box-shadow: 0 10px 20px rgba(255, 183, 178, 0.3);
+    }
+    body.theme-cute h1, body.theme-cute h2 {
+        color: #ff6b6b;
+        text-shadow: 2px 2px 0px #ffd1dc;
+    }
+    body.theme-cute blockquote {
+        border-left: 5px solid #ffb7b2;
+        background-color: #fff9fa;
+        padding: 10px 20px;
+        border-radius: 10px;
+    }
+    body.theme-cute .btn { background: #ffe0e6; color: #ff6b6b; }
+    body.theme-cute .btn.active { background: #ff6b6b; color: #fff; }
+    
+    /* Mermaid */
+    .mermaid { text-align: center; margin: 30px 0; }
+
+    /* Tables */
+    .table-responsive { overflow-x: auto; margin: 10px 0 20px 0; }
+    .table-responsive table { border-collapse: collapse; width: 100%; box-shadow: 0 2px 6px rgba(16,24,40,0.04); }
+    .table-responsive th, .table-responsive td { border: 1px solid #d1d9e6; padding: 10px 12px; vertical-align: top; }
+    .table-responsive thead th { background: linear-gradient(180deg,#0b3d91,#0d47a1); color: #ffffff; font-weight: 700; }
+    .table-responsive tbody tr:nth-child(even) { background: #f7f9fc; }
+    .table-responsive td strong { color: #0d47a1; }
+
+    /* RWD */
+    @media (max-width: 768px) {
+        .container { padding: 20px; margin: 20px auto; width: 90%; }
+        .theme-switch { top: auto; bottom: 20px; right: 20px; }
+    }
+</style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'loose' });
+</script>
+<body class="theme-academic">
+
+<nav class="theme-switch" aria-label="主題切換">
+    <button class="btn active" onclick="setTheme('academic', this)">🎓 學術模式</button>
+    <button class="btn" onclick="setTheme('cute', this)">🧸 可愛模式</button>
+</nav>
+
+<main class="container">
+    <h1>Google Cloud AI 核心基礎架構課程筆記</h1>
+<img src="Gemini_Generated_Image_bcvtribcvtribcvt.png" alt="Cover Image" style="width:100%; margin-bottom: 20px; border-radius: 8px;">
+<h2>目錄 (Table of Contents)</h2>
+<ul>
+<li>
+<p><a href="#module-1">模組一： AI 基礎</a></p>
+</li>
+<li>
+<p><a href="#module-2">模組二：生成式 AI</a></p>
+</li>
+<li>
+<p><a href="#module-3">模組三：AI 開發選項</a></p>
+</li>
+<li>
+<p><a href="#module-4">模組四：AI 開發工作流程</a></p>
+</li>
+</ul>
+<h2><a id="module-1"></a>筆記：模組一： AI 基礎</h2>
+<h3>1. 基本資訊區塊</h3>
+<ul>
+<li>
+<p><strong>課程單元/章節標題</strong>：模組一： AI 基礎</p>
+</li>
+<li>
+<p><strong>講師</strong>：Hanson 老師</p>
+</li>
+<li>
+<p><strong>授課時間/平台</strong>：2026年 / Google Cloud Platform 核心基礎架構 Cloud Onboard 課程</p>
+</li>
+<li>
+<p><strong>主要關鍵字</strong>：</p>
+<ul>
+<li>
+<p><strong>核心概念</strong>：人工智慧 (AI), 預測式 AI, 生成式 AI, 機器學習 (ML), 監督式學習, 非監督式學習</p>
+</li>
+<li>
+<p><strong>Google Cloud 產品</strong>：Google Cloud Platform (GCP), BigQuery, BigQuery ML, Vertex AI, Cloud Storage, Compute Engine, Google Kubernetes Engine (GKE), Cloud Run, Looker</p>
+</li>
+<li>
+<p><strong>硬體與架構</strong>：Tensor Processing Unit (TPU), AI 基礎架構</p>
+</li>
+<li>
+<p><strong>應用情境</strong>：Coffee on Wheels (行動咖啡車隊), Data Beans (數位轉型公司)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>2. 內容摘要與知識點區塊</h3>
+<h4>A. 課程簡介與目標</h4>
+<p>本課程為 Google Cloud 認證專家的學習第一步，旨在介紹 GCP 上的 AI 相關基礎知識。課程包含四個單元，並搭配 Cloud Hero 趣味挑戰賽，透過情境式演練加深學習印象與實作技能。</p>
+<h4>B. AI 使用情境：Coffee on Wheels 行動咖啡車隊</h4>
+<p>講師以一個虛構的行動咖啡車隊「Coffee on Wheels」為例，說明 AI 如何解決真實世界的商業挑戰。</p>
+<div class="mermaid">
+graph LR
+    data[資料來源]:::data --> bq[BigQuery]
+    bq --> vertex[Vertex AI\n(訓練 / 推論)]:::process
+    vertex --> dashboard[儀表板 / Looker]
+    dashboard --> decision[商業決策]
+    classDef data fill:#e8f2ff,stroke:#0d47a1,color:#0d47a1;
+    classDef process fill:#fff4e6,stroke:#ff6b6b,color:#7a2b0d;
+    classDef ui fill:#e9fbe7,stroke:#2e7d32,color:#2e7d32;
+    classDef action fill:#fff3f3,stroke:#d32f2f,color:#d32f2f;
+</div>
+<ul>
+<li>
+<p><strong>面臨的挑戰</strong>：</p>
+<ol>
+<li>
+<p><strong>地點選擇</strong>：如何預測熱門地點以最大化銷售？如何根據交通與天氣狀況最佳化移動路徑？</p>
+</li>
+<li>
+<p><strong>銷售預測與監控</strong>：如何預測各地點的潛在營收？如何即時監控銷售效能？</p>
+</li>
+<li>
+<p><strong>行銷活動自動化</strong>：如何提升行銷活動的執行效率？</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>解決方案 Demo</strong>：</p>
+<ul>
+<li>
+<p>透過由「Data Beans」公司利用 GCP 工具（Gemini, BigQuery, Vertex AI, Looker）建立的 AI 儀表板來應對挑戰。</p>
+</li>
+<li>
+<p><strong>儀表板功能亮點</strong>：</p>
+<ul>
+<li>
+<p><strong>總體數據監控</strong>：顯示跨城市的總營收、利潤率、車隊大小等摘要資訊。</p>
+</li>
+<li>
+<p><strong>AI 洞察分析</strong>：Gemini 能提供即時見解，例如「倫敦的營收高於平均，但客戶忠誠度需關注」。</p>
+</li>
+<li>
+<p><strong>智慧路線規劃</strong>：根據天氣預報（如下雨）和未來事件（如足球比賽），由 Gemini 建議最佳化的行車路線，避開壅塞或不便的區域。</p>
+</li>
+<li>
+<p><strong>銷售預測與即時街景</strong>：可預測特定地點在未來時間點的人流、預期銷售額，並觀看即時街景。</p>
+</li>
+<li>
+<p><strong>產品創新與行銷</strong>：當偵測到某產品（如 Mocha Magic）銷售不佳時，Gemini 能建議並生成新產品（如 Hazelnut Heaven）的名稱、描述及圖片。接著能自動生成社交媒體（如 X 平台）的行銷文案與圖片，一鍵發布。</p>
+</li>
+<li>
+<p><strong>多格式報告匯出</strong>：可將分析報告匯出為 Google Slides 等格式。</p>
+</li>
+<li>
+<p><strong>技術透明化</strong>：提供 "How It's Made" 功能，展示儀表板背後使用的 GCP 技術，並提供 GitHub 上的原始碼供學習。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>C. 預測式 AI vs. 生成式 AI</h4>
+<p>課程將 AI 的問題簡化為兩大類型，並對其進行了詳細的區分與比較。</p>
+<blockquote>
+<p><strong>講師觀點</strong>：
+*   <strong>預測式 AI (Predictive AI)</strong>：又稱傳統或判別式 AI。利用既有歷史資料來學習模式，進而對未來結果進行預測或分類。擅長分析與預測，幫助做出明確決策。
+*   <strong>生成式 AI (Generative AI)</strong>：不僅能分析，更能創造。它能理解資料間的複雜關聯，並生成全新的內容（文字、圖片、影片等），甚至能採取行動。</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>決策樹與整合應用</strong>：</p>
+<ul>
+<li>
+<p><strong>預測問題</strong>：優先選擇預測式 AI。</p>
+</li>
+<li>
+<p><strong>內容生成與自動化</strong>：生成式 AI 是理想選擇。</p>
+</li>
+<li>
+<p><strong>整合應用</strong>：最佳方式往往是兩者結合。例如，用預測式 AI 預測客戶流失風險，再用生成式 AI 驅動聊天機器人來與這些高風險客戶互動，或用預測式 AI 區分客戶群體，再用生成式 AI 為不同群體打造個人化的行銷內容。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4>D. Google Cloud 的三層 AI 架構</h4>
+<p>Google Cloud 提供了一個分層的基礎架構來支持 AI 專案的開發與應用。</p>
+<div class="mermaid">
+graph TB
+    infra[AI 基礎架構\n(CPU/GPU/TPU、儲存、網路)]:::infra
+    dev[AI 開發層\n(Vertex AI、BigQuery ML)]:::dev
+    app[AI 應用程式與解決方案\n(Looker 等)]:::app
+    infra --> dev --> app
+    classDef infra fill:#e3f2fd,stroke:#0d47a1,color:#0d47a1;
+    classDef dev fill:#fff8e1,stroke:#f57f17,color:#f57f17;
+    classDef app fill:#e8f5e9,stroke:#2e7d32,color:#2e7d32;
+</div>
+<ol>
+<li>
+<p><strong>AI 基礎架構 (AI Infrastructure)</strong>：最底層，提供先進的計算（CPU, GPU, TPU）、網路和儲存技術，為 AI 奠定穩固基礎。</p>
+</li>
+<li>
+<p><strong>AI 開發層 (AI Development)</strong>：中間層，以 <strong>Vertex AI</strong> 平台為核心，引導從 AI 設計到部署的完整流程。此層與 BigQuery 等資料產品無縫整合，是開發者與資料科學家的主要工作區域。</p>
+</li>
+<li>
+<p><strong>AI 應用程式與解決方案 (AI Applications &amp; Solutions)</strong>：最頂層，為企業使用者和分析師提供立即可用的解決方案，讓非技術人員也能快速將想法原型化。</p>
+</li>
+</ol>
+<h4>E. AI 模型基礎知識</h4>
+<ul>
+<li>
+<p><strong>術語釐清</strong>：</p>
+<ul>
+<li>
+<p><strong>人工智慧 (AI)</strong>：一個廣泛的領域，指讓機器模仿人類智慧行為的技術。</p>
+</li>
+<li>
+<p><strong>機器學習 (ML)</strong>：實現 AI 的一種方法，讓電腦從資料中學習模式，而無需明確編寫演算法。</p>
+</li>
+<li>
+<p><strong>深度學習 (Deep Learning)</strong>：ML 的一個子集，使用多層（深度）神經網路，模型參數多，學習能力強。</p>
+</li>
+<li>
+<p><strong>生成式 AI (Generative AI)</strong>：使用大型基礎模型（通常是深度學習模型），透過自然語言提示來執行任務和生成內容。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>學習類型</strong>：</p>
+<div class="table-responsive">
+<table>
+    <thead>
+        <tr>
+            <th>學習類型</th>
+            <th>資料特性</th>
+            <th>驅動方式</th>
+            <th>核心目標</th>
+            <th>範例</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>監督式學習</strong></td>
+            <td>有標記 (Label) 的資料</td>
+            <td>任務驅動</td>
+            <td>識別目標、進行預測</td>
+            <td>根據標記為「貓」或「狗」的圖片，學習分類新圖片。</td>
+        </tr>
+        <tr>
+            <td><strong>非監督式學習</strong></td>
+            <td>未標記的資料</td>
+            <td>資料驅動</td>
+            <td>識別資料中的內在模式或結構</td>
+            <td>將不同品種的狗的圖片自動分組。</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</li>
+<li>
+<p><strong>常見問題類型與模型</strong>：</p>
+<ul>
+<li>
+<p><strong>監督式學習</strong>：</p>
+<ul>
+<li>
+<p><strong>分類 (Classification)</strong>：預測類別變數（如：是/否，貓/狗）。模型範例：<strong>邏輯迴歸 (Logistic Regression)</strong>。</p>
+</li>
+<li>
+<p><strong>回歸 (Regression)</strong>：預測連續數值（如：銷售金額、溫度）。模型範例：<strong>線性迴歸 (Linear Regression)</strong>。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>非監督式學習</strong>：</p>
+<ul>
+<li>
+<p><strong>分群 (Clustering)</strong>：將資料點分組（如：客戶分群）。模型範例：<strong>K-Means</strong>。</p>
+</li>
+<li>
+<p><strong>關聯 (Association)</strong>：識別資料點之間的潛在關係（如：啤酒與尿布）。模型範例：<strong>Apriori</strong>。</p>
+</li>
+<li>
+<p><strong>降維 (Dimensionality Reduction)</strong>：減少特徵數量以提高效率。模型範例：<strong>PCA (主成分分析)</strong>。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>F. BigQuery ML 介紹</h4>
+<p>BigQuery ML 讓使用者能直接在 BigQuery 資料倉儲中使用 SQL 語法來建立和執行機器學習模型，大幅簡化了 ML 工作流程。</p>
+<ul>
+<li>
+<p><strong>核心優勢</strong>：無需移動資料，直接在資料所在地進行模型訓練與預測。</p>
+</li>
+<li>
+<p><strong>五大步驟</strong>：</p>
+<ol>
+<li>
+<p><strong>資料準備 (ETL)</strong>：將資料擷取、轉換並載入到 BigQuery。</p>
+</li>
+<li>
+<p><strong>特徵選擇與預處理</strong>：使用 SQL 建立訓練資料集，BigQuery ML 會自動處理如 one-hot encoding 等前置作業。</p>
+</li>
+<li>
+<p><strong>建立模型</strong>：使用 <code>CREATE MODEL</code> SQL 指令。
+    <code>sql
+    CREATE MODEL `e-commerce.classification_model`
+    OPTIONS(
+      model_type='LOGISTIC_REG',
+      input_label_cols=['will_buy_on_return_visit']
+    ) AS
+    SELECT ... FROM ...</code></p>
+</li>
+<li>
+<p><strong>評估模型</strong>：使用 <code>ML.EVALUATE</code> 函數來評估模型效能（如：準確率、精準度、召回率）。</p>
+</li>
+<li>
+<p><strong>進行預測</strong>：使用 <code>ML.PREDICT</code> 函數對新資料進行預測。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3>3. 知識深化與應用區塊</h3>
+<ul>
+<li>
+<p><strong>核心方法論分析</strong>：本單元的核心是建立一個從「商業問題」到「AI 解決方案」的思維框架。講師透過「Coffee on Wheels」案例，生動地展示了 AI 不僅是技術工具，更是驅動商業模式創新和營運效率提升的引擎。這個案例的價值在於其完整性，涵蓋了從數據分析、預測、路線最佳化到內容生成和自動化行銷的全鏈路。</p>
+</li>
+<li>
+<p><strong>學習與實作策略</strong>：</p>
+<ul>
+<li>
+<p><strong>問題導向學習</strong>：先理解商業挑戰（如地點選擇、銷售預測），再反向思考哪種 AI 技術（預測式或生成式）最適合解決該問題。</p>
+</li>
+<li>
+<p><strong>整合平台思維</strong>：理解 Google Cloud 的三層 AI 架構至關重要。這有助於學習者根據自己的角色（如商業分析師、開發者）和任務需求，選擇在正確的層級（應用層、開發層、基礎設施層）使用合適的工具（如 Looker, Vertex AI, BigQuery ML）。</p>
+</li>
+<li>
+<p><strong>從 SQL 開始的 ML</strong>：對於熟悉 SQL 的數據分析師或後端工程師而言，BigQuery ML 是一個極佳的切入點。它降低了機器學習的門檻，讓人們可以在熟悉的環境中快速實驗並產出價值，而無需立即深入複雜的 Python 程式設計。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>領域趨勢與延伸</strong>：</p>
+<ul>
+<li>
+<p><strong>AI 的融合</strong>：預測式 AI 和生成式 AI 的邊界日益模糊，未來的趨勢是將兩者無縫結合，創造更強大的應用。例如，先用預測模型找出潛在機會，再由生成式 AI 自動執行後續的溝通或創造性任務。</p>
+</li>
+<li>
+<p><strong>硬體加速的重要性</strong>：講師特別提到 TPU，強調了專用硬體在 AI 運算中的巨大優勢。這暗示了隨著模型規模的增長，底層硬體基礎設施的選擇將成為 AI 專案成功與否的關鍵因素之一。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>4. 學習價值與反思區塊</h3>
+<ul>
+<li>
+<p><strong>獨特價值與學習亮點</strong>：本單元最大的亮點在於其高度的實用性和系統性。它沒有直接深入複雜的演算法，而是從一個貼近生活的商業案例出發，完整地展示了 Google Cloud AI 生態系如何協同作戰，解決一個具體的商業問題。這使得抽象的 AI 技術變得具體可感。此外，對預測式 AI 和生成式 AI 的清晰劃分與融合應用的探討，為初學者建立了正確且全面的認知框架。</p>
+</li>
+<li>
+<p><strong>對 AI 領域學習的意義</strong>：對於想進入 AI 領域，特別是雲端 AI 應用的學習者來說，這個單元是絕佳的入門。它不僅介紹了「是什麼」（各種 AI 模型和工具），更重要的是闡述了「為什麼」（為何要分層、為何要結合使用）和「怎麼做」（BigQuery ML 的實作步驟）。這建立了一個宏觀的視角，讓學習者明白單一技術點在整個 AI 解決方案中所處的位置。</p>
+</li>
+<li>
+<p><strong>實際應用潛力與個人啟發</strong>：</p>
+<ul>
+<li>
+<p><strong>工作應用</strong>：儀表板的 Demo 提供了極大的啟發。任何行業的數據分析師或產品經理都可以思考如何將類似的 AI 功能（如自然語言洞察、預測建議、自動化報告）整合到現有的商業智慧（BI）系統中，將其從一個被動的數據呈現工具，升級為一個主動的決策輔助系統。</p>
+</li>
+<li>
+<p><strong>個人學習</strong>：BigQuery ML 的介紹讓人意識到，學習機器學習的路徑並非只有一條。對於數據背景的學習者，可以先從 SQL-based ML 工具入手，快速驗證想法並累積成功經驗，之後再逐步深入學習 Python 和更複雜的自訂模型框架，這是一條更平滑、更具成就感的學習曲線。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2><a id="module-2"></a>筆記：模組二：生成式 AI</h2>
+<h3>1. 基本資訊區塊</h3>
+<ul>
+<li>
+<p><strong>課程單元/章節標題</strong>：模組二：生成式 AI</p>
+</li>
+<li>
+<p><strong>講師</strong>：Hanson 老師</p>
+</li>
+<li>
+<p><strong>授課時間/平台</strong>：2026年 / Google Cloud Platform 核心基礎架構 Cloud Onboard 課程</p>
+</li>
+<li>
+<p><strong>主要關鍵字</strong>：</p>
+<ul>
+<li>
+<p><strong>核心概念</strong>：生成式 AI, 基礎模型 (Foundation Model), 大型語言模型 (LLM), 多模態 (Multimodality), 提示 (Prompt), 提示工程 (Prompt Engineering), 接地 (Grounding), 檢索增強生成 (RAG), 模型微調 (Fine-tuning), PEFT (參數高效微調)</p>
+</li>
+<li>
+<p><strong>Google Cloud 產品</strong>：Gemini (Pro, Flash, 1.5 Flash), Imagen, Veo, Lyria, Vertex AI Studio, Agent Builder, NotebookLM, Colab Enterprise</p>
+</li>
+<li>
+<p><strong>應用</strong>：AI 代理人 (AI Agent), 代理式 AI (Agentic AI), 聊天機器人</p>
+</li>
+<li>
+<p><strong>應用情境</strong>：Simple Insurance (虛擬保險公司)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>2. 內容摘要與知識點區塊</h3>
+<h4>A. 生成式 AI 核心原理</h4>
+<ul>
+<li>
+<p><strong>學習方式</strong>：生成式 AI 透過在極其龐大的資料（文字、圖片、影片等）上進行「訓練」，學習到複雜的模式與知識。</p>
+</li>
+<li>
+<p><strong>大模型 (Large Model)</strong>：
+    &gt; 講師觀點：「模型本身參數的數量，通常代表了這個模型在學習一些很複雜的模式、很複雜的行為時的能力，或者稱作是它儲存知識的能力，就像是腦袋大小的差別。」</p>
+<ul>
+<li>參數數量從百萬級演進到百億甚至兆級，代表模型越來越「聰明」。</li>
+</ul>
+</li>
+</ul>
+<h4>B. Google 的基礎模型</h4>
+<ul>
+<li>
+<p><strong>通用模型 (Gemini 系列)</strong>：</p>
+<ul>
+<li>
+<p><strong>Gemini Pro</strong>：最強大的模型，適合需要進階推理能力的複雜任務。</p>
+</li>
+<li>
+<p><strong>Gemini 1.5 Flash</strong>：速度快、延遲低，適合聊天機器人等高容量、即時性應用。</p>
+</li>
+<li>
+<p><strong>Gemini Flashlight (推測應為 Gemini 1.5 Flash 的口誤或早期稱呼)</strong>：最具成本效益，適合批次翻譯、大量內容摘要等非即時任務。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>專用模型</strong>：</p>
+<ul>
+<li>
+<p><strong>Imagen</strong>：專為高品質<strong>圖片生成</strong>而設計。</p>
+</li>
+<li>
+<p><strong>Veo</strong>：專為<strong>影片處理與生成</strong>而設計。</p>
+</li>
+<li>
+<p><strong>Lyria</strong>：專為<strong>音樂創作</strong>而設計 (在 MusicFX 中使用)。</p>
+</li>
+<li>
+<p><strong>Embedding Models</strong>：用於產生向量嵌入，支持語意搜尋等應用。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4>C. 多模態 (Multimodality) 的演進</h4>
+<ul>
+<li>
+<p><strong>定義</strong>：多模態模型能夠同時處理和理解多種類型的資料（如文字、圖片、音訊、影片），並能輸出多種類型的資料。</p>
+</li>
+<li>
+<p><strong>能力躍升</strong>：
+    &gt; 講師比喻：「早期單一模態的模型，你可能只能夠用文字去跟它溝通，但現在多模態的模型，它可以用不同的方式去感知周遭環境...讓它可以去跟周遭環境做互動。」</p>
+<ul>
+<li>這使得 AI 的能力從單純的語言處理，擴展到更接近人類的、對複雜現實世界的綜合理解。</li>
+</ul>
+</li>
+</ul>
+<h4>D. 從提示到生產：生成式 AI 的生命週期</h4>
+<p>講師以虛構的「Simple Insurance」保險公司中的三位不同角色（商業分析師 Bia、ML 工程師 Ian、AI 開發者 Ann）為例，闡述了開發一個生成式 AI 應用的完整流程。</p>
+<ul>
+<li>
+<p><strong>核心工具：Vertex AI Studio</strong></p>
+<ul>
+<li>
+<p><strong>定位</strong>：通往生成式 AI 的閘道，一個低程式碼/無程式碼的開發環境。</p>
+</li>
+<li>
+<p><strong>功能</strong>：快速原型製作、用自有資料調教模型、增強模型知識、自動生成程式碼並部署。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>生命週期四階段</strong>：</p>
+<ol>
+<li>
+<p><strong>設計 (Prompt Design)</strong></p>
+</li>
+<li>
+<p><strong>評估與改進 (Evaluation &amp; Refinement)</strong></p>
+</li>
+<li>
+<p><strong>建置與測試 (Build &amp; Test)</strong></p>
+</li>
+<li>
+<p><strong>監控與最佳化 (Monitor &amp; Optimize)</strong></p>
+</li>
+</ol>
+</li>
+</ul>
+<h4>E. 提示工程 (Prompt Engineering)</h4>
+<ul>
+<li>
+<p><strong>定義</strong>：設計、改進和強化提示（Prompt），以引導 AI 模型產出高品質內容的迭代式實驗過程。</p>
+</li>
+<li>
+<p><strong>良好提示的結構</strong>：</p>
+<div class="table-responsive">
+<table>
+    <thead>
+        <tr>
+            <th>元件</th>
+            <th>必要性</th>
+            <th>說明</th>
+            <th>範例</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>任務 (Task)</strong></td>
+            <td><strong>必須</strong></td>
+            <td>模型的核心工作指令。</td>
+            <td>「幫一個保險公司做風險分析。」</td>
+        </tr>
+        <tr>
+            <td><strong>情境 (Context)</strong></td>
+            <td>選擇性</td>
+            <td>為 AI 設定角色、背景或系統指令。</td>
+            <td>「你是一個保險公司裡面的商業分析師。」</td>
+        </tr>
+        <tr>
+            <td><strong>範例 (Example)</strong></td>
+            <td>選擇性</td>
+            <td>提供預期的輸出格式或問答範例。</td>
+            <td>「請包含市場風險、操作風險、信用風險三個段落。」</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</li>
+<li>
+<p><strong>提示技巧 (最佳實踐)</strong>：</p>
+<ul>
+<li>
+<p><strong>直接具體</strong>：請求要清晰，使用關鍵字。</p>
+</li>
+<li>
+<p><strong>結構化</strong>：使用 Markdown、分隔符號，將複雜任務拆解成小步驟。</p>
+</li>
+<li>
+<p><strong>迭代改進</strong>：從簡單提示開始，根據輸出結果逐步調整。</p>
+</li>
+<li>
+<p><strong>進階技術</strong>：考慮使用少樣本提示 (Few-shot Prompting)、思維鏈 (Chain of Thought, CoT) 或 RAG。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4>F. 模型參數與調校</h4>
+<p>在 Vertex AI Studio 中，可調整參數以控制模型輸出的「隨機性」。</p>
+<ul>
+<li>
+<p><strong>Temperature (溫度)</strong>：</p>
+<ul>
+<li>
+<p><strong>低溫</strong>：降低隨機性，模型傾向選擇機率最高的詞彙，輸出結果較為一致、可預測。適合問答、摘要等任務。</p>
+</li>
+<li>
+<p><strong>高溫</strong>：增加隨機性，模型可能選擇較不常見的詞彙，輸出結果更具創意、多樣性。適合內容創作、腦力激盪。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Top-K</strong>：限制模型僅從機率最高的 K 個詞彙中進行選擇。K 值越小，確定性越高。</p>
+</li>
+<li>
+<p><strong>Top-P</strong>：限制模型從機率總和達到 P 值的詞彙集合中進行選擇。P 值越低，確定性越高。</p>
+</li>
+</ul>
+<h4>G. 提升模型準確性的兩種途徑：Grounding vs. Tuning</h4>
+<ul>
+<li>
+<p><strong>Grounding (接地)</strong>：</p>
+<ul>
+<li>
+<p><strong>目的</strong>：解決模型知識可能過時或不準確的問題。</p>
+</li>
+<li>
+<p><strong>方法</strong>：將模型連接到可信的<strong>外部</strong>即時資料來源（如 Google 搜尋或企業內部資料庫），讓模型在生成答案時可以參考最新、最準確的資訊。</p>
+</li>
+<li>
+<p><strong>實現技術</strong>：<strong>RAG (檢索增強生成)</strong> 是實現接地的主要方法。</p>
+</li>
+<li>
+<p><strong>比喻</strong>：醫生畢業後，持續查閱最新的醫學期刊和研究報告來更新知識。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Model Tuning (模型調教)</strong>：</p>
+<ul>
+<li>
+<p><strong>目的</strong>：讓通用模型具備特定領域的專業知識或遵循特定的輸出風格。</p>
+</li>
+<li>
+<p><strong>方法</strong>：使用一個小型的、標記過的專業資料集，對基礎模型的<strong>內部</strong>參數進行更新和調整。</p>
+</li>
+<li>
+<p><strong>比喻</strong>：醫學生在醫學院接受專業訓練，將專業知識內化到大腦中。</p>
+</li>
+<li>
+<p><strong>Vertex AI 支援的調教方式</strong>：</p>
+<ul>
+<li>
+<p><strong>提示設計 (Prompt Design)</strong>：不改變模型參數，僅透過提示引導。</p>
+</li>
+<li>
+<p><strong>PEFT (參數高效微調)</strong>：也稱轉接器調教，只更新模型一小部分的參數，效率高。</p>
+</li>
+<li>
+<p><strong>完整微調 (Full Fine-tuning)</strong>：更新所有模型參數，計算成本極高，目前 Vertex AI <strong>不支援</strong>針對 Gemini 進行此操作。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>H. AI 的下一步：AI 代理人 (AI Agent)</h4>
+<ul>
+<li>
+<p><strong>演化路徑</strong>：聊天機器人 (對話) -&gt; <strong>AI Agent (行動)</strong> -&gt; 代理式 AI (多 Agent 協調)</p>
+</li>
+<li>
+<p><strong>AI Agent 的定義</strong>：一個結合了 AI 模型（大腦）、外部工具（手腳和感官）以及協調機制（神經系統）的應用程式，能夠為了達成特定目標而採取行動。</p>
+</li>
+<li>
+<p><strong>三大核心元件</strong>：</p>
+<ol>
+<li>
+<p><strong>模型 (大腦)</strong>：一個或多個基礎模型，負責推理和規劃。</p>
+</li>
+<li>
+<p><strong>工具 (手腳/感官)</strong>：透過 API 連接外部世界，執行發送郵件等<strong>動作</strong>，或獲取天氣資訊等<strong>感知</strong>。</p>
+</li>
+<li>
+<p><strong>協調層 (神經系統)</strong>：管理整個運作流程，接收大腦指令，調用工具，並將結果反饋給大腦。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Google Cloud 上的建立工具</strong>：</p>
+<ul>
+<li>
+<p><strong>無程式碼/低程式碼 (商業使用者)</strong>：<strong>Gemini Enterprise</strong>, <strong>NotebookLM</strong> (個人研究助理)。</p>
+</li>
+<li>
+<p><strong>低程式碼/可自訂 (分析師/開發者)</strong>：<strong>Agent Builder</strong>, Agent Garden (提供範例)。</p>
+</li>
+<li>
+<p><strong>高程式碼/完全自訂 (工程師)</strong>：<strong>ADK (Agent Development Kit)</strong>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>3. 知識深化與應用區塊</h3>
+<ul>
+<li>
+<p><strong>核心方法論分析</strong>：本單元的核心是「賦能」。它詳細闡述了如何將一個通用的、強大的生成式 AI 模型（如 Gemini），透過一系列的工程技術（提示工程、參數調整、RAG、微調），轉化為能夠解決特定業務問題的客製化應用。從「提示到生產」的生命週期模型，為企業導入生成式 AI 提供了清晰的路線圖。</p>
+</li>
+<li>
+<p><strong>學習與實作策略</strong>：</p>
+<ul>
+<li>
+<p><strong>從實驗開始</strong>：Vertex AI Studio 是最佳的起點。學習者應親手實驗不同的提示結構、調整模型參數，直觀地感受其對輸出結果的影響。這是掌握提示工程最有效的方法。</p>
+</li>
+<li>
+<p><strong>理解 Grounding 與 Tuning 的權衡</strong>：這是本單元最關鍵的技術決策點。當需要模型掌握「最新資訊」時，應優先考慮 RAG/Grounding；當需要模型學習「特定技能或風格」時，才考慮微調。理解這個差異可以避免不必要的訓練成本和時間。</p>
+</li>
+<li>
+<p><strong>Agent 思維</strong>：學習者應開始培養「Agent 思維」，即思考如何讓 AI 不僅僅是回答問題，而是能串接多個工具、完成一個完整的工作流程。可以從設計一個簡單的 Agent 開始，例如「查詢今天天氣，並根據天氣狀況寫一封郵件提醒我帶傘」。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>領域趨勢與延伸</strong>：</p>
+<ul>
+<li>
+<p><strong>Agent 的普及化</strong>：AI Agent 是生成式 AI 發展的必然趨勢。未來，能夠自主規劃、調用工具並完成複雜任務的 Agent 將會越來越普遍，成為個人和企業的「數位員工」。</p>
+</li>
+<li>
+<p><strong>多 Agent 協作</strong>：代理式 AI (Agentic AI) 的概念預示了更複雜的未來。多個專門的 AI Agent 將會像一個團隊一樣協同工作，解決單一 Agent 無法處理的宏大問題，例如管理整個公司的供應鏈。</p>
+</li>
+<li>
+<p><strong>模型即平台</strong>：Vertex AI Studio 整合了 Google 自家及第三方的模型，體現了「模型即平台」的趨勢。未來，開發者將能像選擇雲端服務一樣，在一個統一的平台上靈活選擇、組合最適合其任務的模型。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>4. 學習價值與反思區塊</h3>
+<ul>
+<li>
+<p><strong>獨特價值與學習亮點</strong>：本單元極具前瞻性與實踐性。它不僅深入淺出地解釋了提示工程的藝術與科學，更重要的是，它清晰地劃分了 Grounding 和 Tuning 這兩個核心客製化技術的應用場景，這是許多初學者極易混淆之處。引入 AI Agent 的概念，更是將學習者的視野從「內容生成」提升到了「任務自動化」的層次，揭示了生成式 AI 的真正潛力。</p>
+</li>
+<li>
+<p><strong>對 AI 領域學習的意義</strong>：對於希望成為 AI 應用開發者的學習者而言，本單元是必修課。它提供了從理論到實踐的完整工具鏈和方法論。掌握 Vertex AI Studio 的使用、理解提示工程的原則、並能根據需求選擇 RAG 或微調，是衡量一個合格生成式 AI 工程師的關鍵能力。</p>
+</li>
+<li>
+<p><strong>實際應用潛力與個人啟發</strong>：</p>
+<ul>
+<li>
+<p><strong>工作應用</strong>：企業可以利用 Vertex AI Studio 快速建立內部知識問答系統（透過 RAG 接地到公司文件）、自動化客服郵件回覆（透過微調學習公司語氣）、甚至開發內部工作流程 Agent（如自動處理報銷申請）。這些都能顯著提升營運效率。</p>
+</li>
+<li>
+<p><strong>個人學習</strong>：NotebookLM 是一個強大的個人學習工具。任何人都可以上傳自己的學習資料（如 PDF 論文、課程筆記），讓 AI 成為專屬於自己的研究助理，幫助總結、提問、產生新觀點。這徹底改變了個人知識管理與學習的方式。本單元的學習本身，就可以透過將逐字稿放入 NotebookLM 來深化理解。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2><a id="module-3"></a>筆記：模組三：AI 開發選項</h2>
+<h3>1. 基本資訊區塊</h3>
+<ul>
+<li>
+<p><strong>課程單元/章節標題</strong>：模組三：AI 開發選項</p>
+</li>
+<li>
+<p><strong>講師</strong>：Hanson 老師</p>
+</li>
+<li>
+<p><strong>授課時間/平台</strong>：2026年 / Google Cloud Platform 核心基礎架構 Cloud Onboard 課程</p>
+</li>
+<li>
+<p><strong>主要關鍵字</strong>：</p>
+<ul>
+<li>
+<p><strong>開發選項</strong>：預先訓練的 API, BigQuery ML, AutoML, 自訂訓練 (Custom Training)</p>
+</li>
+<li>
+<p><strong>核心平台</strong>：Vertex AI</p>
+</li>
+<li>
+<p><strong>工具與環境</strong>：Vertex AI Workbench, Colab Enterprise, 預先建立的容器, 自訂容器</p>
+</li>
+<li>
+<p><strong>技術與框架</strong>：遷移學習 (Transfer Learning), 神經架構搜尋 (Neural Architecture Search), 集成學習 (Ensemble), TensorFlow, Keras, JAX, Flax</p>
+</li>
+<li>
+<p><strong>API</strong>：Gemini API, 自然語言 API</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>2. 內容摘要與知識點區塊</h3>
+<h4>A. 四大 AI 開發選項比較</h4>
+<p>Google Cloud 針對不同需求和技術背景的使用者，提供了四種主要的 AI/ML 開發路徑。</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">開發選項</th>
+<th style="text-align: left;">適用對象</th>
+<th style="text-align: left;">ML/程式專業知識</th>
+<th style="text-align: left;">資料需求</th>
+<th style="text-align: left;">彈性/控制力</th>
+<th style="text-align: left;">訓練時間</th>
+<th style="text-align: left;">核心優勢</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>預先訓練的 API</strong></td>
+<td style="text-align: left;">應用程式開發者</td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;">無需訓練資料</td>
+<td style="text-align: left;">低 (不可調教)</td>
+<td style="text-align: left;">無</td>
+<td style="text-align: left;"><strong>立即可用</strong>，專注於應用邏輯</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BigQuery ML</strong></td>
+<td style="text-align: left;">資料分析師、SQL 開發者</td>
+<td style="text-align: left;">低 (僅需 SQL)</td>
+<td style="text-align: left;">大量 (表格資料)</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;">中 (小時/天)</td>
+<td style="text-align: left;"><strong>無需移動資料</strong>，在 SQL 環境中完成</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AutoML</strong></td>
+<td style="text-align: left;">領域專家、開發者</td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;">中等 (需自有資料)</td>
+<td style="text-align: left;">中 (自動調教)</td>
+<td style="text-align: left;">中 (小時/天)</td>
+<td style="text-align: left;"><strong>無程式碼</strong>建立高品質的自訂模型</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>自訂訓練</strong></td>
+<td style="text-align: left;">ML 工程師、資料科學家</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">大量</td>
+<td style="text-align: left;"><strong>高</strong> (完全控制)</td>
+<td style="text-align: left;">長 (迭代開發)</td>
+<td style="text-align: left;"><strong>完全控制</strong>模型架構與訓練流程</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>講師總結</strong>：「這些選項裡面其實沒有說哪一個最好、哪一個最不好，最好的選項是要看你的商業需求、對ML的專業知識，還有你的預算是怎麼樣。」</p>
+</blockquote>
+<h4>B. Vertex AI：統一的 AI 開發平台</h4>
+<ul>
+<li>
+<p><strong>背景</strong>：為了解決企業在 AI/ML 專案中遇到的生產化挑戰（如擴充性、監控、CI/CD）和易用性挑戰（工具分散、整合困難），Google 推出了 Vertex AI。</p>
+</li>
+<li>
+<p><strong>定位</strong>：一個<strong>點對點 (End-to-End)</strong> 的整合式 AI 開發平台，涵蓋從資料準備、模型訓練、部署到管理的完整生命週期。</p>
+</li>
+<li>
+<p><strong>四大優勢 (4S)</strong>：</p>
+<ol>
+<li>
+<p><strong>Seamless (無縫的)</strong>：提供從資料到部署的順暢使用者體驗。</p>
+</li>
+<li>
+<p><strong>Scalable (可擴充的)</strong>：支援 MLOps，可大規模管理、監控和服務模型。</p>
+</li>
+<li>
+<p><strong>Sustainable (可持續的)</strong>：特徵資料和模型成品可重複使用與共享。</p>
+</li>
+<li>
+<p><strong>Speed (速度)</strong>：根據 Google 內部統計，可減少 80% 的程式碼編寫。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4>C. 深入 AutoML</h4>
+<ul>
+<li>
+<p><strong>定義</strong>：自動化機器學習開發流程中耗時的手動步驟，讓使用者無需深入了解模型細節也能建立高效能模型。</p>
+</li>
+<li>
+<p><strong>內部四大階段</strong>：</p>
+<ol>
+<li>
+<p><strong>資料處理</strong>：自動進行資料前處理，將不同類型的資料（數字、文字、類別）轉換為模型可用的數字向量。</p>
+</li>
+<li>
+<p><strong>模型搜尋與調教</strong>：</p>
+<ul>
+<li>
+<p><strong>神經架構搜尋 (NAS)</strong>：自動嘗試不同的模型架構和超參數組合，找出最佳模型。</p>
+</li>
+<li>
+<p><strong>遷移學習 (Transfer Learning)</strong>：利用 Google 預先訓練好的大型模型作為基礎，在使用者提供的資料上進行微調，從而加速訓練並提升準確度。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>集成 (Ensemble)</strong>：將多個表現最好的模型組合起來，形成一個最終模型。
+    &gt; <strong>講師觀點</strong>：「AutoML雖然你以為只有一個模型，實際上是多個模型組合起來的成果。因為用多個模型組合起來的效果會比一個模型好。」</p>
+</li>
+<li>
+<p><strong>預測</strong>：使用集成後的模型提供預測服務。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4>D. 深入預先訓練的 API</h4>
+<ul>
+<li>
+<p><strong>核心概念</strong>：將 Google 已經用海量資料訓練好的成熟模型，透過 API 的形式提供給開發者直接調用，無需自行訓練。</p>
+</li>
+<li>
+<p><strong>API 如同插座</strong>：
+    &gt; <strong>講師比喻</strong>：「可以把它想像成是插座...你去旅遊只要知道那個國家的插座類型就可以了，不需要知道電網怎麼運作...只要有轉接頭就可以把電器接上去。這就是API的概念。」</p>
+</li>
+<li>
+<p><strong>使用流程 (以 Gemini API 為例)</strong>：</p>
+<ol>
+<li>
+<p><strong>驗證</strong>：提供 API Key 或設定 GCP 專案進行身份驗證。</p>
+</li>
+<li>
+<p><strong>指定模型</strong>：選擇要使用的模型版本（如 <code>gemini-1.5-flash</code>）。</p>
+</li>
+<li>
+<p><strong>發送請求</strong>：透過 SDK 的 <code>generate_content</code> 函數發送提示 (Prompt)。</p>
+</li>
+<li>
+<p><strong>接收回覆</strong>：處理 API 回傳的結果。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>API 種類</strong>：除了 Gemini API，Google Cloud 還提供語音、文字、圖片、文件、對話式 AI 等多種預先訓練好的 API。</p>
+</li>
+</ul>
+<h4>E. 深入自訂訓練 (Custom Training)</h4>
+<ul>
+<li>
+<p><strong>適用時機</strong>：</p>
+<ul>
+<li>
+<p>需要對模型架構有完全的控制能力。</p>
+</li>
+<li>
+<p>希望使用特定的機器學習框架（如 TensorFlow, PyTorch, JAX）。</p>
+</li>
+<li>
+<p>需要自訂複雜的訓練邏輯。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>開發環境</strong>：</p>
+<ul>
+<li>
+<p><strong>Vertex AI Workbench / Colab Enterprise</strong>：提供 Jupyter Lab 筆記本環境，用於資料探索、程式碼編寫和模型實驗。</p>
+</li>
+<li>
+<p><strong>容器選項</strong>：</p>
+<ul>
+<li>
+<p><strong>預先建立好的容器</strong>：Google 官方提供，內建標準框架（如 TensorFlow, PyTorch），開箱即用。</p>
+</li>
+<li>
+<p><strong>自訂容器</strong>：使用者可以自行打包所需的框架、函式庫和依賴項，提供最大靈活性。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>核心框架：TensorFlow</strong></p>
+<ul>
+<li>
+<p><strong>分層結構</strong>：從底層硬體抽象，到低層次 API，再到高層次的 Keras 模組，滿足不同程度的自訂需求。</p>
+</li>
+<li>
+<p><strong>Keras 建立模型三步驟</strong>：</p>
+<ol>
+<li>
+<p><strong>建立模型 (<code>tf.keras.Sequential</code>)</strong>：將神經網路層堆疊起來，定義模型架構。</p>
+</li>
+<li>
+<p><strong>編譯模型 (<code>model.compile</code>)</strong>：指定損失函數、最佳化演算法和評估指標。</p>
+</li>
+<li>
+<p><strong>訓練模型 (<code>model.fit</code>)</strong>：提供訓練資料和標籤，啟動訓練過程。</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3>3. 知識深化與應用區塊</h3>
+<ul>
+<li>
+<p><strong>核心方法論分析</strong>：本單元的核心是「選擇的策略」。它強調在 AI/ML 領域，不存在「一招打天下」的萬能鑰匙。成功的關鍵在於根據具體的<strong>商業目標、團隊技能、資料狀況和預算限制</strong>，做出最合適的技術路徑選擇。這個框架（API -&gt; BigQuery ML -&gt; AutoML -&gt; Custom Training）提供了一個從易到難、從低控制到高控制的清晰光譜，幫助決策者進行權衡。</p>
+</li>
+<li>
+<p><strong>學習與實作策略</strong>：</p>
+<ul>
+<li>
+<p><strong>漸進式學習路徑</strong>：對於初學者或團隊，可以遵循本單元介紹的順序作為學習路徑。先從呼叫 API 開始，感受 AI 的能力；接著利用 BigQuery ML 在現有資料上小試牛刀；然後嘗試用 AutoML 解決更客製化的問題；最後，當標準工具無法滿足需求時，再投入資源學習自訂訓練。</p>
+</li>
+<li>
+<p><strong>AutoML 作為基準線</strong>：即使是專業的 ML 團隊，也可以先使用 AutoML 快速訓練一個模型。這個模型的效能可以作為一個強大的「基準線 (Baseline)」，自訂訓練的目標就是要超越這個基準線。這可以避免團隊花費大量時間和資源，最終卻只得到一個不如自動化工具的結果。</p>
+</li>
+<li>
+<p><strong>理解抽象層次</strong>：學習者應理解 TensorFlow/Keras 的抽象層次。對於大多數應用，使用高層次的 Keras API 已經足夠。只有在需要研究或開發新型演算法時，才需要深入到底層 API。這有助於將精力集中在解決問題，而非重複造輪子。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>領域趨勢與延伸</strong>：</p>
+<ul>
+<li>
+<p><strong>ML 民主化</strong>：像 AutoML 和 BigQuery ML 這樣的工具，是「機器學習民主化」趨勢的體現。它們極大地降低了 AI 的使用門檻，讓更多的數據分析師、領域專家甚至商業使用者都能參與到 AI 應用的創建中。</p>
+</li>
+<li>
+<p><strong>高效能框架的興起</strong>：講師提到 JAX 和 Flax，這代表了業界對更高計算效率的追求。對於需要進行大規模模型訓練和研究的場景，這些新興框架因其速度和對平行處理的良好支援而越來越受歡迎。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>4. 學習價值與反思區塊</h3>
+<ul>
+<li>
+<p><strong>獨特價值與學習亮點</strong>：本單元最大的價值在於提供了一個極其清晰的決策框架。許多課程只會教單一的技術（如 TensorFlow），但本單元從一個更高的維度，比較了所有可行的路徑，並給出了明確的選擇指引。這對於企業的技術主管或專案經理來說，具有極高的參考價值。對 AutoML 內部運作原理（NAS, Transfer Learning, Ensemble）的揭示，也幫助使用者打破了對其「黑盒子」的印象，建立了信任。</p>
+</li>
+<li>
+<p><strong>對 AI 領域學習的意義</strong>：這個單元教會學習者一個重要的元技能：<strong>如何根據問題選擇工具</strong>。在技術日新月異的 AI 領域，學會所有工具是不可能的，但理解不同工具的設計哲學、適用場景和優劣勢，將使學習者具備更強的適應性和問題解決能力。它鼓勵學習者成為一個「務實的工程師」，而不是某個特定框架的「粉絲」。</p>
+</li>
+<li>
+<p><strong>實際應用潛力與個人啟發</strong>：</p>
+<ul>
+<li>
+<p><strong>工作應用</strong>：一個團隊在啟動新的 AI 專案時，可以將本單元的比較表格作為一個檢查清單。例如：「我們的資料都在 BigQuery 嗎？團隊會 SQL 嗎？」-&gt; 考慮 BigQuery ML。「我們有自己的圖片資料，但沒有 ML 專家」-&gt; 考慮 AutoML Vision。「我們需要一個非常特殊的模型架-構來做金融風控」-&gt; 規劃自訂訓練。這個流程可以顯著提高專案的成功率和效率。</p>
+</li>
+<li>
+<p><strong>個人啟發</strong>：這個單元提醒我們，在技術選擇上要避免「錘子思維」（手裡拿著錘子，看什麼都像釘子）。一個熟悉自訂訓練的工程師，也應該了解何時使用更簡單的 AutoML 或 API 會是更明智、更具成本效益的選擇。真正的專業不僅在於能解決複雜問題，更在於能用最簡單有效的方法解決問題。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2><a id="module-4"></a>筆記：模組四：AI 開發工作流程</h2>
+<h3>1. 基本資訊區塊</h3>
+<ul>
+<li>
+<p><strong>課程單元/章節標題</strong>：模組四：AI 開發工作流程</p>
+</li>
+<li>
+<p><strong>講師</strong>：Hanson 老師</p>
+</li>
+<li>
+<p><strong>授課時間/平台</strong>：2026年 / Google Cloud Platform 核心基礎架構 Cloud Onboard 課程</p>
+</li>
+<li>
+<p><strong>主要關鍵字</strong>：</p>
+<ul>
+<li>
+<p><strong>核心流程</strong>：ML 工作流程 (ML Workflow), 資料準備, 模型開發, 模型服務</p>
+</li>
+<li>
+<p><strong>核心理念</strong>：機器學習營運 (MLOps), CI/CT/CD (連續整合/連續訓練/連續交付)</p>
+</li>
+<li>
+<p><strong>Google Cloud 產品</strong>：Vertex AI Pipelines, Vertex AI Feature Store</p>
+</li>
+<li>
+<p><strong>技術概念</strong>：特徵工程 (Feature Engineering), 端點 (Endpoint), 批次預測 (Batch Prediction)</p>
+</li>
+<li>
+<p><strong>評估指標</strong>：混淆矩陣 (Confusion Matrix), 召回率 (Recall), 精準度 (Precision), 特徵重要性 (Feature Importance), 可解釋 AI (Explainable AI)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>2. 內容摘要與知識點區塊</h3>
+<h4>A. ML 工作流程概觀</h4>
+<p>講師將建立 ML 模型比喻為餐廳準備餐點，整個流程包含三個主要階段，且是一個<strong>迭代式</strong>而非線性的過程。</p>
+<div class="mermaid">
+graph LR
+    ingest[Data Ingest]:::step --> etl[ETL / Data Prep]:::step
+    etl --> feature[Feature Store]:::store
+    feature --> train[Train]:::train
+    train --> evaluate[Evaluate]:::eval
+    evaluate --> deploy[Deploy]:::deploy
+    deploy --> monitor[Monitor]:::monitor
+    classDef step fill:#e3f2fd,stroke:#0d47a1,color:#0d47a1;
+    classDef store fill:#fff8e1,stroke:#f57f17,color:#f57f17;
+    classDef train fill:#f3e5f5,stroke:#6a1b9a,color:#6a1b9a;
+    classDef eval fill:#fbe9e7,stroke:#d84315,color:#d84315;
+    classDef deploy fill:#e8f5e9,stroke:#2e7d32,color:#2e7d32;
+    classDef monitor fill:#fff3e0,stroke:#ef6c00,color:#ef6c00;
+</div>
+<ol>
+<li>
+<p><strong>資料準備 (準備食材)</strong></p>
+<ul>
+<li>
+<p><strong>步驟</strong>：上傳資料、特徵工程。</p>
+</li>
+<li>
+<p><strong>說明</strong>：資料的品質和數量直接決定了模型的上限。此階段需要處理各種來源和型態的資料。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>模型開發 (開發食譜)</strong></p>
+<ul>
+<li>
+<p><strong>步驟</strong>：訓練模型、評估模型。</p>
+</li>
+<li>
+<p><strong>說明</strong>：這是一個反覆實驗的迴圈，旨在找到最佳的模型和參數。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>模型服務 (送餐給客人)</strong></p>
+<ul>
+<li>
+<p><strong>步驟</strong>：部署模型、監控模型。</p>
+</li>
+<li>
+<p><strong>說明</strong>：讓模型真正產生價值，並持續監控其在真實世界中的表現。</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>講師觀點</strong>：「如果模型不部署到生產環境，那它就是一個理論上完美的模型而已。」</p>
+</blockquote>
+<h4>B. 階段一：資料準備</h4>
+<ul>
+<li>
+<p><strong>資料上傳</strong>：資料可來自 Cloud Storage, BigQuery 或本地。在 AutoML 中，會根據資料類型和目標（如分類、回歸）來處理。</p>
+</li>
+<li>
+<p><strong>特徵工程 (Feature Engineering)</strong>：</p>
+<ul>
+<li>
+<p><strong>定義</strong>：從原始資料中提取或創造出對模型預測有幫助的特性（特徵）的過程。如同備料時需要對食材進行清洗、切割、調味。</p>
+</li>
+<li>
+<p><strong>工具：Vertex AI Feature Store</strong></p>
+<ul>
+<li>
+<p><strong>定位</strong>：一個集中的儲存庫，用於管理、儲存、服務和共享特徵。</p>
+</li>
+<li>
+<p><strong>工作流程</strong>：在 BigQuery 中準備好特徵 -&gt; 將特徵註冊到 Feature Store -&gt; 設定線上服務 -&gt; 從線上或離線服務中取用特徵。</p>
+</li>
+<li>
+<p><strong>核心優勢</strong>：</p>
+<ul>
+<li>
+<p><strong>共享與重用</strong>：避免不同團隊重複開發相同特徵，確保全組織特徵一致性。</p>
+</li>
+<li>
+<p><strong>可擴充性</strong>：提供低延遲的線上特徵服務能力，無需擔心底層設施。</p>
+</li>
+<li>
+<p><strong>訓練/服務偏差的解決</strong>：確保訓練時和線上預測時使用的特徵計算邏輯完全一致。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>C. 階段二：模型開發</h4>
+<ul>
+<li>
+<p><strong>模型訓練 (以 AutoML 為例)</strong>：</p>
+<ol>
+<li>
+<p><strong>指定訓練方法</strong>：選擇資料集和訓練目標（如分類）。</p>
+</li>
+<li>
+<p><strong>選擇訓練方式</strong>：選擇 AutoML 或自訂訓練。</p>
+</li>
+<li>
+<p><strong>設定訓練細節</strong>：指定目標欄位（Label），並選擇哪些特徵參與訓練。</p>
+</li>
+<li>
+<p><strong>設定訓練預算</strong>：以「節點小時」為單位，AutoML 會在預算內盡力尋找最佳模型。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>模型評估</strong>：</p>
+<ul>
+<li>
+<p><strong>混淆矩陣 (Confusion Matrix)</strong>：分類問題評估的基礎，展示模型預測結果與真實類別的對應關係。</p>
+<div class="table-responsive">
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>實際為正 (Positive)</th>
+            <th>實際為負 (Negative)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>預測為正</strong></td>
+            <td>真陽性 (TP)</td>
+            <td>偽陽性 (FP)</td>
+        </tr>
+        <tr>
+            <td><strong>預測為負</strong></td>
+            <td>偽陰性 (FN)</td>
+            <td>真陰性 (TN)</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</li>
+<li>
+<p><strong>關鍵評估指標</strong>：</p>
+<ul>
+<li>
+<p><strong>精準度 (Precision)</strong> = <code>TP / (TP + FP)</code></p>
+<ul>
+<li>
+<p><strong>意義</strong>：在所有被模型預測為「正」的樣本中，有多少是真的「正」。<strong>求精不求全</strong>。</p>
+</li>
+<li>
+<p><strong>應用</strong>：垃圾郵件分類（希望被標為垃圾郵件的，真的都是垃圾郵件，避免誤判重要信件）。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>召回率 (Recall)</strong> = <code>TP / (TP + FN)</code></p>
+<ul>
+<li>
+<p><strong>意義</strong>：在所有實際上為「正」的樣本中，模型成功找出了多少。<strong>求全不求精</strong>。</p>
+</li>
+<li>
+<p><strong>應用</strong>：癌症診斷（希望找出所有可能的癌症病例，寧可誤判也不願漏掉）。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>特徵重要性 (Feature Importance)</strong>：</p>
+<ul>
+<li>
+<p><strong>意義</strong>：顯示各個輸入特徵對模型預測結果的貢獻度。</p>
+</li>
+<li>
+<p><strong>價值</strong>：屬於<strong>可解釋 AI (Explainable AI)</strong> 的一部分，幫助使用者理解模型的決策依據，增加對模型的信任。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>D. 階段三：模型服務</h4>
+<ul>
+<li>
+<p><strong>模型部署</strong>：</p>
+<ul>
+<li>
+<p><strong>線上預測 (Online Prediction)</strong>：透過部署到 <strong>Endpoint (端點)</strong> 來實現。適用於需要低延遲、即時回應的場景。</p>
+</li>
+<li>
+<p><strong>批次預測 (Batch Prediction)</strong>：無需部署到端點，直接對一批資料進行預測。適用於對延遲不敏感、可離線處理的場景（如每日報告生成）。</p>
+</li>
+<li>
+<p><strong>邊緣部署 (Edge Deployment)</strong>：將模型部署在雲端之外的本地設備（如工廠 IoT 設備），以消除網路延遲、保護隱私或實現離線使用。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>模型監控與 MLOps</strong>：</p>
+<ul>
+<li>
+<p><strong>挑戰</strong>：模型在部署後，其效能可能會因為資料分布的變化（Data Drift）而逐漸下降。</p>
+</li>
+<li>
+<p><strong>解決方案：MLOps (機器學習營運)</strong></p>
+<ul>
+<li>
+<p><strong>定義</strong>：一套旨在將 ML 模型開發（Dev）與部署維運（Ops）流程自動化、標準化的實踐方法。</p>
+</li>
+<li>
+<p><strong>工具：Vertex AI Pipelines</strong></p>
+<ul>
+<li>
+<p><strong>定位</strong>：一個無伺服器的服務，用於指揮編排（Orchestrate）整個 ML 工作流程。</p>
+</li>
+<li>
+<p><strong>運作方式</strong>：將工作流程拆解成一個個獨立的<strong>元件 (Component)</strong>，再將這些元件串聯起來形成一個<strong>管道 (Pipeline)</strong>。</p>
+</li>
+<li>
+<p><strong>優勢</strong>：可重用、可自動化、視覺化監控。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MLOps 成熟度三階段</strong>：</p>
+<ul>
+<li>
+<p><strong>時期 0</strong>：手動流程，通常使用 UI 操作。</p>
+</li>
+<li>
+<p><strong>時期 1</strong>：部分自動化，開始開發可重用的管道組件。</p>
+</li>
+<li>
+<p><strong>時期 2</strong>：完全自動化，實現 CI/CT/CD（連續整合、連續訓練、連續交付）的完整 MLOps 流程。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>3. 知識深化與應用區塊</h3>
+<ul>
+<li>
+<p><strong>核心方法論分析</strong>：本單元的核心是將機器學習從一次性的「專案 (Project)」思維，提升到可持續、可自動化的「產品 (Product)」思維。MLOps 的引入，正是解決了 AI 模型從實驗室走向真實生產環境的「最後一哩路」問題。它強調的是流程的標準化、自動化和可重複性，這對於企業大規模、可靠地應用 AI 至關重要。</p>
+</li>
+<li>
+<p><strong>學習與實作策略</strong>：</p>
+<ul>
+<li>
+<p><strong>理解指標的權衡 (Trade-off)</strong>：學習者必須深刻理解 Precision 和 Recall 之間的權衡關係。在實際應用中，不存在兩者都完美的模型。需要根據具體的商業場景和錯誤的成本（是「誤判」的成本高，還是「漏判」的成本高？）來決定優化哪一個指標，並調整分類門檻值。</p>
+</li>
+<li>
+<p><strong>從樣板開始學習 Pipeline</strong>：對於初學者，直接用程式碼編寫 Vertex AI Pipeline 可能有些困難。最佳的學習路徑是從 Vertex AI 提供的官方管道樣板（如 AutoML 表格分類樣板）開始，先執行它、觀察其運作，然後再嘗試修改或組合其中的元件，逐步掌握管道的構建方式。</p>
+</li>
+<li>
+<p><strong>重視 Feature Store</strong>：在許多企業中，特徵工程佔據了資料科學家 60-80% 的時間。Vertex AI Feature Store 是解決這一痛點的關鍵工具。學習者應將其視為 MLOps 流程的起點，培養「先定義好特徵，再進行模型實驗」的良好習慣。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>領域趨勢與延伸</strong>：</p>
+<ul>
+<li>
+<p><strong>負責任的 AI (Responsible AI)</strong>：特徵重要性等可解釋 AI 工具的介紹，觸及了負責任 AI 的重要議題。隨著 AI 越來越多地被用於高風險決策（如信貸審批、醫療診斷），模型的透明度和可解釋性變得至關重要。</p>
+</li>
+<li>
+<p><strong>MLOps 的普及</strong>：MLOps 不再是大型科技公司的專利。隨著 Vertex AI Pipelines 等代管服務的出現，各種規模的企業都能夠以較低的成本實施 MLOps，加速 AI 應用的落地和迭代。</p>
+</li>
+<li>
+<p><strong>流程即程式碼 (Pipeline as Code)</strong>：使用 SDK 以程式碼的方式定義 Pipeline，使得整個 ML 工作流程可以像軟體工程一樣被版本控制、審查和持續整合，這是現代 MLOps 的核心實踐。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>4. 學習價值與反思區塊</h3>
+<ul>
+<li>
+<p><strong>獨特價值與學習亮點</strong>：本單元最大的亮點是其完整性和實踐性。它不僅僅是理論介紹，而是將一個完整的 ML 專案從資料流入到模型上線監控的全過程，都對應到了 Google Cloud 上的具體工具（Feature Store, AutoML, Vertex AI Pipelines）。餐廳備餐的比喻生動易懂，讓複雜的 MLOps 流程變得平易近人。對 Precision 和 Recall 的深入辨析，更是直接命中了模型評估中最核心、最實用的知識點。</p>
+</li>
+<li>
+<p><strong>對 AI 領域學習的意義</strong>：這個單元為學習者補上了從「會訓練模型」到「能交付可用 AI 服務」之間最關鍵的一環。許多學習者在學會了 <code>model.fit()</code> 之後就感到迷茫，不知道如何將模型部署到生產環境並持續維護。本單元提供的 MLOps 框架和 Vertex AI Pipelines 工具，為他們指明了通往專業 ML 工程師的道路。</p>
+</li>
+<li>
+<p><strong>實際應用潛力與個人啟發</strong>：</p>
+<ul>
+<li>
+<p><strong>工作應用</strong>：任何希望將 AI/ML 應用於核心業務的企業，都應該採納本單元介紹的 MLOps 流程。透過建立自動化的 Vertex AI Pipeline，可以確保模型能夠在資料發生變化時自動重新訓練和部署，始終保持最佳效能，同時也大大減少了人工維運的成本和風險。</p>
+</li>
+<li>
+<p><strong>個人啟發</strong>：這個單元啟示我們，一個成功的 AI 應用，演算法和模型本身可能只佔 20%，而剩下的 80% 則是圍繞著它的資料工程、部署、監控和治理等一系列的工程實踐。對於個人職涯發展而言，成為一個既懂模型又懂 MLOps 的全方位人才，將具備極強的市場競爭力。這也提醒我們，在學習的過程中，不能只停留在 Jupyter Notebook 裡，而要勇於將自己的專案打包成可執行的 Pipeline，完成整個端到端的流程。</p>
+</li>
+</ul>
+</li>
+</ul>
+</main>
+
+<script>
+    // 條件初始化 Mermaid.js（僅在需要時執行）
+    // 無需 Mermaid.js
+
+    function setTheme(themeName, btn) {
+        document.body.className = 'theme-' + themeName;
+        document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+</script>
+</body>
+</html>
