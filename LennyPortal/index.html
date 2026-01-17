@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang='zh-TW'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Lenny's Podcast 知識入口</title>
+<link href='https://fonts.googleapis.com/css2?family=Varela+Round&display=swap' rel='stylesheet'>
+<style>
+    body {
+        font-family: 'Varela Round', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: #FFFAF0; /* Floral White */
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #5D4037;
+    }
+    .container {
+        text-align: center;
+        background: white;
+        padding: 50px;
+        border-radius: 40px;
+        box-shadow: 0 20px 50px rgba(255, 183, 178, 0.3);
+        border: 8px solid #FFD1DC;
+        max-width: 600px;
+        width: 90%;
+    }
+    h1 {
+        font-size: 2.5rem;
+        color: #FF6B6B;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 0px #FFE4E1;
+    }
+    p.subtitle {
+        color: #9E9E9E;
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+    }
+    .menu {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .card {
+        text-decoration: none;
+        padding: 20px;
+        border-radius: 20px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 0px rgba(0,0,0,0.05);
+        position: relative;
+        top: 0;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        top: -5px;
+        box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+    }
+    .card:active {
+        top: 2px;
+        box-shadow: 0 4px 0px rgba(0,0,0,0.05);
+    }
+    .card span {
+        margin-right: 15px;
+        font-size: 1.8rem;
+    }
+    /* Colors for cards */
+    .recommend { background-color: #FFD1DC; color: #D81B60; }
+    .course { background-color: #B2EBF2; color: #00838F; }
+    .research { background-color: #E1BEE7; color: #6A1B9A; }
+
+    .footer {
+        margin-top: 40px;
+        font-size: 0.9rem;
+        color: #BCAAA4;
+    }
+    .sparkle {
+        display: inline-block;
+        animation: rotate 2s infinite linear;
+    }
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1><span class="sparkle">✨</span> Lenny's Portal</h1>
+    <p class="subtitle">歡迎來到 Lenny Podcast 的知識花園 🌸</p>
+    
+    <div class="menu">
+        <a href="Lenny-編輯推薦.html" target="_blank" class="card recommend">
+            <span>🌟</span> 編輯推薦精選
+        </a>
+        <a href="Lenny-課程導讀.html" target="_blank" class="card course">
+            <span>🎓</span> 深度課程導讀
+        </a>
+        <a href="Lenny-研究筆記.html" target="_blank" class="card research">
+            <span>📝</span> 專業研究筆記
+        </a>
+    </div>
+
+    <div class="footer">
+        Made with ❤️ for Product Lovers
+    </div>
+</div>
+
+</body>
+</html>
