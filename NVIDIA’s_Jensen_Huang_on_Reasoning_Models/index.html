@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA 黃仁勳談推理模型、機器人與「AI 泡沫」的反駁 | No Priors Podcast</title>
+
+<!-- Open Graph / LINE link preview -->
+<meta property="og:title" content="NVIDIA 黃仁勳談推理模型、機器人與「AI 泡沫」的反駁" />
+<meta property="og:description" content="No Priors Podcast 專訪 NVIDIA 執行長黃仁勳，深入探討 AI 現狀、反駁「AI 泡沫」論述、機器人技術與地緣政治觀點。" />
+<meta property="og:type" content="article" />
+<meta property="og:image" content="generate_image_88e2414b6ec541b095d3cda53694750c.jpeg" />
+<meta property="og:image:alt" content="Jensen Huang Interview Cover" />
+<meta property="og:locale" content="zh_TW" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="NVIDIA 黃仁勳談推理模型、機器人與「AI 泡沫」的反駁" />
+<meta name="twitter:description" content="No Priors Podcast 專訪 NVIDIA 執行長黃仁勳，深入探討 AI 現狀、反駁「AI 泡沫」論述、機器人技術與地緣政治觀點。" />
+<meta name="twitter:image" content="generate_image_88e2414b6ec541b095d3cda53694750c.jpeg" />
+
+<!-- Additional SEO -->
+<meta name="description" content="No Priors Podcast 專訪 NVIDIA 執行長黃仁勳，深入探討 AI 現狀、反駁「AI 泡沫」論述、機器人技術與地緣政治觀點。" />
+
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --transition-speed: 0.3s;
+        --font-size-base: 16px;
+        --font-size-sm: 14px;
+        --font-size-lg: 18px;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: var(--font-size-base);
+        transition: background-color var(--transition-speed), color var(--transition-speed);
+        line-height: 1.8;
+    }
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 40px;
+        transition: all var(--transition-speed);
+    }
+
+    /* Typography */
+    h1 { font-size: 2em; margin: 0.67em 0; }
+    h2 { font-size: 1.5em; margin: 0.83em 0; }
+    h3 { font-size: 1.17em; margin: 1em 0; }
+    p, li, blockquote { font-size: var(--font-size-base); }
+    blockquote {
+        margin: 1em 0;
+        padding: 0.5em 1em;
+        border-left: 4px solid #ddd;
+    }
+    blockquote p, blockquote li { font-size: inherit; }
+    ul, ol { padding-left: 1.5em; }
+    li { margin: 0.5em 0; }
+    li > ul, li > ol { margin: 0.25em 0; }
+
+    /* Code blocks */
+    pre {
+        background-color: #f6f8fa;
+        padding: 16px;
+        overflow-x: auto;
+        border-radius: 6px;
+        font-size: var(--font-size-sm);
+    }
+    code {
+        font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.9em;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background: none;
+        padding: 0;
+        font-size: inherit;
+    }
+
+    /* Images */
+    img { max-width: 100%; height: auto; display: block; margin: 20px auto; border-radius: 8px; }
+
+    /* Tables */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 1em 0;
+        font-size: var(--font-size-base);
+    }
+    th, td {
+        border: 1px solid #dfe2e5;
+        padding: 8px 12px;
+        text-align: left;
+    }
+    th { background-color: #f6f8fa; font-weight: bold; }
+
+    /* Highlight box */
+    .highlight-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+    }
+    .highlight-box h3 { color: white; margin-top: 0; }
+
+    /* Info card */
+    .info-card {
+        background-color: #f8f9fa;
+        border-left: 4px solid #007bff;
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+    }
+
+    /* Theme Switcher */
+    .theme-switch {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        gap: 10px;
+        background: rgba(255,255,255,0.8);
+        padding: 10px;
+        border-radius: 50px;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .btn {
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 20px;
+        font-weight: bold;
+        font-family: inherit;
+        font-size: var(--font-size-sm);
+        transition: transform 0.2s;
+    }
+    .btn:hover { transform: scale(1.05); }
+
+    /* Academic Theme */
+    body.theme-academic {
+        background-color: #f4f4f4;
+        color: #333;
+        font-family: 'Lora', Georgia, serif;
+    }
+    body.theme-academic .container {
+        background-color: #fff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        border: 1px solid #ddd;
+    }
+    body.theme-academic h1, body.theme-academic h2, body.theme-academic h3 {
+        color: #2c3e50;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+    body.theme-academic blockquote {
+        border-left-color: #2c3e50;
+        background-color: #f9f9f9;
+    }
+    body.theme-academic .btn { background: #e0e0e0; color: #333; }
+    body.theme-academic .btn.active { background: #2c3e50; color: #fff; }
+    body.theme-academic .info-card { background-color: #f8f9fa; border-left-color: #2c3e50; }
+
+    /* Cute Theme */
+    body.theme-cute {
+        background-color: #fff0f5;
+        color: #5d4037;
+        font-family: 'Quicksand', sans-serif;
+        background-image: radial-gradient(#ffb7b2 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+    body.theme-cute .container {
+        background-color: #ffffff;
+        border-radius: 25px;
+        border: 3px dashed #ffb7b2;
+        box-shadow: 0 10px 20px rgba(255, 183, 178, 0.3);
+    }
+    body.theme-cute h1, body.theme-cute h2, body.theme-cute h3 {
+        color: #ff6b6b;
+        text-shadow: 2px 2px 0px #ffd1dc;
+    }
+    body.theme-cute blockquote {
+        border-left: 5px solid #ffb7b2;
+        background-color: #fff9fa;
+        padding: 10px 20px;
+        border-radius: 10px;
+    }
+    body.theme-cute pre { background-color: #fff5f5; border: 1px solid #ffb7b2; }
+    body.theme-cute code { background-color: #fff5f5; }
+    body.theme-cute th { background-color: #fff5f5; }
+    body.theme-cute .btn { background: #ffe0e6; color: #ff6b6b; }
+    body.theme-cute .btn.active { background: #ff6b6b; color: #fff; }
+    body.theme-cute .info-card { background-color: #fff9fa; border-left-color: #ff6b6b; }
+    body.theme-cute .highlight-box { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+
+    /* Mermaid */
+    .mermaid { text-align: center; margin: 30px 0; }
+
+    /* RWD */
+    @media (max-width: 768px) {
+        .container { padding: 20px; margin: 20px auto; width: 90%; }
+        .theme-switch { top: auto; bottom: 20px; right: 20px; }
+    }
+</style>
+</head>
+<body class="theme-academic">
+
+<nav class="theme-switch" aria-label="主題切換">
+    <button class="btn active" onclick="setTheme('academic', this)">🎓 學術模式</button>
+    <button class="btn" onclick="setTheme('cute', this)">🧸 可愛模式</button>
+</nav>
+
+<main class="container">
+
+<h1>NVIDIA 黃仁勳談推理模型、機器人與「AI 泡沫」的反駁</h1>
+
+<img src="generate_image_88e2414b6ec541b095d3cda53694750c.jpeg" alt="Jensen Huang Interview Cover" style="width:100%; margin-bottom: 20px; border-radius: 8px;">
+
+<div class="info-card">
+    <p><strong>節目來源</strong>：No Priors Podcast</p>
+    <p><strong>發布日期</strong>：2026 年 1 月 8 日</p>
+    <p><strong>主持人</strong>：Sarah Guo、Elad Gil</p>
+    <p><strong>來賓</strong>：黃仁勳 (Jensen Huang)，NVIDIA 創辦人暨執行長</p>
+    <p><strong>推薦對象</strong>：AI 從業人員、科技投資者、對機器人學有興趣者、關注科技產業趨勢的學習者</p>
+</div>
+
+<hr />
+
+<h2>節目簡介</h2>
+
+<p>在這場深度訪談中，NVIDIA 執行長黃仁勳與 No Priors Podcast 主持人 Sarah Guo 及 Elad Gil 進行了一場精彩對話。黃仁勳深入探討了 AI 的現狀、強力反駁了「AI 泡沫」的說法，並對機器人技術（Robotics）與地緣政治提出了獨到見解。這是一場結合技術洞察與商業智慧的頂尖對談，為 2026 年 AI 產業的發展方向提供了重要參考。</p>
+
+<hr />
+
+<h2>核心主題一覽</h2>
+
+<div class="highlight-box">
+    <h3>六大核心主題</h3>
+    <ol>
+        <li><strong>反駁「AI 泡沫」</strong>：加速運算是必然趨勢</li>
+        <li><strong>2025 年回顧</strong>：推理模型與獲利能力</li>
+        <li><strong>就業市場新觀點</strong>：任務 (Task) vs. 目的 (Purpose)</li>
+        <li><strong>2026 年展望</strong>：機器人與數位生物學</li>
+        <li><strong>地緣政治與開源</strong>：DeepSeek 與全球協作</li>
+        <li><strong>能源議題</strong>：AI 推動綠能創新</li>
+    </ol>
+</div>
+
+<hr />
+
+<h2>1. 反駁「AI 泡沫」論述：加速運算是必然趨勢</h2>
+
+<p>黃仁勳強烈反駁 AI 是泡沫的觀點，他提出了一個更宏觀的計算架構轉型論點：</p>
+
+<h3>摩爾定律的終結</h3>
+<p>即使沒有 ChatGPT 或生成式 AI，NVIDIA 仍會取得巨大成功。原因在於<strong>摩爾定律（Moore's Law）已大致失效</strong>，CPU 無法再像過去那樣每年提供顯著的效能提升與成本下降。</p>
+
+<h3>加速運算的必要性</h3>
+<p>全球資料中心必須從<strong>通用運算（General Purpose Computing）</strong>轉向<strong>加速運算（Accelerated Computing）</strong>，以處理電腦繪圖、SQL 數據處理、科學模擬等任務。這是一個硬體更新週期，與 AI 是否存在泡沫無關。</p>
+
+<h3>產能短缺證明需求</h3>
+<p>不僅是 OpenAI，<strong>所有新創公司、大學研究人員以及各行各業都在渴求算力</strong>。這顯示需求是真實且全面性的，並非僅由少數公司驅動。</p>
+
+<blockquote>
+<p>「AI 泡沫論調是為了嚇唬人退出市場，實際情況是計算需求的量是瘋狂的。」— 黃仁勳</p>
+</blockquote>
+
+<hr />
+
+<h2>2. 2025 年的回顧：推理模型與獲利能力</h2>
+
+<h3>推理 (Reasoning) 與接地 (Grounding)</h3>
+<p>2025 年最大的驚喜在於 AI 在推理能力與<strong>「接地」（Grounding）</strong>方面的巨大進步。所謂「接地」，指的是減少幻覺、基於事實的能力。這讓 AI 的輸出更加可靠，適用於更多關鍵任務場景。</p>
+
+<h3>推論的獲利能力</h3>
+<p>業界證明了<strong>推論階段產生的 Token 具有極高的經濟價值</strong>。例如：</p>
+<ul>
+    <li><strong>Open Evidence</strong>：醫療領域 AI 應用</li>
+    <li><strong>Cursor</strong>：程式碼生成工具</li>
+    <li><strong>Harvey</strong>：法律 AI 助手</li>
+</ul>
+<p>這些應用展現了高利潤率（毛利率可達 90%），證明人們願意為高品質的 AI 產出付費。</p>
+
+<hr />
+
+<h2>3. 就業市場新觀點：任務 (Task) vs. 目的 (Purpose)</h2>
+
+<p>針對 AI 取代工作的擔憂，黃仁勳提出了一個重要的分析框架：</p>
+
+<div class="info-card">
+    <p><strong>核心觀點</strong>：工作的「任務」可能會被自動化，但「目的」不會。</p>
+</div>
+
+<h3>軟體工程師的例子</h3>
+<ul>
+    <li><strong>任務</strong>：編寫程式碼 (Coding)</li>
+    <li><strong>目的</strong>：解決問題</li>
+</ul>
+<p>AI 協助編碼讓工程師能解決<strong>更多、更複雜</strong>的問題，而非被取代。</p>
+
+<h3>放射科醫師的例子</h3>
+<ul>
+    <li><strong>任務</strong>：判讀影像</li>
+    <li><strong>目的</strong>：診斷疾病與研究</li>
+</ul>
+<p>雖然 AI 能輔助看片，但醫師的診斷專業與判斷力仍是核心。AI 實際上讓醫師能處理更多病例，導致<strong>醫師需求不減反增</strong>。</p>
+
+<h3>實體 AI 解決勞動力短缺</h3>
+<p>由於人口老化與人們不願從事某些工作（如卡車司機），世界面臨嚴重的勞動力短缺。機器人與實體 AI 將填補這些缺口，而非搶走工作。</p>
+
+<hr />
+
+<h2>4. 2026 年展望：機器人與數位生物學</h2>
+
+<h3>數位生物學的「ChatGPT 時刻」</h3>
+<p>黃仁勳預測<strong>數位生物學（Digital Biology）將迎來重大突破</strong>。AI 將能理解並生成：</p>
+<ul>
+    <li>蛋白質結構</li>
+    <li>化學分子</li>
+    <li>細胞結構</li>
+</ul>
+<p>這將徹底改變藥物研發，縮短新藥開發時程，降低成本。</p>
+
+<h3>推理型機器人</h3>
+<p>自駕車與機器人將從單純的感知與規劃，進化到具備<strong>「推理能力」</strong>。這讓它們能處理未曾見過的突發狀況（Out of Distribution），實現真正的自主運作。</p>
+
+<h3>萬物皆機器人</h3>
+<blockquote>
+<p>「所有會動的東西都將變成機器人。」— 黃仁勳</p>
+</blockquote>
+<p>這不僅限於人形機器人，還包括：</p>
+<ul>
+    <li>建築機械（怪手、起重機）</li>
+    <li>農業設備（拖拉機、收割機）</li>
+    <li>物流系統（無人搬運車、倉儲機器人）</li>
+    <li>服務機器人（清潔、配送）</li>
+</ul>
+
+<hr />
+
+<h2>5. 地緣政治與開源生態</h2>
+
+<h3>對美中關係的樂觀態度</h3>
+<p>黃仁勳對 2026 年的美中關係持<strong>樂觀態度</strong>，認為「脫鉤（Decoupling）」是不切實際且天真的。他強調兩國經濟高度耦合，應在確保國家安全的前提下尋求建設性合作。</p>
+
+<h3>開源至關重要</h3>
+<p>他特別指出中國的 <strong>DeepSeek</strong> 模型是過去幾年最重要的 AI 論文之一，這證明了：</p>
+<ul>
+    <li>美國新創公司也從全球（包含中國）的開源貢獻中受益</li>
+    <li>開源是創新的飛輪，切斷它將扼殺產業發展</li>
+    <li>若沒有開源，許多產業的創新將會窒息</li>
+</ul>
+
+<hr />
+
+<h2>6. 能源議題：AI 推動綠能創新</h2>
+
+<p>黃仁勳強調：<strong>沒有能源就沒有 AI 工廠</strong>。</p>
+
+<p>AI 的巨大能源需求正在反向推動：</p>
+<ul>
+    <li><strong>綠能技術</strong>：太陽能、風能的效率提升</li>
+    <li><strong>電池技術</strong>：儲能系統的創新</li>
+    <li><strong>核能復興</strong>：小型模組化反應爐（SMR）的發展</li>
+    <li><strong>電網升級</strong>：智慧電網與分散式能源</li>
+</ul>
+
+<p>AI 產業的需求成為推動能源轉型的重要動力。</p>
+
+<hr />
+
+<h2>專家團隊分析</h2>
+
+<h3>記者視角：新聞價值與公眾影響</h3>
+<ul>
+    <li><strong>「AI 工廠」概念</strong>：生動形象地解釋了 AI 基礎設施的必要性，易於公眾理解</li>
+    <li><strong>「任務 vs. 目的」框架</strong>：為個人適應 AI 時代提供了啟示，有助緩解就業恐慌</li>
+    <li><strong>地緣政治觀點</strong>：提供了與主流脫鉤論不同的視角，具有高度新聞性</li>
+</ul>
+
+<h3>分析師視角：商業洞察</h3>
+<ul>
+    <li><strong>AI 代幣毛利率達 90%</strong>：顯示 AI 服務的巨大商業潛力</li>
+    <li><strong>計算需求持續增長</strong>：基礎設施投資仍有巨大空間</li>
+    <li><strong>垂直應用價值</strong>：特定領域（醫療、法律、程式）的 AI 應用展現高利潤</li>
+</ul>
+
+<h3>技術專家視角：深度洞察</h3>
+<ul>
+    <li><strong>推理能力突破</strong>：AI 從感知走向真正的認知與推理</li>
+    <li><strong>多模態整合</strong>：文字、影像、語音的統一處理成為趨勢</li>
+    <li><strong>長上下文處理</strong>：能處理更長文件與更複雜任務</li>
+</ul>
+
+<hr />
+
+<h2>AI 技術堆疊與機器人學關聯圖</h2>
+
+<div class="mermaid">
+graph TD
+    subgraph AI_Stack[AI 技術堆疊]
+        A[能源層]
+        B[晶片層]
+        C[基礎設施層]
+        D[軟體與數據中心]
+        E[AI 模型]
+        F[應用層]
+        A --> B
+        B --> C
+        C --> D
+        D --> E
+        E --> F
+    end
+
+    subgraph Robotics[機器人學應用]
+        G[機器人學]
+        H[感知系統]
+        I[規劃與決策]
+        J[控制系統]
+        K[執行器]
+        G --> H
+        G --> I
+        G --> J
+        G --> K
+    end
+
+    subgraph Applications[產業應用]
+        L[工業自動化]
+        M[自駕車]
+        N[醫療機器人]
+        O[服務機器人]
+        P[數位生物學]
+    end
+
+    F --> G
+    E --> H
+    E --> I
+    G --> L
+    G --> M
+    G --> N
+    G --> O
+    E --> P
+</div>
+
+<hr />
+
+<h2>關鍵要點總結</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>主題</th>
+            <th>核心觀點</th>
+            <th>影響</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>AI 泡沫</td>
+            <td>計算需求真實存在，非泡沫</td>
+            <td>持續投資基礎設施</td>
+        </tr>
+        <tr>
+            <td>推理能力</td>
+            <td>2025 年重大突破</td>
+            <td>AI 可靠性大幅提升</td>
+        </tr>
+        <tr>
+            <td>就業影響</td>
+            <td>改變任務，不改變目的</td>
+            <td>技能升級而非失業</td>
+        </tr>
+        <tr>
+            <td>機器人</td>
+            <td>萬物皆機器人</td>
+            <td>勞動力短缺解方</td>
+        </tr>
+        <tr>
+            <td>數位生物學</td>
+            <td>即將迎來 ChatGPT 時刻</td>
+            <td>藥物研發革命</td>
+        </tr>
+        <tr>
+            <td>開源生態</td>
+            <td>創新的關鍵飛輪</td>
+            <td>維持全球協作</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr />
+
+<h2>總結與未來展望</h2>
+
+<p>這場訪談清晰地描繪了 2026 年 AI 產業的發展藍圖。黃仁勳的觀點有力地駁斥了 AI 泡沫論，強調了計算需求的真實增長和 AI 應用場景的廣泛性。從數位生物學到推理型機器人，從能源創新到全球開源協作，AI 正在重塑各個產業。</p>
+
+<p>對於台灣產業而言，這場訪談提供了重要啟示：</p>
+
+<ul>
+    <li><strong>持續投資 AI 基礎設施</strong>：晶片製造、資料中心、能源供應</li>
+    <li><strong>擁抱開源生態</strong>：參與全球 AI 創新飛輪</li>
+    <li><strong>關注垂直應用</strong>：醫療、製造、服務等領域的 AI 整合</li>
+    <li><strong>培育跨領域人才</strong>：AI 與機器人、生物科技的交叉人才</li>
+</ul>
+
+<p>正如黃仁勳所言，樂觀主義者應推動社會前進，而非僅提出末日論調。在這個 AI 快速發展的時代，積極參與、理性投資、持續學習，才是應對變革的最佳策略。</p>
+
+<hr />
+
+<p><em>內容整理自 No Priors Podcast，2026 年 1 月 8 日發布</em></p>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        securityLevel: 'loose',
+        flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis'
+        }
+    });
+</script>
+<script>
+    function setTheme(themeName, btn) {
+        document.body.className = 'theme-' + themeName;
+        document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+</script>
+</body>
+</html>
