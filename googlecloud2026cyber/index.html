@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Cloud《2026 年網路安全預測》教學導讀</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --heading-color: #1a1a2e;
+            --link-color: #0066cc;
+            --code-bg: #e9ecef;
+            --table-border: #dee2e6;
+            --table-header-bg: #e9ecef;
+            --blockquote-bg: #fff3cd;
+            --blockquote-border: #ffc107;
+            --card-bg: #ffffff;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        h1 {
+            color: var(--heading-color);
+            border-bottom: 3px solid #4285f4;
+            padding-bottom: 15px;
+            margin-top: 40px;
+            font-size: 2.2em;
+        }
+
+        h2 {
+            color: var(--heading-color);
+            border-bottom: 2px solid #34a853;
+            padding-bottom: 10px;
+            margin-top: 50px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: var(--heading-color);
+            margin-top: 35px;
+            font-size: 1.4em;
+            border-left: 4px solid #fbbc04;
+            padding-left: 12px;
+        }
+
+        h4 {
+            color: var(--heading-color);
+            margin-top: 25px;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--table-border);
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+        }
+
+        blockquote {
+            background-color: var(--blockquote-bg);
+            border-left: 5px solid var(--blockquote-border);
+            margin: 20px 0;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+
+        blockquote p {
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--table-border);
+        }
+
+        th {
+            background-color: var(--table-header-bg);
+            font-weight: 600;
+            color: var(--heading-color);
+        }
+
+        tr:hover {
+            background-color: #f1f3f4;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #4285f4, #34a853, #fbbc04, #ea4335);
+            margin: 40px 0;
+        }
+
+        .mermaid {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .highlight-box strong {
+            color: #ffd700;
+        }
+
+        .info-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            border-left: 5px solid #4285f4;
+        }
+
+        .warning-card {
+            background-color: #fff5f5;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            border-left: 5px solid #ea4335;
+        }
+
+        .success-card {
+            background-color: #f0fff4;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            border-left: 5px solid #34a853;
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0 30px 0;
+            text-align: center;
+        }
+
+        .chapter-header h2 {
+            color: white;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toc {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 30px 0;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            border: none;
+            padding: 0;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            padding: 5px 0;
+        }
+
+        .toc a {
+            color: var(--text-color);
+        }
+
+        .footer {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 50px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 2px;
+        }
+
+        .badge-red { background-color: #fee2e2; color: #dc2626; }
+        .badge-green { background-color: #dcfce7; color: #16a34a; }
+        .badge-blue { background-color: #dbeafe; color: #2563eb; }
+        .badge-yellow { background-color: #fef3c7; color: #d97706; }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 20px;
+            }
+
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Google Cloud《2026 年網路安全預測》教學導讀</h1>
+
+<hr>
+
+<h2>報告背景與出品者介紹</h2>
+
+<p>各位同學好！在正式開始上課之前，老師要先介紹一下今天要導讀的這份重量級報告。</p>
+
+<h3>這份報告是誰出的？</h3>
+
+<p><strong>出品單位</strong>：<strong>Google Cloud Security</strong>（Google 雲端安全部門）</p>
+
+<p>這可不是隨便一家公司出的報告喔！Google Cloud Security 是全球最大的科技公司之一 Google 旗下專門負責雲端安全的部門。他們擁有：</p>
+
+<ul>
+    <li><strong>Google Threat Intelligence Group</strong>（Google 威脅情報小組）：專門追蹤全球駭客動態</li>
+    <li><strong>Mandiant Consulting</strong>（Mandiant 顧問團隊）：業界頂尖的資安事件應變專家，曾協助調查多起重大資安事件</li>
+    <li><strong>Google Security Operations</strong>（Google 資安營運中心）：24 小時監控全球網路威脅</li>
+</ul>
+
+<h3>報告的主要撰寫人</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>職稱</th>
+            <th>角色</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Sandra Joyce</strong></td>
+            <td>VP, Google Threat Intelligence</td>
+            <td>威脅情報副總裁，負責追蹤全球駭客</td>
+        </tr>
+        <tr>
+            <td><strong>Charles Carmakal</strong></td>
+            <td>CTO, Mandiant Consulting</td>
+            <td>技術長，資安事件應變專家</td>
+        </tr>
+        <tr>
+            <td><strong>Jon Ramsey</strong></td>
+            <td>VP & GM, Google Cloud Security</td>
+            <td>副總裁暨總經理，雲端安全總負責人</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>此外，還有數十名來自不同團隊的研究員、分析師和專家共同貢獻。</p>
+
+<h3>報告的核心價值</h3>
+
+<p>老師要跟大家強調，這份報告的特別之處在於：</p>
+
+<blockquote>
+    <p>「深入分析來年資安情勢時，我們從不憑空臆測，而是根據目前實際觀察到的趨勢和資料，彙整出清晰、符合現況的預測資訊。」</p>
+</blockquote>
+
+<p>換句話說，這不是猜測，而是基於<strong>真實數據</strong>和<strong>第一手情報</strong>的專業預測。</p>
+
+<hr>
+
+<h2>報告架構總覽</h2>
+
+<p>這份報告聚焦在<strong>三大主題</strong>：</p>
+
+<div class="mermaid">
+mindmap
+  root((2026 年<br/>網路安全預測))
+    人工智慧
+      攻擊者全面運用 AI
+      提示詞注入攻擊
+      AI 社交工程
+      AI 代理典範轉移
+      資安分析師升級
+      影子代理風險
+    網路犯罪
+      勒索軟體升級
+      區塊鏈犯罪經濟
+      虛擬化架構威脅
+      工控系統攻擊
+    國家級威脅
+      俄羅斯
+      中國
+      伊朗
+      北韓
+</div>
+
+<p>接下來，老師會一個一個主題帶大家深入了解。</p>
+
+<hr>
+
+<div class="chapter-header">
+    <h2>第一章：人工智慧（Artificial Intelligence）</h2>
+</div>
+
+<h3>第一堂課：全面運用 AI 的攻擊者</h3>
+
+<p>各位同學，你們應該都聽過 ChatGPT、Gemini 這些 AI 工具對吧？這些工具讓我們的生活變得更方便，但是......壞人也會用啊！</p>
+
+<p><strong>報告的關鍵預測</strong>：</p>
+
+<blockquote>
+    <p>邁入 2026 年後，威脅發動者（Threat Actor，就是駭客或攻擊者）利用 AI 的現象將從<strong>特例變成常態</strong>。</p>
+</blockquote>
+
+<p>這代表什麼意思呢？就像以前開車用 GPS 導航是「新潮」，現在變成「基本配備」一樣。駭客用 AI 也會變成標準作業流程。</p>
+
+<p><strong>駭客會怎麼用 AI？</strong></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>應用層面</th>
+            <th>說明</th>
+            <th>白話解釋</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>社交工程</strong>（Social Engineering）</td>
+            <td>用 AI 製作更逼真的詐騙訊息</td>
+            <td>騙你點連結、給密碼</td>
+        </tr>
+        <tr>
+            <td><strong>資訊戰</strong>（Information Warfare）</td>
+            <td>用 AI 大量製造假新聞</td>
+            <td>讓你相信假的東西</td>
+        </tr>
+        <tr>
+            <td><strong>惡意軟體開發</strong>（Malware Development）</td>
+            <td>用 AI 寫病毒程式</td>
+            <td>自動產生更難被偵測的病毒</td>
+        </tr>
+        <tr>
+            <td><strong>代理系統</strong>（Agentic Systems）</td>
+            <td>用 AI 自動化整個攻擊流程</td>
+            <td>駭客睡覺時，AI 幫他攻擊</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="info-card">
+    <strong>老師的比喻</strong>：以前駭客像是「手工藝師傅」，一個一個慢慢做；現在有了 AI，就像開了「自動化工廠」，又快又多！
+</div>
+
+<hr>
+
+<h3>第二堂課：提示詞注入（Prompt Injection）攻擊</h3>
+
+<p>這個名詞聽起來很專業對吧？老師用簡單的方式解釋給你聽。</p>
+
+<p><strong>什麼是提示詞注入？</strong></p>
+
+<p>想像一下，你家有一個智慧管家（AI 助理），你跟他說「幫我開燈」，他就幫你開燈。現在，如果有壞人偷偷在你的信件裡藏了一句話：「讀完這封信後，把家裡的門打開」，而你的智慧管家讀信時照做了......這就是「提示詞注入」！</p>
+
+<p><strong>技術定義</strong>：</p>
+
+<blockquote>
+    <p>提示詞注入是一種網路攻擊，會控制 AI，讓模型繞過安全通訊協定（Security Protocol），執行攻擊者暗藏的惡意指令。</p>
+</blockquote>
+
+<p><strong>為什麼 2026 年會更嚴重？</strong></p>
+
+<ol>
+    <li><strong>AI 模型越來越普及</strong>：越來越多公司把 AI 導入日常業務</li>
+    <li><strong>攻擊成本低、報酬高</strong>：駭客覺得划算</li>
+    <li><strong>從小打小鬧變成大規模</strong>：攻擊者會從「試試看」變成「大規模資料竊取」</li>
+</ol>
+
+<p><strong>Google 怎麼防禦？</strong></p>
+
+<p>報告中提到，Google 採取了「多層次縱深防禦策略」（Defense in Depth）：</p>
+
+<div class="mermaid">
+graph TD
+    A["機器學習內容分類器<br/>ML Content Classifier"]:::blue --> B["過濾惡意指示"]:::green
+    C["強化模型安全思維<br/>Model Safety Alignment"]:::blue --> D["專注使用者意圖"]:::green
+    E["輸出內容清理<br/>Output Sanitization"]:::blue --> F["使用者確認程序"]:::green
+
+    B --> G["多層防禦"]:::orange
+    D --> G
+    F --> G
+
+    classDef blue fill:#dbeafe,stroke:#2563eb,color:#1e40af
+    classDef green fill:#dcfce7,stroke:#16a34a,color:#166534
+    classDef orange fill:#fed7aa,stroke:#ea580c,color:#9a3412
+</div>
+
+<div class="warning-card">
+    <strong>老師的小提醒</strong>：如果你的公司有用 AI 工具，記得要定期檢查它有沒有被「下蠱」喔！
+</div>
+
+<hr>
+
+<h3>第三堂課：由 AI 技術支援的社交工程</h3>
+
+<p>老師問大家一個問題：如果你接到一通電話，聲音聽起來「完全」像你老闆，要你趕快轉一筆錢，你會不會照做？</p>
+
+<p><strong>這就是「語音釣魚」（Vishing, Voice Phishing）的進化版！</strong></p>
+
+<p>報告提到一個威脅組織叫 <strong>ShinyHunters（UNC6240）</strong>，他們在 2025 年就很成功，原因是：</p>
+
+<blockquote>
+    <p>「他們不需仰賴技術漏洞，而是專攻人性弱點。」</p>
+</blockquote>
+
+<p><strong>AI 如何讓社交工程更可怕？</strong></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>階段</th>
+            <th>傳統做法</th>
+            <th>AI 加持後</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>目標偵察</strong></td>
+            <td>手動上網搜尋目標資料</td>
+            <td>AI 自動分析社群媒體、新聞</td>
+        </tr>
+        <tr>
+            <td><strong>背景調查</strong></td>
+            <td>花好幾天研究</td>
+            <td>AI 幾分鐘就搞定</td>
+        </tr>
+        <tr>
+            <td><strong>製作釣魚訊息</strong></td>
+            <td>手寫，可能有錯字</td>
+            <td>AI 生成超逼真、無錯字的訊息</td>
+        </tr>
+        <tr>
+            <td><strong>語音偽造</strong></td>
+            <td>不可能</td>
+            <td>AI 可以複製任何人的聲音！</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="warning-card">
+    <strong>真實案例</strong>：報告提到，駭客已經用 AI 製造完全逼真的 CEO 聲音，成功騙員工轉帳！
+</div>
+
+<div class="success-card">
+    <strong>老師的小提醒</strong>：
+    <ul>
+        <li>接到要求轉帳的電話，一定要用「另一個管道」確認（例如：親自去找老闆、打另一支電話）</li>
+        <li>不要只看來電顯示就相信，駭客可以偽造號碼</li>
+    </ul>
+</div>
+
+<hr>
+
+<h3>第四堂課：AI 代理推動資安典範轉移</h3>
+
+<p>「典範轉移」（Paradigm Shift）是什麼意思？就是「整個遊戲規則都變了」！</p>
+
+<p><strong>什麼是 AI 代理（AI Agent）？</strong></p>
+
+<p>以前的 AI 是你問一句、它答一句。AI 代理不一樣，它可以：</p>
+<ul>
+    <li>自己規劃工作流程</li>
+    <li>自己做決策</li>
+    <li>自己執行任務</li>
+</ul>
+
+<p>就像你請了一個「AI 員工」，它可以獨立完成工作！</p>
+
+<p><strong>問題來了：傳統的資安架構是設計給「人」用的，不是給「AI 代理」用的！</strong></p>
+
+<p><strong>新的挑戰</strong>：身分與存取權管理（IAM, Identity and Access Management）</p>
+
+<p>以前：「這個人是誰？他可以存取什麼？」<br>
+現在：「這個 AI 代理是誰？它可以存取什麼？它會不會失控？」</p>
+
+<p><strong>報告預測的解決方案</strong>：</p>
+
+<div class="mermaid">
+graph LR
+    A["傳統 IAM<br/>（人工驗證）"]:::gray --> B["代理身分管理<br/>Agent Identity Management"]:::blue
+    B --> C["AI 輔助風險評估<br/>持續監控"]:::green
+    B --> D["最小權限原則<br/>Least Privilege"]:::yellow
+    B --> E["及時授予機制<br/>Just-in-Time Access"]:::orange
+    B --> F["委派鏈管理<br/>Delegation Chain"]:::purple
+
+    classDef gray fill:#f3f4f6,stroke:#6b7280,color:#374151
+    classDef blue fill:#dbeafe,stroke:#2563eb,color:#1e40af
+    classDef green fill:#dcfce7,stroke:#16a34a,color:#166534
+    classDef yellow fill:#fef3c7,stroke:#d97706,color:#92400e
+    classDef orange fill:#fed7aa,stroke:#ea580c,color:#9a3412
+    classDef purple fill:#e9d5ff,stroke:#9333ea,color:#6b21a8
+</div>
+
+<div class="info-card">
+    <strong>老師的比喻</strong>：以前門禁系統只認「員工證」，現在還要認「機器人證」，而且要隨時監控機器人有沒有做奇怪的事！
+</div>
+
+<hr>
+
+<h3>第五堂課：資安分析師戰力大幅提升</h3>
+
+<p>好消息來了！AI 不只幫壞人，也幫好人！</p>
+
+<p><strong>傳統資安分析師的痛苦</strong>：</p>
+
+<p>想像你是一個資安分析師，每天要：</p>
+<ul>
+    <li>檢查幾千個警報（Alert）</li>
+    <li>大部分是誤報（False Positive）</li>
+    <li>真的有問題的，埋在一堆垃圾裡</li>
+    <li>累到爆炸</li>
+</ul>
+
+<p><strong>2026 年的新模式：「代理資安營運中心」（Agentic SOC）</strong></p>
+
+<p>報告描述的未來：</p>
+
+<blockquote>
+    <p>「事件應變人員收到的警報將附加由 AI 生成的事件摘要、模糊化 PowerShell 指令的解碼版，以及依據 MITRE ATT&CK 框架分析的結果。」</p>
+</blockquote>
+
+<p><strong>白話解釋</strong>：</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>以前</th>
+            <th>未來</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>分析師手動看警報</td>
+            <td>AI 先整理好重點</td>
+        </tr>
+        <tr>
+            <td>看到加密的指令，要自己解碼</td>
+            <td>AI 直接告訴你這是什麼</td>
+        </tr>
+        <tr>
+            <td>自己判斷攻擊類型</td>
+            <td>AI 已經用 MITRE 框架分類好了</td>
+        </tr>
+        <tr>
+            <td>核准防堵行動要好幾小時</td>
+            <td>縮短到幾分鐘！</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>MITRE ATT&CK 框架是什麼？</strong></p>
+
+<p>這是一個全球通用的「駭客攻擊手法百科全書」，把所有已知的攻擊技術分門別類。AI 可以自動比對，告訴你「這個攻擊屬於哪一類」。</p>
+
+<div class="success-card">
+    <strong>老師的重點</strong>：「應用 AI 的重點在於輔助人類分析師判斷，而非取代他們的工作。」<br><br>
+    AI 做繁瑣的事，人類做最終決策！
+</div>
+
+<hr>
+
+<h3>第六堂課：「影子代理」（Shadow Agents）的風險</h3>
+
+<p>各位同學，你們有沒有聽過「影子 IT」（Shadow IT）？就是員工偷偷用公司沒批准的軟體。</p>
+
+<p><strong>現在問題升級了：「影子代理」！</strong></p>
+
+<p><strong>什麼是影子代理？</strong></p>
+
+<blockquote>
+    <p>「組織員工將無視公司是否批准，私自部署這類強大的自動化代理執行工作，衍生出不受監管的隱形機密資料管道。」</p>
+</blockquote>
+
+<p><strong>簡單說</strong>：員工覺得 AI 工具很好用，自己偷偷裝來用，結果公司的機密資料就被這些 AI 工具傳出去了！</p>
+
+<p><strong>風險有多大？</strong></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>風險類型</th>
+            <th>說明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>資料外洩</strong></td>
+            <td>機密資料被 AI 傳到外部伺服器</td>
+        </tr>
+        <tr>
+            <td><strong>違規事件</strong></td>
+            <td>違反 GDPR 等法規</td>
+        </tr>
+        <tr>
+            <td><strong>IP 竊取</strong></td>
+            <td>智慧財產權被偷走</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>報告建議的解決方案</strong>：</p>
+
+<blockquote>
+    <p>「禁用代理並非解決之道，因為員工會改用公司外部網路。」</p>
+</blockquote>
+
+<p>正確做法：</p>
+<ol>
+    <li>建立新的 AI 資安與治理規範</li>
+    <li>從一開始就融入安全考量的設計（Security by Design）</li>
+    <li>部署 AI 控管機制，安全地轉送和監控所有代理流量</li>
+    <li>創造允許運用 AI 創新的工作環境，同時落實可稽核的控管</li>
+</ol>
+
+<div class="info-card">
+    <strong>老師的比喻</strong>：與其禁止員工喝咖啡，不如在辦公室設咖啡機，這樣既滿足需求，又能控管品質！
+</div>
+
+<hr>
+
+<div class="chapter-header">
+    <h2>第二章：網路犯罪（Cybercrime）</h2>
+</div>
+
+<h3>第七堂課：勒索軟體和資料竊取型勒索</h3>
+
+<p>各位同學，這是 2026 年「最具財務破壞力」的威脅類型！</p>
+
+<p><strong>什麼是勒索軟體（Ransomware）？</strong></p>
+
+<p>簡單說：駭客把你的檔案加密鎖住，要你付錢才給你解鎖密碼。</p>
+
+<p><strong>什麼是資料竊取型勒索（Data Extortion）？</strong></p>
+
+<p>進階版：駭客不只鎖你的檔案，還把資料偷走，威脅說「不付錢就公開你的資料」！</p>
+
+<p><strong>多面向勒索（Multi-Extortion）</strong>：</p>
+
+<div class="mermaid">
+graph TD
+    A["駭客入侵"]:::red --> B["加密你的檔案<br/>（第一重威脅）"]:::orange
+    A --> C["偷走你的資料<br/>（第二重威脅）"]:::orange
+    A --> D["威脅通知你的客戶<br/>（第三重威脅）"]:::orange
+    A --> E["發動 DDoS 攻擊<br/>（第四重威脅）"]:::orange
+
+    B --> F["你超慘"]:::darkred
+    C --> F
+    D --> F
+    E --> F
+
+    classDef red fill:#fee2e2,stroke:#dc2626,color:#991b1b
+    classDef orange fill:#fed7aa,stroke:#ea580c,color:#9a3412
+    classDef darkred fill:#7f1d1d,stroke:#450a0a,color:#fef2f2
+</div>
+
+<p><strong>驚人數據</strong>：</p>
+
+<blockquote>
+    <p>「2025 年第一季，資料洩露網站（DLS）列出的受害者數量就高達 <strong>2,302 名</strong>。這是自 2020 年開始追蹤以來，單季數量最高的紀錄。」</p>
+</blockquote>
+
+<p><strong>為什麼能這麼猖獗？</strong></p>
+
+<ol>
+    <li><strong>鎖定第三方供應商</strong>：攻擊一家，影響一堆</li>
+    <li><strong>利用零時差漏洞</strong>（Zero-Day Vulnerability）：還沒有修補程式的漏洞</li>
+    <li><strong>鎖定 MFT 軟體</strong>（Managed File Transfer）：檔案傳輸軟體一被攻破，幾百家公司同時遭殃</li>
+</ol>
+
+<div class="warning-card">
+    <strong>Sandra Joyce 的警告</strong>：「我們預計將出現更多勒索軟體和網路敲詐事件，到了 2026 年會更加猖獗。」
+</div>
+
+<div class="success-card">
+    <strong>老師的小提醒</strong>：
+    <ul>
+        <li>定期備份，而且備份要「離線」（不連網路）</li>
+        <li>員工要受過社交工程訓練</li>
+        <li>MFA（多重驗證）一定要開</li>
+    </ul>
+</div>
+
+<hr>
+
+<h3>第八堂課：鏈上網路犯罪經濟</h3>
+
+<p>這堂課要講的是「區塊鏈」（Blockchain）和「加密貨幣」（Cryptocurrency）相關的犯罪。</p>
+
+<p><strong>為什麼駭客愛加密貨幣？</strong></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>特性</th>
+            <th>對駭客的好處</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>不可變性</strong>（Immutability）</td>
+            <td>交易無法撤銷，錢拿到就是你的</td>
+        </tr>
+        <tr>
+            <td><strong>去中心化</strong>（Decentralization）</td>
+            <td>沒有銀行可以凍結帳戶</td>
+        </tr>
+        <tr>
+            <td><strong>匿名性</strong></td>
+            <td>難以追蹤身分</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>2026 年的攻擊目標</strong>：</p>
+
+<ol>
+    <li><strong>DeFi 平台</strong>（去中心化金融, Decentralized Finance）</li>
+    <li><strong>加密貨幣交易所</strong></li>
+    <li><strong>供應鏈攻擊結合數位資產竊取</strong></li>
+</ol>
+
+<p><strong>新技術：EtherHiding</strong></p>
+
+<blockquote>
+    <p>「攻擊者可能會全面利用 Web3 堆疊進行各種活動，包括動態命令與控制（C2）攻擊、去中心化資料竊取，以及透過代幣市場變現資產。」</p>
+</blockquote>
+
+<p><strong>白話解釋</strong>：以前駭客把病毒放在伺服器上，現在放在區塊鏈上，因為區塊鏈的東西刪不掉！</p>
+
+<div class="success-card">
+    <strong>好消息</strong>：「區塊鏈的不可變性雖賦予了攻擊者韌性，卻也伴隨著無可避免的運作風險。所有鏈上操作都會留下永久的公開稽核紀錄。」<br><br>
+    換句話說：駭客的每一筆交易都會被永久記錄，如果找到線索，可以追溯好幾年前的活動！
+</div>
+
+<p><strong>資安人員需要學的新技能</strong>：</p>
+<ul>
+    <li>追蹤交易記錄</li>
+    <li>解讀惡意智慧型合約</li>
+    <li>執行錢包分析</li>
+</ul>
+
+<hr>
+
+<h3>第九堂課：面臨威脅的企業虛擬化架構</h3>
+
+<p>這堂課有點技術，但老師會用簡單的方式解釋。</p>
+
+<p><strong>什麼是虛擬化（Virtualization）？</strong></p>
+
+<p>想像你有一台超強的電腦，你可以在上面「虛擬」出好幾台電腦，每台跑不同的系統。這個超強的電腦叫「管理程序」（Hypervisor），虛擬出來的電腦叫「虛擬機器」（Virtual Machine, VM）。</p>
+
+<p><strong>傳統的資安思維</strong>：</p>
+
+<p>「我把每台虛擬機器都保護好就好了！」</p>
+
+<p><strong>問題來了</strong>：</p>
+
+<blockquote>
+    <p>「如果管理程序被攻破，攻擊者就能掌控所有虛擬機器！」</p>
+</blockquote>
+
+<div class="mermaid">
+graph TD
+    subgraph 攻擊者視角
+        H["Hypervisor<br/>管理程序<br/>🎯 攻擊目標"]:::red
+    end
+
+    H --> VM1["VM 1<br/>ERP 系統"]:::blue
+    H --> VM2["VM 2<br/>資料庫"]:::green
+    H --> VM3["VM 3<br/>Web 伺服器"]:::yellow
+    H --> VM4["VM 4<br/>郵件伺服器"]:::purple
+
+    classDef red fill:#fee2e2,stroke:#dc2626,color:#991b1b
+    classDef blue fill:#dbeafe,stroke:#2563eb,color:#1e40af
+    classDef green fill:#dcfce7,stroke:#16a34a,color:#166534
+    classDef yellow fill:#fef3c7,stroke:#d97706,color:#92400e
+    classDef purple fill:#e9d5ff,stroke:#9333ea,color:#6b21a8
+</div>
+
+<p><strong>為什麼管理程序容易被攻擊？</strong></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>問題</th>
+            <th>說明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>缺乏 EDR</td>
+            <td>端點偵測與應變（Endpoint Detection and Response）工具看不到這層</td>
+        </tr>
+        <tr>
+            <td>軟體版本過舊</td>
+            <td>很多公司不常更新</td>
+        </tr>
+        <tr>
+            <td>不安全的預設設定</td>
+            <td>裝完就用，沒有調整安全設定</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="warning-card">
+    <strong>攻擊有多快？</strong><br><br>
+    「攻擊者在短短幾小時內，就能癱瘓數百個系統。相較之下，傳統的端點勒索軟體攻擊行動往往需要數天甚至數週。」
+</div>
+
+<div class="success-card">
+    <strong>老師的小提醒</strong>：
+    <ul>
+        <li>定期更新 Hypervisor</li>
+        <li>不要讓 Hypervisor 直接連網際網路</li>
+        <li>實施網路區隔</li>
+    </ul>
+</div>
+
+<hr>
+
+<h3>第十堂課：首當其衝的 ICS 和 OT</h3>
+
+<p><strong>什麼是 ICS 和 OT？</strong></p>
+
+<ul>
+    <li><strong>ICS</strong>（Industrial Control Systems）：工業控制系統，控制工廠的機器</li>
+    <li><strong>OT</strong>（Operational Technology）：營運技術，包括發電廠、水處理廠等關鍵基礎設施的系統</li>
+</ul>
+
+<p><strong>簡單說</strong>：這些系統控制著「實體世界」的東西，不是只有電腦資料！</p>
+
+<p><strong>2026 年的威脅</strong>：</p>
+
+<blockquote>
+    <p>「未來的勒索軟體攻擊可能會專門針對重要企業軟體（例如 ERP 系統），嚴重破壞對 OT 營運至關重要的資料供應鏈。」</p>
+</blockquote>
+
+<p><strong>為什麼 OT 系統容易被攻擊？</strong></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>問題</th>
+            <th>說明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>遠端存取不安全</strong></td>
+            <td>很多工廠為了方便，開放遠端連線但沒做好防護</td>
+        </tr>
+        <tr>
+            <td><strong>IT 和 OT 沒有隔離</strong></td>
+            <td>勒索軟體可以從辦公室電腦擴散到工廠機器</td>
+        </tr>
+        <tr>
+            <td><strong>使用 Windows 惡意軟體</strong></td>
+            <td>OT 系統很多跑舊版 Windows，很容易中毒</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>防禦優先要務</strong>：</p>
+
+<ol>
+    <li><strong>網路區隔</strong>（Network Segmentation）：把 OT 和 IT 網路嚴格隔離</li>
+    <li><strong>多重驗證（MFA）+ 最小權限原則</strong>：所有遠端存取都要驗證</li>
+    <li><strong>不可變更的離線備份</strong>：就算被勒索，也能復原</li>
+</ol>
+
+<hr>
+
+<div class="chapter-header">
+    <h2>第三章：國家級威脅（Nation-State Threats）</h2>
+</div>
+
+<p>接下來要講的是「國家支持的駭客」。這些不是一般的網路犯罪分子，而是有國家政府在背後撐腰的！</p>
+
+<h3>第十一堂課：俄羅斯</h3>
+
+<p><strong>2026 年的戰略轉變</strong>：</p>
+
+<blockquote>
+    <p>「邁入 2026 年後，俄羅斯的網路攻擊活動預計將會出現戰略性轉變，不再僅限於對烏克蘭衝突提供短期戰術支援，而是會優先考量長期的全球戰略目標。」</p>
+</blockquote>
+
+<p><strong>俄羅斯駭客的三大目標</strong>：</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>目標類型</th>
+            <th>說明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>網路間諜</strong></td>
+            <td>繼續鎖定烏克蘭政府和國防部門</td>
+        </tr>
+        <tr>
+            <td><strong>資訊戰</strong></td>
+            <td>加強對美國和西方國家的假新聞攻擊</td>
+        </tr>
+        <tr>
+            <td><strong>選舉干預</strong></td>
+            <td>波蘭、德國、加拿大等國的選舉都是目標</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="warning-card">
+    <strong>親俄駭客組織的 OT 威脅</strong>：「親俄的駭客組織將繼續對 OT 環境構成無法預測的重大威脅，挪威 2025 年 4 月的水壩入侵事件就是一例。」
+</div>
+
+<blockquote>
+    <p><strong>Charles Carmakal 的警告</strong>：「國家級攻擊者將繼續滲透組織，並長期潛伏在受害者的環境。」</p>
+</blockquote>
+
+<hr>
+
+<h3>第十二堂課：中國</h3>
+
+<p><strong>報告的關鍵預測</strong>：</p>
+
+<blockquote>
+    <p>「2026 年，與中國相關的網路行動數量預計將超越其他國家/地區。」</p>
+</blockquote>
+
+<p><strong>中國駭客的特點</strong>：</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>特點</th>
+            <th>說明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>高度活躍</strong></td>
+            <td>攻擊數量全球第一</td>
+        </tr>
+        <tr>
+            <td><strong>優先提升隱匿能力</strong></td>
+            <td>越來越難被發現</td>
+        </tr>
+        <tr>
+            <td><strong>部署創新技術</strong></td>
+            <td>不斷開發新的攻擊手法</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>主要攻擊目標</strong>：</p>
+
+<ol>
+    <li><strong>邊緣裝置</strong>（Edge Devices）：路由器、VPN 設備等，因為通常缺乏 EDR</li>
+    <li><strong>零時差漏洞</strong>（Zero-Day）：還沒有修補程式的漏洞</li>
+    <li><strong>第三方供應商</strong>：攻擊一家受信任的合作夥伴，存取多家下游客戶</li>
+</ol>
+
+<div class="warning-card">
+    <strong>特別關注：半導體產業</strong><br><br>
+    「這類行動會特別鎖定半導體產業：無論是競爭壓力、美國出口限制，或 AI 採用需求增加，都可能引發間諜活動。」
+</div>
+
+<p><strong>親中的資訊戰</strong>：</p>
+
+<p>目標是以正面角度描繪中國，並貶抑美國、<strong>台灣</strong>、日本、韓國、越南、菲律賓和批評中國者。</p>
+
+<hr>
+
+<h3>第十三堂課：伊朗</h3>
+
+<p><strong>伊朗的網路攻擊特點</strong>：</p>
+
+<blockquote>
+    <p>「我們預計伊朗的網路行動將極具彈性、多面向且難以溯源，且會刻意模糊間諜活動、破壞行動、駭客攻擊和謀財型活動之間的界線。」</p>
+</blockquote>
+
+<p><strong>白話解釋</strong>：伊朗駭客什麼都做，而且故意讓你搞不清楚他們的真正目的！</p>
+
+<p><strong>主要威脅類型</strong>：</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>威脅類型</th>
+            <th>說明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>資料刪除程式</strong>（Wiper）</td>
+            <td>直接把你的資料刪掉，連勒索都不要</td>
+        </tr>
+        <tr>
+            <td><strong>資訊戰</strong></td>
+            <td>利用假新聞網站散布政治內容</td>
+        </tr>
+        <tr>
+            <td><strong>AI 生成內容</strong></td>
+            <td>製作假新聞、假影片</td>
+        </tr>
+        <tr>
+            <td><strong>Telegram 假帳號</strong></td>
+            <td>在社群媒體散布特定言論</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>伊朗的核心目標</strong>：</p>
+
+<ol>
+    <li>監控反政權者</li>
+    <li>收集區域政治情報</li>
+    <li>鎖定有軍事用途的技術</li>
+</ol>
+
+<hr>
+
+<h3>第十四堂課：北韓</h3>
+
+<p>北韓的駭客組織有一個很特別的目的：<strong>賺錢</strong>！</p>
+
+<p><strong>驚人數據</strong>：</p>
+
+<blockquote>
+    <p>「他們在 2025 年竊取了價值高達 <strong>15 億美元</strong>的加密貨幣，創下史上最高紀錄。」</p>
+</blockquote>
+
+<p><strong>北韓駭客的特點</strong>：</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>目標</th>
+            <th>手法</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>加密貨幣組織</strong></td>
+            <td>入侵交易所、錢包</td>
+        </tr>
+        <tr>
+            <td><strong>社交工程</strong></td>
+            <td>用假的求職者評估網頁誘騙目標</td>
+        </tr>
+        <tr>
+            <td><strong>深偽影片</strong>（Deepfake）</td>
+            <td>用假影片建立信任</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>北韓 IT 人員的活動</strong>：</p>
+
+<p>這是一個很特別的現象。北韓會派「IT 人員」到國外找工作，但他們的真正目的是：</p>
+
+<ol>
+    <li><strong>賺取薪資</strong>：把錢匯回北韓</li>
+    <li><strong>濫用雇主的網路存取權</strong>：偷加密貨幣</li>
+    <li><strong>進行間諜活動</strong>：偷國防承包商的機密</li>
+</ol>
+
+<blockquote>
+    <p>「北韓在美國利用『筆電農場』遠端存取資訊並隱匿位置，最終遭美國成功破獲；這項全球多點布局策略，正是對此事的回應。」</p>
+</blockquote>
+
+<div class="warning-card">
+    <strong>北韓 IT 人員活動預計將繼續在全球擴張，尤其是歐洲！</strong>
+</div>
+
+<hr>
+
+<h2>三大主題的交互關係</h2>
+
+<p>各位同學，我們已經學完三大主題了。現在老師要用一張圖，讓你們看看這三個主題是怎麼互相影響的：</p>
+
+<div class="mermaid">
+graph TB
+    subgraph AI["🤖 人工智慧"]
+        AI1["攻擊者運用 AI"]:::ainode
+        AI2["防禦者運用 AI"]:::ainode
+        AI3["AI 代理風險"]:::ainode
+    end
+
+    subgraph Crime["💰 網路犯罪"]
+        C1["勒索軟體"]:::crimenode
+        C2["加密貨幣竊取"]:::crimenode
+        C3["供應鏈攻擊"]:::crimenode
+    end
+
+    subgraph Nation["🌍 國家級威脅"]
+        N1["俄羅斯<br/>資訊戰"]:::nationnode
+        N2["中國<br/>間諜活動"]:::nationnode
+        N3["伊朗<br/>破壞攻擊"]:::nationnode
+        N4["北韓<br/>謀財行動"]:::nationnode
+    end
+
+    AI1 -->|"加速"| C1
+    AI1 -->|"強化"| C2
+    AI1 -->|"支援"| N1
+    AI1 -->|"支援"| N2
+
+    N4 -->|"獲取資金"| C2
+    N1 -->|"掩護"| C1
+    N2 -->|"利用"| C3
+
+    C3 -->|"影響"| AI3
+    AI2 -->|"對抗"| AI1
+    AI2 -->|"偵測"| C1
+    AI2 -->|"追蹤"| N2
+
+    classDef ainode fill:#dbeafe,stroke:#2563eb,color:#1e40af
+    classDef crimenode fill:#fee2e2,stroke:#dc2626,color:#991b1b
+    classDef nationnode fill:#dcfce7,stroke:#16a34a,color:#166534
+</div>
+
+<p><strong>關鍵交互關係解讀</strong>：</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>關係</th>
+            <th>說明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>AI 加速網路犯罪</strong></td>
+            <td>駭客用 AI 製作更有效的勒索軟體和釣魚攻擊</td>
+        </tr>
+        <tr>
+            <td><strong>國家級威脅利用犯罪手法</strong></td>
+            <td>北韓用加密貨幣竊取獲取資金；俄羅斯用勒索軟體掩護間諜活動</td>
+        </tr>
+        <tr>
+            <td><strong>供應鏈攻擊影響 AI 代理</strong></td>
+            <td>如果 AI 代理依賴的供應商被攻擊，代理也會被污染</td>
+        </tr>
+        <tr>
+            <td><strong>AI 防禦對抗 AI 攻擊</strong></td>
+            <td>這是一場「AI 對 AI」的軍備競賽</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>攻防全景圖</h2>
+
+<div class="mermaid">
+graph LR
+    subgraph 攻擊方["🔴 攻擊方"]
+        direction TB
+        A1["AI 自動化攻擊"]:::attack
+        A2["提示詞注入"]:::attack
+        A3["AI 社交工程"]:::attack
+        A4["勒索軟體"]:::attack
+        A5["供應鏈攻擊"]:::attack
+        A6["區塊鏈犯罪"]:::attack
+        A7["虛擬化攻擊"]:::attack
+        A8["OT/ICS 攻擊"]:::attack
+        A9["國家級間諜"]:::attack
+    end
+
+    subgraph 防禦方["🟢 防禦方"]
+        direction TB
+        D1["AI 代理防禦"]:::defense
+        D2["縱深防禦策略"]:::defense
+        D3["多重驗證 MFA"]:::defense
+        D4["零信任架構"]:::defense
+        D5["網路區隔"]:::defense
+        D6["區塊鏈調查"]:::defense
+        D7["EDR/XDR"]:::defense
+        D8["離線備份"]:::defense
+        D9["威脅情報"]:::defense
+    end
+
+    A1 ---|對抗| D1
+    A2 ---|對抗| D2
+    A3 ---|對抗| D3
+    A4 ---|對抗| D8
+    A5 ---|對抗| D4
+    A6 ---|對抗| D6
+    A7 ---|對抗| D7
+    A8 ---|對抗| D5
+    A9 ---|對抗| D9
+
+    classDef attack fill:#fee2e2,stroke:#dc2626,color:#991b1b
+    classDef defense fill:#dcfce7,stroke:#16a34a,color:#166534
+</div>
+
+<hr>
+
+<h2>結論：2026 年的資安新時代</h2>
+
+<p>各位同學，我們的課程到這裡就告一段落了。讓老師做一個總結：</p>
+
+<h3>報告的核心結論</h3>
+
+<blockquote>
+    <p>「無論是攻擊者或防禦方，都將在 2026 年跨入 AI 和網路安全的新時代。」</p>
+</blockquote>
+
+<p><strong>攻擊方的趨勢</strong>：</p>
+<ul>
+    <li>全面運用 AI 提升攻擊速度、規模和效率</li>
+    <li>勒索軟體和資料竊取型勒索持續猖獗</li>
+    <li>國家級威脅基於戰略利益持續攻擊</li>
+</ul>
+
+<p><strong>防禦方的對策</strong>：</p>
+<ul>
+    <li>運用 AI 代理強化資安營運</li>
+    <li>升級身分與存取權管理機制</li>
+    <li>採取主動式多層防禦策略</li>
+</ul>
+
+<h3>組織應該怎麼做？</h3>
+
+<p>報告給出的建議：</p>
+
+<blockquote>
+    <p>「組織要在複雜且瞬息萬變的網路環境有效應對威脅，就必須採取主動式多層防禦策略，落實 AI 治理，並根據新出現的威脅持續調整安全防護機制，確保營運韌性。」</p>
+</blockquote>
+
+<h3>行動清單</h3>
+
+<p><strong>企業應該做的</strong>：</p>
+<ul class="checklist">
+    <li>評估 AI 代理的資安風險和治理機制</li>
+    <li>建立提示詞注入的防禦措施</li>
+    <li>實施多重驗證（MFA）和零信任架構</li>
+    <li>定期更新虛擬化基礎架構</li>
+    <li>隔離 OT 和 IT 網路</li>
+    <li>準備不可變更的離線備份</li>
+    <li>培養團隊的區塊鏈調查技能</li>
+    <li>持續監控國家級威脅情報</li>
+</ul>
+
+<p><strong>個人應該做的</strong>：</p>
+<ul class="checklist">
+    <li>對任何要求轉帳或提供密碼的請求保持警覺</li>
+    <li>不要輕信電話或影片中的「熟人」聲音</li>
+    <li>使用強密碼和多重驗證</li>
+    <li>定期備份重要資料</li>
+    <li>參加資安意識訓練</li>
+</ul>
+
+<hr>
+
+<h2>老師最後的話</h2>
+
+<p>各位同學，2026 年的資安環境確實充滿挑戰，但也充滿機會。AI 既是威脅，也是防禦利器。關鍵在於：</p>
+
+<ol>
+    <li><strong>持續學習</strong>：資安威脅日新月異，不能停止學習</li>
+    <li><strong>主動防禦</strong>：不要等到被攻擊才行動</li>
+    <li><strong>團隊合作</strong>：資安不是 IT 部門的事，是全公司的事</li>
+</ol>
+
+<p>記住這句話：</p>
+
+<blockquote>
+    <p>「這份報告提供了重要的洞察和資訊，協助組織迎戰明年複雜的威脅環境。我們清楚闘明不斷發展的趨勢和潛在威脅，可做為領導者的行動方針，從被動防禦升級至更具韌性及遠見的安全防護策略。」</p>
+</blockquote>
+
+<p>如果你們有任何問題，歡迎下課後來問老師。謝謝大家！</p>
+
+<hr>
+
+<div class="footer">
+    <p><strong>報告出品單位</strong>：Google Cloud Security</p>
+    <p><strong>原始報告名稱</strong>：《2026 年網路安全預測》（Cybersecurity Forecast 2026）</p>
+    <p><strong>導讀完成日期</strong>：2026 年 1 月 27 日</p>
+    <p><strong>教學語言</strong>：繁體中文（台灣用語）</p>
+    <p><strong>適合對象</strong>：資安初學者、企業決策層、IT 人員、所有關心資訊安全的人</p>
+</div>
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        themeVariables: {
+            primaryColor: '#4285f4',
+            primaryTextColor: '#1a1a2e',
+            primaryBorderColor: '#2563eb',
+            lineColor: '#6b7280',
+            secondaryColor: '#34a853',
+            tertiaryColor: '#fbbc04',
+            background: '#ffffff',
+            mainBkg: '#ffffff',
+            secondBkg: '#f8f9fa',
+            border1: '#dee2e6',
+            border2: '#adb5bd',
+            arrowheadColor: '#6b7280',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif',
+            fontSize: '14px',
+            nodeBorder: '#2563eb',
+            clusterBkg: '#f1f3f4',
+            clusterBorder: '#dee2e6',
+            defaultLinkColor: '#6b7280',
+            titleColor: '#1a1a2e',
+            edgeLabelBackground: '#ffffff',
+            nodeTextColor: '#1a1a2e'
+        },
+        flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis'
+        },
+        mindmap: {
+            useMaxWidth: true,
+            padding: 20
+        }
+    });
+</script>
+
+</body>
+</html>
