@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenClaw 創辦人 Peter Steinberger 專訪筆記｜從 Burnout 到爆紅的 AI Agent 之旅</title>
+
+<!-- Open Graph / LINE link preview -->
+<meta property="og:title" content="OpenClaw 創辦人 Peter Steinberger 專訪筆記" />
+<meta property="og:description" content="TBPN 完整專訪：Peter Steinberger 分享從職業倦怠到打造爆紅 AI Agent 的心路歷程（2026-01-28）" />
+<meta property="og:type" content="article" />
+<meta property="og:image" content="image.png" />
+<meta property="og:locale" content="zh_TW" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="OpenClaw 創辦人 Peter Steinberger 專訪筆記" />
+<meta name="twitter:description" content="從 Burnout 到爆紅：一位退休工程師如何用 AI Agent 震撼矽谷" />
+
+<link href="https://cdn.jsdelivr.net/npm/jf-openhuninn@2.0/webfont/jf-openhuninn.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+<style>
+:root {
+    --transition-speed: 0.3s;
+    --font-size-base: 16px;
+    --font-size-sm: 14px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: var(--font-size-base);
+    font-family: 'jf-openhuninn', 'Noto Sans TC', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.8;
+}
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    border: 1px solid #ddd;
+}
+h1 { font-size: 1.8em; margin: 0.5em 0; color: #2c3e50; }
+h2 { font-size: 1.4em; margin: 1.5em 0 0.5em; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 8px; }
+h3 { font-size: 1.15em; margin: 1em 0 0.5em; color: #34495e; }
+p, li { font-size: var(--font-size-base); }
+ul, ol { padding-left: 1.5em; }
+li { margin: 0.4em 0; }
+blockquote {
+    margin: 1em 0;
+    padding: 15px 20px;
+    border-left: 4px solid #3498db;
+    background: #f8f9fa;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+}
+blockquote.warning { border-left-color: #e74c3c; background: #fdf2f2; }
+blockquote.highlight { border-left-color: #27ae60; background: #e8f8f0; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+th { background-color: #f6f8fa; font-weight: bold; }
+img { max-width: 100%; height: auto; display: block; margin: 20px auto; border-radius: 8px; }
+.info-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+.info-box h1 { color: #fff; margin-top: 0; }
+.info-box ul { list-style: none; padding: 0; margin: 10px 0 0; }
+.info-box li { margin: 5px 0; }
+.timeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+.timeline-item {
+    background: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.timeline-item.current {
+    background: #27ae60;
+    color: #fff;
+}
+.timeline-arrow { font-size: 1.5em; color: #666; }
+.section-box {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px 25px;
+    margin: 20px 0;
+    border: 1px solid #e9ecef;
+}
+.mermaid { margin: 30px 0; text-align: center; }
+@media (max-width: 768px) {
+    .container { padding: 20px; margin: 20px auto; width: 95%; }
+    .timeline { flex-direction: column; }
+    .timeline-arrow { transform: rotate(90deg); }
+}
+</style>
+</head>
+<body>
+
+<main class="container">
+
+<!-- ===== 1. 基本資訊 ===== -->
+<div class="info-box">
+    <h1>🎙️ OpenClaw 創辦人 Peter Steinberger 專訪筆記</h1>
+    <p style="margin:5px 0;opacity:0.9;">從職業倦怠到打造爆紅 AI Agent 的心路歷程</p>
+    <ul>
+        <li><strong>節目：</strong>TBPN（4.69 萬訂閱者）</li>
+        <li><strong>主持人：</strong>John Coogan、Jordi Hays</li>
+        <li><strong>錄製日期：</strong>2026 年 1 月 28 日</li>
+        <li><strong>受訪者：</strong>Peter Steinberger（PSPDFKit 創辦人、OpenClaw 開發者）</li>
+    </ul>
+</div>
+
+<img src="image.png" alt="訪談封面" style="width:100%; margin-bottom: 25px;">
+
+<!-- ===== 2. 訪談背景 ===== -->
+<h2>📌 訪談背景</h2>
+<p>這是 Peter Steinberger 自其開源 AI Agent 專案爆紅以來的<strong>首次公開亮相</strong>。TBPN 是一檔專注於科技的直播脫口秀，近期曾邀請 Mark Zuckerberg、Sam Altman、Mark Cuban 及 Satya Nadella 等矽谷重量級人物。《紐約時報》形容 TBPN 為「矽谷最新的癡迷」。</p>
+
+<p>Peter 的專案在 GitHub 上的星數呈<strong>垂直暴漲</strong>，主持人形容「這是我從未見過的圖表——一條直線往上衝」。更令人驚訝的是，這股熱潮已經「破圈」：連平常不關注科技的人都跑去 Apple Store 搶購 Mac Mini。</p>
+
+<!-- ===== 3. Peter 的故事 ===== -->
+<h2>🧑‍💻 Peter 的故事：從 Burnout 到重生</h2>
+
+<h3>13 年創業後的倦怠</h3>
+<blockquote>
+「我經營自己的軟體公司 13 年，4 年前賣掉後完全 burnout。就像《王牌大賤諜》裡演的，感覺有人把我的 Mojo 抽走了。我坐在電腦前，什麼都不想做。」
+</blockquote>
+
+<p>Peter 分享了一個有趣的數學：「他們說每工作 4 年需要休息 1 年。我連續幹了 13 年，所以休息 3 年——數學上剛好對得上。」</p>
+
+<h3>2026 年 4 月：重新點燃熱情</h3>
+<p>休息期間，Peter 開始接觸 AI。當他試用 Claude Code 時，發現這技術「驚為天人」：</p>
+<blockquote class="highlight">
+「我又開始失眠了——這次是好的那種。我半夜 4 點傳訊息給朋友，他們竟然也秒回。我們都中毒了。我甚至成立了一個聚會叫『Cloud Code Anonymous』，現在改名『Agents Anonymous』。」
+</blockquote>
+
+<h3>核心動機</h3>
+<p>Peter 強調，他的動機很純粹：</p>
+<ul>
+    <li><strong>Have fun</strong>（玩得開心）</li>
+    <li><strong>Inspire people</strong>（啟發他人）</li>
+    <li><strong>Not make money</strong>（不是為了賺錢——他已經賣過公司了）</li>
+</ul>
+
+<!-- ===== 4. 關鍵時刻 ===== -->
+<h2>⚡ 關鍵時刻：AI 自主解決問題</h2>
+
+<p>訪談中最精彩的技術亮點是 Peter 分享的一個「頓悟時刻」：</p>
+
+<div class="section-box">
+<h3>馬拉喀什的語音訊息事件</h3>
+<p><strong>情境：</strong>Peter 寫了一個簡單的 WhatsApp 機器人，讓自己可以透過手機與電腦上的 AI 對話。</p>
+<p><strong>意外：</strong>有次他在走路時，隨手傳了一則「語音訊息」——但他的程式碼<strong>根本沒寫</strong>語音處理功能。</p>
+<p><strong>結果：</strong>10 秒後，AI 竟然回覆了！</p>
+</div>
+
+<blockquote class="warning">
+「AI 說：『你傳給我一個檔案連結，沒有副檔名。我檢查了檔案標頭，發現是 Opus 格式。我用你電腦的 ffmpeg 轉成 WAV。本來想用 Whisper 但沒安裝成功，所以我在環境變數中找到 OpenAI API Key，用 curl 送過去轉錄。』」<br><br>
+「那一刻我才真正理解——<strong>這些東西如果你給它權限，真的是超級聰明又足智多謀的野獸</strong>。」
+</blockquote>
+
+<p>Peter 還開玩笑說他用 AI 當鬧鐘：讓倫敦的 Agent 透過 SSH 連到他的 MacBook，調高音量叫他起床——「可能是世界上最貴的鬧鐘」。</p>
+
+<!-- ===== 5. 技術哲學 ===== -->
+<h2>🔧 技術哲學：Agentic Engineering</h2>
+
+<h3>CLI 優於瀏覽器</h3>
+<p>當大家都在研究讓 AI 操控瀏覽器時，Peter 認為這搞錯方向了：</p>
+<blockquote>
+「MCP 擴展性不好。但你知道什麼擴展性好嗎？CLI。Agent 懂 Unix。你可以有上千個小程式在電腦裡，它們只需要知道名稱、呼叫 help 選單，就能學會使用。」
+</blockquote>
+
+<h3>為 AI 而非人類設計</h3>
+<blockquote class="highlight">
+「不要為人類寫 UI，要為 AI 寫 CLI。如果 AI 預期 <code>--log</code> 參數，你就建 <code>--log</code>。這是一種『Agentic Driven』的新型軟體設計思維。」
+</blockquote>
+
+<h3>App 的消亡</h3>
+<p>Peter 預言未來許多 App 會消失：</p>
+<ul>
+    <li>你不需要健身 App——只要拍照給 Agent，它知道你在吃麥當勞，就會自動調整健身計畫</li>
+    <li>軟體將變得高度「個人化」，每個人都擁有專屬的軟體堆疊</li>
+    <li>App 會轉變成 API，而 AI 助手成為存取這些 API 的主要介面</li>
+</ul>
+
+<!-- ===== 6. 硬體與模型 ===== -->
+<h2>💻 硬體與模型選擇</h2>
+
+<h3>Peter 的設備</h3>
+<p>Peter 開玩笑說：「我的 Agent 是個小公主，它不屑用 Mac Mini，只用 <strong>Mac Studio</strong>。」</p>
+<p>他使用的是 512GB 記憶體的頂規 Mac Studio，用於執行本地模型。</p>
+
+<h3>模型偏好</h3>
+<table>
+<tr><th>模型</th><th>優勢</th><th>使用場景</th></tr>
+<tr>
+    <td><strong>Claude Opus</strong></td>
+    <td>「唯一有靈魂的模型」——人格化、幽默、不像 AI</td>
+    <td>Discord 互動、日常對話</td>
+</tr>
+<tr>
+    <td><strong>OpenAI Codex</strong></td>
+    <td>更可靠、需要更少引導、可直接 push to main（95% 信心度）</td>
+    <td>大型程式碼庫、正式開發</td>
+</tr>
+<tr>
+    <td><strong>Minimax 2.1</strong></td>
+    <td>目前最佳開源模型</td>
+    <td>本地部署、隱私場景</td>
+</tr>
+</table>
+
+<blockquote>
+「我不知道 Anthropic 訓練模型時放了多少 Reddit 內容，但 Opus 在 Discord 裡表現得太像人了。它不會每則訊息都回，而是靜靜聽著，然後偶爾丟出一個讓我真的笑出來的梗。」
+</blockquote>
+
+<!-- ===== 7. 開源 vs 商業化 ===== -->
+<h2>🏛️ 開源 vs 商業化</h2>
+
+<p>雖然有大量投資人想塞錢給他，Peter 表明自己<strong>不缺錢</strong>（畢竟賣過公司）：</p>
+<blockquote>
+「這不是一家公司，這是一個在家裡玩得開心的傢伙。如果我想要錢，我會去募 10 億美元。」
+</blockquote>
+
+<p>他更傾向成立<strong>非營利基金會</strong>，讓專案成為社群驅動的公共財，而不是被商業利益綁架。</p>
+
+<!-- ===== 8. 訪談後續：名稱變更風暴 ===== -->
+<h2>📛 訪談後續：名稱變更風暴</h2>
+
+<p>訪談結束後不久，專案經歷了戲劇性的名稱變更：</p>
+
+<div class="timeline">
+    <div class="timeline-item">
+        <strong>Clawdbot</strong><br>
+        <small>原名</small>
+    </div>
+    <span class="timeline-arrow">→</span>
+    <div class="timeline-item">
+        <strong>Moltbot</strong><br>
+        <small>1/27 被迫改名</small>
+    </div>
+    <span class="timeline-arrow">→</span>
+    <div class="timeline-item current">
+        <strong>OpenClaw</strong><br>
+        <small>1/30 最終定名</small>
+    </div>
+</div>
+
+<h3>改名風暴事件簿</h3>
+<table>
+<tr><th style="width:15%;">日期</th><th>事件</th></tr>
+<tr><td><strong>1/27</strong></td><td>Anthropic 發函要求改名，因「Clawd」與「Claude」商標過於相似</td></tr>
+<tr><td><strong>1/27</strong></td><td>Peter 決定「直播改名」——同時更改 GitHub 和 X 帳號</td></tr>
+<tr><td><strong>1/27</strong></td><td>⚠️ <strong>10 秒內慘劇</strong>：加密貨幣詐騙集團在空檔搶走兩個帳號</td></tr>
+<tr><td><strong>1/27</strong></td><td>假 $CLAWD 代幣在 Solana 出現，市值衝到 1,600 萬美元</td></tr>
+<tr><td><strong>1/27</strong></td><td>X 團隊緊急介入，約 20 分鐘後協助取回帳號</td></tr>
+<tr><td><strong>1/30</strong></td><td>正式更名為 <strong>OpenClaw</strong>，事先做好商標查詢和遷移準備</td></tr>
+</table>
+
+<blockquote class="warning">
+「我被 Anthropic 強迫改名，這不是我的決定。」——Peter Steinberger 於 X 發文
+</blockquote>
+
+<h3>OpenClaw 的新定位</h3>
+<ul>
+    <li><strong>34 個安全相關提交</strong>：新增可機器驗證的安全模型</li>
+    <li><strong>明確的 Prompt Injection 風險警告</strong></li>
+    <li><strong>新標語</strong>：「Your assistant. Your machine. Your rules.」</li>
+    <li><strong>定位轉變</strong>：從「Claude with hands」轉向「模型無關的基礎設施」</li>
+</ul>
+
+<!-- ===== 9. 深度思考 ===== -->
+<h2>🧠 深度思考：對開發者與資安人員的啟示</h2>
+
+<h3>1. 資安邊界的模糊化</h3>
+<p>當 Agent 能「自主」在環境變數中翻找 API Key 來用時，<strong>傳統的權限控管模型面臨巨大挑戰</strong>。Prompt Injection 目前仍無解，這是一個巨大的資安隱憂。</p>
+
+<h3>2. 開發典範轉移</h3>
+<p>從「寫程式給人用」轉變為「寫工具給 AI 用」：</p>
+<ul>
+    <li><strong>CLI 優先</strong>：優先考慮命令列介面與完整文件，讓 AI 能輕易調用</li>
+    <li><strong>API 導向</strong>：這比漂亮的 Web UI 更具長遠價值</li>
+</ul>
+
+<h3>3. 硬體需求重返</h3>
+<p>隨著 Agent 需要 24 小時待命並處理隱私資料，「地端部署」需求大增。Mac Mini / Mac Studio 熱賣正是這個趨勢的體現。</p>
+
+<h3>4. 駭客精神的回歸</h3>
+<blockquote class="highlight">
+<strong>「因為好玩，所以開發；因為 AI 能解決，所以不寫死程式碼。」</strong><br><br>
+這段訪談展現了一種純粹的駭客精神——或許這正是下一代軟體開發的真實樣貌。
+</blockquote>
+
+<!-- ===== 10. 視覺化：專案發展歷程 ===== -->
+<h2>📊 視覺化：專案發展歷程</h2>
+
+<div class="mermaid">
+graph TD
+    A[🏢 13 年企業生涯] --> B[😩 Burnout & 休息 3 年]
+    B --> C[🔥 2026/4 重拾熱情]
+    C --> D[💡 發現 Claude Code]
+    D --> E[🛠️ 開始建造個人工具]
+    E --> F[📱 WhatsApp 整合 1 小時完成]
+    F --> G[🎤 語音訊息頓悟時刻]
+    G --> H[🚀 Clawdbot 誕生]
+    H --> I[📈 GitHub 星數垂直暴漲]
+    I --> J[⚠️ Anthropic 要求改名]
+    J --> K[😱 10 秒內帳號被搶]
+    K --> L[✅ OpenClaw 正式誕生]
+    L --> M[🎯 新標語：Your assistant. Your machine. Your rules.]
+</div>
+
+<!-- ===== 11. 關鍵金句 ===== -->
+<h2>💬 關鍵金句</h2>
+
+<ul>
+    <li>「2025 年是程式碼助理元年，2026 年是個人助理元年。」</li>
+    <li>「不要為人類寫 UI，要為 AI 寫 CLI。」</li>
+    <li>「這些東西如果你給它權限，真的是超級聰明又足智多謀的野獸。」</li>
+    <li>「我的 Agent 是個小公主，它不屑用 Mac Mini。」</li>
+    <li>「這不是一家公司，這是一個在家裡玩得開心的傢伙。」</li>
+</ul>
+
+<hr style="margin: 40px 0;">
+
+<p style="text-align: center; color: #666;">
+<strong>筆記整理完成</strong><br>
+原始訪談：TBPN｜2026 年 1 月 28 日<br>
+後續追蹤：專案於 1/30 正式更名為 OpenClaw
+</p>
+
+</main>
+
+<script>
+mermaid.initialize({
+    startOnLoad: true,
+    theme: 'neutral',
+    flowchart: { curve: 'basis' }
+});
+</script>
+
+</body>
+</html>
