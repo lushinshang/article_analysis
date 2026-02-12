@@ -440,7 +440,7 @@ graph LR
     end
 
     subgraph "Agent"
-        Agent["🤖 AI Agent"]
+        AgentNode["🤖 AI Agent"]
     end
 
     FS --> MCP
@@ -448,12 +448,12 @@ graph LR
     API --> MCP
     CI --> MCP
 
-    MCP -->|接得到| Agent
+    MCP -->|接得到| AgentNode
 
-    Skills -->|會做| Agent
-    Hooks -->|做得對| Agent
+    Skills -->|會做| AgentNode
+    Hooks -->|做得對| AgentNode
 
-    Agent -->|結果| Result["✅ 可交付的代碼"]
+    AgentNode -->|結果| Result["✅ 可交付的代碼"]
 
     style MCP fill:#ffffcc
     style Skills fill:#ccffcc
