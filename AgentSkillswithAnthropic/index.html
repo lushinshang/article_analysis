@@ -1,0 +1,180 @@
+
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Skills 課程導讀索引（教師視角）</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Improved responsive table styles for readability */
+    :root { --muted: #666; --border: #e6e9ee; --accent: #1967d2; --bg: #ffffff; }
+    .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table.index { width: 100%; border-collapse: collapse; max-width: 100%; table-layout: fixed; }
+    table.index th, table.index td { padding: 10px 12px; border: 1px solid var(--border); text-align: left; vertical-align: top; }
+    table.index caption { text-align: left; font-weight: 700; margin-bottom: 8px; }
+    table.index th { background: #fafbfd; font-weight: 600; }
+    table.index td:nth-child(1) { width: 6%; white-space: nowrap; }
+    table.index td:nth-child(2) { width: 28%; }
+    table.index td:nth-child(3) { width: 46%; word-wrap: break-word; overflow-wrap: break-word; }
+    table.index td:nth-child(4) { width: 20%; white-space: nowrap; }
+    .index a { color: var(--accent); text-decoration: none; }
+    .index a:hover { text-decoration: underline; }
+
+    /* Mobile: stack rows as cards for easier reading */
+    @media (max-width: 800px) {
+      table.index thead { display: none; }
+      table.index, table.index tbody, table.index tr, table.index td { display: block; width: 100%; }
+      table.index tr { margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+      table.index td { padding: 8px 6px; }
+      table.index td::before { font-weight: 600; display: inline-block; width: 36%; color: var(--muted); }
+      table.index td:nth-child(1)::before { content: "No."; }
+      table.index td:nth-child(2)::before { content: "Course"; }
+      table.index td:nth-child(3)::before { content: "Summary"; }
+      table.index td:nth-child(4)::before { content: "Links"; }
+    }
+  </style>
+</head>
+<body style="background:#fff;">
+  <main style="margin-left:2vw;margin-right:2vw;">
+    <h1>課程導讀索引（教師視角）</h1>
+    <p>本頁為教師快速參考：概覽本目錄內 10 節導讀逐字稿，提供課程標題、教學要點摘要，以及連結，方便備課或作為教案大綱。</p>
+    <p>課程來源：<a href="https://www.deeplearning.ai/short-courses/agent-skills-with-anthropic/" target="_blank" rel="noopener noreferrer">Agent Skills with Anthropic — DeepLearning.AI</a></p>
+      <p>學習教材：<a href="https://github.com/https-deeplearning-ai/sc-agent-skills-files/tree/main" target="_blank" rel="noopener noreferrer">https://github.com/https-deeplearning-ai/sc-agent-skills-files</a></p>
+    <section aria-labelledby="course-desc">
+      <h2 id="course-desc">課程說明</h2>
+      <p>本短課程（Agent Skills with Anthropic）介紹如何設計、封裝與部署 Agent Skills（技能），涵蓋概念、工具整合（例如 Files API、Code Execution、MCP）、Skill 設計（SKILL.md）、以及使用 Claude Agent SDK 的實作範例。課程適合想把重複化流程工程化、並把專業知識作為可重複技能注入代理應用的學習者與產品/工程團隊。</p>
+      <p>教學建議：每節課可採用「概念講解 + 範例示範 + 實作練習」的節奏；教師可搭配課堂練習（如：建立最小可行 SKILL、寫測試 harness、在容器中模擬 Files API 流程）來鞏固學習效果。</p>
+    </section>
+
+    <div class="table-responsive">
+      <table class="index" aria-describedby="table-desc">
+        <caption id="table-desc">目錄中 10 節課程的標題、教師摘要與檔案連結</caption>
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Course Title</th>
+            <th scope="col">Teacher Summary</th>
+            <th scope="col">連結</th>
+          </tr>
+        </thead>
+        <tbody><tr>
+            <td scope="row">1</td>
+            <td>Introduction — 代理技能（Agent Skills）入門</td>
+            <td>概述技能概念、漸進揭露與實作流程，並列出入門練習；適合作為課程的第一堂或前導單元，聚焦學習目標與期望成果。</td>
+            <td><a href="guide_001.html">導讀教學</a><br><a href="transcript_001.html">逐字稿</a></td>
+          </tr>
+<tr>
+            <td scope="row">2</td>
+            <td>Why Use Skills — Part I</td>
+            <td>從行銷案例說明把重複流程封裝為 Skill 的實務價值，並示範 SKILL.md 結構與指標計算，適合用於帶入實務案例與操作步驟。</td>
+            <td><a href="guide_002.html">導讀教學</a><br><a href="transcript_002.html">逐字稿</a></td>
+          </tr>
+<tr>
+            <td scope="row">3</td>
+            <td>Why Use Skills — Part II</td>
+            <td>延伸說明技能的結構、可攜性與可組合性，介紹進階揭露與實作建議，適合用於講解技能設計原則與範例分析。</td>
+            <td><a href="guide_003.html">導讀教學</a><br><a href="transcript_003.html">逐字稿</a></td>
+          </tr>
+<tr>
+            <td scope="row">4</td>
+            <td>Exploring Pre-Built Skills</td>
+            <td>介紹內建與預構建技能（例如 PowerPoint/Excel）與 skill-creator 工具的應用，並示範如何把 CSV 流程轉為 BigQuery + MCP，適合示範整合應用。</td>
+            <td><a href="guide_004.html">導讀教學</a><br><a href="transcript_004.html">逐字稿</a></td>
+          </tr>
+<tr>
+            <td scope="row">5</td>
+            <td>Skills with the Claude API</td>
+            <td>說明在 Messages API 環境下如何結合 Code Execution 與 Files API 來執行技能，包含上傳/下載檔案與容器運作的實務重點，適合做為 API 層面的技術講解。</td>
+            <td><a href="guide_005.html">導讀教學</a><br><a href="transcript_005.html">逐字稿</a></td>
+          </tr>
+<tr>
+            <td scope="row">6</td>
+            <td>Skills with the Claude Agent SDK </td>
+            <td>聚焦使用 Claude Agent SDK 建構 research agent 的實作流程：主代理/子代理分工、allowed_tools 與寫入 MCP 的範例，建議用於實作演練與 code walkthrough。</td>
+            <td><a href="guide_006.html">導讀教學</a><br><a href="transcript_006.html">逐字稿</a></td>
+          </tr>
+<tr>
+            <td scope="row">7</td>
+            <td>技能、工具、MCP 與子代理</td>
+            <td>釐清 Skills、Tools、MCP 與 Subagents 的職責與互動，建議以案例講解如何搭配使用並處理權限與上下文成本，適合用於概念架構教學。</td>
+            <td><a href="guide_007.html">導讀教學</a><br><a href="transcript_007.html">逐字稿</a></td>
+          </tr>
+<tr>
+            <td scope="row">8</td>
+            <td>Creating Custom Skills</td>
+            <td>深入探討 SKILL.md 結構、命名與測試策略，並提供生成練習題與時間序列分析等實例，適合用於技能設計工作坊與評審練習。</td>
+            <td><a href="guide_008.html">導讀教學</a><br><a href="transcript_008.html">逐字稿</a></td>
+          </tr>
+<tr>
+            <td scope="row">9</td>
+            <td>Agent Skills 與實務</td>
+            <td>總結技能設計與上線流程，強調從最小可行 Skill 出發、採漸進揭露並以監測驅動迭代；適合作為課程結尾的教學要點回顧。</td>
+            <td><a href="guide_009.html">導讀教學</a><br><a href="transcript_009.html">逐字稿</a></td>
+          </tr>
+<tr>
+            <td scope="row">10</td>
+            <td>Agent Skills 結語</td>
+            <td>重申從原型到技能化的流程、漸進揭露與監控迭代的重要性；適合用於課堂回顧與評估學習成效的討論。</td>
+            <td><a href="guide_010.html">導讀教學</a><br><a href="transcript_010.html">逐字稿</a></td>
+          </tr></tbody>
+      </table>
+    </div>
+  <section id="lectures-and-guides">
+  <h2>Lectures and Guides</h2>
+  <ul>
+    <li>
+      <strong>Agent Skills Conclusion</strong><br>
+      <a href="guide_010.html">Guide / 導讀</a><br>
+      <a href="transcript_010.html">Transcript / 逐字稿</a>
+    </li>
+    <li>
+      <strong>Conclusion</strong><br>
+      <a href="guide_009.html">Guide / 導讀</a><br>
+      <a href="transcript_009.html">Transcript / 逐字稿</a>
+    </li>
+    <li>
+      <strong>Creating Custom Skills</strong><br>
+      <a href="guide_008.html">Guide / 導讀</a><br>
+      <a href="transcript_008.html">Transcript / 逐字稿</a>
+    </li>
+    <li>
+      <strong>Exploring Pre Built Skills</strong><br>
+      <a href="guide_004.html">Guide / 導讀</a><br>
+      <a href="transcript_004.html">Transcript / 逐字稿</a>
+    </li>
+    <li>
+      <strong>Introduction</strong><br>
+      <a href="guide_001.html">Guide / 導讀</a><br>
+      <a href="transcript_001.html">Transcript / 逐字稿</a>
+    </li>
+    <li>
+      <strong>Skills Vs Tools Mcp And Subagents</strong><br>
+      <a href="guide_007.html">Guide / 導讀</a><br>
+      <a href="transcript_007.html">Transcript / 逐字稿</a>
+    </li>
+    <li>
+      <strong>Skills With The Claude Agent Sdk</strong><br>
+      <a href="guide_006.html">Guide / 導讀</a><br>
+      <a href="transcript_006.html">Transcript / 逐字稿</a>
+    </li>
+    <li>
+      <strong>Skills With The Claude Api</strong><br>
+      <a href="guide_005.html">Guide / 導讀</a><br>
+      <a href="transcript_005.html">Transcript / 逐字稿</a>
+    </li>
+    <li>
+      <strong>Why Use Skills Part I</strong><br>
+      <a href="guide_002.html">Guide / 導讀</a><br>
+      <a href="transcript_002.html">Transcript / 逐字稿</a>
+    </li>
+    <li>
+      <strong>Why Use Skills Part Ii</strong><br>
+      <a href="guide_003.html">Guide / 導讀</a><br>
+      <a href="transcript_003.html">Transcript / 逐字稿</a>
+    </li>
+  </ul>
+</section>
+</main>
+</body>
+</html>
