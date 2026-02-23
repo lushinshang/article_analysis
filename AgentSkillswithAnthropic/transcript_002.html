@@ -3,37 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conclusion - Transcript</title>
+  <title>Why Use Skills - Part I - Transcript</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <header>
       <span class="course-tag">DeepLearning.AI x Anthropic</span>
-      <h1>Conclusion</h1>
-      <p class="meta">Agent Skills with Anthropic | Duration: 1 minute</p>
+      <h1>Why Use Skills - Part I</h1>
+      <p class="meta">Agent Skills with Anthropic | Duration: 11 minutes</p>
     </header>
 
     <section class="transcript">
       <h2>English Transcript</h2>
 
-      <p>Congratulations on making it this far.</p>
+      <p>Skills are folders of instructions that package repeated workflows, specialized knowledge, or new capabilities for your agent. If you find yourself typing the same prompt across conversations, you should consider transforming that into a skill. Let's explore how to do that using Claude AI.</p>
 
-      <p>You've learned how to create skills, explored their best practices, and seen them in action across different platforms.</p>
+      <p>So before we talk a little bit more about skills and dive into what a skill looks like and how it works, let's walk through a scenario to showcase why skills are so useful.</p>
 
-      <p>When creating a skill, start with basic markdown instructions, then expand later following progressive disclosure.</p>
+      <p>Right here, I've got some campaign data in a CSV that I'd like to analyze the performance of. I've got a date, a campaign name, impressions, clicks, conversions. We're going to take in some marketing data and use Claude to analyze this information.</p>
 
-      <p>Monitor how your agent uses your skill in real scenarios and iterate based on observations.</p>
+      <p>In my first prompt, I'm attaching this data, explaining what the input data looks like, asking to check for quality, funnel analysis, and some useful metrics around what I expect for click-through rates and conversion rates. At the bottom, I've got an output format that I'm requesting. You can imagine it would be valuable to not have to include this prompt every time and to have that packaged up.</p>
 
-      <p>Make sure the description contains enough detail for your agent to know when to use it.</p>
+      <p>Claude is going to read this CSV, perform the Data Quality Check and Funnel Analysis and give us back our campaign performance analysis. It shows Total Records, any Missing Data, and any Anomalies. We'll see our Funnel Analysis versus the benchmark data, some things working better, some things not.</p>
 
-      <p>Don't forget, Claude is very knowledgeable about what skills are.</p>
+      <p>We've got a nice interpretation and now we're going to ask for additional efficiency metrics: return on ad spend, cost per acquisition, net profit and so on. We'll see the results, what's working, what's not, portfolio performance and total net profit.</p>
 
-      <p>So you can always start with a simple conversation to begin creating skills and then use the skill creator skill to follow best practices.</p>
+      <p>The next step is to take in additional data: our budget reallocation rules. We have extra money to think about allocating towards other marketing channels. This file has rules for allocating, what to figure out and how to decide where to increase, maintain, or decrease budget.</p>
 
-      <p>Thank you for joining me in this journey.</p>
+      <p>This is a lot of specific data for our particular use case. Claude knows how to handle decisions and analyze metrics, but here we're specifying exactly how we want things done. We see allocation rules, recommendations, what's passing, what's not, and a proposed reallocation.</p>
 
-      <p>And I can't wait to see what you build with agent skills.</p>
+      <p>What we've seen is a step-by-step process requiring us to put in documentation and pre-existing knowledge. Everything goes immediately into the context window. What happens if I want a different conversation? This information isn't always necessary.</p>
+
+      <p>What we're going to do is take this information and package it into a skill. A standalone asset, a folder really, that contains instructions for how to perform the campaign analysis while being intentional about what goes into the context window.</p>
+
+      <p>This is a weekly campaign performance analysis. This is much nicer to have pre-packaged that you can use yourself, share with team members, and edit as necessary.</p>
+
+      <p>Let's take a look at what a SKILL.md file is. This file needs to be named SKILL.md in markdown format. It has similar information to the previous prompt: input requirements, data quality check, funnel analysis with metrics and benchmarks, efficiency analysis, and output format. There's a note on Budget Reallocation that references a different file only when the user asks about it.</p>
+
+      <p>That's one example of being more efficient with context: only reading and using the budget reallocation file when asked about it.</p>
+
+      <p>There's one more piece of YAML data needed at the beginning. Every skill requires a name and a description. The name is for referencing and UI display. The description helps the model understand when to use the skill.</p>
+
+      <p>The second file is budget_reallocation_rules.md, referenced from the skill. When you make a skill, it can reference other files as long as they're in the same parent folder.</p>
+
+      <p>We create a folder named the skill name: analyzing-marketing-campaign. Rules: use lowercase letters, dashes between words, don't use reserved keywords like Claude or Anthropic. Inside, we create a references folder, put the budget reallocation file there, and put SKILL.md at the top level.</p>
+
+      <p>We create a zip file, upload it to Claude AI through Settings > Capabilities > Skills. We see the name and description.</p>
+
+      <p>Now let's test it. In a new chat, we ask Claude a similar prompt and attach the CSV. If it works, Claude should pick up the skill. It reads the skill file, picks up the name and description. Since we're asking about budget reallocation, it also reads that additional file.</p>
+
+      <p>We see similar results to before: channel analysis, recommendations, and proposed reallocations. But this time, we didn't have to add all the prompting ourselves.</p>
+
+      <p>This skill can be shared across many platforms. Since skills are an open standard, it's supported in Codex, Gemini CLI, and more. We've created a centralized, portable, context-efficient solution.</p>
+
+      <p>Now let's create a report. We ask Claude to create an Excel report with specific information and color coding. Under the hood, the ability to create spreadsheets lives in a built-in skill. We get an Executive Summary, Funnel Analysis, Efficiency Analysis spreadsheet we can open in Google Drive.</p>
+
+      <p>Through the use of our skill to analyze data and built-in skills to create spreadsheets, we can transform CSVs into meaningful, actionable insights in many file formats.</p>
+
+      <p>Next, we'll explore in more depth what a skill looks like, how it works, and where it fits into the entire AI ecosystem.</p>
     </section>
 
     <hr style="border:none;border-top:1px dashed var(--card-border);margin:2rem 0;">
@@ -41,28 +69,53 @@
     <section class="transcript">
       <h2>繁體中文（台灣）</h2>
 
-      <p>恭喜你堅持到了這裡。</p>
+      <p>技能（Skills）是指示資料夾，用於打包重複的工作流程、專業知識或代理的新能力。如果你發現自己在不同對話中重複輸入相同的提示詞，你應該考慮將其轉換為技能。讓我們用 Claude AI 來探索如何做到這一點。</p>
 
-      <p>你已經學會了如何建立技能、探索了最佳實務，並在不同平台上看到它們的實際運作。</p>
+      <p>在深入了解技能的外觀和運作方式之前，讓我們先走過一個場景來展示技能為何如此有用。</p>
 
-      <p>建立技能時，先從基本的 Markdown 指示開始，然後遵循漸進式揭露（Progressive Disclosure）的原則逐步擴充。</p>
+      <p><strong>場景示範：行銷活動分析</strong></p>
+      <p>我有一份 CSV 格式的行銷活動資料，包含日期、活動名稱、曝光次數、點擊數、轉換數。在第一個提示詞中，我附上資料、說明輸入格式、要求品質檢查、漏斗分析，以及點擊率和轉換率的指標。底部還指定了輸出格式。</p>
 
-      <p>在真實情境中觀察你的代理如何使用技能，並根據觀察結果進行迭代。</p>
+      <p>Claude 讀取 CSV，執行資料品質檢查和漏斗分析，回傳行銷活動績效分析：總記錄數、缺失資料、異常值。我們看到漏斗分析與基準資料的對比，以及效率指標（廣告投資報酬率、每次獲客成本、淨利潤等）。</p>
 
-      <p>確保描述包含足夠的細節，讓你的代理知道何時該使用它。</p>
+      <p>接著匯入預算重分配規則，分析哪些管道需要增加、維持或減少預算。這需要大量特定於我們用例的資料。</p>
 
-      <p>別忘了，Claude 對技能有非常深入的了解。</p>
+      <p><strong>問題：</strong>這個逐步過程要求我們每次都投入文件和知識，所有東西立即進入上下文窗口，不夠高效。</p>
 
-      <p>所以你可以隨時從簡單對話開始建立技能，然後使用 skill creator 技能來遵循最佳實務。</p>
+      <p><strong>解決方案：打包成技能</strong></p>
+      <p>將這些資訊打包成一個獨立的資產（資料夾），包含執行行銷活動分析的指示，同時對上下文窗口中的內容保持明確控制。</p>
 
-      <p>感謝你加入這段旅程。</p>
+      <p><strong>SKILL.md 檔案結構：</strong></p>
+      <ul>
+        <li>YAML Frontmatter：名稱（name）和描述（description）- 必填</li>
+        <li>輸入需求</li>
+        <li>資料品質檢查</li>
+        <li>漏斗分析（含指標和基準）</li>
+        <li>效率分析</li>
+        <li>輸出格式</li>
+        <li>預算重分配（參考外部檔案，只在使用者詢問時載入）</li>
+      </ul>
 
-      <p>我非常期待看到你用代理技能建立出什麼成果。</p>
+      <p><strong>技能資料夾結構：</strong></p>
+      <pre><code>analyzing-marketing-campaign/
+  SKILL.md
+  references/
+    budget_reallocation_rules.md</code></pre>
+
+      <p><strong>命名規則：</strong>使用小寫字母、連字號分隔、不使用保留字（如 Claude、Anthropic）。</p>
+
+      <p><strong>上傳與使用：</strong>建立 zip 檔案，透過 Settings > Capabilities > Skills 上傳到 Claude AI。在新對話中，Claude 自動偵測並使用技能，根據技能指示執行分析。只在詢問預算重分配時才載入額外檔案。</p>
+
+      <p><strong>可攜性：</strong>技能是開放標準，支援 Codex、Gemini CLI 等多個平台。一次建立，多處部署。</p>
+
+      <p><strong>結合內建技能：</strong>我們的自訂技能分析資料，內建的 Excel 技能建立試算表，將 CSV 轉換為有意義、可操作的洞察，以多種檔案格式呈現。</p>
+
+      <p>接下來，我們將更深入地探討技能的外觀、運作方式，以及它在整個 AI 生態系統中的位置。</p>
     </section>
 
     <footer>
       <span>Agent Skills with Anthropic - DeepLearning.AI</span>
-      <span>Transcript 002</span>
+      <span>Transcript 009</span>
     </footer>
   </div>
 </body>

@@ -3,29 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agent Skills Conclusion - Transcript</title>
+  <title>Introduction - Transcript</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <header>
       <span class="course-tag">DeepLearning.AI x Anthropic</span>
-      <h1>Agent Skills with Anthropic - Conclusion</h1>
-      <p class="meta">Lesson 11 of 12 | Duration: 43 seconds | Instructor: Elie Schoppik</p>
+      <h1>Introduction</h1>
+      <p class="meta">Agent Skills with Anthropic | Duration: 2 minutes</p>
     </header>
 
     <section class="transcript">
       <h2>English Transcript</h2>
 
-      <p>Congratulations on making it this far. You've learned how to create skills, explored their best practices, and seen them in action across different platforms.</p>
+      <p>Welcome to this course on agent skills, built in partnership with Anthropic and taught by returning instructor Elie Schoppik.</p>
 
-      <p>When creating a skill, start with basic markdown instructions, then expand later following progressive disclosure. Monitor how your agent uses your skill in real scenarios and iterate based on observations.</p>
+      <p>Skills give Claude Code and other agents new abilities to carry out tasks.</p>
 
-      <p>Make sure the description contains enough detail for your agent to know when to use it. Don't forget, Claude is very knowledgeable about what skills are.</p>
+      <p>I'm thrilled to have Elie return to teach this.</p>
 
-      <p>So you can always start with a simple conversation to begin creating skills and then use the skill creator skill to follow best practices.</p>
+      <p>Thank you, Andrew. I'm happy to be back and work with you all on this one.</p>
 
-      <p>Thank you for joining me in this journey. And I can't wait to see what you build with agent skills.</p>
+      <p>Skills are folders of instructions that extend your agent's capabilities with specialized knowledge.</p>
+
+      <p>In this course, you'll learn how skills work, learn best practices for creating them, and build skills for different use cases including coding and research and data analysis and more.</p>
+
+      <p>What's exciting about skills is they're now an open standard, which means they have a standardized format that work with any skills compatible agent. So you can build your skills once and deploy them across multiple agent products.</p>
+
+      <p>Any skill should include a SKILL.md markdown file, which contains the skill's name, description, and main instructions. The main instructions can also refer to other files such as scripts, additional markdown files, and assets such as templates and images.</p>
+
+      <p>Skills are progressively disclosed to the agent, which means that the skill's name and description always live in your agent's context window, but the agent does not load the rest of the instructions into its context until a user request matches the skill's description. At that point, the agent might then additionally load the reference and asset files if needed as well.</p>
+
+      <p>To use this skill, your agent needs a basic set of tools, filesystem access to read and write files and a bash tool to execute code. And these tools enable your agent to execute whatever command a skill requires.</p>
+
+      <p>Your agent can combine skills with MCP and sub-agents to create powerful, agentic workflows. For example, it can use MCP to get data from external sources, then rely on a skill to know what to do with that data or how to retrieve it efficiently. It can also delegate tasks to a sub-agent with isolated context, which can itself use skills for specialized knowledge.</p>
+
+      <p>In this course, we'll start with Claude AI, where we'll create a skill for a marketing campaign and combine it with the pre-built skills for Excel and PowerPoint. Then, we'll create two skills for content creation and data analysis workflows and try them with the Claude API. After that, we'll use skills with Claude code for reviewing and testing code. And finally, we'll build a research agent with the Claude agent SDK that uses a skill to combine research results.</p>
+
+      <p>I'd like to thank Hawraa Salami from DeepLearning.AI who contributed to this course.</p>
+
+      <p>So, how do you know when to use a skill? Let's say you have a workflow that you repeatedly ask your agent to implement. Instead of explaining the same workflow every time, you can package it as a skill so your agent automatically knows what to do.</p>
+
+      <p>That's exactly what you'll learn with Elie in the first lesson. So, please go on to the next video to learn more.</p>
     </section>
 
     <hr style="border:none;border-top:1px dashed var(--card-border);margin:2rem 0;">
@@ -33,55 +53,40 @@
     <section class="transcript">
       <h2>繁體中文（台灣）</h2>
 
-      <p>恭喜你堅持到了這裡。你已經學會了如何建立技能（Skills）、探索了最佳實務，並且在不同平台上看到了它們的實際運作。</p>
+      <p>歡迎來到這門關於代理技能（Agent Skills）的課程，由 DeepLearning.AI 與 Anthropic 合作開發，由回歸講師 Elie Schoppik 授課。</p>
 
-      <p>建立技能時，先從基本的 Markdown 指示開始，然後遵循漸進式揭露（Progressive Disclosure）的原則逐步擴充。在真實情境中觀察你的代理如何使用你的技能，並根據觀察結果進行迭代改善。</p>
+      <p>技能賦予 Claude Code 和其他代理執行任務的新能力。</p>
 
-      <p>確保描述（Description）包含足夠的細節，讓你的代理知道何時該使用這個技能。別忘了，Claude 對技能有非常深入的了解。</p>
+      <p>很高興 Elie 再次回來授課。</p>
 
-      <p>所以你可以隨時透過簡單的對話開始建立技能，然後使用 skill creator 技能來遵循最佳實務。</p>
+      <p>謝謝 Andrew，我很開心能回來和大家一起進行這門課程。</p>
 
-      <p>感謝你加入這段旅程。我非常期待看到你用代理技能（Agent Skills）建立出什麼。</p>
-    </section>
+      <p>技能是一組指示資料夾，用專業知識擴展代理的能力。</p>
 
-    <section>
-      <h2>Key Concepts / 核心概念</h2>
-      <div class="key-concept">
-        <h3>1. Skill Creation Best Practices / 技能建立最佳實務</h3>
-        <ul>
-          <li>Start with basic markdown instructions / 從基本的 Markdown 指示開始</li>
-          <li>Progressive disclosure approach / 漸進式揭露方法</li>
-          <li>Expand functionality gradually / 逐步擴充功能</li>
-        </ul>
-      </div>
-      <div class="key-concept">
-        <h3>2. Monitoring and Iteration / 監控與迭代</h3>
-        <ul>
-          <li>Monitor agent usage in real scenarios / 在真實場景中監控代理的使用情況</li>
-          <li>Iterate based on observations / 根據觀察進行迭代</li>
-          <li>Continuous improvement cycle / 持續改善循環</li>
-        </ul>
-      </div>
-      <div class="key-concept">
-        <h3>3. Skill Description Guidelines / 技能描述指南</h3>
-        <ul>
-          <li>Include sufficient detail / 包含足夠的細節</li>
-          <li>Help agents understand when to use skills / 幫助代理理解何時使用技能</li>
-        </ul>
-      </div>
-      <div class="key-concept">
-        <h3>4. Claude's Knowledge of Skills / Claude 對技能的認知</h3>
-        <ul>
-          <li>Claude understands skills deeply / Claude 深度理解技能</li>
-          <li>Start with simple conversations / 從簡單對話開始</li>
-          <li>Use skill creator for best practices / 使用 skill creator 遵循最佳實務</li>
-        </ul>
-      </div>
+      <p>在本課程中，你將學習技能如何運作、建立技能的最佳實務，並為不同的使用案例建立技能，包括程式開發、研究、資料分析等等。</p>
+
+      <p>令人興奮的是，技能現在是一個開放標準，這意味著它們有一個標準化格式，可以與任何相容技能的代理一起工作。所以你可以一次建立技能，然後部署到多個代理產品中。</p>
+
+      <p>每個技能都應包含一個 SKILL.md Markdown 檔案，其中包含技能的名稱、描述和主要指示。主要指示也可以參考其他檔案，例如腳本、額外的 Markdown 檔案，以及範本和圖片等資源。</p>
+
+      <p>技能對代理採用漸進式揭露（Progressive Disclosure）的方式，這意味著技能的名稱和描述始終存在於代理的上下文窗口（Context Window）中，但代理不會將其餘指示載入上下文，直到使用者的請求符合技能的描述。此時，代理可能會根據需要額外載入參考和資源檔案。</p>
+
+      <p>要使用技能，你的代理需要一組基本工具：檔案系統存取（讀寫檔案）和 bash 工具（執行程式碼）。這些工具使代理能夠執行技能所需的任何指令。</p>
+
+      <p>你的代理可以結合技能與 MCP（Model Context Protocol）和子代理（Sub-agents）來建立強大的代理工作流程。例如，它可以使用 MCP 從外部來源取得資料，然後依靠技能來知道如何處理該資料或如何有效地擷取。它也可以將任務委派給具有隔離上下文的子代理，而子代理本身也可以使用技能來獲取專業知識。</p>
+
+      <p>在本課程中，我們將從 Claude AI 開始，建立一個行銷活動的技能並結合預建的 Excel 和 PowerPoint 技能。然後建立兩個用於內容建立和資料分析工作流程的技能，並使用 Claude API 測試。接著在 Claude Code 中使用技能來審查和測試程式碼。最後，使用 Claude Agent SDK 建立一個研究代理，用技能來整合研究結果。</p>
+
+      <p>我要感謝 DeepLearning.AI 的 Hawraa Salami 對本課程的貢獻。</p>
+
+      <p>那麼，你怎麼知道何時該使用技能？假設你有一個反覆要求代理執行的工作流程。與其每次都解釋相同的工作流程，不如將其打包成一個技能，讓你的代理自動知道該做什麼。</p>
+
+      <p>這正是你將在 Elie 的第一課中學到的。請繼續觀看下一個影片以了解更多。</p>
     </section>
 
     <footer>
       <span>Agent Skills with Anthropic - DeepLearning.AI</span>
-      <span>Transcript 001</span>
+      <span>Transcript 005</span>
     </footer>
   </div>
 </body>

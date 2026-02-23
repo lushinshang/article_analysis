@@ -3,57 +3,141 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Skills with the Claude API - Transcript</title>
+  <title>Creating Custom Skills - Transcript</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <header>
       <span class="course-tag">DeepLearning.AI x Anthropic</span>
-      <h1>Skills with the Claude API</h1>
-      <p class="meta">Agent Skills with Anthropic | Duration: 17 minutes</p>
+      <h1>Creating Custom Skills</h1>
+      <p class="meta">Agent Skills with Anthropic | Duration: 16 minutes</p>
     </header>
 
     <section class="transcript">
       <h2>English Transcript</h2>
 
-      <p>In the first lesson, you saw how skills work with Claude AI. Now, we'll work with the Claude API to test the two skills we made from the previous lesson. To use skills with the Claude API, we'll need to use the code execution tool and the files API. This will equip Claude with file system access for reading and writing files and with bash for executing code. Let's get to it.</p>
+      <p>We'll now take a closer look at how skills are structured and best practices for creating skills. Then we'll apply what you learn to two examples. One to create practice questions based on lecture notes, and another to analyze the characteristics of time series data. Let's go.</p>
 
-      <p>We've talked quite a bit about how skills work and how to create them. And we talked a little bit as well about the portability of skills across different environments in the Claude ecosystem, as well as many other agentic applications. We started by looking at skills in Claude AI and Claude Desktop, and now we're going to move to talk about how to use skills using the Claude Messages API.</p>
+      <p>In this lesson, we're going to focus a bit on the structure of a skill, some of the best practices associated with it, and then we're going to take a look at two skills that we make and see how they fare when run through the skill creator to see how they perform against some of the best practices.</p>
 
-      <p>There are two things that are important to note. First, skills that you create in Claude AI and Claude Desktop are not shared in The Claude API or Claude Code. The second important piece is that in order for skills to work, we need the ability for Claude to execute code, create and edit documents, presentations, PDFs, and data reports, and work with a file system. This is something that we're going to have to manually do when we work with the Claude API, whereas it is configured for you automatically when using Claude AI and Claude Desktop.</p>
+      <p>To review, every skill that we make has required SKILL.md file with some YAML Frontmatter that requires a name and a description. In the underlying SKILL.md, we have the content that goes in our skill, and then any references to scripts or any additional text files, assets necessary that are loaded only when necessary.</p>
 
-      <p>In Claude Desktop or Claude AI, if I go to settings and take a look at capabilities, there's a section for code execution and file creation. This is enabled by default, giving Claude a virtual machine to execute code and perform tasks that make Skills happen. If this is disabled, we'll need to turn this on to use skills.</p>
+      <p>As we take a look at some of the best practices for names and descriptions, you can imagine this is mission critical. Your name and description are not only how Claude can analyze what your skill does, but also detect when to use that particular skill.</p>
 
-      <p>When working with tools like Claude Code and the Claude agent, you have direct access to a file system. Whereas using the Claude API, we do not, and need a container to execute code and a file system to work with. The skills themselves do not change, the format does not change, but depending on the environment, you may utilize skills slightly differently.</p>
+      <p>So with the name, there's a maximum of characters, same with the description. We mentioned briefly, the name has to contain lowercase letters, numbers and hyphens, and in general, stick with the verb plus ing form the name of your skill.</p>
 
-      <p>The code execution tool allows Claude to run Bash or shell commands in a sandboxed environment. It gives our application a separate dedicated container to execute code and work with a file system. This is mission critical for reading skills, executing code within skills, and working with files.</p>
+      <p>For the description, you want to describe not only what it does, but also when to use it. And if there are specific keywords that lead to agents triggering this skill, make sure to lean into those.</p>
 
-      <p>When we include the code execution tool, we give Claude an execution sandbox or container. There are limitations for RAM, disk, CPU, and more importantly, there is no internet connection in the Messages API sandbox (though Claude AI and Desktop do have internet). There are pre-installed libraries available out of the box.</p>
+      <p>In addition to the required fields that you have, the agent skills specification allows for optional fields. This could be the license, compatibility, and arbitrary key-value pairs in your metadata.</p>
 
-      <p>The Code Execution Tool works with the Files API. When working with files, we need a mechanism for storing them. The Files API allows uploading and downloading files that can be run inside the container. Upload input files, send them to the container, download generated files.</p>
+      <p>What's important to note here is that while there is a standard on agent skills, there are some skills that you might come across, some built by Anthropic, some others, that don't follow this specification to a T. The skills are in active development, as is the specification for skills as we work across many different model providers and many different agent tooling ecosystems.</p>
 
-      <p>The library of skills lives in a directory powered by the container. As we read from this skills directory, add information or create new files, this is where skills come into play. When working with the API and wanting to use skills, we need the Code Execution Tool.</p>
+      <p>As we start to move past the YAML Frontmatter and into the underlying body of the skill, there are no underlying restrictions that we have for the format of our skill. However, when you think about building predictable workflows, you want to make sure you have step-by-step instructions.</p>
 
-      <p>Let's revisit the two custom skills: generating practice questions and time series analysis. We head to a Jupyter notebook.</p>
+      <p>As we saw in other skills, especially the skill creator skill, it's important to specify edge cases, step-by-step instructions, and if there's a reason for a step to be skipped, be very clear why that is.</p>
 
-      <p>First, we upload the skill directory using the Files API with the necessary beta headers. We get back a skill ID. We can list skills using .list method with source "custom" to confirm.</p>
+      <p>In general, keeping this to under 500 lines is best practice, because we can always reference external files, assets, scripts, when necessary. In general, being clear and concise is valuable, and using forward slashes is mission critical even when on Windows. It's important to make sure the skill works across many different environments.</p>
 
-      <p>For the generating practice questions skill, we upload a LaTeX file using the Files API. We use Sonnet, passing beta headers for skills, code execution, and files API. Skills are set in a container keyword argument with the list of skills. We reference a particular timestamp or use the latest version.</p>
+      <p>When you think about creating skills, you want to think a little bit about how much freedom you want to give to that skill. Should we allow for general approaches and general directions, or should we be focusing on a specific sequence?</p>
 
-      <p>We ask to generate practice questions and specify the file. The Code Execution Tool processes the request. The model detects the skill, reads the SKILL.md first, then progressively loads additional files like the markdown template from the assets folder. It then creates output files, copies them to an output directory, and returns a file_id for download.</p>
+      <p>You can imagine for following best practices, we might want a low degree of freedom, but for more creative outputs, multiple colors, multiple styles, multiple fonts, we can allow for that high degree of freedom.</p>
 
-      <p>Using that file_id, we download the generated notes04.md file. It follows the exact parts from the skill: true/false questions, explanatory questions, coding questions, and use case applications.</p>
+      <p>As we start to think about more complex workflows with multiple skills, breaking things down into sequential steps is always more valuable than having one very, very large skill that tries to do it all. These systems can handle 100+ skills. It's important to make sure that they're named appropriately, not confusing, and can be followed with a predictable pattern.</p>
 
-      <p>We also have the ability to delete skills programmatically by listing all versions and deleting them, then deleting the underlying skill.</p>
+      <p>In the specification, there's room for optional directories. And as we've seen with quite a few different skills, there are subfolders for scripts, references, and assets. Your scripts include any kind of code that needs to be read and executed. You also want to make sure you have error handling and clear documentation.</p>
 
-      <p>Next, we use our analyzing time series skill alongside the built-in docx skill. We upload the custom skill, get a skill ID, and can see both custom and built-in skills. We upload a retail sales CSV file.</p>
+      <p>Our references contain additional documentation or reference files. And in general, it's often valuable to instruct the skill to read the entire reference file if it happens to be quite long.</p>
 
-      <p>We build a message using our custom skill ID and the Anthropic built-in docx skill. The model reads both SKILL.md files, examines the data, runs diagnostics and creates visualizations per the skill's workflow, reads the summary, and then creates a Word document using the docx skill.</p>
+      <p>Finally, we have underlying assets. These could include templates for output, images, logos, data files, schemas, and so on. It's important to note that these directories, scripts, references, and assets are following the standard of agent skills. But you might come across quite a few different skills that don't necessarily follow that particular standard yet. The standard is rapidly evolving and skills are also rapidly evolving.</p>
 
-      <p>The result is a Word document with findings, overview, statistics, plots and visualizations, and statistical analysis. We download it using the file_id.</p>
+      <p>Now that we have a good sense of best practices, optional directories, and how to write production grade skills, let's take a look at two examples of skills that we've created, step through them, and then run them through the skill-creator to analyze for best practices and talk about evaluating these skills to make sure we're ready for production.</p>
 
-      <p>In this lesson, we've combined the Messages API, Code Execution tool, Files API, and skills to work with custom skills programmatically. In the next lesson, we'll move to Claude Code and see how to add custom skills inside a .claude folder.</p>
+      <p>So I'm in VS Code now. And here we have two custom skills that we're going to dive into. The first one is a generating practice questions skill.</p>
+
+      <p>If we take a look at this skill, we can see that the description is for generating educational practice questions from lecture notes to test understanding. You can imagine you're a teacher or instructor, you want to provide a particular format for input and output, and you want to generate comprehensive questions to test understanding.</p>
+
+      <p>Let's step through this skill. To start, we have supported formats for input. We specify what particular libraries to use, and we specify what text to extract. We then follow with our question structure. Again, we want to be very specific, so we're specifying the exact order that we want these questions generated in. Starting with True/False, working all the way towards realistic applications.</p>
+
+      <p>For each of these questions, we have sub guidelines below. We can see here that this skill is not more than 500 lines of code. But if it needed to grow larger and larger, we can always include underlying files to reference to if necessary.</p>
+
+      <p>As we take a look at some of these examples, for true and false, even coding questions and so on. We can see here, we're being very explicit with the scope and the structure and the required output for these particular questions.</p>
+
+      <p>As we dive deeper into that output format, we specify that it depends on the user request. And instead of giving direct examples of every single kind of output, we're actually referencing templates inside of our assets folder. If we're dealing with LaTeX or we're dealing with Markdown, we specify exactly how we want that to look like.</p>
+
+      <p>If you find yourself needing a particular kind of output format, instead of putting that all in the SKILL.md, reference it in an external asset or file. Remember that these files, these templates are only being loaded when necessary. So we can be extremely efficient with our tokens and context window by only loading the particular file in the data format that we need.</p>
+
+      <p>If there are external resources that we need, domain-specific examples, we can link to that as well, like we do in the references folder here. We're leaning into that concept of progressive disclosure by only loading what's absolutely necessary and referencing external files only when we need.</p>
+
+      <p>The second skill we're going to look at is a skill for analyzing time series data. We're going to provide a CSV and we want to understand the characteristics before forecasting quite a few different things.</p>
+
+      <p>What's important to note here is that as we go through this particular skill, there is a very particular deterministic workflow that we want to have. We're making use of a few different Python scripts to perform that particular action.</p>
+
+      <p>To start, we have a Python script for visualizing the data that we're working with. Plotting the time series, a histogram, rolling stats, box plots, and quite a few more. For working with autocorrelation, we also have plots as well that we can draw. Similarly with decomposition.</p>
+
+      <p>As we take a look at our diagnose.py, we have underlying functionality for analyzing the data that we're working with. While there are quite a few functions here, I want to draw your attention to what we do at the end when we run our diagnostics. We make use of these functions to analyze data quality, distribution, stationary tests, seasonality, trend, autocorrelation, and finally, end with a transform recommendation.</p>
+
+      <p>What we have here is a predictable workflow that we want to run each time in a particular order. So let's go back and look at our skill to see exactly how that's done.</p>
+
+      <p>First we're going to start with the format for our input. We're going to be very explicit for what we should be looking for, the names of the columns and the particular data types. Next we're going to move on to one of the most important parts of this skill, the workflow.</p>
+
+      <p>Notice here, we're being extremely explicit with the steps that we have, telling our particular skill and Claude to run this exact script when we begin our diagnostics. We then have the option for generating the plots necessary and reporting this data to the user, taking this data, finding what's in the summary.txt and presenting the relevant plots.</p>
+
+      <p>We can also see here for answering some of these questions that we might need, we have an interpretation.md file for guidance. As we take a look at some of the script options, we can add additional flags if necessary.</p>
+
+      <p>And as we start to think about what's being output, we can specify exactly the tree of files, text files, images, and so on that we output. We want to be extremely predictable with the data that's coming in, the operations that we perform, and then finally the output.</p>
+
+      <p>As always, if there are external references, we can make sure to list those here. And given that we have scripts that are dependent on Python libraries, we need to make sure that we highlight exactly what those dependencies are and make sure that they're installed so that these scripts run correctly.</p>
+
+      <p>Now that we've taken a look at these two custom skills that we've created, let's see how they stand up when we run this through the skill creator skill and determine if we're following best practices.</p>
+
+      <p>We could do this in a couple environments. We can go back to Claude desktop, but what I'd like to show you is how we can use Claude Code with skills. We're going to see this in much more depth in a future lesson.</p>
+
+      <p>But right now, I'm going to open up Claude Code. I'm going to install the necessary skill in our case skill-creator. And then we're going to use two subagents in parallel to evaluate our analyzing time series and our generating practice question skills.</p>
+
+      <p>This is a really helpful way to just start the evaluation process for how well we've done with writing these skills. So we're going to go ahead and hop into Claude Code.</p>
+
+      <p>Unlike Claude AI, Claude Code does not come with the built-in skills that include skill creator. So we need to install those. And we're going to do that using a marketplace.</p>
+
+      <p>So we're going to head over to our Marketplaces. We're going to add a marketplace for anthropic/skills. This is the repository that we saw earlier that contains two collections.</p>
+
+      <p>First, document-skills. These include processing Excel files, PowerPoints, Word docs, and PDFs. And the other collection are the example-skills. These are some of the other ones that we saw including the skill creator skill.</p>
+
+      <p>So let's install this in the project scope. Once we install that, we're going to see that we need to restart Claude Code. And we're also going to see that in our .claude, we have in our settings.json the enabledPlugins that includes these skills.</p>
+
+      <p>So let's go ahead and restart Claude Code and see what skills we have. And we can do that using the /skills command. If we've done this correctly, we should see that we have our skill-creator skill right here as expected.</p>
+
+      <p>Let's go ahead and make use of that skill. So we're going to ask Claude Code to use the skill-creator skill to evaluate how these skills have followed best practices. To do this a little bit faster, we're going to use subagents in parallel where each subagent is evaluating each of the custom skills that I have.</p>
+
+      <p>In order to do this, we're going to be prompted to use that skill, skill-creator, which is great. It's working as expected. We're going to successfully load that skill, read the necessary files, and go ahead and dispatch our subagents to check for best practices.</p>
+
+      <p>We can see here, it's found the correct skills, generating practice questions, analyzing time series. And let's launch our two agents to evaluate these skills against best practices that we have.</p>
+
+      <p>Alright, let's see how we did. Well, not too bad. Generating practice questions, nine out of ten. We could improve a bit on the conciseness. We've got some nice recommendations here.</p>
+
+      <p>The good news is we did even better on analyzing time series. We can see some observations here and some excellent job across avoiding duplication, Frontmatter quality, and conciseness.</p>
+
+      <p>A really nice way to evaluate your skills is to run them through this skill creator, which includes best practices out of the box.</p>
+
+      <p>So we've run our skills through this skill creator to analyze for best practices in the underlying SKILL.md and associated files, but how can we make sure the skills are working as expected?</p>
+
+      <p>Here's one example that we could build a harness around to think about writing a unit test for our skills, similarly to how we write unit tests for software.</p>
+
+      <p>So to start with our generating practice questions, when we think about what the evaluation might look like, we would start with a couple different queries. Generating questions and saving it to a markdown file, to a LaTeX file, to a PDF. We can go ahead and make sure that we're passing in the correct files in the correct format.</p>
+
+      <p>We can then make sure that our expected behavior is what we need. Using the correct libraries for PDF input, extracting the learning objectives as we specified, generating different kinds of questions and following guidelines for those, using the correct output structure, using the correct output templates that we saw in our assets folder, making sure in certain data formats like LaTeX that it's successfully compiling. And then finally, making sure that our questions are generated to the correct files and the right format.</p>
+
+      <p>We also would want to make sure that we gather human feedback in this process and that we test this across all the different models that we're planning to use.</p>
+
+      <p>For our second skill for analyzing time series, we make use of three different Python scripts. So we're going to make the assumption that we've already tested those Python scripts with traditional unit tests in software. Assuming that those scripts are doing what we want them to do, let's now test that everything is happening in the correct order with the appropriate inputs and outputs and expected behavior.</p>
+
+      <p>The query you might have here is to analyze and generate plots for some time series data. We'd want to pass in some potential CSVs, make sure that the Python scripts that we showed for visualizing and diagnosing are run correct. More importantly, making sure that all the steps in the workflow are in the correct order.</p>
+
+      <p>We're asking for plots, we want to make sure that that optional step is included. We then want to return a summary, interpret those findings, and finally, create a folder with all the required files in their right place.</p>
+
+      <p>Similarly to our other skill, we want to get human feedback and test across the models that we use.</p>
+
+      <p>In the next lesson, we're going to take these two skills and bring them into Jupyter notebooks and use the Claude messages API to run these skills using code execution tools to produce outputs programmatically.</p>
     </section>
 
     <hr style="border:none;border-top:1px dashed var(--card-border);margin:2rem 0;">
@@ -61,55 +145,64 @@
     <section class="transcript">
       <h2>繁體中文（台灣）</h2>
 
-      <p>在第一課中，你看到了技能如何與 Claude AI 協同工作。現在，我們將使用 Claude API 來測試上一課製作的兩個技能。要在 Claude API 中使用技能，我們需要使用程式碼執行工具（Code Execution Tool）和檔案 API（Files API）。這將提供 Claude 檔案系統存取和 bash 執行能力。</p>
+      <p>現在我們將更深入地了解技能的結構以及建立技能的最佳實務。然後我們會將所學應用到兩個範例：一個用於根據課堂筆記建立練習題，另一個用於分析時間序列資料的特徵。開始吧。</p>
 
-      <p><strong>重要注意事項：</strong></p>
-      <ul>
-        <li>在 Claude AI 和 Claude Desktop 建立的技能不會與 Claude API 或 Claude Code 共用</li>
-        <li>技能需要 Claude 能夠執行程式碼、建立和編輯文件、簡報、PDF 和報告，並操作檔案系統</li>
-        <li>在 Claude API 中需要手動設定，而 Claude AI 和 Claude Desktop 已自動配置</li>
-      </ul>
+      <p>在這一課中，我們將聚焦於技能的結構、相關的最佳實務，然後看看我們製作的兩個技能，透過 skill creator 來檢驗它們是否符合最佳實務。</p>
 
-      <p><strong>Code Execution Tool（程式碼執行工具）：</strong>允許 Claude 在沙箱環境中執行 Bash 或 shell 指令。提供獨立的容器（Container）來執行程式碼和操作檔案系統。這對讀取技能、執行技能中的程式碼和處理檔案至關重要。</p>
+      <p>回顧一下，我們製作的每個技能都需要一個 SKILL.md 檔案，其中包含 YAML Frontmatter，需要名稱（name）和描述（description）。在 SKILL.md 的內容中，我們放入技能的主體，然後是對腳本或其他文字檔案、資源的參考，這些只在需要時才會載入。</p>
 
-      <p><strong>容器限制：</strong></p>
-      <ul>
-        <li>有 RAM、磁碟、CPU 限制</li>
-        <li>Messages API 沙箱沒有網路連線（Claude AI/Desktop 有）</li>
-        <li>提供預安裝的程式庫</li>
-      </ul>
+      <p>看看名稱和描述的最佳實務，這是至關重要的。名稱和描述不僅是 Claude 分析技能功能的方式，也是偵測何時使用該技能的依據。</p>
 
-      <p><strong>Files API（檔案 API）：</strong>用於上傳和下載可在容器中運行的檔案。上傳輸入檔案、發送到容器、下載生成的檔案。</p>
+      <p>名稱有字元上限，描述也一樣。名稱必須使用小寫字母、數字和連字號，一般建議使用「動詞 + ing」的形式來命名技能。</p>
 
-      <p><strong>範例 1 - 生成練習題技能：</strong></p>
-      <ol>
-        <li>使用 Files API 上傳技能目錄，取得 skill ID</li>
-        <li>上傳 LaTeX 講義檔案</li>
-        <li>使用 Sonnet 模型，傳入 beta headers：skills、code_execution、files API</li>
-        <li>技能在 <code>container</code> 關鍵字參數中設定</li>
-        <li>模型偵測技能，先讀取 SKILL.md，然後漸進式載入 assets 中的範本</li>
-        <li>生成 Markdown 檔案，透過 file_id 下載</li>
-        <li>輸出包含：是非題、解釋題、程式碼題、應用題</li>
-      </ol>
+      <p>描述方面，你不僅要描述它做什麼，還要描述何時使用它。如果有特定的關鍵字會觸發代理使用此技能，請確保加入這些關鍵字。</p>
 
-      <p><strong>範例 2 - 分析時間序列技能 + docx 技能：</strong></p>
-      <ol>
-        <li>上傳自訂技能，取得 skill ID</li>
-        <li>上傳零售銷售 CSV 檔案</li>
-        <li>同時使用自訂技能（skill ID + version）和 Anthropic 內建 docx 技能</li>
-        <li>模型讀取兩個 SKILL.md，分析資料，執行診斷和視覺化</li>
-        <li>使用 docx 技能建立 Word 文件</li>
-        <li>下載包含統計分析、圖表和視覺化的 Word 文件</li>
-      </ol>
+      <p>除了必填欄位，代理技能規格還允許選填欄位，包括授權條款（license）、相容性（compatibility）以及 metadata 中任意的鍵值對。</p>
 
-      <p><strong>技能管理：</strong>可以程式化地列出技能版本、刪除版本，然後刪除底層技能。</p>
+      <p>需要注意的是，雖然有代理技能的標準，但你可能會遇到一些不完全遵循此規格的技能。技能和規格都在積極開發中，我們正在跨多個模型提供者和代理工具生態系統進行合作。</p>
 
-      <p>在這一課中，我們結合了 Messages API、Code Execution Tool、Files API 和技能，以程式化方式使用自訂技能。在下一課中，我們將轉到 Claude Code，了解如何在 <code>.claude</code> 資料夾中添加自訂技能。</p>
+      <p>進入 SKILL.md 的主體後，技能的格式沒有特別的限制。但如果你想建立可預測的工作流程，就需要確保有逐步指示。</p>
+
+      <p>正如我們在其他技能中看到的，特別是 skill creator 技能，重要的是要指定邊界情況、逐步指示，如果有需要跳過某步驟的理由，要清楚說明原因。</p>
+
+      <p>一般來說，保持在 500 行以下是最佳實務，因為我們可以在需要時參考外部檔案、資源和腳本。清晰簡潔是很有價值的，即使在 Windows 上也要使用正斜線（/），這對確保技能在不同環境中正常運作至關重要。</p>
+
+      <p>建立技能時，你需要考慮給予技能多少自由度。是允許一般性的方法和方向，還是聚焦於特定的序列？你可以想像，遵循最佳實務可能需要低自由度，但對於更具創意的輸出，我們可以允許高自由度。</p>
+
+      <p>當考慮更複雜的多技能工作流程時，將任務分解為循序漸進的步驟總是比擁有一個試圖做所有事情的超大技能更有價值。這些系統可以處理 100 個以上的技能，重要的是確保命名恰當、不會混淆，並且可以遵循可預測的模式。</p>
+
+      <p>規格中允許選填目錄。我們在多個技能中看到了 scripts、references 和 assets 子資料夾。scripts 包含需要讀取和執行的程式碼，你也需要確保有錯誤處理和清晰的文件說明。</p>
+
+      <p>references 包含額外的文件或參考檔案。assets 則可包括輸出範本、圖片、logo、資料檔案、schema 等。這些目錄遵循代理技能的標準，但你可能會遇到不完全遵循標準的技能。標準在快速演進，技能也在快速演進。</p>
+
+      <p>現在我們對最佳實務、選填目錄和如何撰寫生產等級的技能有了很好的了解，讓我們看看兩個已建立的技能範例，逐步分析它們，然後通過 skill-creator 來檢驗最佳實務。</p>
+
+      <p>現在我在 VS Code 中，這裡有兩個我們要深入了解的自訂技能。第一個是「生成練習題」技能。這個技能的描述是「從課堂筆記生成教育練習題來測試理解程度」。</p>
+
+      <p>讓我們逐步瀏覽這個技能。首先，我們定義了支援的輸入格式，指定使用哪些程式庫，以及要提取的文字。接著是題目結構，我們非常具體地指定了題目生成的確切順序，從是非題開始，一直到實際應用題。</p>
+
+      <p>每類題目都有子指南。這個技能不超過 500 行程式碼，但如果需要更多，我們可以隨時加入外部參考檔案。我們對輸出格式非常明確，並在 assets 資料夾中使用範本來參考不同的輸出格式（如 LaTeX 或 Markdown）。</p>
+
+      <p>如果需要特定的輸出格式，與其全部放在 SKILL.md 中，不如在外部 asset 或檔案中參考。記住，這些範本只在需要時才載入，所以我們可以非常有效率地使用 token 和上下文窗口。</p>
+
+      <p>第二個技能是分析時間序列資料的技能。我們提供 CSV，想在預測前了解其特徵。這個技能有非常特定的確定性工作流程，使用多個 Python 腳本來執行特定動作。</p>
+
+      <p>我們有用於視覺化資料的 Python 腳本（繪製時間序列圖、直方圖、滾動統計、箱型圖等）、自相關圖和分解圖。diagnose.py 中有分析資料品質、分佈、平穩性測試、季節性、趨勢、自相關，最後是轉換建議的功能。</p>
+
+      <p>技能的工作流程部分非常明確地指定了步驟，告訴 Claude 在開始診斷時要執行哪個確切的腳本。我們指定了精確的輸出檔案樹結構，確保輸入、操作和輸出都是極度可預測的。</p>
+
+      <p>接下來，我們在 Claude Code 中使用 skill-creator 技能來評估這兩個技能。安裝方式是通過 marketplace 添加 anthropic/skills 倉庫，包含 document-skills 和 example-skills 兩個集合。</p>
+
+      <p>使用子代理並行評估兩個技能。結果：生成練習題得到 9/10 分，可以在簡潔度上改進；分析時間序列表現更好，在避免重複、Frontmatter 品質和簡潔度方面表現優秀。</p>
+
+      <p>我們也討論了如何像寫軟體的單元測試一樣為技能撰寫測試，包括測試不同的查詢、驗證預期行為、收集人類回饋，以及跨模型測試。</p>
+
+      <p>在下一課中，我們將把這兩個技能帶入 Jupyter notebook，並使用 Claude Messages API 透過程式碼執行工具來產生輸出。</p>
     </section>
 
     <footer>
       <span>Agent Skills with Anthropic - DeepLearning.AI</span>
-      <span>Transcript 008</span>
+      <span>Transcript 003</span>
     </footer>
   </div>
 </body>
