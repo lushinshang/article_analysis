@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Use Skills - Part II - Transcript</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="course-tag">DeepLearning.AI x Anthropic</span>
+      <h1>Why Use Skills - Part II</h1>
+      <p class="meta">Agent Skills with Anthropic | Duration: 8 minutes</p>
+    </header>
+
+    <section class="transcript">
+      <h2>English Transcript</h2>
+
+      <p>In the previous lesson, we saw how to create skills in Claude and move from prompts with data to package skills that we can use across many different conversations. Now let's dive deeper and talk about what skills are and the open standard that powers them.</p>
+
+      <p>Similar to the model context protocol, skills themselves are an open standard that can be used across many different AI applications. While skills were something originally created at Anthropic, skills themselves are now an open standard with a specific specification that is used across many different platforms, including Codex, Gemini CLI, Claude Code, Open Code, and much more.</p>
+
+      <p>When we build AI applications, in order to use skills, we need a file system. In that file system, we load folders that contain a SKILL.md file and subfolders or files that can be referenced. Skills can include other markdown documents, but also scripts that can be executed.</p>
+
+      <p>For example, we have a skill for working with PDF documents. We need to convert PDFs to images, extract info from form fields, and even fill PDF forms with annotations. This requires code to be executed, and that code can be referenced from the SKILL.md file.</p>
+
+      <p>Skills can also include icons, images, and other assets as we think about creating custom styles and brands.</p>
+
+      <p>Where skills really shine are places where Claude might not know exactly how you or your company operates. Designing newsletters, creating brand guides, things that Claude has a general idea on, but not the exact way your company does it.</p>
+
+      <p>The way we used to think about building agents centered around agents with a single purpose. Coding, research, finance, marketing. These domain-specific agents had a particular set of tools and context. But as we built more of these single-purpose agents, we realized that under the hood, all they really need is a simple scaffolding: underlying tools like bash and a filesystem to find, edit, modify, execute, and perform tasks.</p>
+
+      <p>These simpler agents are easier to evaluate, understand, and scale. But what they lacked was the underlying context and domain expertise. That's where skills come in.</p>
+
+      <p>We want finance agents to perform financial analysis in a particular fashion. We want research agents to have the domain expertise necessary. Skills provide procedural knowledge and user-specific context that can be loaded on demand.</p>
+
+      <p>In addition to domain expertise, skills provide a repeatable workflow. In a non-deterministic system where we don't always know exactly what the output will be, skills provide articulate steps that allow the agent to perform tasks we can predict with more accuracy.</p>
+
+      <p>Skills also introduce new capabilities, things an agent doesn't know how to do out of the box. When we bring in new capabilities, we unleash new functionality for our agents with minimal additional context.</p>
+
+      <p>We previously saw weekly marketing campaign reviews, and we want that to be predictable across many individuals and teams. For new capabilities like generating presentations, Excel spreadsheets, PDF reports, executing scripts: that's where agent skills shine.</p>
+
+      <p>We talked about the portability of skills. While we've seen skills in Claude AI, skills can be used in the exact same format across Claude Code, the Agent SDK, the API, and since Agent Skills are an open standard, across a growing number of agent products. You can create skills in one environment and share them across many.</p>
+
+      <p>Skills are composable. We can take custom skills like analyzing marketing campaigns and combine with built-in skills like creating PowerPoint presentations, PDFs, or Excel spreadsheets. We can combine multiple skills to build complex and predictable workflows.</p>
+
+      <p>Under the hood, skills can contain quite a bit of information. You can have hundreds of skills across your system, and to protect the context window, skills are progressively disclosed.</p>
+
+      <p>The idea of Progressive Disclosure is to only load the data necessary and avoid polluting the context. We think of the context window as a public good. The more data added, the more tokens consumed, and the likelihood of context degradation or incorrect responses potentially increases.</p>
+
+      <p>When skills are loaded from the file system, only the name and description get added to the context window. This is essential so Claude knows what the skill is and how to trigger it. Once triggered, the SKILL.md is loaded. Depending on requirements, additional files or scripts are loaded progressively.</p>
+
+      <p>Additional resources are loaded as needed. Scripts are loaded and executed separately from the context window. By using bash and file system tools, Claude loads only necessary information, executes only necessary scripts, and intentionally adds only what's needed to the context window.</p>
+
+      <p>In the next lesson, we'll continue talking about skills and particularly how they're used alongside other technologies like the model context protocol, sub-agents, underlying tools, and much more.</p>
+    </section>
+
+    <hr style="border:none;border-top:1px dashed var(--card-border);margin:2rem 0;">
+
+    <section class="transcript">
+      <h2>繁體中文（台灣）</h2>
+
+      <p>在上一課中，我們看到了如何在 Claude 中建立技能，從帶有資料的提示詞轉變為可在多個對話中使用的打包技能。現在讓我們更深入地討論技能是什麼，以及驅動它們的開放標準。</p>
+
+      <p><strong>技能是開放標準：</strong>類似於模型上下文協定（MCP），技能本身是一個開放標準，可在多個 AI 應用程式中使用。雖然最初由 Anthropic 建立，但現在已是跨平台的開放標準，包括 Codex、Gemini CLI、Claude Code、Open Code 等。</p>
+
+      <p><strong>技能的組成：</strong></p>
+      <ul>
+        <li>需要檔案系統來載入包含 SKILL.md 的資料夾</li>
+        <li>可以包含其他 Markdown 文件</li>
+        <li>可以包含可執行的腳本（例如 PDF 處理技能需要轉換 PDF 為圖片、提取表單欄位資訊等）</li>
+        <li>可以包含圖示、圖片和其他資源</li>
+      </ul>
+
+      <p><strong>技能的價值所在：</strong>Claude 可能不知道你或你的公司具體是怎麼運作的。設計電子報、建立品牌指南 — Claude 有一般概念，但不知道你公司的具體方式。</p>
+
+      <p><strong>代理架構的演進：</strong></p>
+      <ol>
+        <li><strong>舊思維：</strong>針對特定目的建立代理（程式開發、研究、財務、行銷）</li>
+        <li><strong>新認知：</strong>代理只需要簡單的架構（bash + 檔案系統）</li>
+        <li><strong>缺少的部分：</strong>底層的上下文和領域專業知識 → 由技能提供</li>
+      </ol>
+
+      <p><strong>技能提供三大價值：</strong></p>
+      <div class="key-concept">
+        <h3>1. Domain Expertise / 領域專業知識</h3>
+        <p>提供程序化知識和使用者特定的上下文，可按需載入。讓財務代理以特定方式執行財務分析，讓研究代理擁有必要的領域專業知識。</p>
+      </div>
+      <div class="key-concept">
+        <h3>2. Repeatable Workflow / 可重複的工作流程</h3>
+        <p>在非確定性系統中，技能提供明確的步驟，讓代理以更高的準確度執行可預測的任務。例如每週行銷活動審查，確保跨個人和團隊的一致性。</p>
+      </div>
+      <div class="key-concept">
+        <h3>3. New Capabilities / 新能力</h3>
+        <p>代理原本不知道如何做的事情，如生成簡報、Excel 試算表、PDF 報告、執行腳本等。以最少的額外上下文釋放代理的全新功能。</p>
+      </div>
+
+      <p><strong>可攜性（Portability）：</strong>技能可以在 Claude AI、Claude Code、Agent SDK、API 中以完全相同的格式使用。作為開放標準，也支援越來越多的代理產品。一處建立，多處分享。</p>
+
+      <p><strong>可組合性（Composability）：</strong>自訂技能（如行銷分析）可以與內建技能（如 PowerPoint、PDF、Excel）組合，建立複雜且可預測的工作流程。</p>
+
+      <p><strong>漸進式揭露（Progressive Disclosure）：</strong></p>
+      <ul>
+        <li>將上下文窗口視為「公共財」— 越多資料意味著越多 token 消耗和潛在的上下文品質下降</li>
+        <li>技能從檔案系統載入時，只有名稱和描述進入上下文窗口</li>
+        <li>觸發時才載入 SKILL.md</li>
+        <li>根據需求漸進式載入額外檔案或腳本</li>
+        <li>腳本在上下文窗口之外載入和執行</li>
+      </ul>
+
+      <p>在下一課中，我們將繼續討論技能，特別是它們如何與模型上下文協定、子代理、底層工具等技術一起使用。</p>
+    </section>
+
+    <footer>
+      <span>Agent Skills with Anthropic - DeepLearning.AI</span>
+      <span>Transcript 010</span>
+    </footer>
+  </div>
+</body>
+</html>

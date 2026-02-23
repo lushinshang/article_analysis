@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills with the Claude API - Transcript</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="course-tag">DeepLearning.AI x Anthropic</span>
+      <h1>Skills with the Claude API</h1>
+      <p class="meta">Agent Skills with Anthropic | Duration: 17 minutes</p>
+    </header>
+
+    <section class="transcript">
+      <h2>English Transcript</h2>
+
+      <p>In the first lesson, you saw how skills work with Claude AI. Now, we'll work with the Claude API to test the two skills we made from the previous lesson. To use skills with the Claude API, we'll need to use the code execution tool and the files API. This will equip Claude with file system access for reading and writing files and with bash for executing code. Let's get to it.</p>
+
+      <p>We've talked quite a bit about how skills work and how to create them. And we talked a little bit as well about the portability of skills across different environments in the Claude ecosystem, as well as many other agentic applications. We started by looking at skills in Claude AI and Claude Desktop, and now we're going to move to talk about how to use skills using the Claude Messages API.</p>
+
+      <p>There are two things that are important to note. First, skills that you create in Claude AI and Claude Desktop are not shared in The Claude API or Claude Code. The second important piece is that in order for skills to work, we need the ability for Claude to execute code, create and edit documents, presentations, PDFs, and data reports, and work with a file system. This is something that we're going to have to manually do when we work with the Claude API, whereas it is configured for you automatically when using Claude AI and Claude Desktop.</p>
+
+      <p>In Claude Desktop or Claude AI, if I go to settings and take a look at capabilities, there's a section for code execution and file creation. This is enabled by default, giving Claude a virtual machine to execute code and perform tasks that make Skills happen. If this is disabled, we'll need to turn this on to use skills.</p>
+
+      <p>When working with tools like Claude Code and the Claude agent, you have direct access to a file system. Whereas using the Claude API, we do not, and need a container to execute code and a file system to work with. The skills themselves do not change, the format does not change, but depending on the environment, you may utilize skills slightly differently.</p>
+
+      <p>The code execution tool allows Claude to run Bash or shell commands in a sandboxed environment. It gives our application a separate dedicated container to execute code and work with a file system. This is mission critical for reading skills, executing code within skills, and working with files.</p>
+
+      <p>When we include the code execution tool, we give Claude an execution sandbox or container. There are limitations for RAM, disk, CPU, and more importantly, there is no internet connection in the Messages API sandbox (though Claude AI and Desktop do have internet). There are pre-installed libraries available out of the box.</p>
+
+      <p>The Code Execution Tool works with the Files API. When working with files, we need a mechanism for storing them. The Files API allows uploading and downloading files that can be run inside the container. Upload input files, send them to the container, download generated files.</p>
+
+      <p>The library of skills lives in a directory powered by the container. As we read from this skills directory, add information or create new files, this is where skills come into play. When working with the API and wanting to use skills, we need the Code Execution Tool.</p>
+
+      <p>Let's revisit the two custom skills: generating practice questions and time series analysis. We head to a Jupyter notebook.</p>
+
+      <p>First, we upload the skill directory using the Files API with the necessary beta headers. We get back a skill ID. We can list skills using .list method with source "custom" to confirm.</p>
+
+      <p>For the generating practice questions skill, we upload a LaTeX file using the Files API. We use Sonnet, passing beta headers for skills, code execution, and files API. Skills are set in a container keyword argument with the list of skills. We reference a particular timestamp or use the latest version.</p>
+
+      <p>We ask to generate practice questions and specify the file. The Code Execution Tool processes the request. The model detects the skill, reads the SKILL.md first, then progressively loads additional files like the markdown template from the assets folder. It then creates output files, copies them to an output directory, and returns a file_id for download.</p>
+
+      <p>Using that file_id, we download the generated notes04.md file. It follows the exact parts from the skill: true/false questions, explanatory questions, coding questions, and use case applications.</p>
+
+      <p>We also have the ability to delete skills programmatically by listing all versions and deleting them, then deleting the underlying skill.</p>
+
+      <p>Next, we use our analyzing time series skill alongside the built-in docx skill. We upload the custom skill, get a skill ID, and can see both custom and built-in skills. We upload a retail sales CSV file.</p>
+
+      <p>We build a message using our custom skill ID and the Anthropic built-in docx skill. The model reads both SKILL.md files, examines the data, runs diagnostics and creates visualizations per the skill's workflow, reads the summary, and then creates a Word document using the docx skill.</p>
+
+      <p>The result is a Word document with findings, overview, statistics, plots and visualizations, and statistical analysis. We download it using the file_id.</p>
+
+      <p>In this lesson, we've combined the Messages API, Code Execution tool, Files API, and skills to work with custom skills programmatically. In the next lesson, we'll move to Claude Code and see how to add custom skills inside a .claude folder.</p>
+    </section>
+
+    <hr style="border:none;border-top:1px dashed var(--card-border);margin:2rem 0;">
+
+    <section class="transcript">
+      <h2>繁體中文（台灣）</h2>
+
+      <p>在第一課中，你看到了技能如何與 Claude AI 協同工作。現在，我們將使用 Claude API 來測試上一課製作的兩個技能。要在 Claude API 中使用技能，我們需要使用程式碼執行工具（Code Execution Tool）和檔案 API（Files API）。這將提供 Claude 檔案系統存取和 bash 執行能力。</p>
+
+      <p><strong>重要注意事項：</strong></p>
+      <ul>
+        <li>在 Claude AI 和 Claude Desktop 建立的技能不會與 Claude API 或 Claude Code 共用</li>
+        <li>技能需要 Claude 能夠執行程式碼、建立和編輯文件、簡報、PDF 和報告，並操作檔案系統</li>
+        <li>在 Claude API 中需要手動設定，而 Claude AI 和 Claude Desktop 已自動配置</li>
+      </ul>
+
+      <p><strong>Code Execution Tool（程式碼執行工具）：</strong>允許 Claude 在沙箱環境中執行 Bash 或 shell 指令。提供獨立的容器（Container）來執行程式碼和操作檔案系統。這對讀取技能、執行技能中的程式碼和處理檔案至關重要。</p>
+
+      <p><strong>容器限制：</strong></p>
+      <ul>
+        <li>有 RAM、磁碟、CPU 限制</li>
+        <li>Messages API 沙箱沒有網路連線（Claude AI/Desktop 有）</li>
+        <li>提供預安裝的程式庫</li>
+      </ul>
+
+      <p><strong>Files API（檔案 API）：</strong>用於上傳和下載可在容器中運行的檔案。上傳輸入檔案、發送到容器、下載生成的檔案。</p>
+
+      <p><strong>範例 1 - 生成練習題技能：</strong></p>
+      <ol>
+        <li>使用 Files API 上傳技能目錄，取得 skill ID</li>
+        <li>上傳 LaTeX 講義檔案</li>
+        <li>使用 Sonnet 模型，傳入 beta headers：skills、code_execution、files API</li>
+        <li>技能在 <code>container</code> 關鍵字參數中設定</li>
+        <li>模型偵測技能，先讀取 SKILL.md，然後漸進式載入 assets 中的範本</li>
+        <li>生成 Markdown 檔案，透過 file_id 下載</li>
+        <li>輸出包含：是非題、解釋題、程式碼題、應用題</li>
+      </ol>
+
+      <p><strong>範例 2 - 分析時間序列技能 + docx 技能：</strong></p>
+      <ol>
+        <li>上傳自訂技能，取得 skill ID</li>
+        <li>上傳零售銷售 CSV 檔案</li>
+        <li>同時使用自訂技能（skill ID + version）和 Anthropic 內建 docx 技能</li>
+        <li>模型讀取兩個 SKILL.md，分析資料，執行診斷和視覺化</li>
+        <li>使用 docx 技能建立 Word 文件</li>
+        <li>下載包含統計分析、圖表和視覺化的 Word 文件</li>
+      </ol>
+
+      <p><strong>技能管理：</strong>可以程式化地列出技能版本、刪除版本，然後刪除底層技能。</p>
+
+      <p>在這一課中，我們結合了 Messages API、Code Execution Tool、Files API 和技能，以程式化方式使用自訂技能。在下一課中，我們將轉到 Claude Code，了解如何在 <code>.claude</code> 資料夾中添加自訂技能。</p>
+    </section>
+
+    <footer>
+      <span>Agent Skills with Anthropic - DeepLearning.AI</span>
+      <span>Transcript 008</span>
+    </footer>
+  </div>
+</body>
+</html>

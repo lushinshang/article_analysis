@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程導讀 08：Creating Custom Skills — 結構、最佳實踐與評估</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="course-tag">DeepLearning.AI x Anthropic</span>
+  <h1>課程導讀 08：Creating Custom Skills — 結構、最佳實踐與評估</h1>
+  <p class="meta">對應課程：Creating Custom Skills | 影片時長：約 16 分鐘 | 對應教材：L4</p>
+</header>
+
+<nav class="toc">
+  <h2>本篇目錄</h2>
+  <ol>
+    <li><a href="#core">核心概念</a></li>
+    <li><a href="#path">學習路徑</a></li>
+    <li><a href="#practice">實務應用</a></li>
+    <li><a href="#pitfall">常見誤區</a></li>
+    <li><a href="#thinking">延伸思考</a></li>
+  </ol>
+</nav>
+
+<section id="core">
+<h2>核心概念</h2>
+
+<h3>SKILL.md 檔案結構</h3>
+<p>一個 Skill 檔案有兩個主要部分：</p>
+<ol>
+  <li><strong>YAML Frontmatter</strong>：頂部的元資料</li>
+  <li><strong>Body Content</strong>：下方的 Markdown 指令</li>
+</ol>
+
+<h3>Frontmatter 必填欄位</h3>
+<table>
+  <tr><th>欄位</th><th>限制</th></tr>
+  <tr><td><code>name</code></td><td>最多 64 字元；僅小寫字母、數字、連字號；不能以連字號開頭或結尾；必須與父目錄同名；建議用「動詞+ing」形式</td></tr>
+  <tr><td><code>description</code></td><td>最多 1024 字元；描述 Skill「做什麼」和「何時使用」；包含觸發關鍵字</td></tr>
+</table>
+
+<h3>Frontmatter 選用欄位</h3>
+<table>
+  <tr><th>欄位</th><th>說明</th></tr>
+  <tr><td><code>license</code></td><td>授權名稱或授權檔參考</td></tr>
+  <tr><td><code>compatibility</code></td><td>環境需求（最多 500 字元）</td></tr>
+  <tr><td><code>metadata</code></td><td>任意鍵值對（如 author、version）</td></tr>
+  <tr><td><code>allowed-tools</code></td><td>預核准工具清單（實驗性功能）</td></tr>
+</table>
+
+<h3>Body Content 最佳實踐</h3>
+
+<div class="key-concept">
+<h3>建議結構</h3>
+<ul>
+  <li>步驟化指令（Step-by-step Instructions）</li>
+  <li>輸入格式 / 輸出格式 / 範例</li>
+  <li>常見邊界案例（Edge Cases）</li>
+  <li>保持在 <strong>500 行以內</strong></li>
+  <li>詳細參考資料移到獨立檔案</li>
+  <li>參考保持<strong>一層深度</strong>（避免巢狀引用）</li>
+  <li>路徑一律使用正斜線（/），即使在 Windows 上</li>
+</ul>
+</div>
+
+<h3>自由度設計</h3>
+<table>
+  <tr><th>自由度</th><th>描述</th><th>適用場景</th></tr>
+  <tr><td><strong>高自由度</strong></td><td>一般性文字指引，多種做法皆可</td><td>創意輸出、風格選擇</td></tr>
+  <tr><td><strong>中自由度</strong></td><td>提供範例程式碼/模式，但允許變化</td><td>資料分析、報告格式</td></tr>
+  <tr><td><strong>低自由度</strong></td><td>指定特定腳本，必須依序執行</td><td>合規流程、測試流程</td></tr>
+</table>
+
+<h3>選用目錄</h3>
+<table>
+  <tr><th>目錄</th><th>用途</th><th>注意事項</th></tr>
+  <tr><td><code>/assets</code></td><td>範本、圖片、schema、查找表</td><td>僅在需要時載入</td></tr>
+  <tr><td><code>/references</code></td><td>額外文件，代理視需要讀取</td><td>超過 100 行的檔案建議加入目錄（TOC）</td></tr>
+  <tr><td><code>/scripts</code></td><td>可執行的程式碼</td><td>需明確文件化依賴；說明是「執行」還是「閱讀」</td></tr>
+</table>
+
+<h3>Skill 評估方法</h3>
+
+<h4>用 Skill Creator 檢查最佳實踐</h4>
+<p>在 Claude Code 中安裝 skill-creator，用子代理平行評估多個 Skills：</p>
+<pre><code># 安裝 Anthropic Skills marketplace
+# Settings > Marketplace > anthropic/skills
+
+# 要求評估
+"Use the skill-creator to evaluate how my skills follow best practices.
+ Launch subagents in parallel for each skill."
+</code></pre>
+
+<h4>單元測試框架</h4>
+<pre><code>{
+  "skills": ["generating-practice-questions"],
+  "queries": [
+    "Generate questions and save to output.md",
+    "Generate questions and save to output.tex"
+  ],
+  "files": ["test-files/notes.pdf", "test-files/notes.tex"],
+  "expected_behavior": [
+    "Successfully reads and extracts the input file",
+    "Extracts all learning objectives",
+    "Generates the 4 types of questions",
+    "Follows the guidelines for each question",
+    "Uses the correct output templates",
+    "LaTeX output successfully compiles",
+    "Saves to correct output file"
+  ]
+}
+</code></pre>
+</section>
+
+<section id="path">
+<h2>學習路徑</h2>
+
+<h3>兩個範例 Skill 深度剖析</h3>
+
+<h4>Skill 1：generating-practice-questions</h4>
+<ul>
+  <li><strong>用途</strong>：從講義產生練習題</li>
+  <li><strong>亮點</strong>：
+    <ul>
+      <li>支援多種輸入格式（PDF、LaTeX、Markdown）</li>
+      <li>4 種題型（True/False、解釋題、程式題、應用題）</li>
+      <li>輸出範本放在 <code>assets/</code>（按需載入 LaTeX 或 Markdown 範本）</li>
+      <li>外部參考放在 <code>references/</code></li>
+    </ul>
+  </li>
+  <li><strong>評分</strong>：9/10（可改善精簡度）</li>
+</ul>
+
+<h4>Skill 2：analyzing-time-series</h4>
+<ul>
+  <li><strong>用途</strong>：分析 CSV 時間序列資料的特性</li>
+  <li><strong>亮點</strong>：
+    <ul>
+      <li>三個 Python 腳本：<code>visualize.py</code>、<code>diagnose.py</code>、<code>decomposition.py</code></li>
+      <li>低自由度設計：明確指定腳本執行順序</li>
+      <li>明確的輸出目錄結構</li>
+      <li>依賴清單明確列出</li>
+    </ul>
+  </li>
+  <li><strong>評分</strong>：10/10</li>
+</ul>
+
+<h3>教材資源</h3>
+<ul>
+  <li><code>L4/custom_skills/generating-practice-questions/</code></li>
+  <li><code>L4/custom_skills/analyzing-time-series/</code></li>
+  <li><code>L4/reading_material_4.md</code>：完整的投影片摘要</li>
+</ul>
+</section>
+
+<section id="practice">
+<h2>實務應用</h2>
+
+<h3>在 Claude Code 中安裝 Skills</h3>
+<pre><code># 步驟 1：加入 marketplace
+# /plugin > marketplace > anthropic/skills
+
+# 步驟 2：安裝到 project scope
+
+# 步驟 3：重啟 Claude Code
+
+# 步驟 4：確認
+# /skills  (應看到 skill-creator)
+</code></pre>
+
+<h3>評估驅動開發（EDD）</h3>
+<p>課程建議的 Skill 開發流程：</p>
+<ol>
+  <li><strong>設計</strong>：定義輸入/輸出/步驟</li>
+  <li><strong>實作</strong>：撰寫 SKILL.md + 相關檔案</li>
+  <li><strong>靜態檢查</strong>：用 Skill Creator 評估最佳實踐</li>
+  <li><strong>動態測試</strong>：用單元測試框架驗證行為</li>
+  <li><strong>人工回饋</strong>：收集真實使用者的回饋</li>
+  <li><strong>跨模型測試</strong>：在所有目標模型上測試</li>
+</ol>
+
+<div class="callout callout-tip">
+<p class="callout-title">資安 Skill 設計範例</p>
+<p>建立一個「事件回應 Skill」：低自由度設計，明確指定 NIST SP 800-61 的步驟順序（準備 → 偵測 → 遏制 → 根除 → 復原 → 善後）。每個步驟引用獨立的參考文件。用單元測試確認每個步驟都不會被跳過。</p>
+</div>
+</section>
+
+<section id="pitfall">
+<h2>常見誤區</h2>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：不區分「執行」和「閱讀」腳本</p>
+<p>在 SKILL.md 中引用腳本時，必須<strong>明確說明</strong>是要 Claude 「執行這個腳本」還是「閱讀這個腳本作為參考」。模糊的引用會導致非預期的行為。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：不列出腳本依賴</p>
+<p>如果你的 scripts/ 目錄中的 Python 腳本依賴特定套件（如 pandas、matplotlib），必須在 Skill 中明確列出並指示安裝方式。否則在某些環境中腳本會執行失敗。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：只在一個模型上測試</p>
+<p>不同模型對 Skill 指令的遵從程度不同。課程明確建議在所有你計劃使用的模型上測試 Skill。</p>
+</div>
+</section>
+
+<section id="thinking">
+<h2>延伸思考</h2>
+
+<h3>Skill 的品質指標</h3>
+<p>如何量化一個 Skill 的品質？可以考慮：</p>
+<ul>
+  <li><strong>可預測性</strong>：相同輸入下，多次執行的輸出一致性</li>
+  <li><strong>正確性</strong>：輸出是否符合 expected_behavior</li>
+  <li><strong>效率</strong>：消耗的 token 數量</li>
+  <li><strong>可維護性</strong>：修改一個步驟需要改動多少檔案</li>
+</ul>
+
+<h3>思考題</h3>
+<ol>
+  <li>高自由度 vs. 低自由度 Skill 各適合什麼場景？在你的工作中，哪些流程需要低自由度（嚴格遵守），哪些需要高自由度（創意發揮）？</li>
+  <li>Skill 的單元測試如何做到自動化？你能設計一個 CI/CD pipeline 來在每次 Skill 更新時自動執行測試嗎？</li>
+  <li>如果一個 Skill 的 SKILL.md 超過 500 行，你會如何重構？拆成多個 Skills？還是更積極地使用 references/ 目錄？</li>
+</ol>
+</section>
+
+<footer>
+  <a href="guide_007.html">&larr; 上一篇：Skills vs Tools, MCP, and Subagents</a>
+  <a href="guide_009.html">下一篇：Conclusion &rarr;</a>
+</footer>
+
+</div>
+</body>
+</html>

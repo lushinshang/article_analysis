@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程導讀 07：Skills vs Tools, MCP, and Subagents — 生態系定位</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="course-tag">DeepLearning.AI x Anthropic</span>
+  <h1>課程導讀 07：Skills vs Tools, MCP, and Subagents — 生態系定位</h1>
+  <p class="meta">對應課程：Skills vs Tools, MCP, and Subagents | 影片時長：約 7 分鐘 | 對應教材：L2</p>
+</header>
+
+<nav class="toc">
+  <h2>本篇目錄</h2>
+  <ol>
+    <li><a href="#core">核心概念</a></li>
+    <li><a href="#path">學習路徑</a></li>
+    <li><a href="#practice">實務應用</a></li>
+    <li><a href="#pitfall">常見誤區</a></li>
+    <li><a href="#thinking">延伸思考</a></li>
+  </ol>
+</nav>
+
+<section id="core">
+<h2>核心概念：四者的定位與協作</h2>
+
+<h3>Skills vs MCP</h3>
+<table>
+  <tr><th>面向</th><th>MCP</th><th>Skills</th></tr>
+  <tr><td><strong>用途</strong></td><td>連接外部系統和資料（資料庫、API、服務）</td><td>教代理如何處理那些資料</td></tr>
+  <tr><td><strong>提供什麼</strong></td><td>存取（Access）</td><td>專業知識（Expertise）</td></tr>
+  <tr><td><strong>範例</strong></td><td>MCP Server 連接資料庫</td><td>Skill 定義「用 A、B 欄位計算指標 X」</td></tr>
+</table>
+
+<div class="key-concept">
+<h3>精煉比喻</h3>
+<p><strong>MCP 帶進工具和材料，Skills 告訴你怎麼用它們蓋出東西。</strong></p>
+</div>
+
+<h3>Skills vs Tools</h3>
+<table>
+  <tr><th>面向</th><th>Tools</th><th>Skills</th></tr>
+  <tr><td><strong>用途</strong></td><td>提供代理完成任務的基本能力</td><td>用專業知識擴展代理的能力</td></tr>
+  <tr><td><strong>Context</strong></td><td>工具定義<strong>永遠</strong>在 context window 中</td><td>Skills <strong>漸進式載入</strong></td></tr>
+  <tr><td><strong>彈性</strong></td><td>固定的能力集合</td><td>可以包含腳本作為「按需工具」</td></tr>
+  <tr><td><strong>比喻</strong></td><td>錘子、鋸子、釘子</td><td>「如何組裝書架」的說明書</td></tr>
+</table>
+
+<div class="callout callout-note">
+<p class="callout-title">Tools on Demand</p>
+<p>Skills 可以包含腳本，這些腳本在需要時才被載入和執行——相當於「按需工具」。如果有些工具不是每次對話都需要，把它們放在 Skill 的 scripts/ 目錄中，比放在全域工具清單中更節省 context。</p>
+</div>
+
+<h3>Skills vs Subagents</h3>
+<table>
+  <tr><th>面向</th><th>Subagents</th><th>Skills</th></tr>
+  <tr><td><strong>用途</strong></td><td>有獨立的 context 和工具權限</td><td>為主代理或子代理提供專業知識</td></tr>
+  <tr><td><strong>運作方式</strong></td><td>主代理分派任務，子代理獨立（可平行）執行</td><td>告知「工作應該如何完成」</td></tr>
+  <tr><td><strong>範例</strong></td><td>Code Reviewer 子代理</td><td>語言/框架特定的最佳實踐 Skill</td></tr>
+</table>
+
+<p><strong>Skills 可以同時增強主代理和子代理。</strong>主代理可以用 Skill 來決定「如何分派任務」，子代理可以用 Skill 來決定「如何執行任務」。</p>
+
+<h3>四者如何協作：Customer Insight Analyzer 範例</h3>
+<table>
+  <tr><th>組件</th><th>角色</th></tr>
+  <tr><td><strong>Skill</strong></td><td>定義如何分類回饋、如何摘要發現</td></tr>
+  <tr><td><strong>MCP Server</strong></td><td>Google Drive MCP，存取客戶訪談記錄和問卷</td></tr>
+  <tr><td><strong>Subagents</strong></td><td>Interview Analyzer（分析訪談）、Survey Analyzer（分析問卷）</td></tr>
+  <tr><td><strong>Tools</strong></td><td>底層工具（bash、filesystem）驅動一切運作</td></tr>
+</table>
+
+<h3>AI 生態系的層次架構</h3>
+<pre><code>Prompts（最基本的原子單位）
+  └── Skills（封裝 prompts + 程式碼 + 資源）
+        └── Subagents（使用 Skills，獨立 context）
+              └── MCP（提供外部資料和工具）
+                    └── Tools（底層執行能力）
+</code></pre>
+</section>
+
+<section id="path">
+<h2>學習路徑</h2>
+
+<h3>重點教材</h3>
+<p><code>reading_material_2.md</code> 提供了投影片的完整摘要，包含所有比較表格。建議：</p>
+<ol>
+  <li>先讀投影片摘要，建立四者的心智模型</li>
+  <li>對照逐字稿，理解講師的比喻和範例</li>
+  <li>回顧前幾課的實作，用本課的框架重新理解每個步驟用了哪個組件</li>
+</ol>
+
+<h3>參考資源</h3>
+<ul>
+  <li><a href="https://www.claude.com/blog/skills-explained">Skills Explained（官方部落格）</a></li>
+  <li><a href="https://support.claude.com/en/articles/12580051-teach-claude-your-way-of-working-using-skills">Teach Claude your Way of Working using Skills</a></li>
+</ul>
+</section>
+
+<section id="practice">
+<h2>實務應用</h2>
+
+<h3>選擇正確組件的決策框架</h3>
+<table>
+  <tr><th>需求</th><th>選擇</th></tr>
+  <tr><td>需要存取外部資料來源</td><td>MCP Server</td></tr>
+  <tr><td>需要定義「怎麼做」的知識</td><td>Skill</td></tr>
+  <tr><td>需要隔離的 context 或平行執行</td><td>Subagent</td></tr>
+  <tr><td>需要底層系統操作（執行、讀寫）</td><td>Tool</td></tr>
+  <tr><td>需要可重複、可預測的工作流</td><td>Skill（可能 + Subagent）</td></tr>
+  <tr><td>需要跨對話/跨會話持久化</td><td>Skill（跨對話）+ Subagent（跨會話）</td></tr>
+</table>
+
+<h3>Context Window 保護策略</h3>
+<ul>
+  <li><strong>Skills</strong>：Progressive Disclosure，只載入需要的部分</li>
+  <li><strong>Subagents</strong>：獨立 context，不污染主代理的 context</li>
+  <li><strong>MCP</strong>：工具定義載入 context，但資料透過工具呼叫取得</li>
+</ul>
+
+<div class="callout callout-tip">
+<p class="callout-title">Context Window 最佳實踐</p>
+<p>把 context window 想成「共享記憶體」。Skills 用漸進載入保護它，Subagents 用獨立空間保護它，Tool 定義必然佔用它。當你有 100+ Skills 時，Progressive Disclosure 的價值就非常明顯了——只有名稱和描述佔用 context，其餘按需載入。</p>
+</div>
+</section>
+
+<section id="pitfall">
+<h2>常見誤區</h2>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：用 Skill 取代 MCP Server</p>
+<p>Skill 可以包含「查詢資料庫」的指令，但它無法真正連接資料庫。你仍然需要 MCP Server 提供實際的連線能力。Skill 負責「知道怎麼查」，MCP 負責「能夠查」。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：每個任務都用子代理</p>
+<p>子代理有額外的資源消耗（token、延遲）。只在需要<strong>隔離 context</strong>或<strong>平行執行</strong>時才使用。簡單的順序任務，在主代理中直接處理就好。</p>
+</div>
+</section>
+
+<section id="thinking">
+<h2>延伸思考</h2>
+
+<h3>持久性（Persistence）的維度</h3>
+<p>講師提到 Skills 可以跨對話持久化，Subagents 可以跨會話持久化。這意味著：</p>
+<ul>
+  <li><strong>Skills</strong> 是「長期知識」——定義了組織如何運作</li>
+  <li><strong>Subagents</strong> 是「工作記憶」——記得上次任務的脈絡</li>
+  <li><strong>Prompts</strong> 是「即時指令」——只在當下有效</li>
+</ul>
+
+<h3>思考題</h3>
+<ol>
+  <li>在企業環境中，Skills 的管理（建立、版本控管、權限控制）由誰負責？這是 DevOps、知識管理還是 AI 工程的範疇？</li>
+  <li>「Tools on Demand」（Skill 中的腳本）和 MCP 提供的工具有什麼根本差異？什麼時候該用前者，什麼時候該用後者？</li>
+  <li>如果四個組件的職責邊界模糊（例如 Skill 內嵌了大量腳本，實質上變成了一個「微代理」），你會如何重新設計來保持清晰的關注點分離？</li>
+</ol>
+</section>
+
+<footer>
+  <a href="guide_006.html">&larr; 上一篇：Skills with the Agent SDK</a>
+  <a href="guide_008.html">下一篇：Creating Custom Skills &rarr;</a>
+</footer>
+
+</div>
+</body>
+</html>

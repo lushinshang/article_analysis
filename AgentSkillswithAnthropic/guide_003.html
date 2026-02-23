@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程導讀 03：Why Use Skills Part II — 開放標準與 Progressive Disclosure</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="course-tag">DeepLearning.AI x Anthropic</span>
+  <h1>課程導讀 03：Why Use Skills Part II — 開放標準與 Progressive Disclosure</h1>
+  <p class="meta">對應課程：Why Use Skills Part II | 影片時長：約 8 分鐘 | 對應教材：L1-partII</p>
+</header>
+
+<nav class="toc">
+  <h2>本篇目錄</h2>
+  <ol>
+    <li><a href="#core">核心概念</a></li>
+    <li><a href="#path">學習路徑</a></li>
+    <li><a href="#practice">實務應用</a></li>
+    <li><a href="#pitfall">常見誤區</a></li>
+    <li><a href="#thinking">延伸思考</a></li>
+  </ol>
+</nav>
+
+<section id="core">
+<h2>核心概念</h2>
+
+<h3>Skills 是開放標準</h3>
+<p>Agent Skills 不是 Anthropic 專屬技術。它是一個<strong>開放規格</strong>（Open Specification），已被多個平台採用：Codex、Gemini CLI、Claude Code、Open Code 等。這意味著你建立一次 Skill，就能在多個代理產品中使用。</p>
+
+<h3>從專用代理到通用代理的典範轉移</h3>
+<table>
+  <tr><th>舊模式</th><th>新模式</th></tr>
+  <tr><td>每個領域一個專用代理</td><td>通用代理 + Skills 注入領域知識</td></tr>
+  <tr><td>各自有狹窄的 scaffolding</td><td>簡單的 scaffolding：bash + filesystem</td></tr>
+  <tr><td>難以評估、理解和擴展</td><td>更易評估、理解和擴展</td></tr>
+</table>
+
+<p>通用代理需要的是<strong>上下文和領域專業知識</strong>，而 Skills 正是提供這些知識的機制。</p>
+
+<h3>Skills 的三大能力</h3>
+<div class="key-concept">
+<table>
+  <tr><th>能力類別</th><th>說明</th><th>範例</th></tr>
+  <tr><td><strong>領域專業知識</strong></td><td>Claude 有通識能力，但不知道「你的公司怎麼做」</td><td>品牌視覺規範、法律審查流程</td></tr>
+  <tr><td><strong>可重複工作流</strong></td><td>在非確定性系統中建立可預測的輸出</td><td>每週行銷分析、客戶電話準備</td></tr>
+  <tr><td><strong>新能力</strong></td><td>代理原生不會做的事</td><td>產生簡報、PDF 報表、建構 MCP 伺服器</td></tr>
+</table>
+</div>
+
+<h3>Progressive Disclosure 深入解析</h3>
+<p>這是 Skills 架構中最核心的設計理念：</p>
+
+<ol>
+  <li><strong>第一層</strong>：Skill 的名稱和描述<strong>永遠</strong>存在於 context window 中</li>
+  <li><strong>第二層</strong>：當 Skill 被觸發時，載入 SKILL.md 主體內容</li>
+  <li><strong>第三層</strong>：根據需要，載入額外的參考檔案和腳本</li>
+</ol>
+
+<div class="callout callout-note">
+<p class="callout-title">Context Window 是公共財</p>
+<p>加入越多資料到 context window → 消耗越多 token → context 越快填滿 → context degradation（上下文退化）或不正確回應的機率越高。Progressive Disclosure 的目標就是在保護這個公共資源的前提下，提供必要的知識。</p>
+</div>
+
+<h3>Skill 可以包含什麼？</h3>
+<ul>
+  <li><strong>Markdown 文件</strong>：指令、參考文件</li>
+  <li><strong>腳本</strong>：可被執行的 Python/Bash 程式碼</li>
+  <li><strong>資源</strong>：圖示、圖片、範本、CSV、schema</li>
+</ul>
+
+<h3>Skills 的可組合性（Composability）</h3>
+<p>多個 Skills 可以組合使用，建構複雜的工作流。例如：</p>
+<ul>
+  <li><strong>公司品牌 Skill</strong>：提供品牌視覺規範</li>
+  <li><strong>PowerPoint Skill</strong>：產生簡報</li>
+  <li><strong>BigQuery Skill</strong>：提供行銷資料 schema</li>
+  <li><strong>行銷分析 Skill</strong>：分析行銷資料</li>
+</ul>
+<p>組合起來就是：從 BigQuery 取資料 → 行銷分析 → 品牌風格 → 產生簡報。</p>
+</section>
+
+<section id="path">
+<h2>學習路徑</h2>
+
+<h3>重點教材：L1-partII 投影片摘要</h3>
+<p>教材 <code>reading_material_1_II.md</code> 是本課的核心整理，建議仔細閱讀。它涵蓋了：</p>
+<ul>
+  <li>Agent Skills 的定義與結構</li>
+  <li>舊模式 vs. 新模式的比較</li>
+  <li>Skills 的四大特性：可攜性、可組合性、Progressive Disclosure、結構規範</li>
+  <li>三種 Skill 結構範例（行銷分析、PDF 處理、電子報設計）</li>
+</ul>
+
+<h3>建議閱讀順序</h3>
+<ol>
+  <li>先看 <code>reading_material_1_II.md</code> 的投影片摘要</li>
+  <li>對照逐字稿，理解講師如何闡述每個概念</li>
+  <li>回到 Part I 的 Skill 範例，驗證所學</li>
+</ol>
+</section>
+
+<section id="practice">
+<h2>實務應用</h2>
+
+<h3>在你的組織中導入 Skills 的切入點</h3>
+<ol>
+  <li><strong>盤點反覆性工作</strong>：哪些 prompt 你每週都在打？</li>
+  <li><strong>識別領域知識</strong>：哪些「我們公司的做法」是 AI 無法從公開資料學到的？</li>
+  <li><strong>評估可組合性</strong>：哪些 Skills 可以串接成端到端的工作流？</li>
+</ol>
+
+<div class="callout callout-tip">
+<p class="callout-title">資安團隊的 Skill 組合範例</p>
+<p>弱點掃描結果分析 Skill + 合規報告格式 Skill + Excel/PDF 內建 Skill = 自動化的合規弱點報告生成流程。</p>
+</div>
+</section>
+
+<section id="pitfall">
+<h2>常見誤區</h2>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：在 SKILL.md 中放入執行用的腳本程式碼</p>
+<p>腳本應該放在獨立檔案中（例如 <code>scripts/</code> 目錄），由 SKILL.md 引用。腳本的載入和執行是透過 bash/filesystem 工具完成的，不應直接嵌入指令文件中。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：認為 Skills 能取代 MCP</p>
+<p>Skills 提供的是「知識」（怎麼做），MCP 提供的是「存取」（取得資料）。兩者是互補關係，不是替代關係。下一課（guide_007）會深入討論這個區分。</p>
+</div>
+</section>
+
+<section id="thinking">
+<h2>延伸思考</h2>
+
+<h3>非確定性系統中的可預測性</h3>
+<p>LLM 本質上是非確定性的——相同的輸入不一定得到相同的輸出。Skills 透過明確的步驟和格式要求，在非確定性系統中創造<strong>可預測的工作流</strong>。這與軟體工程中「透過約束減少變異」的原則一致。</p>
+
+<h3>思考題</h3>
+<ol>
+  <li>Progressive Disclosure 有三層載入機制。在你的使用場景中，哪些資訊應該放在第一層（永遠載入）、第二層（觸發時載入）、第三層（視需要載入）？</li>
+  <li>Skills 的開放標準化，對「AI 代理的可替換性」有什麼商業意義？</li>
+  <li>在非確定性系統中建立可預測性，除了 Skills 之外還有哪些策略？</li>
+</ol>
+</section>
+
+<footer>
+  <a href="guide_002.html">&larr; 上一篇：Why Use Skills Part I</a>
+  <a href="guide_004.html">下一篇：Exploring Pre-Built Skills &rarr;</a>
+</footer>
+
+</div>
+</body>
+</html>

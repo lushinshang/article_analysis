@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程導讀 01：導論 — Agent Skills 概觀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="course-tag">DeepLearning.AI x Anthropic</span>
+  <h1>課程導讀 01：導論 — Agent Skills 概觀</h1>
+  <p class="meta">對應課程：Introduction | 影片時長：約 2 分鐘 | 講師：Andrew Ng、Elie Schoppik</p>
+</header>
+
+<nav class="toc">
+  <h2>本篇目錄</h2>
+  <ol>
+    <li><a href="#core">核心概念</a></li>
+    <li><a href="#path">學習路徑</a></li>
+    <li><a href="#practice">實務應用</a></li>
+    <li><a href="#pitfall">常見誤區</a></li>
+    <li><a href="#thinking">延伸思考</a></li>
+  </ol>
+</nav>
+
+<section id="core">
+<h2>核心概念：什麼是 Agent Skills？為什麼重要？</h2>
+
+<p>Agent Skills 是一種<strong>輕量級的開放標準格式</strong>，用來擴展 AI 代理的能力。一個 Skill 本質上就是一個<strong>資料夾</strong>，裡面包含指令（instructions）、腳本（scripts）和資源（assets），讓代理能夠發現並執行特定任務。</p>
+
+<div class="key-concept">
+<h3>一句話理解 Skills</h3>
+<p>如果你發現自己在不同對話中反覆輸入相同的 prompt，那就應該把它封裝成一個 Skill。</p>
+</div>
+
+<h3>Skills 的核心結構</h3>
+<ul>
+  <li><strong>SKILL.md</strong>（必要）：包含技能名稱、描述和主要指令</li>
+  <li><strong>參考檔案</strong>（選用）：額外的 Markdown、腳本、範本、圖片等</li>
+</ul>
+
+<h3>Progressive Disclosure（漸進式揭露）</h3>
+<p>這是 Skills 設計中最關鍵的概念之一：</p>
+<table>
+  <tr><th>載入時機</th><th>載入內容</th></tr>
+  <tr><td>永遠載入</td><td>Skill 的名稱與描述（YAML frontmatter）</td></tr>
+  <tr><td>使用者請求匹配時</td><td>SKILL.md 主體指令</td></tr>
+  <tr><td>視需要</td><td>參考檔案、腳本、資源</td></tr>
+</table>
+
+<div class="callout callout-tip">
+<p class="callout-title">業界觀點</p>
+<p>Progressive Disclosure 的設計理念與資安領域的「最小權限原則」（Principle of Least Privilege）異曲同工——只在需要時才載入必要的上下文，避免 context window 被不必要的資訊污染。</p>
+</div>
+</section>
+
+<section id="path">
+<h2>學習路徑：本課程如何安排？</h2>
+
+<p>本課程按照由淺入深的順序，帶你走過 Skills 的完整生命週期：</p>
+<ol>
+  <li><strong>Claude.ai 實作</strong>：建立行銷分析 Skill，結合內建 Excel / PowerPoint Skills</li>
+  <li><strong>Claude API</strong>：用 Code Execution Tool + Files API 程式化地使用 Skills</li>
+  <li><strong>Claude Code</strong>：在 CLI 環境中安裝和使用 Skills，進行程式碼審查與測試</li>
+  <li><strong>Claude Agent SDK</strong>：建構研究代理，用 Skill 引導子代理協作</li>
+</ol>
+
+<div class="callout callout-note">
+<p class="callout-title">先備知識</p>
+<p>你不需要付費訂閱。Skills 在 Claude.ai 免費方案中已可使用（搭配 Sonnet 4.5 或 Haiku 4.5）。</p>
+</div>
+</section>
+
+<section id="practice">
+<h2>實務應用：Skills 在業界能做什麼？</h2>
+
+<h3>典型應用場景</h3>
+<ul>
+  <li><strong>重複性工作流封裝</strong>：每週行銷報告分析、客戶電話準備流程、季度業務回顧</li>
+  <li><strong>領域專業知識傳遞</strong>：品牌視覺規範、法律審查流程、資料分析方法論</li>
+  <li><strong>新能力擴展</strong>：產生簡報、生成 Excel 報表、建構 MCP 伺服器</li>
+</ul>
+
+<h3>跨平台可攜性</h3>
+<p>Skills 是<strong>開放標準</strong>，同一份 Skill 可以在以下環境使用：</p>
+<ul>
+  <li>Claude.ai / Claude Desktop</li>
+  <li>Claude Code</li>
+  <li>Claude Agent SDK</li>
+  <li>Claude API</li>
+  <li>Codex、Gemini CLI、Open Code 等第三方工具</li>
+</ul>
+</section>
+
+<section id="pitfall">
+<h2>常見誤區</h2>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區 1：把 Skills 當成「大型 Prompt」</p>
+<p>Skills 不只是把 prompt 存成檔案。它的價值在於 Progressive Disclosure——只在需要時載入，保護 context window。如果你把所有資訊一次塞進 SKILL.md，就失去了這個優勢。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區 2：忽略 Skill 描述的重要性</p>
+<p>名稱和描述是 AI 代理判斷「何時使用這個 Skill」的唯一依據。描述寫得不夠精確，代理就無法在正確時機觸發你的 Skill。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區 3：以為 Skills 只能用在 Claude</p>
+<p>Agent Skills 已經是開放標準，不僅限於 Anthropic 生態系。在設計 Skill 時，應考慮跨平台相容性。</p>
+</div>
+</section>
+
+<section id="thinking">
+<h2>延伸思考</h2>
+
+<h3>從「專用代理」到「通用代理 + Skills」的典範轉移</h3>
+<p>過去我們傾向為每個領域建構專用代理（研究代理、程式代理、財務代理），各自有窄範圍的 scaffolding。新的典範是：<strong>通用代理</strong>搭配簡單的底層工具（bash + filesystem），再透過 Skills 注入領域知識。</p>
+
+<p>這個轉變對資安從業人員的啟示是：</p>
+<ul>
+  <li><strong>資安知識的標準化</strong>：滲透測試流程、合規檢查清單、事件回應 SOP 都可以封裝成 Skills</li>
+  <li><strong>團隊知識共享</strong>：資深人員的經驗可以透過 Skills 傳遞給整個團隊</li>
+  <li><strong>可審計性</strong>：Skill 是版本化的檔案，可以納入程式碼審查流程</li>
+</ul>
+
+<h3>思考題</h3>
+<ol>
+  <li>在你的日常工作中，有哪些反覆向 AI 代理描述的流程，適合封裝成 Skill？</li>
+  <li>Progressive Disclosure 如何幫助你在 token 有限的場景下，更有效率地使用 AI？</li>
+  <li>Skills 的開放標準格式，對於企業的「AI 供應商鎖定」問題有什麼影響？</li>
+</ol>
+</section>
+
+<footer>
+  <span>Agent Skills with Anthropic — 課程導讀系列</span>
+  <a href="guide_002.html">下一篇：Why Use Skills Part I &rarr;</a>
+</footer>
+
+</div>
+</body>
+</html>

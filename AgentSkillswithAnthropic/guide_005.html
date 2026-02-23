@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程導讀 05：Skills with the Claude API — 程式化使用 Skills</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="course-tag">DeepLearning.AI x Anthropic</span>
+  <h1>課程導讀 05：Skills with the Claude API — 程式化使用 Skills</h1>
+  <p class="meta">對應課程：Skills with the Claude API | 影片時長：約 17 分鐘 | 對應教材：L5</p>
+</header>
+
+<nav class="toc">
+  <h2>本篇目錄</h2>
+  <ol>
+    <li><a href="#core">核心概念</a></li>
+    <li><a href="#path">學習路徑</a></li>
+    <li><a href="#practice">實務應用</a></li>
+    <li><a href="#pitfall">常見誤區</a></li>
+    <li><a href="#thinking">延伸思考</a></li>
+  </ol>
+</nav>
+
+<section id="core">
+<h2>核心概念</h2>
+
+<h3>不同環境的 Skills 基礎設施</h3>
+<p>Skills 在每個環境中的<strong>格式不變</strong>，但底層基礎設施有差異：</p>
+
+<table>
+  <tr><th>環境</th><th>Code Execution</th><th>File System</th><th>配置方式</th></tr>
+  <tr><td>Claude.ai / Desktop</td><td>內建（自動啟用）</td><td>內建</td><td>自動配置</td></tr>
+  <tr><td>Claude Code</td><td>直接存取本機</td><td>直接存取本機</td><td>自動配置</td></tr>
+  <tr><td>Claude API</td><td>需手動啟用 Code Execution Tool</td><td>需使用 Files API</td><td>手動配置</td></tr>
+</table>
+
+<div class="callout callout-note">
+<p class="callout-title">關鍵差異</p>
+<p>在 Claude.ai 建立的 Skills，<strong>不會</strong>自動同步到 Claude API 或 Claude Code。每個環境各自管理自己的 Skills。</p>
+</div>
+
+<h3>Code Execution Tool</h3>
+<p>Code Execution Tool 提供一個<strong>沙盒容器</strong>（sandbox container），讓 Claude 能：</p>
+<ul>
+  <li>執行 Bash/Shell 命令</li>
+  <li>建立、編輯、檢視檔案</li>
+  <li>執行 Python 程式碼</li>
+</ul>
+
+<p>限制條件：</p>
+<ul>
+  <li>有 RAM、磁碟空間、CPU 限制</li>
+  <li><strong>API 版本無網路連線</strong>（Claude.ai/Desktop 版本有）</li>
+  <li>僅有預裝的程式庫</li>
+</ul>
+
+<h3>Files API</h3>
+<p>Files API 用來上傳和下載檔案到/從沙盒容器：</p>
+<ol>
+  <li><strong>上傳</strong>：將 Skill 目錄和輸入檔案上傳到容器</li>
+  <li><strong>處理</strong>：Claude 在容器中讀取 Skill、執行分析、產生輸出</li>
+  <li><strong>下載</strong>：取得產生的檔案（報告、文件等）</li>
+</ol>
+
+<h3>API 中使用 Skills 的流程</h3>
+<pre><code># 1. 上傳 Skill 目錄
+skill = client.skills.create(files_from_dir("custom_skills/my-skill"))
+
+# 2. 上傳輸入檔案
+file = client.files.create(open("input.csv", "rb"))
+
+# 3. 發送請求（需要三個 beta headers）
+response = client.messages.create(
+    model="claude-sonnet-4-5-20250514",
+    betas=["skills", "code-execution", "files-api"],
+    container={"skills": [{"id": skill.id, "version": "latest"}]},
+    tools=[{"type": "code_execution"}],
+    messages=[{"role": "user", "content": [...]}]
+)
+
+# 4. 下載產生的檔案
+output = client.files.download(file_id)
+</code></pre>
+</section>
+
+<section id="path">
+<h2>學習路徑</h2>
+
+<h3>本課的兩個實作</h3>
+
+<h4>實作 1：Generating Practice Questions Skill</h4>
+<ol>
+  <li>上傳自訂 Skill 到 API</li>
+  <li>上傳 LaTeX 講義檔案</li>
+  <li>Claude 讀取 SKILL.md → 讀取 LaTeX → Progressive Disclosure 載入 Markdown 範本</li>
+  <li>產生練習題 → 存為 Markdown 檔案 → 下載</li>
+</ol>
+
+<h4>實作 2：Analyzing Time Series Skill + docx Skill</h4>
+<ol>
+  <li>上傳自訂 Skill + 使用內建 docx Skill</li>
+  <li>上傳 CSV 時間序列資料</li>
+  <li>Claude 執行診斷腳本 + 視覺化 → 產生 Word 文件 → 下載</li>
+</ol>
+
+<h3>教材資源</h3>
+<ul>
+  <li><code>L5/lesson_5.ipynb</code>：完整的 Jupyter Notebook</li>
+  <li><code>L5/sample_outputs/</code>：預先產生的範例輸出</li>
+  <li><code>L5/custom_skills/</code>：兩個自訂 Skill</li>
+  <li><code>L5/data/</code>：輸入資料檔案</li>
+  <li><code>L5/lecture_notes/</code>：LaTeX 講義</li>
+</ul>
+
+<div class="callout callout-warning">
+<p class="callout-title">費用提醒</p>
+<p>完整執行一次 Notebook 約需 $0.67 美元的 API 額度。可以選擇只看預先執行的輸出。</p>
+</div>
+</section>
+
+<section id="practice">
+<h2>實務應用</h2>
+
+<h3>Beta Headers 的重要性</h3>
+<p>使用 API 搭配 Skills 時，需要傳入三個 beta headers：</p>
+<table>
+  <tr><th>Header</th><th>用途</th></tr>
+  <tr><td><code>skills</code></td><td>啟用 Skills 功能</td></tr>
+  <tr><td><code>code-execution</code></td><td>啟用沙盒容器執行程式碼</td></tr>
+  <tr><td><code>files-api</code></td><td>啟用檔案上傳/下載</td></tr>
+</table>
+
+<h3>自訂 Skill + 內建 Skill 的混用</h3>
+<p>在 <code>container</code> 參數中，可以同時列入：</p>
+<ul>
+  <li>自訂 Skill（用 skill ID）</li>
+  <li>內建 Skill（用 Anthropic 提供的識別碼，例如 <code>docx</code>）</li>
+</ul>
+<p>兩者遵循相同的 Progressive Disclosure 機制。</p>
+
+<div class="callout callout-tip">
+<p class="callout-title">自動化合規報告</p>
+<p>透過 API 程式化使用 Skills，你可以將報告生成整合到 CI/CD pipeline 中。例如：每次弱點掃描完成後，自動觸發 API 呼叫，使用「弱點分析 Skill + Word Skill」產生合規報告。</p>
+</div>
+</section>
+
+<section id="pitfall">
+<h2>常見誤區</h2>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：API 沙盒有完整網路存取</p>
+<p>API 的 Code Execution Tool 沙盒<strong>沒有網路連線</strong>。這與 Claude.ai/Desktop 不同。如果你的 Skill 需要下載套件或存取外部 API，必須在上傳前預先準備好所有依賴。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：Skills 跨環境自動同步</p>
+<p>在 Claude.ai 上傳的 Skill <strong>不會</strong>出現在 API 或 Claude Code 中。每個環境都需要獨立管理自己的 Skills。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：忘記指定 beta headers</p>
+<p>缺少任何一個 beta header 都會導致 Skills 無法正常運作。最常見的錯誤是只加了 <code>skills</code> 但忘了 <code>code-execution</code>。</p>
+</div>
+</section>
+
+<section id="thinking">
+<h2>延伸思考</h2>
+
+<h3>Skills 的版本管理</h3>
+<p>API 支援 Skill 的多版本管理。你可以指定特定版本或使用 <code>latest</code>。在生產環境中，建議固定版本號，避免 Skill 更新導致非預期行為。這與軟體的依賴管理（如 npm lock file）是同樣的思維。</p>
+
+<h3>思考題</h3>
+<ol>
+  <li>API 沙盒沒有網路連線，這對 Skill 設計有什麼限制？你會如何設計一個需要外部資料的 Skill 來繞過這個限制？</li>
+  <li>在 CI/CD pipeline 中使用 Skills，你會如何處理 API 費用控管和失敗重試？</li>
+  <li>自訂 Skill 和內建 Skill 混用時，如果兩者的輸出格式衝突，模型會如何處理？你能設計一個測試來驗證嗎？</li>
+</ol>
+</section>
+
+<footer>
+  <a href="guide_004.html">&larr; 上一篇：Exploring Pre-Built Skills</a>
+  <a href="guide_006.html">下一篇：Skills with the Claude Agent SDK &rarr;</a>
+</footer>
+
+</div>
+</body>
+</html>

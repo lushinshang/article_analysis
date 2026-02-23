@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程導讀 09：Conclusion — 課程回顧與行動指南</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="course-tag">DeepLearning.AI x Anthropic</span>
+  <h1>課程導讀 09：Conclusion — 課程回顧與行動指南</h1>
+  <p class="meta">對應課程：Conclusion | 影片時長：約 1 分鐘</p>
+</header>
+
+<nav class="toc">
+  <h2>本篇目錄</h2>
+  <ol>
+    <li><a href="#core">核心概念回顧</a></li>
+    <li><a href="#path">學習路徑總結</a></li>
+    <li><a href="#practice">實務行動指南</a></li>
+    <li><a href="#pitfall">最終注意事項</a></li>
+    <li><a href="#thinking">延伸思考</a></li>
+  </ol>
+</nav>
+
+<section id="core">
+<h2>核心概念回顧</h2>
+
+<p>講師 Elie Schoppik 在結語中提煉了四個關鍵訊息：</p>
+
+<div class="key-concept">
+<h3>1. 從簡單開始，漸進擴展</h3>
+<p>建立 Skill 時，先從基本的 Markdown 指令開始，之後再依循 Progressive Disclosure 原則擴展。不要一開始就試圖建立完美的 Skill。</p>
+</div>
+
+<div class="key-concept">
+<h3>2. 觀察與迭代</h3>
+<p>監控你的代理在真實場景中如何使用你的 Skill，根據觀察結果迭代改進。Skill 的品質來自於持續的回饋迴圈。</p>
+</div>
+
+<div class="key-concept">
+<h3>3. Description 決定觸發時機</h3>
+<p>確保 description 包含足夠的細節，讓代理知道何時該使用這個 Skill。這是 Progressive Disclosure 第一層的關鍵。</p>
+</div>
+
+<div class="key-concept">
+<h3>4. 善用 Claude 的知識</h3>
+<p>Claude 本身就非常瞭解 Skills。你可以從簡單的對話開始建立 Skill，然後用 Skill Creator Skill 來對齊最佳實踐。</p>
+</div>
+</section>
+
+<section id="path">
+<h2>學習路徑總結</h2>
+
+<h3>全課程知識地圖</h3>
+<table>
+  <tr><th>課程</th><th>關鍵學習</th><th>對應導讀</th></tr>
+  <tr><td>Introduction</td><td>Skills 定義、結構、Progressive Disclosure</td><td><a href="guide_001.html">guide_001</a></td></tr>
+  <tr><td>Why Use Skills I</td><td>從 prompt 到 Skill 的演化、SKILL.md 結構</td><td><a href="guide_002.html">guide_002</a></td></tr>
+  <tr><td>Why Use Skills II</td><td>開放標準、可組合性、Context 保護</td><td><a href="guide_003.html">guide_003</a></td></tr>
+  <tr><td>Exploring Pre-Built</td><td>內建 Skills、Skill Creator、MCP 整合</td><td><a href="guide_004.html">guide_004</a></td></tr>
+  <tr><td>Claude API</td><td>Code Execution Tool、Files API、程式化使用</td><td><a href="guide_005.html">guide_005</a></td></tr>
+  <tr><td>Agent SDK</td><td>子代理、MCP、Skills 的完整整合</td><td><a href="guide_006.html">guide_006</a></td></tr>
+  <tr><td>Skills vs Others</td><td>Skills/Tools/MCP/Subagents 的定位</td><td><a href="guide_007.html">guide_007</a></td></tr>
+  <tr><td>Creating Custom</td><td>結構規範、最佳實踐、評估方法</td><td><a href="guide_008.html">guide_008</a></td></tr>
+  <tr><td>Conclusion</td><td>回顧與行動指南</td><td>本篇</td></tr>
+</table>
+
+<h3>建議的複習順序</h3>
+<ol>
+  <li><strong>概念理解</strong>（guide_001 → 003 → 007）：理解 Skills 是什麼、為什麼需要、與其他組件的關係</li>
+  <li><strong>結構掌握</strong>（guide_008 → 002）：掌握 SKILL.md 的結構和最佳實踐</li>
+  <li><strong>實作練習</strong>（guide_004 → 005 → 006）：在不同環境中使用 Skills</li>
+</ol>
+</section>
+
+<section id="practice">
+<h2>實務行動指南</h2>
+
+<h3>第一步：建立你的第一個 Skill（30 分鐘）</h3>
+<ol>
+  <li>選一個你每週都在做的重複性工作</li>
+  <li>把你平常會給 AI 的 prompt 整理成 SKILL.md</li>
+  <li>加入 YAML frontmatter（name + description）</li>
+  <li>上傳到 Claude.ai 測試</li>
+</ol>
+
+<h3>第二步：漸進式改善（1-2 小時）</h3>
+<ol>
+  <li>觀察 Claude 如何使用你的 Skill</li>
+  <li>把「只有部分場景需要」的內容移到 <code>references/</code></li>
+  <li>加入輸出範本到 <code>assets/</code></li>
+  <li>用 Skill Creator 檢查最佳實踐</li>
+</ol>
+
+<h3>第三步：團隊推廣</h3>
+<ol>
+  <li>分享 Skill 給團隊成員</li>
+  <li>收集回饋、迭代改進</li>
+  <li>建立 Skill 評估的單元測試</li>
+  <li>考慮在 Claude API 中自動化使用</li>
+</ol>
+
+<div class="callout callout-tip">
+<p class="callout-title">快速起步建議</p>
+<p>不要從零開始寫 SKILL.md。先把你的 prompt 直接貼給 Claude，說「請幫我把這個 prompt 轉換成一個 Agent Skill」。Claude 知道 Skills 的結構，會幫你產生初始版本。</p>
+</div>
+</section>
+
+<section id="pitfall">
+<h2>最終注意事項</h2>
+
+<div class="callout callout-warning">
+<p class="callout-title">規格仍在演進中</p>
+<p>Agent Skills 的開放標準仍在積極發展中。你可能會遇到不完全遵循當前規格的 Skills（包括 Anthropic 自己的一些早期 Skills）。保持關注規格更新。</p>
+</div>
+
+<div class="callout callout-note">
+<p class="callout-title">持續學習資源</p>
+<ul>
+  <li><a href="https://agentskills.io/specification">Agent Skills 規格文件</a></li>
+  <li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices">Skill 撰寫最佳實踐</a></li>
+  <li><a href="https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf">Building Skills for Claude 完整指南（PDF）</a></li>
+  <li><a href="https://github.com/anthropics/skills">Anthropic Skills 倉庫</a></li>
+</ul>
+</div>
+</section>
+
+<section id="thinking">
+<h2>延伸思考</h2>
+
+<h3>Skills 生態系的未來</h3>
+<p>隨著越來越多平台採用 Agent Skills 開放標準，我們可以預見：</p>
+<ul>
+  <li><strong>Skills Marketplace</strong>：類似 npm 的 Skills 生態系，開發者可以發佈和安裝 Skills</li>
+  <li><strong>企業 Skill 管理</strong>：組織級的 Skills 版本控管、權限管理和審計</li>
+  <li><strong>Skills Composition Engine</strong>：自動化 Skills 組合和工作流編排</li>
+</ul>
+
+<h3>最終思考題</h3>
+<ol>
+  <li>如果你只能為你的團隊建立三個 Skills，你會建立哪三個？為什麼？</li>
+  <li>Skills 的開放標準化是否會改變 AI 工具的競爭格局？供應商的差異化將從何處體現？</li>
+  <li>在 Skills 越來越普及之後，「Prompt Engineering」這門技能會如何演化？</li>
+</ol>
+</section>
+
+<footer>
+  <a href="guide_008.html">&larr; 上一篇：Creating Custom Skills</a>
+  <a href="guide_010.html">下一篇：Agent Skills 總結 &rarr;</a>
+</footer>
+
+</div>
+</body>
+</html>

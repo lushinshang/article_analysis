@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills with the Claude Agent SDK - Transcript</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="course-tag">DeepLearning.AI x Anthropic</span>
+      <h1>Skills with the Claude Agent SDK</h1>
+      <p class="meta">Agent Skills with Anthropic | Duration: 20 minutes</p>
+    </header>
+
+    <section class="transcript">
+      <h2>English Transcript</h2>
+
+      <p>In this final lesson, we'll create a research agent using the Claude Agent SDK. The agent will use a skill to create a learning guide for an open source tool based on its documentation, GitHub repo, and web search. Let's go.</p>
+
+      <p>Now that we've seen how to use skills on the web with Claude using the messages API and Claude Code, let's talk about how to use skills with the Claude Agent SDK.</p>
+
+      <p>As a refresher, the Claude Agent SDK is a programmatic way of building your own agentic applications that use the same internal harness that Claude Code does.</p>
+
+      <p>What we're going to be building here is a general purpose research agent. The main agent is going to be able to research information from multiple sources and synthesize a summary. It will dispatch three different subagents for analyzing documentation, analyzing and downloading repositories, and researching information by searching the web.</p>
+
+      <p>Let's take a look at those prompts, and then we'll take a look at a Skill that's used to guide the Main Agent with a research methodology and what needs to be extracted and synthesized.</p>
+
+      <p>To start, we have our main agent prompt. This is the orchestrator that has access to three available subagents with the following capabilities: finding information from documentation, analyzing repository structures, finding articles, videos, and community content to bring it all together.</p>
+
+      <p>In this particular application, we mention that if the Skill is provided, we want it to follow a particular pattern. It's possible that Skills may or may not be provided for the application we're building, but in our case we're going to provide one.</p>
+
+      <p>If the skill matches the user's request, we need to follow that skill's instructions precisely. Since we're starting from scratch with this agentic application, we want to be very intentional about what to do when skills are provided or when they're not.</p>
+
+      <p>As we continue, we have delegation guidelines for how to spawn subagents and after receiving results, how to synthesize all of those pieces of information.</p>
+
+      <p>For the documentation researcher, we'll have access to WebSearch and WebFetch. We provide a process to locate documentation, particular input formats, guidelines, and an output to return findings in a certain way.</p>
+
+      <p>For the repository analyzer, we also provide WebSearch to find repositories, Bash commands to clone and run git, and then the ability to read and find files and data within files. Similarly, we provide a process, an input format, guidelines, and an output.</p>
+
+      <p>Finally, our Web Researcher makes use of WebSearch and WebFetch as well. This allows us to search for content relevant to that topic and to receive extraction instructions as well from the main agent.</p>
+
+      <p>All of these prompts will be used together when we set up the code necessary to make our agent work.</p>
+
+      <p>Finally, let's talk about the skill we're going to be using here. We have a skill named learning-a-tool. The purpose of this skill is to guide the main orchestrator. We will not be using the skill in our individual subagents, but we're using this skill as a way to create a predictable pattern so that the main agent knows the ideal workflow and what and how to dispatch subagents.</p>
+
+      <p>We give the skill a name and a description. We want to create learning paths for programming tools, define what information should be researched, and specify how best to follow an approach to researching all the way towards creating a comprehensive learning path.</p>
+
+      <p>We start with a research phase, specifying for each subagent exactly what to look for. We then organize that content into progressive levels, using progressive disclosure to load another markdown file as the source of truth.</p>
+
+      <p>In our progressive learning file, there's quite a bit around the individual levels, starting from an overview and motivation, all the way towards installing core concepts, practical patterns, and then where to go next.</p>
+
+      <p>We take that data, specify a structure, and specify an output. We're very particular with the exact format. The goal is to get access to a learning environment that gives an overview, resources, a path, and code examples.</p>
+
+      <p>Now that we've seen the application at a high level, there's one last piece we'll layer on. We want to write the output to Notion using an MCP server.</p>
+
+      <p>Let's go ahead and begin by running uv init and initialize a project and add the necessary dependencies like claude-agent-sdk, python-dotenv, and asyncio. Once installed, let's create a file called agent.py.</p>
+
+      <p>The boilerplate brings in asyncio, dotenv, and display_message helpers. To start, we set up our Claude agent with a system_prompt and allowed_tools. We set up a loop to accept user input, run it through our model, and send back the response.</p>
+
+      <p>For tools, read-only tools like read, Grep and Glob are allowed by default. But for writing files, searching the web, and executing bash commands, we need to pass those in explicitly. We'll bring in the Write tool, Bash tool, WebSearch and WebFetch tools.</p>
+
+      <p>Next, we add mcp_servers to connect to. We use Notion with a notion token environment variable. We need to add mcp_notion_* to allowed_tools so the main agent can use Notion's tools.</p>
+
+      <p>Now let's bring in our subagents. We load all prompts, import AgentDefinition, and create a dictionary of agents with descriptions, prompts, and tool configurations. We update system_prompt with main_agent_prompt and pass agents as a keyword argument.</p>
+
+      <p>It's important to list all tools that your main agent and subagents will need inside allowed_tools, or else subagents will not be able to use them.</p>
+
+      <p>We need to include the Task tool for dispatching subagents. The last piece is the Skill tool. Since we have filesystem and bash access, all we need is the Skill tool to correctly read skills. Skills are defined inside a .claude/skills folder.</p>
+
+      <p>We specify setting_sources to find skills in the user directory and the project directory.</p>
+
+      <p>Let's test our agent. We'll learn about MinerU, an open library for PDF extraction. This requires external research since it's not something Claude might know well from training data.</p>
+
+      <p>We ask to create a learning guide and show the plan first. The skill is invoked, and we see the research phase, structure, and expected output. We approve the plan and it spawns all three subagents in parallel.</p>
+
+      <p>The docs researcher heads to documentation, the repo analyzer looks on GitHub, and the web researcher searches tutorials and YouTube guides. These agents interact in parallel, fetching from different data sources.</p>
+
+      <p>After subagents finish, we create the comprehensive guide, pulling together all necessary files based on the research. We have a readme, resources, and code examples. The learning path includes overview, installation, core concepts, practical patterns, and next steps.</p>
+
+      <p>Finally, we write the resources.md to a Notion subpage using the MCP server. We use Notion tools to populate the page with rich blocks, including documentation, tutorials, video resources, and community channels.</p>
+
+      <p>We made use of skills, MCP servers, agents, and subagents all using the agent SDK. You can imagine layering on additional skills or subagents for more complex workflows.</p>
+
+      <p>There are security concerns to be mindful of. We're allowing write and bash commands without user permission. The next step is building an interface for user confirmation, similar to Claude Code. We've given you the foundation to continue building powerful agentic applications.</p>
+    </section>
+
+    <hr style="border:none;border-top:1px dashed var(--card-border);margin:2rem 0;">
+
+    <section class="transcript">
+      <h2>繁體中文（台灣）</h2>
+
+      <p>在這最後一課中，我們將使用 Claude Agent SDK 建立一個研究代理。該代理將使用技能，根據文件、GitHub 倉庫和網路搜尋來為開源工具建立學習指南。</p>
+
+      <p>Claude Agent SDK 是一種程式化方式來建立你自己的代理應用程式，使用與 Claude Code 相同的內部架構。</p>
+
+      <p>我們要建立的是一個通用研究代理。主代理能夠從多個來源研究資訊並綜合摘要。它會派遣三個不同的子代理：分析文件、分析和下載倉庫、以及透過網路搜尋研究資訊。</p>
+
+      <p><strong>主代理提示詞：</strong>作為協調器，擁有三個子代理的存取權限。如果提供了技能，需要精確遵循技能的指示。我們要對有無技能的情況都做好規劃。</p>
+
+      <p><strong>子代理設定：</strong></p>
+      <ul>
+        <li><strong>Documentation Researcher（文件研究員）</strong>：使用 WebSearch 和 WebFetch，定位文件並以特定格式回傳發現</li>
+        <li><strong>Repository Analyzer（倉庫分析器）</strong>：使用 WebSearch、Bash 指令（git clone）、檔案讀取能力</li>
+        <li><strong>Web Researcher（網路研究員）</strong>：使用 WebSearch 和 WebFetch，搜尋相關內容</li>
+      </ul>
+
+      <p><strong>learning-a-tool 技能：</strong>這個技能引導主協調器，不在個別子代理中使用。目的是建立可預測的模式，讓主代理知道理想的工作流程以及如何派遣子代理。</p>
+
+      <p>技能定義了研究階段（指定每個子代理要找什麼）、內容組織（漸進式等級）和輸出格式（概述、資源、路徑和程式碼範例）。</p>
+
+      <p><strong>程式碼實作：</strong></p>
+      <ul>
+        <li>使用 <code>uv init</code> 初始化專案，添加 <code>claude-agent-sdk</code>、<code>python-dotenv</code>、<code>asyncio</code></li>
+        <li>設定 <code>allowed_tools</code>：Write、Bash、WebSearch、WebFetch、Task、Skill</li>
+        <li>設定 <code>mcp_servers</code>：連接 Notion MCP 伺服器</li>
+        <li>使用 <code>AgentDefinition</code> 定義子代理，包含描述、提示詞和工具配置</li>
+        <li>使用 <code>setting_sources</code> 指定技能位置（user 目錄和 project 目錄）</li>
+      </ul>
+
+      <p><strong>重要注意事項：</strong>必須在 <code>allowed_tools</code> 中列出主代理和子代理需要的所有工具，否則子代理將無法使用。技能定義在 <code>.claude/skills</code> 資料夾中，檔案名必須為 SKILL.md。</p>
+
+      <p><strong>實際示範 - MinerU 學習指南：</strong>MinerU 是一個開源 PDF 提取程式庫，不是 Claude 訓練資料中可能很了解的內容，需要外部研究。</p>
+
+      <p>流程：</p>
+      <ol>
+        <li>先顯示計畫（類似 Claude Code 的 plan mode）</li>
+        <li>批准後，平行派遣三個子代理</li>
+        <li>子代理分別從文件、GitHub、網路教學收集資料</li>
+        <li>綜合建立完整學習指南：README、resources、code examples、learning path</li>
+        <li>使用 Notion MCP 伺服器將 resources.md 寫入 Notion 頁面</li>
+      </ol>
+
+      <p><strong>安全注意事項：</strong>目前允許 write 和 bash 指令不需使用者確認。下一步應建立類似 Claude Code 的使用者確認介面，以及代理和子代理的中斷機制（interrupts）。</p>
+
+      <p>我們已經為你提供了繼續建立強大代理應用程式的基礎，期待看到你接下來的創作。</p>
+    </section>
+
+    <footer>
+      <span>Agent Skills with Anthropic - DeepLearning.AI</span>
+      <span>Transcript 007</span>
+    </footer>
+  </div>
+</body>
+</html>

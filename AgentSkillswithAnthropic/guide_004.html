@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程導讀 04：Exploring Pre-Built Skills — 內建技能與工作流組合</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="course-tag">DeepLearning.AI x Anthropic</span>
+  <h1>課程導讀 04：Exploring Pre-Built Skills — 內建技能與工作流組合</h1>
+  <p class="meta">對應課程：Exploring Pre-Built Skills | 影片時長：約 18 分鐘 | 對應教材：L3</p>
+</header>
+
+<nav class="toc">
+  <h2>本篇目錄</h2>
+  <ol>
+    <li><a href="#core">核心概念</a></li>
+    <li><a href="#path">學習路徑</a></li>
+    <li><a href="#practice">實務應用</a></li>
+    <li><a href="#pitfall">常見誤區</a></li>
+    <li><a href="#thinking">延伸思考</a></li>
+  </ol>
+</nav>
+
+<section id="core">
+<h2>核心概念</h2>
+
+<h3>兩類內建 Skills</h3>
+<p>在 <code>github.com/anthropics/skills</code> 倉庫中，Skills 分為兩類：</p>
+
+<table>
+  <tr><th>類別</th><th>包含</th><th>預設狀態</th></tr>
+  <tr><td><strong>Document Skills</strong></td><td>Excel、PowerPoint、Word、PDF</td><td>永遠開啟（Claude.ai 內建）</td></tr>
+  <tr><td><strong>Example Skills</strong></td><td>skill-creator 等範例</td><td>預設關閉（需手動啟用），skill-creator 除外</td></tr>
+</table>
+
+<h3>PowerPoint Skill 剖析</h3>
+<p>PowerPoint Skill 的 SKILL.md 內容非常豐富，包含：</p>
+<ul>
+  <li>YAML Frontmatter（name + description）</li>
+  <li>操作概覽：建立、編輯、分析 PowerPoint 檔案</li>
+  <li>底層腳本：讀取和寫入 .pptx 的 Python 程式碼</li>
+  <li>設計原則：色彩、字型、排版指引</li>
+  <li>色彩調色盤：當使用者未指定時的預設選擇</li>
+</ul>
+
+<div class="callout callout-note">
+<p class="callout-title">重要觀察</p>
+<p>腳本（scripts）不是一開始就執行的——它們僅在必要時才被載入和執行。這再次印證了 Progressive Disclosure 的設計。</p>
+</div>
+
+<h3>Skill Creator：元技能（Meta-Skill）</h3>
+<p>Skill Creator 是一個「用來建立 Skills 的 Skill」。它包含：</p>
+<ul>
+  <li>Skills 的最佳實踐知識</li>
+  <li>明確的建立步驟流程</li>
+  <li>三個 Python 腳本：<code>init_skill.py</code>（初始化）、<code>package_skill.py</code>（打包）、<code>validate_skill.py</code>（驗證）</li>
+</ul>
+
+<h3>三個 Skills + MCP 的完整工作流</h3>
+<p>本課展示了一個端到端的工作流：</p>
+<ol>
+  <li><strong>修改行銷 Skill</strong>：用 skill-creator 將 CSV 資料來源改為 BigQuery（透過 MCP Server）</li>
+  <li><strong>建立品牌 Skill</strong>：上傳品牌視覺規範和 logo，用 skill-creator 建立品牌指南 Skill</li>
+  <li><strong>組合工作流</strong>：行銷分析 Skill（從 BigQuery 取資料）+ 品牌 Skill（套用風格）+ PowerPoint 內建 Skill（產生簡報）</li>
+</ol>
+</section>
+
+<section id="path">
+<h2>學習路徑</h2>
+
+<h3>本課三部分操作</h3>
+
+<h4>Part 1：更新行銷 Skill 使用 BigQuery</h4>
+<ul>
+  <li>前提：需要設定 BigQuery MCP Server（或用 SQLite 替代）</li>
+  <li>使用 Claude Desktop（因為 BigQuery MCP Server 是本地 MCP server）</li>
+  <li>在 SKILL.md 中指定 MCP server 和 tool 名稱是最佳實踐</li>
+</ul>
+
+<h4>Part 2：建立品牌指南 Skill</h4>
+<ul>
+  <li>上傳品牌視覺文件 + logo 圖檔</li>
+  <li>用 skill-creator 自動產生 SKILL.md + assets 資料夾</li>
+</ul>
+
+<h4>Part 3：組合完整工作流</h4>
+<ul>
+  <li>從 BigQuery 查詢資料 → 行銷分析 → 品牌風格套用 → 產生 PowerPoint 簡報</li>
+  <li>Claude 會自動讀取所有相關 Skill，逐步執行</li>
+</ul>
+
+<h3>教材資源</h3>
+<ul>
+  <li><code>L3/prompts.md</code>：三個部分的完整 Prompt</li>
+  <li><code>L3/updated_marketing_skill/</code>：更新後的行銷 Skill</li>
+  <li><code>L3/brand_guidelines_files/</code>：品牌視覺檔案</li>
+  <li><code>L3/brand_guidelines_skill/</code>：產生的品牌 Skill</li>
+  <li><code>L3/output_report_example/</code>：產生的 PowerPoint 範例</li>
+</ul>
+
+<div class="callout callout-note">
+<p class="callout-title">替代方案</p>
+<p>不需要 BigQuery 也能完成練習。你可以用 SQLite + 對應的 MCP Server，或直接跳過 Part 1。</p>
+</div>
+</section>
+
+<section id="practice">
+<h2>實務應用</h2>
+
+<h3>MCP + Skills 的最佳實踐</h3>
+<p>在 SKILL.md 中使用 MCP Server 時，應明確指定：</p>
+<pre><code>## Data Access
+Use the BigQuery MCP server (`mcp_bigquery`) to query data.
+Tool: `mcp_bigquery_query`
+Always specify a date range — avoid querying the entire table.
+</code></pre>
+
+<h3>Skill Creator 的價值</h3>
+<ul>
+  <li>遵循最佳實踐自動產生 Skill 結構</li>
+  <li>分析現有 Skills 的模式，確保新 Skill 與其互補</li>
+  <li>自動建立必要的資料夾和檔案結構</li>
+</ul>
+
+<div class="callout callout-tip">
+<p class="callout-title">資安應用：SOC 分析工作流</p>
+<p>設想三個 Skills 的組合：(1) SIEM 查詢 Skill（透過 MCP 連接 Splunk/ELK），(2) 事件分類 Skill（定義威脅分類標準），(3) 報告 Skill（套用組織報告格式）。這三個 Skills 加上 MCP Server，就能建構自動化的 SOC Tier 1 分析流程。</p>
+</div>
+</section>
+
+<section id="pitfall">
+<h2>常見誤區</h2>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：Claude.ai 和 Claude Desktop 的 Skills 差異</p>
+<p>Claude.ai 只支援<strong>遠端 MCP Server</strong>；Claude Desktop 支援<strong>本地 MCP Server</strong>。如果你的 MCP Server 是本地運行的（如 BigQuery MCP），必須使用 Claude Desktop。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：完全依賴 Skill Creator</p>
+<p>Skill Creator 很好用，但它產生的 Skill 品質取決於你提供的<strong>上下文品質</strong>。你仍然需要清楚描述需求、提供完整的參考文件。「Garbage in, garbage out」同樣適用。</p>
+</div>
+</section>
+
+<section id="thinking">
+<h2>延伸思考</h2>
+
+<h3>Skills 的可組合性與微服務架構的相似性</h3>
+<p>Skills 的組合使用方式，與微服務架構有驚人的相似性：每個 Skill 負責單一職責，透過明確的介面（輸入/輸出格式）互相協作。模型扮演「協調器」（Orchestrator）的角色。</p>
+
+<h3>思考題</h3>
+<ol>
+  <li>Skill Creator 產生的 Skill 會自我參考嗎？（用 Skill Creator 來改進 Skill Creator 本身？）這引發了哪些有趣的問題？</li>
+  <li>在你的工作流中，哪些步驟適合用 MCP 取得資料，哪些適合用 Skill 定義流程？</li>
+  <li>如果你要設計 100+ 個 Skills 的命名系統，你會如何避免名稱衝突和觸發歧義？</li>
+</ol>
+</section>
+
+<footer>
+  <a href="guide_003.html">&larr; 上一篇：Why Use Skills Part II</a>
+  <a href="guide_005.html">下一篇：Skills with the Claude API &rarr;</a>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程導讀 06：Skills with the Claude Agent SDK — 建構研究代理</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="course-tag">DeepLearning.AI x Anthropic</span>
+  <h1>課程導讀 06：Skills with the Claude Agent SDK — 建構研究代理</h1>
+  <p class="meta">對應課程：Skills with the Claude Agent SDK | 影片時長：約 20 分鐘 | 對應教材：L7</p>
+</header>
+
+<nav class="toc">
+  <h2>本篇目錄</h2>
+  <ol>
+    <li><a href="#core">核心概念</a></li>
+    <li><a href="#path">學習路徑</a></li>
+    <li><a href="#practice">實務應用</a></li>
+    <li><a href="#pitfall">常見誤區</a></li>
+    <li><a href="#thinking">延伸思考</a></li>
+  </ol>
+</nav>
+
+<section id="core">
+<h2>核心概念</h2>
+
+<h3>Claude Agent SDK 是什麼？</h3>
+<p>Claude Agent SDK 是程式化建構代理應用程式的框架，使用與 Claude Code 相同的內部架構（harness）。你可以用它來建構自己的 AI 代理應用。</p>
+
+<h3>本課建構的研究代理架構</h3>
+<pre><code>Main Agent (Orchestrator)
+├── Skill: learning-a-tool (引導研究方法和輸出格式)
+├── MCP Server: Notion (寫入研究結果)
+│
+├── Subagent: docs_researcher
+│   └── Tools: WebSearch, WebFetch
+│
+├── Subagent: repo_analyzer
+│   └── Tools: Bash (git clone), Read, Glob, Grep
+│
+└── Subagent: web_researcher
+    └── Tools: WebSearch, WebFetch
+</code></pre>
+
+<h3>Skill 在 Agent SDK 中的角色</h3>
+<p>在本課的架構中，Skill 不是給子代理用的——而是給<strong>主代理（Orchestrator）</strong>用的：</p>
+<ul>
+  <li>定義研究方法論（Research Methodology）</li>
+  <li>指定每個子代理應該收集什麼資訊</li>
+  <li>定義輸出結構（Progressive Learning Levels）</li>
+  <li>確保工作流的可預測性和一致性</li>
+</ul>
+
+<div class="key-concept">
+<h3>learning-a-tool Skill 的設計</h3>
+<p>這個 Skill 引導主代理：</p>
+<ol>
+  <li><strong>研究階段</strong>：分派子代理收集官方文件、GitHub 倉庫、社群資源</li>
+  <li><strong>組織階段</strong>：將收集的內容組織成漸進式學習層級（載入 <code>references/progressive_learning.md</code>）</li>
+  <li><strong>輸出階段</strong>：產生 README、resources.md、學習路徑、程式碼範例</li>
+</ol>
+</div>
+
+<h3>Agent SDK 的關鍵配置</h3>
+
+<h4>Tools（工具權限）</h4>
+<pre><code>allowed_tools = [
+    "Write", "Bash",
+    "WebSearch", "WebFetch",
+    "Task",                    # 分派子代理
+    "Skill",                   # 讀取 Skills
+    "mcp_notion_*"             # Notion MCP 所有工具
+]
+</code></pre>
+
+<div class="callout callout-warning">
+<p class="callout-title">權限規則</p>
+<p>子代理使用的所有工具，都必須列在主代理的 <code>allowed_tools</code> 中。即使你在子代理定義中指定了工具，如果主代理沒有允許，子代理也無法使用。</p>
+</div>
+
+<h4>Subagent 定義</h4>
+<pre><code>agents = {
+    "docs_researcher": AgentDefinition(
+        description="...",
+        prompt=docs_prompt,
+        tools=["WebSearch", "WebFetch"]
+    ),
+    "repo_analyzer": AgentDefinition(
+        description="...",
+        prompt=repo_prompt,
+        tools=["Bash", "Read", "Glob", "Grep"]
+    ),
+    "web_researcher": AgentDefinition(
+        description="...",
+        prompt=web_prompt,
+        tools=["WebSearch", "WebFetch"]
+    )
+}
+</code></pre>
+
+<h4>Skills 載入</h4>
+<pre><code># Skills 存放在 .claude/skills/ 目錄
+# 需要 Skill tool + setting_sources 配置
+setting_sources = ["user", "project"]
+</code></pre>
+</section>
+
+<section id="path">
+<h2>學習路徑</h2>
+
+<h3>漸進式建構流程</h3>
+<ol>
+  <li><strong>基礎骨架</strong>：建立最簡單的 Agent（只有 system_prompt + 對話迴圈）</li>
+  <li><strong>加入工具</strong>：Write、Bash、WebSearch、WebFetch</li>
+  <li><strong>加入 MCP</strong>：Notion MCP Server + 對應工具權限</li>
+  <li><strong>加入子代理</strong>：三個研究子代理 + Task tool</li>
+  <li><strong>加入 Skills</strong>：Skill tool + setting_sources + .claude/skills/ 目錄</li>
+</ol>
+
+<h3>教材資源</h3>
+<ul>
+  <li><code>L7/agent.py</code>：主要代理程式碼</li>
+  <li><code>L7/main.py</code>：進入點</li>
+  <li><code>L7/utils.py</code>：display_message 等輔助函式</li>
+  <li><code>L7/prompts/</code>：主代理和子代理的 prompt</li>
+  <li><code>L7/.claude/skills/learning-a-tool/</code>：研究 Skill</li>
+</ul>
+
+<h3>環境設定</h3>
+<pre><code># 初始化專案
+uv init && uv add claude-agent-sdk python-dotenv asyncio
+
+# .env 檔案
+ANTHROPIC_API_KEY=your-key
+NOTION_TOKEN=your-notion-token  # 選用
+
+# 執行
+uv run python agent.py
+</code></pre>
+</section>
+
+<section id="practice">
+<h2>實務應用</h2>
+
+<h3>子代理平行執行</h3>
+<p>三個子代理同時出發：docs_researcher 找官方文件、repo_analyzer 分析 GitHub 倉庫、web_researcher 搜尋教學和社群資源。這種平行化大幅縮短了研究時間。</p>
+
+<h3>Plan Mode</h3>
+<p>與 Claude Code 類似，你可以要求代理先展示計畫再執行。在本課的範例中：</p>
+<pre><code>User: Create a learning guide for MinerU. Show me the plan first.
+Agent: [shows research plan + output structure]
+User: Proceed.
+Agent: [spawns 3 subagents in parallel]
+</code></pre>
+
+<h3>MCP 整合：Notion 寫入</h3>
+<p>研究完成後，代理讀取 <code>resources.md</code>，轉換為 Notion rich blocks，寫入指定的 Notion 頁面。這展示了 Skills（研究方法）+ MCP（外部系統存取）+ Subagents（平行執行）的完整整合。</p>
+
+<div class="callout callout-tip">
+<p class="callout-title">資安團隊應用：自動化威脅情報研究</p>
+<p>用相同的架構建構威脅情報研究代理：一個子代理搜尋 CVE 資料庫，一個分析相關的 PoC 程式碼，一個收集供應商公告。用 Skill 定義情報分析方法論，用 MCP 寫入 Confluence 或 Notion。</p>
+</div>
+</section>
+
+<section id="pitfall">
+<h2>常見誤區</h2>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：子代理自動繼承主代理的工具權限</p>
+<p>錯。子代理的工具權限需要在兩個地方同時設定：(1) <code>allowed_tools</code>（全域允許清單），(2) <code>AgentDefinition.tools</code>（子代理可用工具）。兩者取交集。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：忽略安全考量</p>
+<p>課程中直接允許了 Write 和 Bash 工具而不需使用者確認。在生產環境中，你應該加入人機確認（interrupt）機制，就像 Claude Code 那樣。課程也明確提到這是「待改進」的部分。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：Skills 目錄結構錯誤</p>
+<p>在 Agent SDK 中，Skills 必須放在 <code>.claude/skills/</code> 目錄下，且檔案名稱必須是 <code>SKILL.md</code>（注意大小寫和複數形式）。</p>
+</div>
+</section>
+
+<section id="thinking">
+<h2>延伸思考</h2>
+
+<h3>Skill 作為 Orchestrator 的引導策略</h3>
+<p>本課展示了一個有趣的 Skill 使用模式：Skill 不是提供「如何做某件事」的知識，而是提供「如何協調多個代理做研究」的方法論。這開啟了「元 Skill」的設計空間——用 Skill 來定義代理的行為模式，而非具體任務。</p>
+
+<h3>思考題</h3>
+<ol>
+  <li>如果你要為 Skill 加入安全控制（例如限制 Bash 命令的範圍），你會在哪個層級實作？主代理、子代理、還是 Skill 本身？</li>
+  <li>子代理平行執行時，如果結果有矛盾（例如兩個來源的資訊不一致），主代理應該如何處理？你會在 Skill 中定義衝突解決策略嗎？</li>
+  <li>本課的 learning-a-tool Skill 用 Progressive Disclosure 載入 <code>progressive_learning.md</code>。如果這個參考檔案很大（>100 行），你會如何優化？</li>
+</ol>
+</section>
+
+<footer>
+  <a href="guide_005.html">&larr; 上一篇：Skills with the Claude API</a>
+  <a href="guide_007.html">下一篇：Skills vs Tools, MCP, and Subagents &rarr;</a>
+</footer>
+
+</div>
+</body>
+</html>

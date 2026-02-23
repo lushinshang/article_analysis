@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程導讀 02：Why Use Skills Part I — 從 Prompt 到 Skill 的演化</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="course-tag">DeepLearning.AI x Anthropic</span>
+  <h1>課程導讀 02：Why Use Skills Part I — 從 Prompt 到 Skill 的演化</h1>
+  <p class="meta">對應課程：Why Use Skills Part I | 影片時長：約 11 分鐘 | 對應教材：L1-partI</p>
+</header>
+
+<nav class="toc">
+  <h2>本篇目錄</h2>
+  <ol>
+    <li><a href="#core">核心概念</a></li>
+    <li><a href="#path">學習路徑</a></li>
+    <li><a href="#practice">實務應用</a></li>
+    <li><a href="#pitfall">常見誤區</a></li>
+    <li><a href="#thinking">延伸思考</a></li>
+  </ol>
+</nav>
+
+<section id="core">
+<h2>核心概念：為什麼需要 Skills？</h2>
+
+<h3>問題：反覆提示的痛點</h3>
+<p>本課用一個行銷分析場景來示範痛點。傳統做法是每次對話都要：</p>
+<ol>
+  <li>附上 CSV 資料</li>
+  <li>描述輸入格式與欄位</li>
+  <li>指定品質檢查、漏斗分析、效率指標</li>
+  <li>定義輸出格式</li>
+  <li>附上預算分配規則文件</li>
+</ol>
+
+<p>這些資訊每次都會被加入 context window，即使後續對話不需要。</p>
+
+<div class="callout callout-note">
+<p class="callout-title">關鍵洞察</p>
+<p>Context window 是公共財（public good）。每多塞一筆不必要的資料，就增加了 token 消耗、加速 context 填滿、提高回應出錯的可能性。</p>
+</div>
+
+<h3>解法：封裝成 Skill</h3>
+<p>將上述流程封裝成一個 <code>analyzing-marketing-campaign</code> Skill：</p>
+
+<pre><code>analyzing-marketing-campaign/
+├── SKILL.md              # 主要指令（分析流程、指標定義、輸出格式）
+└── references/
+    └── budget_reallocation_rules.md  # 僅在使用者要求時才載入
+</code></pre>
+
+<h3>SKILL.md 的結構</h3>
+<p>每個 SKILL.md 都有兩個部分：</p>
+<ol>
+  <li><strong>YAML Frontmatter</strong>：必須包含 <code>name</code>（名稱）和 <code>description</code>（描述）</li>
+  <li><strong>Markdown 主體</strong>：步驟化的指令內容</li>
+</ol>
+
+<pre><code>---
+name: analyzing-marketing-campaign
+description: Analyze weekly marketing campaign performance data, compute efficiency metrics, and provide budget reallocation recommendations.
+---
+
+## Input Requirements
+...
+
+## Data Quality Check
+...
+
+## Funnel Analysis
+...
+
+## Budget Reallocation
+When the user asks about budget reallocation, read references/budget_reallocation_rules.md
+</code></pre>
+
+<div class="key-concept">
+<h3>命名規則</h3>
+<ul>
+  <li>使用小寫字母、數字和連字號（hyphen）</li>
+  <li>避免使用保留關鍵字（如 Claude、Anthropic）</li>
+  <li>資料夾名稱必須與 YAML 中的 name 欄位一致</li>
+</ul>
+</div>
+</section>
+
+<section id="path">
+<h2>學習路徑</h2>
+
+<h3>本課的操作流程</h3>
+<ol>
+  <li><strong>體驗痛點</strong>：先用傳統 prompt 方式完成行銷分析（多輪對話）</li>
+  <li><strong>建立 Skill</strong>：建立 SKILL.md + references 目錄</li>
+  <li><strong>打包上傳</strong>：將 Skill 資料夾壓縮為 zip，上傳到 Claude.ai Settings &gt; Capabilities &gt; Skills</li>
+  <li><strong>實測</strong>：在新對話中附上 CSV，Claude 自動偵測並使用 Skill</li>
+  <li><strong>結合內建 Skills</strong>：用內建的 Excel Skill 產生試算表報告</li>
+</ol>
+
+<h3>教材資源</h3>
+<ul>
+  <li><strong>初始對話 Prompt</strong>：<code>L1-partI/prompts_initial_conversation.md</code></li>
+  <li><strong>CSV 範例資料</strong>：<code>L1-partI/campaign_data_week1.csv</code></li>
+  <li><strong>預算規則</strong>：<code>L1-partI/budget_reallocation_rules.md</code></li>
+  <li><strong>Skill 檔案</strong>：<code>L1-partI/skill/analyzing-marketing-campaign/</code></li>
+  <li><strong>使用 Skill 後的 Prompt</strong>：<code>L1-partI/prompts_with_skills.md</code></li>
+</ul>
+</section>
+
+<section id="practice">
+<h2>實務應用</h2>
+
+<h3>Skill 帶來的三大效益</h3>
+<table>
+  <tr><th>效益</th><th>說明</th></tr>
+  <tr><td>Context 效率</td><td>預算規則只在使用者要求時才載入，不會佔用不必要的 context</td></tr>
+  <tr><td>可攜性</td><td>同一個 Skill 可在 Claude.ai、Claude Code、Codex、Gemini CLI 等環境使用</td></tr>
+  <tr><td>團隊共享</td><td>封裝好的 Skill 可分享給團隊成員，確保分析流程一致</td></tr>
+</table>
+
+<h3>結合內建 Skills 的威力</h3>
+<p>課程展示了自建的行銷分析 Skill 搭配內建的 Excel Skill，自動產生包含以下工作表的試算表：</p>
+<ul>
+  <li>Executive Summary（摘要）</li>
+  <li>Funnel Analysis（漏斗分析）</li>
+  <li>Efficiency Analysis（效率分析）</li>
+</ul>
+
+<div class="callout callout-tip">
+<p class="callout-title">資安實務應用</p>
+<p>想像你建立了一個「弱點評估分析」Skill：定義了 CVSS 評分標準、風險分級規則、報告格式。搭配內建的 Excel Skill，就能自動從掃描結果產生合規報告。每週一鍵完成，不需要反覆描述流程。</p>
+</div>
+</section>
+
+<section id="pitfall">
+<h2>常見誤區</h2>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：把所有資訊都放進 SKILL.md</p>
+<p>像預算分配規則這類「只有部分場景需要」的內容，應該放在 <code>references/</code> 資料夾，在 SKILL.md 中用條件引用：「When the user asks about X, read references/X.md」。這就是 Progressive Disclosure 的實踐。</p>
+</div>
+
+<div class="callout callout-warning">
+<p class="callout-title">誤區：description 寫得太模糊</p>
+<p>Description 是模型判斷「何時觸發 Skill」的依據。<strong>好的描述</strong>會包含具體的觸發情境和關鍵字。例如「Analyze weekly marketing campaign performance from CSV data, compute CTR, CPA, ROAS metrics」比「Marketing analysis」好得多。</p>
+</div>
+</section>
+
+<section id="thinking">
+<h2>延伸思考</h2>
+
+<h3>Skill 設計 = Prompt Engineering + 軟體工程</h3>
+<p>設計一個好的 Skill 需要兩種思維的結合：</p>
+<ul>
+  <li><strong>Prompt Engineering</strong>：如何清楚地向模型傳達指令、設定期望輸出</li>
+  <li><strong>軟體工程</strong>：模組化、關注點分離、漸進式載入、版本控管</li>
+</ul>
+
+<h3>思考題</h3>
+<ol>
+  <li>你團隊中有哪些「每次都要解釋的 SOP」？它們能分解成哪些 SKILL.md + references？</li>
+  <li>如果兩個 Skill 的 description 有重疊，模型可能觸發錯誤的 Skill。你會如何設計 description 來避免這個問題？</li>
+  <li>Progressive Disclosure 的「條件載入」機制，與你在資安領域見過的哪些設計模式相似？</li>
+</ol>
+</section>
+
+<footer>
+  <a href="guide_001.html">&larr; 上一篇：導論</a>
+  <a href="guide_003.html">下一篇：Why Use Skills Part II &rarr;</a>
+</footer>
+
+</div>
+</body>
+</html>

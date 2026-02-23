@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程導讀 10：Agent Skills 總結 — 知識整合與速查手冊</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="course-tag">DeepLearning.AI x Anthropic</span>
+  <h1>課程導讀 10：Agent Skills 總結 — 知識整合與速查手冊</h1>
+  <p class="meta">對應課程：Agent Skills Conclusion | 課程總結與速查參考</p>
+</header>
+
+<nav class="toc">
+  <h2>本篇目錄</h2>
+  <ol>
+    <li><a href="#summary">全課精華摘要</a></li>
+    <li><a href="#cheatsheet">Skill 建立速查表</a></li>
+    <li><a href="#comparison">四環境比較表</a></li>
+    <li><a href="#ecosystem">生態系全景</a></li>
+    <li><a href="#checklist">品質檢查清單</a></li>
+    <li><a href="#resources">參考資源彙整</a></li>
+  </ol>
+</nav>
+
+<section id="summary">
+<h2>全課精華摘要</h2>
+
+<h3>Agent Skills 是什麼？</h3>
+<p>Agent Skills 是一種<strong>輕量級開放標準格式</strong>，用來將重複性工作流、專業知識和新能力封裝成可攜帶、可組合、可漸進式載入的資料夾。</p>
+
+<h3>課程核心學習成果</h3>
+<ol>
+  <li><strong>理解 Skills 的設計理念</strong>：Progressive Disclosure、Context Window 保護、開放標準</li>
+  <li><strong>掌握 Skill 結構</strong>：YAML Frontmatter + Markdown Body + /references + /scripts + /assets</li>
+  <li><strong>在四個環境中使用 Skills</strong>：Claude.ai、Claude API、Claude Code、Agent SDK</li>
+  <li><strong>區分 Skills 與其他組件</strong>：Tools（能力）、MCP（存取）、Subagents（隔離/平行）</li>
+  <li><strong>建立和評估自訂 Skills</strong>：最佳實踐、Skill Creator、單元測試</li>
+</ol>
+</section>
+
+<section id="cheatsheet">
+<h2>Skill 建立速查表</h2>
+
+<h3>最小可行 Skill</h3>
+<pre><code>my-skill/
+└── SKILL.md
+</code></pre>
+
+<pre><code>---
+name: my-skill
+description: "描述 Skill 做什麼以及何時使用。包含觸發關鍵字。"
+---
+
+## 步驟
+1. ...
+2. ...
+3. ...
+
+## 輸出格式
+...
+</code></pre>
+
+<h3>完整 Skill 結構</h3>
+<pre><code>my-skill/
+├── SKILL.md
+├── references/
+│   ├── detailed-guide.md
+│   └── faq.md
+├── scripts/
+│   ├── process.py
+│   └── validate.sh
+└── assets/
+    ├── templates/
+    │   ├── output.md
+    │   └── output.tex
+    └── images/
+        └── logo.png
+</code></pre>
+
+<h3>Frontmatter 速查</h3>
+<table>
+  <tr><th>欄位</th><th>必填</th><th>說明</th></tr>
+  <tr><td><code>name</code></td><td>是</td><td>小寫、連字號分隔、動詞+ing 形式、=目錄名</td></tr>
+  <tr><td><code>description</code></td><td>是</td><td>做什麼 + 何時用 + 觸發關鍵字</td></tr>
+  <tr><td><code>license</code></td><td>否</td><td>授權資訊</td></tr>
+  <tr><td><code>compatibility</code></td><td>否</td><td>環境需求</td></tr>
+  <tr><td><code>metadata</code></td><td>否</td><td>任意鍵值對</td></tr>
+  <tr><td><code>allowed-tools</code></td><td>否</td><td>預核准工具（實驗性）</td></tr>
+</table>
+</section>
+
+<section id="comparison">
+<h2>四環境比較表</h2>
+
+<table>
+  <tr><th>面向</th><th>Claude.ai / Desktop</th><th>Claude API</th><th>Claude Code</th><th>Agent SDK</th></tr>
+  <tr><td><strong>Skills 管理</strong></td><td>UI 上傳 zip</td><td>Files API 上傳</td><td>.claude/skills/ 目錄</td><td>.claude/skills/ 目錄</td></tr>
+  <tr><td><strong>Code Execution</strong></td><td>內建（自動）</td><td>Code Execution Tool（手動啟用）</td><td>本機直接存取</td><td>本機直接存取</td></tr>
+  <tr><td><strong>File System</strong></td><td>內建</td><td>Files API</td><td>本機</td><td>本機</td></tr>
+  <tr><td><strong>MCP 支援</strong></td><td>遠端 MCP（.ai）/ 本地 MCP（Desktop）</td><td>不適用</td><td>本地 MCP</td><td>本地 MCP</td></tr>
+  <tr><td><strong>子代理</strong></td><td>不適用</td><td>不適用</td><td>Task tool</td><td>AgentDefinition</td></tr>
+  <tr><td><strong>網路存取</strong></td><td>有</td><td>沙盒無網路</td><td>有</td><td>有</td></tr>
+  <tr><td><strong>Skills 同步</strong></td><td colspan="4" style="text-align:center">各環境<strong>獨立管理</strong>，不自動同步</td></tr>
+</table>
+</section>
+
+<section id="ecosystem">
+<h2>生態系全景</h2>
+
+<h3>組件定位速查</h3>
+<table>
+  <tr><th>我需要...</th><th>用什麼</th></tr>
+  <tr><td>教代理「怎麼做」</td><td><strong>Skill</strong></td></tr>
+  <tr><td>連接外部資料/系統</td><td><strong>MCP Server</strong></td></tr>
+  <tr><td>隔離 context 或平行執行</td><td><strong>Subagent</strong></td></tr>
+  <tr><td>底層系統操作（bash、讀寫檔案）</td><td><strong>Tool</strong></td></tr>
+  <tr><td>可重複、可預測的工作流</td><td><strong>Skill</strong></td></tr>
+  <tr><td>跨對話持久化知識</td><td><strong>Skill</strong></td></tr>
+  <tr><td>只在部分對話需要的工具</td><td><strong>Skill（scripts/ 按需載入）</strong></td></tr>
+</table>
+
+<h3>Progressive Disclosure 三層架構</h3>
+<table>
+  <tr><th>層級</th><th>載入時機</th><th>內容</th><th>佔用 Context</th></tr>
+  <tr><td>Layer 1</td><td>永遠</td><td>name + description</td><td>極少</td></tr>
+  <tr><td>Layer 2</td><td>Skill 觸發時</td><td>SKILL.md 主體</td><td>中等</td></tr>
+  <tr><td>Layer 3</td><td>視需要</td><td>references/ scripts/ assets/</td><td>按需</td></tr>
+</table>
+</section>
+
+<section id="checklist">
+<h2>品質檢查清單</h2>
+
+<h3>Skill 發佈前檢查</h3>
+<ul>
+  <li>[ ] YAML frontmatter 包含 name 和 description</li>
+  <li>[ ] name 與目錄名稱一致</li>
+  <li>[ ] name 使用小寫+連字號+動詞ing 形式</li>
+  <li>[ ] description 描述「做什麼」和「何時用」</li>
+  <li>[ ] SKILL.md 在 500 行以內</li>
+  <li>[ ] 詳細參考資料已移到 references/</li>
+  <li>[ ] 腳本依賴已明確列出</li>
+  <li>[ ] 腳本標註「執行」或「閱讀」用途</li>
+  <li>[ ] 路徑使用正斜線（/）</li>
+  <li>[ ] 參考保持一層深度</li>
+  <li>[ ] 超過 100 行的參考檔案有 TOC</li>
+  <li>[ ] 經過 Skill Creator 最佳實踐檢查</li>
+  <li>[ ] 有單元測試定義（queries + expected_behavior）</li>
+  <li>[ ] 在目標模型上測試通過</li>
+  <li>[ ] 收集過人工回饋</li>
+</ul>
+</section>
+
+<section id="resources">
+<h2>參考資源彙整</h2>
+
+<h3>官方文件</h3>
+<ul>
+  <li><a href="https://agentskills.io/specification">Agent Skills 規格文件</a></li>
+  <li><a href="https://agentskills.io/what-are-skills">What are Skills?</a></li>
+  <li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Anthropic Agent Skills 文件</a></li>
+  <li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices">Skill 撰寫最佳實踐</a></li>
+</ul>
+
+<h3>工具與範例</h3>
+<ul>
+  <li><a href="https://github.com/anthropics/skills">Anthropic Skills 倉庫（內建 + 範例 Skills）</a></li>
+  <li><a href="https://github.com/anthropics/claude-cookbooks/tree/main/skills">Claude Cookbook: Skills</a></li>
+  <li><a href="https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf">Building Skills for Claude 完整指南（PDF）</a></li>
+</ul>
+
+<h3>API 文件</h3>
+<ul>
+  <li><a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool">Code Execution Tool</a></li>
+  <li><a href="https://platform.claude.com/docs/en/build-with-claude/files">Files API</a></li>
+  <li><a href="https://platform.claude.com/docs/en/build-with-claude/skills-guide">Skills with API Guide</a></li>
+  <li><a href="https://platform.claude.com/docs/en/build-with-claude/streaming">Streaming API</a></li>
+</ul>
+
+<h3>部落格與文章</h3>
+<ul>
+  <li><a href="https://claude.com/blog/skills">Introducing Agent Skills</a></li>
+  <li><a href="https://www.claude.com/blog/skills-explained">Skills Explained</a></li>
+  <li><a href="https://support.claude.com/en/articles/12580051-teach-claude-your-way-of-working-using-skills">Teach Claude your Way of Working</a></li>
+</ul>
+
+<h3>課程教材</h3>
+<ul>
+  <li><a href="https://github.com/https-deeplearning-ai/sc-agent-skills-files">課程完整教材倉庫</a></li>
+  <li><a href="https://agentskills.io/home#adoption">Skills 相容平台清單</a></li>
+</ul>
+</section>
+
+<footer>
+  <a href="guide_009.html">&larr; 上一篇：Conclusion</a>
+  <span>Agent Skills with Anthropic — 課程導讀系列（完）</span>
+</footer>
+
+</div>
+</body>
+</html>

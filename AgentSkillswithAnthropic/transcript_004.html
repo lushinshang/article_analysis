@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exploring Pre-Built Skills - Transcript</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="course-tag">DeepLearning.AI x Anthropic</span>
+      <h1>Exploring Pre-Built Skills</h1>
+      <p class="meta">Agent Skills with Anthropic | Duration: 18 minutes</p>
+    </header>
+
+    <section class="transcript">
+      <h2>English Transcript</h2>
+
+      <p>In the first lesson, Claude AI used the Excel skill to create spreadsheets displaying the marketing results. The Excel skill is one of Anthropic's pre-built skills, which also include a PowerPoint, Word, and PDF skill, as well as a skill creation skill. Let's take a look at those.</p>
+
+      <p>Now that we've seen how skills fit in the entire AI ecosystem, let's take a look at some of the pre-built skills that you can use out of the box with Claude AI and Claude Desktop, and that you can install yourself with tools like Claude Code.</p>
+
+      <p>Inside of this repository that lives at github.com/anthropic/skills. Let's take a look at the skills folder and see which built-in ones that we have. All of these are ready for production usage.</p>
+
+      <p>It's important to note that this list of skills, while created at Anthropic, is actually bucketed into two different sections. The skills for Microsoft Docs, PDFs, Power Points, and Excel are known as document skills. These are built in and always used in tools like Claude AI. The remainder of these skills are examples that we've created that you can toggle on and off in Claude, but by default with the exception of skill-creator are toggled off.</p>
+
+      <p>Let's first start by analyzing the PowerPoint skill. We can see just like other structures that we have a SKILL.md file as well as other files and folders to reference. Inside of this SKILL.md, we have that same YAML Frontmatter that includes the name and the description.</p>
+
+      <p>When we take a look at how this skill works and what it does, we've got an overview. The users may ask to create, edit, analyze contents of a PowerPoint file. Here's what it looks like, here's how you read it. And if there are particular tasks that need to be done, there are underlying scripts to go ahead and execute.</p>
+
+      <p>Remember, these are not executed right out of the box. These are only loaded and executed when necessary.</p>
+
+      <p>There's quite a bit that we can do with PowerPoint presentations, colors, typography, as you can imagine, this is how we can start to make things that look nicer and look more like real-world presentations out of the box. There are design principles that we have, requirements that are necessary, and color palette selections that we can have Claude pick from when the user does not specify them.</p>
+
+      <p>The next skill I want to show you is a little bit of a meta idea here, and that's called the skill-creator. And the skill creator is a skill that serves the purpose of programmatically creating skills for you.</p>
+
+      <p>Instead of having to do things from scratch and create the necessary files and folder structure, the skill creator can do that for you. Let's take a look at the SKILL.md file and see what's happening here.</p>
+
+      <p>We specify in this SKILL.md file what skill is, what it provides, and then we include some of the best practices associated with skills. We're going to dive into those best practices in the next lesson.</p>
+
+      <p>When we take a look at the skill creation process, we're extremely explicit with the steps that we have here. Since we want to use this skill to create a predictable workflow, we want to be extremely explicit with what the steps are, how to follow them, and what to skip only if some reason exists.</p>
+
+      <p>We start with concrete examples, we plan reusable skill contents, and here you can start to see examples that are very helpful for Claude to pattern match when there's a skill you'd like to create.</p>
+
+      <p>When we start initializing the skill, here we're running underlying Python scripts to perform the task necessary. Inside of the scripts folder, I have three Python files here. A script to initialize the skill and provide the underlying text, a Python file to package that skill, and then a script to validate that skill.</p>
+
+      <p>The underlying code to initialize a skill takes an existing template with some YAML Frontmatter and some placeholders and to-dos, and fills that in based on the data that is coming in. Once we've generated the necessary files, we can package that up. Here you can see we're bringing in the necessary modules to zip our skill and make sure that we're doing this in the right folder and file structure.</p>
+
+      <p>Finally, we have one last script to perform a validation of our skill. Make sure that a SKILL.md exists, validate some of the YAML Frontmatter, and make sure that what we put inside of our folder and files is correct.</p>
+
+      <p>We're going to be leveraging this skill-creator skill to take existing content that we have and package it up into a reusable and modular script.</p>
+
+      <p>Now let's go ahead and shift gears back to Claude and see how to put together built-in skills, our own skills, and a predictable workflow with an MCP server.</p>
+
+      <p>Back in Claude, let's take a look and make sure that we have the correct skills enabled and where those live. Back in settings, inside of capabilities. We saw previously, we can create skills in this section. What I want to show you are the example skills that we have. By default, these skills are turned off. If we want to toggle them on, we can absolutely do so. The skill that is toggled on by default is the skill-creator that we just saw.</p>
+
+      <p>It's important to note that while the skill-creator is extremely effective at creating underlying skills and structure necessary, we still have to be intentional about the prompt that we provide and the data that goes in to the skill that we're going to make.</p>
+
+      <p>What we're going to do now is put all of these ideas around skills, MCP, and prompting together. First, we're going to modify our previous skill that we created for analyzing campaigns to not use a CSV for data, but instead BigQuery.</p>
+
+      <p>If you're not familiar, BigQuery is a data store powered by Google, and in order to bring in the necessary tooling and context to work with BigQuery, we're going to connect an MCP server.</p>
+
+      <p>So we're going to use the skill-creator skill to modify our previous marketing analyzing skill to use BigQuery. We're then going to use skill-creator to create another skill for brand guidelines. We'll include a file that specifies the guidelines as well as logos, and we'll build another skill to perform that task.</p>
+
+      <p>Finally, we'll take our two skills that we used to extract and analyze data and to leverage brand guidelines and combine them with a built-in skill for creating PowerPoint presentations to create a workflow that makes use of prompting, skills, and the model context protocol.</p>
+
+      <p>Before we jump in, you might be wondering where the Excel and PowerPoint and other document skills that we saw before live. These are built in to Claude AI and are not things that can be toggled on and off.</p>
+
+      <p>Before we modify our analyzing marketing campaign skill to use BigQuery, let's also make a note that we're using Claude desktop here to connect to a local MCP server to leverage BigQuery. The underlying command and arguments and environment variables are configured in Settings, Developer.</p>
+
+      <p>For this example, we don't have to use BigQuery, you can use a database, some external data store, but we just want to showcase what it looks like with skills and MCP servers working together.</p>
+
+      <p>Let's go ahead and modify our previous skill to now use BigQuery instead of CSVs for data access. To make sure this is working correctly, let's first ask Claude to list the tables in BigQuery that exist. We're going to make use of the MCP server that we have. There's a data set called marketing that contains a single table.</p>
+
+      <p>Now we're going to ask Claude to show the schema of the table. And this looks great. We're going to make use of this schema when we update our analyzing-marketing-campaign skill.</p>
+
+      <p>We ask Claude to update our skill so that instead of a CSV upload, we pull from BigQuery. The first thing it's going to do is analyze the necessary skill structure and use our skill creator skill to modify the existing skill and follow best practices.</p>
+
+      <p>We can see instead of using a CSV, we're using BigQuery and following the best practice of using MCP servers with skills where we specify the server and the name of the tool. It's best practice not to use an ambiguous date range, so we ask the user to clarify, and when we show an example of querying, we're specifying a date range.</p>
+
+      <p>In order to make sure this is saved to subsequent conversations, let's go ahead and copy this skill.</p>
+
+      <p>Now we're going to shift gears and create a new skill for brand guidelines. Let's upload a file with brand guidelines as well as some logos. These brand guidelines include a color palette, supporting colors, typography. Claude knows how to design things, but where skills really shine are where you can tell Claude exactly how you want things done for your company.</p>
+
+      <p>The skill creator creates a SKILL.md file following best practices with a name and description, as well as underlying folders with the necessary data and logos.</p>
+
+      <p>Now that we've updated our skill to move from CSVs to BigQuery, and created a new skill for brand guidelines, let's combine that to build a workflow alongside the built-in PowerPoint presentation skill to first analyze our data and then generate a presentation.</p>
+
+      <p>We'll analyze our marketing data for a different week in BigQuery, then based on that data, generate a presentation with our brand guidelines. We read the relevant skill files, query BigQuery, and use these metrics to generate a PowerPoint presentation with our brand styling.</p>
+
+      <p>We can see the underlying CSS and HTML being written for our slides, and then we lean into the built-in skill for creating the presentation. The model validates the slides and goes back to edit anything necessary.</p>
+
+      <p>The result: really nice looking slides with the colors, fonts, logos, and everything I want for my company. We have efficiency analysis, funnel analysis, and executive summary.</p>
+
+      <p>What we're seeing here is an underlying PowerPoint presentation created from a built-in skill, combined with two skills that we've made alongside an MCP server pulling in data from BigQuery.</p>
+
+      <p>In the next lesson, we'll explore some of the best practices around creating skills and take a look at two other custom skills that we create.</p>
+    </section>
+
+    <hr style="border:none;border-top:1px dashed var(--card-border);margin:2rem 0;">
+
+    <section class="transcript">
+      <h2>繁體中文（台灣）</h2>
+
+      <p>在第一課中，Claude AI 使用 Excel 技能建立了顯示行銷結果的試算表。Excel 技能是 Anthropic 預建技能之一，還包括 PowerPoint、Word、PDF 技能，以及技能建立技能。讓我們來看看這些。</p>
+
+      <p>現在我們了解了技能如何融入整個 AI 生態系統，讓我們看看你可以在 Claude AI 和 Claude Desktop 中直接使用的預建技能，以及可以透過 Claude Code 等工具自行安裝的技能。</p>
+
+      <p>在 github.com/anthropic/skills 這個倉庫中，所有這些技能都已準備好供生產環境使用。</p>
+
+      <p>重要的是，這些技能分為兩類：用於 Microsoft Docs、PDF、PowerPoint 和 Excel 的「文件技能」（Document Skills）是內建的，在 Claude AI 中始終可用。其餘的是範例技能，你可以在 Claude 中開啟或關閉，但預設除了 skill-creator 之外都是關閉的。</p>
+
+      <p>先來分析 PowerPoint 技能。它有一個 SKILL.md 檔案以及其他參考檔案和資料夾，包含 YAML Frontmatter 的名稱和描述。這個技能可以建立、編輯、分析 PowerPoint 檔案的內容，並且有底層腳本可以執行。</p>
+
+      <p>記住，這些腳本不是一開始就執行的，而是只在需要時才載入和執行。</p>
+
+      <p>PowerPoint 技能可以處理很多事情：顏色、字體排版、設計原則、需求規格，以及當使用者未指定時可由 Claude 選擇的色彩調色盤。</p>
+
+      <p>接下來要介紹的是一個 meta 概念 — skill-creator。它是一個用於程式化建立技能的技能。不需要從零開始建立必要的檔案和資料夾結構，skill creator 可以為你完成。</p>
+
+      <p>skill-creator 的 SKILL.md 中明確指定了步驟，包含具體範例和可重用的技能內容模式。初始化技能時會執行底層 Python 腳本：init_skill（初始化）、package（打包）和 validate（驗證）。</p>
+
+      <p>回到 Claude，我們要結合內建技能、自訂技能和 MCP 伺服器。首先修改之前的行銷分析技能，從 CSV 改為使用 BigQuery（Google 的資料存儲服務），透過 MCP 伺服器連接。</p>
+
+      <p>接著使用 skill-creator 建立品牌指南技能，包含色彩調色盤、字體排版和 logo。Claude 知道如何設計，但技能真正發光的地方是你可以告訴 Claude 你的公司要怎麼做。</p>
+
+      <p>最後，我們結合三個技能：行銷資料分析技能（BigQuery）、品牌指南技能，以及內建的 PowerPoint 技能，建立了一個完整的工作流程：從 BigQuery 分析行銷資料，然後生成符合品牌風格的簡報。</p>
+
+      <p>結果是漂亮的投影片，包含效率分析、漏斗分析和執行摘要，所有顏色、字體和 logo 都符合公司規範。</p>
+
+      <p>在下一課中，我們將探索建立技能的最佳實務，並看看另外兩個自訂技能。</p>
+    </section>
+
+    <footer>
+      <span>Agent Skills with Anthropic - DeepLearning.AI</span>
+      <span>Transcript 004</span>
+    </footer>
+  </div>
+</body>
+</html>
