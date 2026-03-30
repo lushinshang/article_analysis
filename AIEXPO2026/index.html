@@ -1,0 +1,1717 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI EXPO 2026 三天整體宏觀脈絡</title>
+  <style>
+    :root {
+      --ink: #1a1f36;
+      --ink-light: #4a5068;
+      --ink-muted: #8890a8;
+      --bg: #fafaf8;
+      --surface: #ffffff;
+      --border: #e8e8e4;
+      --accent: #4338ca;
+      --accent-soft: #eef2ff;
+      --accent-mid: #c7d2fe;
+      --green: #059669;
+      --green-soft: #ecfdf5;
+      --amber: #d97706;
+      --amber-soft: #fffbeb;
+      --rose: #e11d48;
+      --rose-soft: #fff1f2;
+      --teal: #0d9488;
+      --teal-soft: #f0fdfa;
+      --violet: #7c3aed;
+      --violet-soft: #f5f3ff;
+      --radius: 8px;
+      --shadow: 0 1px 4px rgba(26,31,54,0.07), 0 4px 16px rgba(26,31,54,0.05);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── 頂部橫幅 ── */
+    .banner {
+      background: linear-gradient(135deg, #1a1f36 0%, #2d3561 60%, #3730a3 100%);
+      color: white;
+      padding: 3.5rem 2rem 3rem;
+    }
+    .banner-inner { max-width: 820px; margin: 0 auto; }
+    .banner-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      color: rgba(255,255,255,0.85);
+    }
+    .banner h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .banner-lead {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+    .banner-meta {
+      margin-top: 1.75rem;
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+    }
+    .banner-meta span { display: flex; align-items: center; gap: 5px; }
+
+    /* ── 主體佈局 ── */
+    .wrapper { max-width: 820px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    /* ── 一句話總結 ── */
+    .hero-callout {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 3.5rem;
+      font-size: 1.05rem;
+      color: var(--ink);
+      line-height: 1.75;
+    }
+    .hero-callout strong { color: var(--accent); }
+
+    /* ── 章節標題 ── */
+    .section-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 1.75rem;
+    }
+    .section-number {
+      width: 32px; height: 32px;
+      background: var(--ink);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .section-header h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .content-block {
+      margin-bottom: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .content-block:last-child { border-bottom: none; }
+
+    /* ── 五層架構卡片 ── */
+    .layer-list { display: flex; flex-direction: column; gap: 1rem; }
+    .layer-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .layer-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .layer-header:hover { background: var(--bg); }
+    .layer-num {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .l1 .layer-num { background: var(--accent-soft); color: var(--accent); }
+    .l2 .layer-num { background: var(--green-soft); color: var(--green); }
+    .l3 .layer-num { background: var(--amber-soft); color: var(--amber); }
+    .l4 .layer-num { background: var(--rose-soft); color: var(--rose); }
+    .l5 .layer-num { background: var(--teal-soft); color: var(--teal); }
+    .layer-title {
+      flex: 1;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .layer-speaker {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2px 10px;
+      white-space: nowrap;
+    }
+    .layer-chevron {
+      color: var(--ink-muted);
+      font-size: 0.75rem;
+      margin-left: 4px;
+      transition: transform 0.2s;
+    }
+    .layer-card.open .layer-chevron { transform: rotate(180deg); }
+    .layer-body {
+      display: none;
+      padding: 0 1.25rem 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .layer-card.open .layer-body { display: block; }
+    .layer-body p { margin-top: 0.85rem; font-size: 0.93rem; color: var(--ink-light); line-height: 1.75; }
+    .layer-body ol, .layer-body ul { padding-left: 1.4em; margin-top: 0.75rem; }
+    .layer-body li { margin: 0.35rem 0; font-size: 0.93rem; color: var(--ink-light); }
+    .layer-body strong { color: var(--ink); font-weight: 600; }
+    .layer-body .signal {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg);
+      border-radius: 6px;
+      font-size: 0.88rem;
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    /* 數據圖片 */
+    .data-figures {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    @media (max-width: 560px) { .data-figures { grid-template-columns: 1fr; } }
+    .data-fig {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .data-fig img {
+      width: 100%;
+      display: block;
+    }
+    .data-fig figcaption {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      line-height: 1.4;
+    }
+
+    /* ── 產業鏈 ── */
+    .chain {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+    .chain-flow {
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--ink-light);
+    }
+    .chain-node {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 3px 9px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+    .chain-arrow { color: var(--ink-muted); font-size: 0.75rem; }
+
+    /* ── 議程表 ── */
+    .agenda-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; font-size: 0.9rem; }
+    .agenda-table thead tr { background: var(--ink); color: white; }
+    .agenda-table thead th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; font-size: 0.82rem; letter-spacing: 0.03em; }
+    .agenda-table tbody tr { border-bottom: 1px solid var(--border); }
+    .agenda-table tbody tr:hover { background: var(--bg); }
+    .agenda-table td { padding: 0.9rem 1rem; vertical-align: top; }
+    .agenda-table td:first-child { white-space: nowrap; }
+    .module-tag {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 4px;
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+    .tag-1 { background: var(--accent-soft); color: var(--accent); }
+    .tag-2 { background: var(--green-soft); color: var(--green); }
+    .tag-3 { background: var(--amber-soft); color: var(--amber); }
+    .tag-4 { background: var(--rose-soft); color: var(--rose); }
+    .tag-5 { background: var(--teal-soft); color: var(--teal); }
+    .agenda-speaker { font-size: 0.78rem; color: var(--ink-muted); margin-top: 3px; }
+    .agenda-q { font-size: 0.83rem; color: var(--ink-light); line-height: 1.5; }
+
+    /* ── 交叉主題 ── */
+    .cross-theme {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .cross-theme h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .theme-num {
+      width: 22px; height: 22px;
+      background: var(--ink);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .cross-theme ul { padding-left: 1.25em; }
+    .cross-theme li { font-size: 0.88rem; color: var(--ink-light); margin: 0.3rem 0; line-height: 1.6; }
+
+    /* ── 診斷結果 ── */
+    .diagnosis {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .diagnosis p { font-size: 0.93rem; color: var(--ink-light); line-height: 1.75; margin-bottom: 1rem; }
+    .causal-chain {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+      background: var(--bg);
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      font-size: 0.84rem;
+    }
+    .causal-node {
+      background: var(--rose-soft);
+      color: var(--rose);
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-weight: 600;
+    }
+    .causal-arrow { color: var(--ink-muted); }
+
+    /* ── 供需對話 ── */
+    .supply-demand {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 600px) { .supply-demand { grid-template-columns: 1fr; } }
+    .sd-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+    .sd-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid; }
+    .sd-supply h4 { color: var(--green); border-color: var(--green); }
+    .sd-demand h4 { color: var(--rose); border-color: var(--rose); }
+    .sd-card ul { padding-left: 1.2em; }
+    .sd-card li { font-size: 0.85rem; color: var(--ink-light); margin: 0.35rem 0; line-height: 1.55; }
+
+    /* ── 成熟度路徑 ── */
+    .maturity-steps { display: flex; flex-direction: column; gap: 0; }
+    .maturity-step {
+      display: flex; gap: 1rem;
+      padding: 1.25rem 1.25rem 1.25rem 0;
+      position: relative;
+    }
+    .step-connector {
+      display: flex; flex-direction: column; align-items: center;
+      flex-shrink: 0; width: 40px;
+    }
+    .step-dot {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+    .step-line {
+      width: 2px; flex: 1; min-height: 20px;
+      background: var(--border);
+      margin-top: 4px;
+    }
+    .maturity-step:last-child .step-line { display: none; }
+    .s1 .step-dot { background: var(--accent-soft); color: var(--accent); }
+    .s2 .step-dot { background: var(--amber-soft); color: var(--amber); border: 2px dashed var(--amber); }
+    .s3 .step-dot { background: var(--green-soft); color: var(--green); }
+    .s4 .step-dot { background: var(--violet-soft); color: var(--violet); }
+    .step-content { flex: 1; padding-top: 6px; }
+    .step-content h4 { font-size: 0.9rem; font-weight: 700; color: var(--ink); margin-bottom: 0.25rem; }
+    .step-content .step-quote { font-size: 0.82rem; color: var(--ink-muted); font-style: italic; margin-bottom: 0.5rem; }
+    .step-content ul { padding-left: 1.2em; }
+    .step-content li { font-size: 0.85rem; color: var(--ink-light); margin: 0.2rem 0; }
+    .step-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    .badge-current { background: var(--amber-soft); color: var(--amber); }
+
+    /* ── 十大趨勢 ── */
+    .trends-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+    @media (max-width: 560px) { .trends-grid { grid-template-columns: 1fr; } }
+    .trend-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      display: flex; gap: 0.85rem; align-items: flex-start;
+    }
+    .trend-n {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--border);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 32px;
+      font-variant-numeric: tabular-nums;
+    }
+    .trend-card:hover .trend-n { color: var(--accent-mid); }
+    .trend-text strong { font-size: 0.88rem; font-weight: 700; color: var(--ink); display: block; margin-bottom: 3px; }
+    .trend-text span { font-size: 0.82rem; color: var(--ink-light); line-height: 1.5; }
+
+    /* ── 三句濃縮 ── */
+    .final-quotes { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .final-quote {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .quote-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .final-quote p { font-size: 0.95rem; font-weight: 600; color: var(--ink); line-height: 1.6; }
+
+    .conclusion-box {
+      background: linear-gradient(135deg, #1a1f36, #2d3561);
+      color: white;
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      text-align: center;
+    }
+    .conclusion-box p { font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+    .conclusion-box strong { color: #a5b4fc; }
+
+    /* ── 研究框架表 ── */
+    .framework-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .framework-table thead tr { background: var(--ink); color: white; }
+    .framework-table thead th { padding: 0.7rem 1rem; text-align: left; font-size: 0.8rem; letter-spacing: 0.03em; }
+    .framework-table tbody tr { border-bottom: 1px solid var(--border); }
+    .framework-table tbody tr:hover { background: var(--bg); }
+    .framework-table td { padding: 0.85rem 1rem; vertical-align: top; }
+    .framework-table td:first-child { font-weight: 700; color: var(--ink-muted); text-align: center; }
+
+    /* ── 內文樣式 ── */
+    p { margin: 0.8rem 0; font-size: 0.95rem; color: var(--ink-light); line-height: 1.8; }
+    p strong { color: var(--ink); font-weight: 600; }
+    .intro-p { font-size: 1rem; color: var(--ink-light); line-height: 1.8; margin-bottom: 1.25rem; }
+
+    /* ── 個人心得區塊 ── */
+    .reflection-block {
+      background: #fffbf5;
+      border: 1px solid #e8d8b8;
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+    .reflection-block::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #d4a843, #b87333);
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+    .reflection-block h4 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #7c4f0a;
+      margin: 0 0 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .reflection-block p {
+      color: #4a3a28;
+      font-size: 0.93rem;
+      line-height: 1.85;
+      margin: 0.6rem 0;
+    }
+    .reflection-block p strong { color: #5c3a08; }
+    .reflection-block ul {
+      margin: 0.6rem 0 0;
+      padding-left: 1.4rem;
+    }
+    .reflection-block ul li {
+      font-size: 0.92rem;
+      color: #4a3a28;
+      line-height: 1.75;
+      margin-bottom: 0.4rem;
+    }
+    .reflection-block ul li strong { color: #5c3a08; }
+
+    /* ── 技術演進時間軸 ── */
+    .tech-timeline {
+      display: flex;
+      gap: 0;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid #e8d8b8;
+    }
+    .tl-year {
+      flex: 1;
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      border-right: 1px solid #e8d8b8;
+      background: #fffdf8;
+    }
+    .tl-year:last-child { border-right: none; }
+    .tl-year.tl-now {
+      background: linear-gradient(135deg, #fff8e8, #fef0cc);
+    }
+    .tl-year-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #b87333;
+      text-transform: uppercase;
+    }
+    .tl-year.tl-now .tl-year-label { color: #c8520a; }
+    .tl-year-topic {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #3a2a14;
+    }
+    .tl-year-desc {
+      font-size: 0.8rem;
+      color: #7a6040;
+      line-height: 1.5;
+    }
+    .tl-now-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      background: #c8520a;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── 焦點位移圖 ── */
+    .focus-shift {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #e8d8b8;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid #e8d8b8;
+      margin: 1.25rem 0;
+    }
+    .fs-card {
+      background: #fffdf8;
+      padding: 1.1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .fs-card.fs-now { background: linear-gradient(135deg, #fff8e8, #fef0cc); }
+    .fs-phase {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #b87333;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .fs-card.fs-now .fs-phase { color: #c8520a; }
+    .fs-title { font-size: 1rem; font-weight: 700; color: #3a2a14; }
+    .fs-sub { font-size: 0.8rem; color: #7a6040; line-height: 1.5; }
+    .fs-key { font-size: 0.78rem; font-weight: 600; color: #5c3a08; margin-top: 0.25rem; }
+
+    /* ── 部署光譜 ── */
+    .deploy-spectrum {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    .ds-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.9rem 1.1rem;
+      background: #fffdf8;
+      border: 1px solid #e8d8b8;
+      border-radius: var(--radius);
+    }
+    .ds-label {
+      min-width: 60px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #b87333;
+      padding-top: 2px;
+      letter-spacing: 0.03em;
+    }
+    .ds-content { flex: 1; }
+    .ds-title { font-size: 0.9rem; font-weight: 700; color: #3a2a14; margin-bottom: 0.25rem; }
+    .ds-desc { font-size: 0.82rem; color: #7a6040; line-height: 1.55; }
+    .ds-row.ds-edge {
+      background: linear-gradient(135deg, #fff8e8, #fef0cc);
+      border-color: #d4a843;
+    }
+    .ds-row.ds-edge .ds-label { color: #c8520a; }
+
+    /* ── 龍蝦時間軸（水平步驟條） ── */
+    .agent-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin: 1.25rem 0;
+    }
+    .as-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+    }
+    .as-dot-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .as-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e8d8b8;
+      border: 2px solid #d4a843;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #7c4f0a;
+      flex-shrink: 0;
+    }
+    .as-step.as-now .as-dot {
+      background: #d4a843;
+      color: white;
+      border-color: #b87333;
+    }
+    .as-line {
+      width: 2px;
+      flex: 1;
+      min-height: 16px;
+      background: #e8d8b8;
+      margin: 3px 0;
+    }
+    .as-body { padding-top: 3px; padding-bottom: 0.5rem; }
+    .as-title { font-size: 0.88rem; font-weight: 700; color: #3a2a14; }
+    .as-step.as-now .as-title { color: #c8520a; }
+    .as-desc { font-size: 0.8rem; color: #7a6040; line-height: 1.5; margin-top: 2px; }
+
+    /* ── 警示框 ── */
+    .caution-box {
+      background: linear-gradient(135deg, #fff8e8, #fff3d6);
+      border: 1.5px solid #d4a843;
+      border-radius: var(--radius);
+      padding: 1.1rem 1.3rem;
+      margin-top: 1.25rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+    }
+    .caution-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .caution-box p {
+      font-size: 0.9rem;
+      color: #4a3a28;
+      line-height: 1.75;
+      margin: 0;
+    }
+    .caution-box p strong { color: #7c4f0a; }
+
+    /* ── 心得區塊標題 ── */
+    .reflection-banner {
+      background: linear-gradient(135deg, #3d2a0a, #5c3a08);
+      color: white;
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .reflection-banner .rb-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #d4a843;
+      text-transform: uppercase;
+    }
+    .reflection-banner h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.4;
+    }
+    .reflection-banner p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (max-width: 640px) {
+      .tech-timeline { flex-direction: column; }
+      .focus-shift { grid-template-columns: 1fr; }
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--ink-muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── 分隔線標題 ── */
+    .section-divider {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 2rem 0 1.5rem;
+    }
+    .section-divider h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ════════════════════════════════════════
+       RWD — 768px（平板）
+    ════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .banner h1 { font-size: 1.75rem; }
+      .banner-lead { font-size: 0.92rem; }
+
+      /* 議程表格 — 橫向捲動 */
+      .agenda-table, .framework-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 0.83rem;
+      }
+
+      /* 趨勢格 2→2（維持，不動） */
+      /* supply-demand 已有自己的 600px breakpoint */
+    }
+
+    /* ════════════════════════════════════════
+       RWD — 640px（手機橫向 / 小平板）
+    ════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      /* 基礎佈局 */
+      .wrapper { padding: 1.75rem 1rem 3rem; }
+      .banner  { padding: 2.25rem 1rem 1.75rem; }
+      .banner h1 { font-size: 1.5rem; line-height: 1.3; }
+      .banner-lead { font-size: 0.88rem; }
+      .banner-meta { gap: 0.75rem; flex-direction: column; }
+      .hero-callout { padding: 1rem 1.1rem; font-size: 0.9rem; }
+
+      /* 段落標題 */
+      .content-block { padding: 1.5rem 1.1rem; margin-bottom: 1.25rem; }
+      .section-header { margin-bottom: 1.25rem; }
+      .section-header h2 { font-size: 1.1rem; }
+
+      /* 五層卡片 */
+      .layer-speaker { display: none; }
+      .layer-title   { font-size: 0.9rem; }
+      .layer-body    { padding: 1rem 1rem 1.25rem; }
+
+      /* 圖片區：單欄 */
+      .data-figures  { grid-template-columns: 1fr; }
+      .data-fig figcaption { font-size: 0.75rem; }
+
+      /* 產業鏈節點 */
+      .chain-flow    { gap: 4px; }
+      .chain-node    { font-size: 0.75rem; padding: 4px 8px; }
+      .chain-arrow   { font-size: 0.75rem; }
+
+      /* 議程 / 框架表格 — 橫向捲動 */
+      .agenda-table, .framework-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+      .agenda-table td, .framework-table td { white-space: normal; }
+
+      /* 跨場主題 */
+      .cross-theme { padding: 1rem 1.1rem; }
+      .cross-theme h4 { font-size: 0.9rem; }
+
+      /* 供需對話：單欄 */
+      .supply-demand { grid-template-columns: 1fr; }
+
+      /* 因果鏈 */
+      .causal-chain   { gap: 4px; }
+      .causal-node    { font-size: 0.78rem; padding: 4px 8px; }
+      .causal-arrow   { font-size: 0.78rem; }
+
+      /* 診斷框 */
+      .diagnosis      { padding: 1rem 1.1rem; }
+
+      /* 成熟度路徑 */
+      .step-content h4 { font-size: 0.9rem; }
+      .step-quote      { font-size: 0.8rem; padding: 0.5rem 0.75rem; }
+
+      /* 趨勢格：單欄 */
+      .trends-grid    { grid-template-columns: 1fr; }
+
+      /* 最終判讀 */
+      .final-quote p  { font-size: 0.88rem; }
+      .conclusion-box { padding: 1.25rem 1.1rem; }
+      .conclusion-box p { font-size: 0.9rem; }
+
+      /* 心得區：個人觀察 */
+      .reflection-banner { padding: 1.1rem 1.1rem; }
+      .reflection-banner h3 { font-size: 1rem; }
+      .reflection-block  { padding: 1.1rem 1.1rem 1.1rem 1.3rem; }
+      .reflection-block h4 { font-size: 0.9rem; }
+      .reflection-block p  { font-size: 0.87rem; }
+      .reflection-block ul li { font-size: 0.87rem; }
+
+      /* 技術時間軸：垂直堆疊 */
+      .tech-timeline  { flex-direction: column; }
+      .tl-year        { border-right: none; border-bottom: 1px solid #e8d8b8; }
+      .tl-year:last-child { border-bottom: none; }
+
+      /* 焦點位移：單欄 */
+      .focus-shift    { grid-template-columns: 1fr; }
+
+      /* 部署光譜 */
+      .ds-row         { flex-direction: column; gap: 0.4rem; }
+      .ds-label       { min-width: unset; }
+
+      /* 龍蝦步驟條 */
+      .as-title       { font-size: 0.85rem; }
+      .as-desc        { font-size: 0.78rem; }
+
+      /* 警示框 */
+      .caution-box    { flex-direction: column; gap: 0.5rem; }
+      .caution-box p  { font-size: 0.86rem; }
+
+      /* 分隔線標題 */
+      .section-divider h3 { font-size: 0.88rem; }
+    }
+
+    /* ════════════════════════════════════════
+       RWD — 420px（最小手機）
+    ════════════════════════════════════════ */
+    @media (max-width: 420px) {
+      .banner h1 { font-size: 1.3rem; }
+      .wrapper   { padding: 1.25rem 0.85rem 2.5rem; }
+      .content-block { padding: 1.25rem 0.9rem; }
+      .layer-num { width: 26px; height: 26px; font-size: 0.65rem; }
+      .section-number { width: 26px; height: 26px; font-size: 0.65rem; }
+      .section-header h2 { font-size: 1rem; }
+      .reflection-block { padding: 0.9rem 0.9rem 0.9rem 1.1rem; }
+      .data-fig img { border-radius: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 頂部橫幅 -->
+<div class="banner">
+  <div class="banner-inner">
+    <div class="banner-tag">📋 參展研究筆記</div>
+    <h1>AI EXPO 2026<br>三天整體宏觀脈絡</h1>
+    <p class="banner-lead">從硬體紅利到全產業工程化 — 六場議程的系統性整理與跨場交叉分析</p>
+    <div class="banner-meta">
+      <span>📅 2026.03.25–27</span>
+      <span>🏛 AI EXPO Taiwan</span>
+      <span>📂 六場議程 × 三天完整脈絡</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <!-- 一句話總結 -->
+  <div class="hero-callout">
+    <strong>核心主旨：</strong>AI EXPO 2026 最大的轉變，不在於哪個模型更聰明，而在於如何讓 AI 真正進入生產環節。從國家算力佈局到企業 Agent 部署，從工廠現場到伺服器供應鏈，整個產業已從「展示說說看」進入「工程化認真做」的新階段——這是一個關於<strong>如何把 AI 變成可運作、可治理、可持續擴張的系統</strong>的時代命題。
+  </div>
+
+  <!-- ─── 一、三天主軸演進路徑 ─── -->
+  <div class="content-block">
+    <div class="section-header">
+      <div class="section-number">一</div>
+      <h2>三天主軸演進路徑</h2>
+    </div>
+
+    <div class="layer-list">
+
+      <!-- Layer 1 -->
+      <div class="layer-card l1 open">
+        <div class="layer-header" onclick="toggleLayer(this)">
+          <div class="layer-num">L1</div>
+          <span class="layer-title">基礎設施與產業體檢</span>
+          <span class="layer-speaker">國研院國網中心 × AIF 溫怡玲</span>
+          <span class="layer-chevron">▼</span>
+        </div>
+        <div class="layer-body">
+          <p>展會第一天，議程即刻切入基礎建設層級。國研院國網中心談的不只是「買多少 GPU」，而是一個更根本的問題：台灣要不要建立屬於自己的主權 AI 平台？能不能讓學研機構、政府單位、新創公司、中小企業，共用一個中立、可信賴的算力環境？這個問題的答案，決定了台灣 AI 發展能走多深、走多遠。</p>
+          <p>緊接著，AIF 執行長溫怡玲帶來了一份直球對決的年度體檢報告。數字說話很直接：<strong>85.7% 的企業計畫導入或擴大 AI，但真正整合進日常流程的只有 6.4%。</strong>這個巨大的落差，並不是因為算力不夠——只有 14.2% 的企業認為算力是問題。真正卡住企業的，是人才找不到（49.7%）、資安說不清（47.4%）、效益算不準（34.5%）。台灣企業的問題早就不是「要不要 AI」，而是「試了之後，怎麼讓它真的跑起來」。</p>
+          <ul>
+            <li>85.7% 企業計畫導入或擴大 AI，但完全整合進常規流程的只有 <strong>6.4%</strong></li>
+            <li>真正的瓶頸不在算力（14.2%），而在<strong>人才（49.7%）</strong>、資安（47.4%）、ROI 可評估性（34.5%）</li>
+            <li>台灣已從「要不要 AI」進入「怎麼跨過試點期」的執行落差階段</li>
+          </ul>
+          <div class="data-figures">
+            <figure class="data-fig">
+              <img src="fig_01_企業AI應用實況.jpg" alt="企業應用AI實際情況圓餅圖">
+              <figcaption>企業應用 AI 實際情況 — 完全整合進常規流程僅 6.4%</figcaption>
+            </figure>
+            <figure class="data-fig">
+              <img src="fig_03_企業阻力排序.jpg" alt="企業導入AI阻力因素排序橫條圖">
+              <figcaption>考慮導入 AI 時感到猶豫或難以推進的因素排序</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layer 2 -->
+      <div class="layer-card l2">
+        <div class="layer-header" onclick="toggleLayer(this)">
+          <div class="layer-num">L2</div>
+          <span class="layer-title">Agent 架構與企業治理</span>
+          <span class="layer-speaker">Google Cloud Neo Chen × 思想科技黃方志</span>
+          <span class="layer-chevron">▼</span>
+        </div>
+        <div class="layer-body">
+          <p>有了產業現況的診斷，下一個問題自然浮現：如果企業認真要推 AI，Agent 到底應該怎麼設計？Google Cloud 的 Neo Chen 與思想科技的黃方志給出了一個清楚的答案：Agent 不是更聰明的聊天機器人，而是一個能接收任務目標、自主決策、呼叫工具、完成閉環的執行系統——從「你說什麼我做什麼」，進化為「你要什麼結果，我自己想辦法」。</p>
+          <p>但真正的挑戰不在模型有多強，而在四個讓 Agent 能夠進入企業、真正長期運作的硬條件：</p>
+          <ol>
+            <li><strong>Context</strong>——它能接觸到哪些資料，決定了它能創造多少價值</li>
+            <li><strong>Governance</strong>——沒有治理框架，員工私自使用的「影子 AI」就會成為資安破口</li>
+            <li><strong>Memory / Permissions / Audit</strong>——能不能進生產環境，決定了能不能規模化</li>
+            <li><strong>工程紀律</strong>——「AI 讓開發速度快了 10 倍，但你的系統設計也要有 10 倍的嚴謹」</li>
+          </ol>
+          <p>這場最重要的視角轉換，是把 Agent 從「個人效率工具」重新定位為「企業可治理、可審計、可擴張的數位勞動基礎設施」。沒有這個定位，Agent 永遠只是 PoC，永遠進不了流程。</p>
+
+          <div class="data-figures" style="margin-top:1.25rem">
+            <figure class="data-fig">
+              <img src="S__30015571.jpg" alt="價值的邊界 — Context 決定 Agent 智商">
+              <figcaption>價值的邊界 — Context 決定 Agent 智商（個人 vs 企業級）</figcaption>
+            </figure>
+            <figure class="data-fig">
+              <img src="S__30015572.jpg" alt="從影子AI到受控工廠">
+              <figcaption>企業的底線 — 從「影子 AI」到「受控工廠」(AI Agent Factory)</figcaption>
+            </figure>
+          </div>
+
+          <figure class="data-fig" style="margin-top:1rem">
+            <img src="S__30015580.jpg" alt="核心心法心智圖" style="width:100%;display:block">
+            <figcaption>核心心法全覽：回歸軟體工程本質 × 實戰策略 × Agent 系統特性（思想科技整理）</figcaption>
+          </figure>
+
+          <div class="data-figures" style="margin-top:1rem">
+            <figure class="data-fig">
+              <img src="S__30015579.jpg" alt="Agent 本質上就是軟體">
+              <figcaption>Agent 本質上就是軟體 — 開發 Agent 沒有魔法，只有工程</figcaption>
+            </figure>
+            <figure class="data-fig">
+              <img src="S__30015581.jpg" alt="10倍速的代價是10倍的紀律">
+              <figcaption>「10 倍速的代價，是 10 倍的紀律。」— AI 絕對不能取代思考</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layer 3 -->
+      <div class="layer-card l3">
+        <div class="layer-header" onclick="toggleLayer(this)">
+          <div class="layer-num">L3</div>
+          <span class="layer-title">作業現場落地與邊緣智慧</span>
+          <span class="layer-speaker">慧穩科技 Fusion AI × 利凌智慧航運</span>
+          <span class="layer-chevron">▼</span>
+        </div>
+        <div class="layer-body">
+          <p>AI 在知識工作端高速演進的同時，另一條路線安靜但紮實地往實體世界推進。慧穩科技（Fusion AI Solutions）與利凌智慧航運這兩場，展示的是 AI 真正落地於工廠產線、海港碼頭、船舶甲板與岸控中心的現場實踐。</p>
+          <p>這裡的主角不是語言模型，而是熱感影像、AIS 船舶識別系統、PTZ 雲台攝影機、多模態感測融合，以及在網路不穩定、延遲不容許的現場環境下仍然能可靠運作的邊緣運算架構。慧穩科技的三步驟方法論——<strong>small-first（從小切入）、fast-visible（快速讓成效可視化）、scalable（設計好了再規模化）</strong>——講的是如何讓傳統產業的 AI 導入不走冤枉路。利凌則以完整的 EDGEVESSEL 系統，打通了船端感知、岸端管理到港區全域監測的整條鏈路。</p>
+          <div class="signal">
+            <strong>核心訊號：</strong>場域型 AI 的勝負手不在模型有多強，而在架構設計是否 edge-first、感測器是否融合得當。在這些高風險的實體環境裡，AI 做的不是回答問題，而是持續感知、即時控制、精準追蹤。
+          </div>
+
+          <figure class="data-fig" style="margin-top:1.25rem">
+            <img src="S__30015626.jpg" alt="Fusion AI 專案方法論" style="width:100%;display:block">
+            <figcaption>慧穩科技 Fusion AI — Industry Upgrade：small-first, fast-visible, scalable 三步驟方法論</figcaption>
+          </figure>
+
+          <div class="data-figures" style="margin-top:1rem">
+            <figure class="data-fig">
+              <img src="S__30015647.jpg" alt="利凌多重感知設備生態">
+              <figcaption>利凌 LILIN — 多重感知設備生態系（NAV、AI 攝影機、ToF、PTZ、CCTV 等）</figcaption>
+            </figure>
+            <figure class="data-fig">
+              <img src="S__30015648.jpg" alt="利凌船舶解決方案系統架構圖">
+              <figcaption>利凌 LILIN — 船舶解決方案（船與岸）系統架構圖</figcaption>
+            </figure>
+          </div>
+
+          <figure class="data-fig" style="margin-top:1rem">
+            <img src="S__30015649.jpg" alt="EDGEVESSEL AI 智慧港口與船舶監測系統" style="width:100%;display:block">
+            <figcaption>利凌 EDGEVESSEL — AI 智慧港口與船舶監測系統：4K 全域多物種偵測 × AI PTZ 自動追蹤 × 取代人工船監</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Layer 4 -->
+      <div class="layer-card l4">
+        <div class="layer-header" onclick="toggleLayer(this)">
+          <div class="layer-num">L4</div>
+          <span class="layer-title">推論經濟與基礎設施重寫</span>
+          <span class="layer-speaker">DIGITIMES 蕭聖倫</span>
+          <span class="layer-chevron">▼</span>
+        </div>
+        <div class="layer-body">
+          <p>當 Agent 在企業端快速普及，底層基礎設施的壓力也跟著質變。DIGITIMES 資深分析師蕭聖倫從供應鏈視角指出一個關鍵轉折：大型語言模型的參數規模競賽已逐漸放緩，接下來的主戰場不是「訓練更大的模型」，而是<strong>「如何讓推論跑得更快、更省、更彈性」</strong>。</p>
+          <p>系統瓶頸因此發生了根本性的位移——從「算力夠不夠」，轉向「<strong>記憶體放得下嗎、資料搬得夠快嗎、多個 GPU 協調得好嗎</strong>」。NVIDIA 的 Dynamo 軟體方案與 Rubin CPX 專用 GPU，正是針對這個新瓶頸所設計的解法：把推論流程拆成 Prefill（首次 token 生成）與 Decode（後續生成）兩個階段，讓不同硬體各司其職、異構協作，整體效率大幅提升。</p>
+          <ul>
+            <li>系統瓶頸已從「算得動」轉成「<strong>記得住、搬得快、協調得好</strong>」</li>
+            <li>NVIDIA 透過 Dynamo、Rubin CPX 等方案，將推論拆成 Prefill / Decode，走向異構分工</li>
+            <li>全球高階 AI 伺服器：2023 年 349K 台 → 2028 年 4,549K 台（五年翻超 13 倍）</li>
+          </ul>
+          <p>這背後是一個結構性的長期投資週期正在啟動。推論基礎設施不是短線題材，而是未來五年持續擴張的核心命題。</p>
+
+          <figure class="data-fig" style="margin-top:1.25rem">
+            <img src="S__30023692.jpg" alt="算力重心轉向推論，系統瓶頸改變" style="width:100%;display:block">
+            <figcaption>算力重心轉向推論，系統瓶頸也發生改變 — 各硬體元件在不同推論場景下的負載矩陣（DIGITIMES 2026/3）</figcaption>
+          </figure>
+
+          <div class="data-figures" style="margin-top:1rem">
+            <figure class="data-fig">
+              <img src="S__30023691.jpg" alt="生成式AI應用與算力可接受度正相關">
+              <figcaption>生成式 AI 應用發展狀況與算力可接受度正相關 — Chatbot 偏雲端、製程自動化偏邊緣</figcaption>
+            </figure>
+            <figure class="data-fig">
+              <img src="S__30023707.jpg" alt="全球高階AI伺服器2023~2028出貨量預估">
+              <figcaption>全球高階 AI 伺服器出貨量預估：349K（2023）→ 4,549K（2028），年複合成長率 67%+</figcaption>
+            </figure>
+          </div>
+
+          <div class="data-figures" style="margin-top:1rem">
+            <figure class="data-fig">
+              <img src="S__30023695.jpg" alt="Dynamo推論架構：Prefill/Decode分離">
+              <figcaption>NVIDIA Dynamo — 推論流程拆分：傳統全 GPU 處理 vs. Prefill/Decode 異構分工</figcaption>
+            </figure>
+            <figure class="data-fig">
+              <img src="S__30023697.jpg" alt="Rubin CPX 為 Prefill 推出的專用 GPU">
+              <figcaption>Rubin CPX — NVIDIA 為 Prefill 階段推出的專用 GPU，配合 Dynamo 架構運作</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layer 5 -->
+      <div class="layer-card l5">
+        <div class="layer-header" onclick="toggleLayer(this)">
+          <div class="layer-num">L5</div>
+          <span class="layer-title">企業決策中樞與資料語意化</span>
+          <span class="layer-speaker">精誠資訊 林宗瀛 Johnny</span>
+          <span class="layer-chevron">▼</span>
+        </div>
+        <div class="layer-body">
+          <p>五個議程中，精誠資訊副總經理林宗瀛的這場補上了最後一塊拼圖——也是最容易被忽略、卻最根本的一塊：<strong>企業的資料要怎麼整理，AI 才能真正「看懂」並拿來做決策？</strong></p>
+          <p>林宗瀛用一個軍事比喻開場：當無人機偵測到敵方裝甲車、飛彈車測量到距離、衛星取得座標位置，這三筆資料只有放在一起，指揮官才能做出決策。企業的處境其實一模一樣——CRM 有客戶資料、ERP 有訂單資料、物流系統有配送資料，彼此各自孤立。資料不是沒有，而是沒有關聯、沒有語意，AI 看不懂、用不上。</p>
+          <p>他提出的解法叫做 <strong>SYSTEM OF CONTEXT</strong>：在模型與企業各系統之間，建立一層能把分散資料轉成有關聯、可推理「知識網絡」的中介層。左腦負責語意推理（Semantic Reasoning），讓 AI 能理解概念之間的邏輯關係；右腦負責相似度搜尋（Similarity Search），讓 AI 能找到語意上最接近的答案。兩者結合，AI 才能從「回答問題」升級為「支援決策、驅動行動」。</p>
+          <div class="signal">
+            <strong>定位：</strong>SYSTEM OF CONTEXT 是 Agent 時代的資料語意底座。企業不缺資料，缺的是讓資料變得 AI-ready 的整合能力。
+          </div>
+
+          <figure class="data-fig" style="margin-top:1.25rem">
+            <img src="S__30064663.jpg" alt="戰場情資比喻" style="width:100%;display:block">
+            <figcaption>開場比喻 — 利用 AI 情境系統整合分析戰場情資，輔助指揮官決策：這正是企業 context 整合的原型</figcaption>
+          </figure>
+
+          <figure class="data-fig" style="margin-top:1rem">
+            <img src="S__30064664.jpg" alt="SYSTEM OF CONTEXT 星圖" style="width:100%;display:block">
+            <figcaption>賦予 AI Agent 決策分析與行動力 — SYSTEM OF CONTEXT：以情境系統整合企業知識節點</figcaption>
+          </figure>
+
+          <div class="data-figures" style="margin-top:1rem">
+            <figure class="data-fig">
+              <img src="S__30064665.jpg" alt="企業Data並非AI-Ready">
+              <figcaption>企業 Data 既獨立又相關聯，但並非 AI-Ready Data — CRM、訂單、ERP、物流各自孤立，語意斷裂</figcaption>
+            </figure>
+            <figure class="data-fig">
+              <img src="S__30064667.jpg" alt="From Data to Knowledge 語意結構">
+              <figcaption>From Data to Knowledge — RDB → Key-Value → Semantic Knowledge Structure，讓數據轉為 AI 可推理的知識</figcaption>
+            </figure>
+          </div>
+
+          <figure class="data-fig" style="margin-top:1rem">
+            <img src="S__30064668.jpg" alt="三層架構：Use Case → 語意知識網 → 資料來源" style="width:100%;display:block">
+            <figcaption>讓 AI 理解並調用關鍵任務數據 — 三層架構：使用情境（Use Case）→ 語意知識網（Semantic Knowledge Network）→ 核心系統資料來源</figcaption>
+          </figure>
+
+          <figure class="data-fig" style="margin-top:1rem">
+            <img src="S__30064669.jpg" alt="左右腦兼具的企業智慧中樞 SYSTEM OF CONTEXT" style="width:100%;display:block">
+            <figcaption>左右腦兼具的企業智慧中樞 — 左腦：Semantic Reasoning（語意推理）× 右腦：Similarity Search（相似度搜尋）</figcaption>
+          </figure>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── 二、各議程間的邏輯銜接 ─── -->
+  <div class="content-block">
+    <div class="section-header">
+      <div class="section-number">二</div>
+      <h2>各議程間的邏輯銜接與相互呼應</h2>
+    </div>
+
+    <p style="margin-bottom:1.5rem">六場議程看似各自獨立，但放在一起，會發現它們其實在描述同一條從算力到應用的完整產業鏈，而且每一場都在回答鏈條上特定位置的核心問題。理解這條鏈，才能看清三天下來所有訊息的全貌。</p>
+    <div class="section-divider"><h3>一條完整的產業鏈</h3></div>
+    <div class="chain">
+      <div class="chain-flow">
+        <span class="chain-node">算力/晶片</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-node">平台/調度</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-node">Agent/流程</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-node">企業治理</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-node">資料語意化</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-node">現場落地</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-node">個人生產力</span>
+      </div>
+    </div>
+
+    <table class="agenda-table">
+      <thead>
+        <tr>
+          <th>模組</th>
+          <th>議程 × 講者</th>
+          <th>核心提問</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="module-tag tag-1">產業成熟度</span></td>
+          <td>
+            2026 台灣產業 AI 化大調查
+            <div class="agenda-speaker">AIF 執行長 溫怡玲</div>
+          </td>
+          <td class="agenda-q">企業 AI 化到哪了？卡在哪裡？</td>
+        </tr>
+        <tr>
+          <td><span class="module-tag tag-2">Agent 治理</span></td>
+          <td>
+            AI 代理新進化
+            <div class="agenda-speaker">Google Cloud Neo Chen × 思想科技黃方志</div>
+          </td>
+          <td class="agenda-q">Agent 進企業，該怎麼建體系？</td>
+        </tr>
+        <tr>
+          <td><span class="module-tag tag-3">場域落地</span></td>
+          <td>
+            工廠 × 港口 × 船岸 AI 實踐
+            <div class="agenda-speaker">慧穩科技 Fusion AI × 利凌智慧航運</div>
+          </td>
+          <td class="agenda-q">AI 進工廠、港口、船岸，怎麼真的跑起來？</td>
+        </tr>
+        <tr>
+          <td><span class="module-tag tag-4">推論基礎設施</span></td>
+          <td>
+            Agent 商轉下的伺服器硬體商機
+            <div class="agenda-speaker">DIGITIMES 資深分析師 蕭聖倫</div>
+          </td>
+          <td class="agenda-q">Agent 被大量採用後，底層算力怎麼被重寫？</td>
+        </tr>
+        <tr>
+          <td><span class="module-tag tag-5">資料語意</span></td>
+          <td>
+            AI EAP 企業 AI 智慧中樞系統
+            <div class="agenda-speaker">精誠資訊 副總經理 林宗瀛 Johnny</div>
+          </td>
+          <td class="agenda-q">企業資料怎麼整成 AI 能理解的 context system？</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"><h3>跨場交叉印證的關鍵主題</h3></div>
+    <p style="margin-bottom:1.25rem">更值得關注的，是幾個在不同議程之間反覆出現、彼此印證的核心主題。這些主題不是單場的觀點，而是整個產業在 2026 年共同面對的結構性問題。</p>
+
+    <div class="cross-theme">
+      <h4><span class="theme-num">1</span>「人才、資料、治理」是貫穿全場的共通瓶頸</h4>
+      <ul>
+        <li>大調查直接點名：企業最大阻礙是人才（49.7%）與資安（47.4%），不是算力</li>
+        <li>Agent 議程呼應：Shadow AI 的根源，正是治理框架缺失與關鍵人才不足</li>
+        <li>作業端議程印證：製造業 AI 無法規模化的原因不在技術，而在資料基礎與整理能力</li>
+        <li>決策中樞議程延伸：企業不是沒資料，而是資料沒有語意、沒有關聯，AI 用不上</li>
+      </ul>
+    </div>
+
+    <div class="cross-theme">
+      <h4><span class="theme-num">2</span>Context Engineering 正在成為企業 AI 成敗的核心能力</h4>
+      <ul>
+        <li>Agent 議程定義了它：「決定 Agent 智商上限的不是模型，而是它能接觸到的上下文」</li>
+        <li>決策中樞議程實作了它：SYSTEM OF CONTEXT 就是企業版的 context 建構引擎</li>
+        <li>伺服器議程量化了它：context 越深越廣，推論負載越重，記憶體與頻寬就越成為瓶頸</li>
+        <li>作業端議程展示了它：在船岸場景裡，context 來自多重感測器的即時融合，不只是文字</li>
+      </ul>
+    </div>
+
+    <div class="cross-theme">
+      <h4><span class="theme-num">3</span>Edge-first vs. Cloud-first 的部署分化已經開始</h4>
+      <ul>
+        <li>伺服器議程用數據說明：Chatbot 類應用偏雲端，製程自動化與現場監控偏邊緣</li>
+        <li>作業端議程以實例驗證：港口、船舶、巡防場景容不下高延遲，edge AI 是唯一可行路線</li>
+        <li>Agent 議程補充視角：知識工作型 Agent 適合平台化治理，場域型 AI 則要 sensor-first、runtime-first</li>
+      </ul>
+    </div>
+
+    <div class="cross-theme">
+      <h4><span class="theme-num">4</span>從「買工具」到「建體系」，升級正在全面發生</h4>
+      <ul>
+        <li>大調查：企業從「買工具試試看」走向「定義問題、整理資料、選對場景」</li>
+        <li>Agent 議程：從單點 Agent demo 走向有治理、可審計的 Agent Factory</li>
+        <li>作業端：從賣一台攝影機走向提供完整場域解決方案</li>
+        <li>伺服器議程：從採購 GPU 走向設計整套推論系統架構</li>
+        <li>決策中樞：從做 RAG 走向建立 semantic knowledge network</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ─── 三、系統思維 ─── -->
+  <div class="content-block">
+    <div class="section-header">
+      <div class="section-number">三</div>
+      <h2>從硬體到應用到決策的系統思維</h2>
+    </div>
+
+    <div class="section-divider"><h3>AIEXPO 的「體檢」視角</h3></div>
+
+    <div class="diagnosis">
+      <p>如果把三天的議程當成一份體檢報告來讀，診斷結論其實相當清晰：<strong>台灣在 AI 硬體供應鏈上的實力已毋庸置疑，但把硬體紅利轉化成各行各業實際生產力的能力，才正要開始建立。</strong>這件事卡在同一條因果鏈上——沒有實戰人才，資料就整理不起來；資料整理不好，問題就定義不清；問題定義不清，AI 就很難真正進入流程、產生價值。</p>
+      <div class="causal-chain">
+        <span class="causal-node">沒有實戰人才</span>
+        <span class="causal-arrow">→</span>
+        <span class="causal-node">不容易整理資料</span>
+        <span class="causal-arrow">→</span>
+        <span class="causal-node">問題定義不準</span>
+        <span class="causal-arrow">→</span>
+        <span class="causal-node">AI 很難進流程</span>
+      </div>
+    </div>
+
+    <div class="section-divider"><h3>技術供給側 vs. 企業落地側的對話</h3></div>
+    <p style="margin-bottom:1.25rem">三天下來，台上的技術方和台下的企業方，其實一直在說著不同的語言。把這兩種聲音並排來看，落差就一目了然。</p>
+    <div class="supply-demand">
+      <div class="sd-card sd-supply">
+        <h4>供給側在說</h4>
+        <ul>
+          <li>算力越來越多元（GPU / ASIC / NPU / LPU）</li>
+          <li>模型越來越會推理（思考型推論、agent-first 設計）</li>
+          <li>部署越來越彈性（cloud / hybrid / edge / on-prem / sovereign）</li>
+          <li>平台越來越完整（CSP 的 SaaS + PaaS + IaaS + 專屬 infra）</li>
+        </ul>
+      </div>
+      <div class="sd-card sd-demand">
+        <h4>需求側在問</h4>
+        <ul>
+          <li>AI 該解我哪個問題？（41.3% 先想解成本與人力）</li>
+          <li>我找誰來做？（49.7% 缺關鍵人才）</li>
+          <li>我的資料夠不夠？</li>
+          <li>做出來能不能信？（32.2% 擔心可信度）</li>
+          <li>ROI 怎麼量？（34.5% 覺得效益難評估）</li>
+        </ul>
+      </div>
+    </div>
+    <p>這個對話說明了一件重要的事：<strong>今天限制企業 AI 進展的，不是技術有沒有到位，而是組織有沒有準備好。</strong>技術方提供的工具越來越強大，但企業方需要的——找到對的問題、備好資料、說服利害關係人、把 AI 整進流程——卻是技術本身給不了的能力。這也是為什麼所有議程的最終落腳點，都不在「哪個模型更強」，而是「怎麼建立讓 AI 持續運作的組織能力」。</p>
+
+    <div class="section-divider" style="margin-top:2rem"><h3>企業 AI 成熟路徑</h3></div>
+    <p style="margin-bottom:1.25rem">把三天議程的觀察整合起來，可以看到一條企業 AI 成熟化的清晰路徑。大多數台灣企業目前還在第二階段，試著跨向第三階段的關口上。</p>
+    <div class="maturity-steps">
+      <div class="maturity-step s1">
+        <div class="step-connector">
+          <div class="step-dot">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h4>認知期</h4>
+          <div class="step-quote">「AI 很重要，我們想試試看」</div>
+          <ul>
+            <li>買工具、做 PoC、個別員工使用</li>
+          </ul>
+        </div>
+      </div>
+      <div class="maturity-step s2">
+        <div class="step-connector">
+          <div class="step-dot">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h4>診斷期 <span class="step-badge badge-current">台灣多數企業目前位置</span></h4>
+          <div class="step-quote">「我知道很重要，但做不深」</div>
+          <ul>
+            <li>嘗試定義問題、整理資料、找人才、選場景</li>
+          </ul>
+        </div>
+      </div>
+      <div class="maturity-step s3">
+        <div class="step-connector">
+          <div class="step-dot">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h4>系統化期</h4>
+          <div class="step-quote">「AI 要進流程，需要完整體系」</div>
+          <ul>
+            <li>建 Agent Factory、context layer、治理框架</li>
+            <li>edge / cloud 分層部署、推論系統設計</li>
+          </ul>
+        </div>
+      </div>
+      <div class="maturity-step s4">
+        <div class="step-connector">
+          <div class="step-dot">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h4>組織能力期</h4>
+          <div class="step-quote">「AI 不是 IT 專案，是組織轉型」</div>
+          <ul>
+            <li>經營策略、人才培育、技術應用三位一體</li>
+            <li>知識保存、流程重塑、決策中樞</li>
+            <li>AI 成為可治理、可擴張、可授權的生產系統</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── 四、十大高機率趨勢 ─── -->
+  <div class="content-block">
+    <div class="section-header">
+      <div class="section-number">四</div>
+      <h2>整場的十大高機率趨勢</h2>
+    </div>
+    <p style="margin-bottom:1.5rem">綜合三天的議程，可以歸納出十個在未來 2–3 年內高機率發生、且彼此相互強化的趨勢。這些趨勢不是孤立的預測，而是從多場議程的交叉論點中浮現出來的共同方向。</p>
+    <div class="trends-grid">
+      <div class="trend-card">
+        <span class="trend-n">01</span>
+        <div class="trend-text">
+          <strong>主權 AI</strong>
+          <span>將成為政府與大型企業核心議題，分散式部署至關重要</span>
+        </div>
+      </div>
+      <div class="trend-card">
+        <span class="trend-n">02</span>
+        <div class="trend-text">
+          <strong>AI 基礎設施</strong>
+          <span>從硬體採購轉向平台調度競爭——調度、隔離、路由、觀測、成本控制</span>
+        </div>
+      </div>
+      <div class="trend-card">
+        <span class="trend-n">03</span>
+        <div class="trend-text">
+          <strong>推論成本優化</strong>
+          <span>比單純訓練更重要，記憶體頻寬與資料搬移效率是新一代晶片關鍵</span>
+        </div>
+      </div>
+      <div class="trend-card">
+        <span class="trend-n">04</span>
+        <div class="trend-text">
+          <strong>Hybrid / Private / On-device AI</strong>
+          <span>「雲端更大」與「終端更近」同時發生</span>
+        </div>
+      </div>
+      <div class="trend-card">
+        <span class="trend-n">05</span>
+        <div class="trend-text">
+          <strong>Agent 嵌入企業流程</strong>
+          <span>不只是聊天介面；2026 是 Agent 爆發年</span>
+        </div>
+      </div>
+      <div class="trend-card">
+        <span class="trend-n">06</span>
+        <div class="trend-text">
+          <strong>Context Engineering</strong>
+          <span>將成為企業 AI 成敗的關鍵能力</span>
+        </div>
+      </div>
+      <div class="trend-card">
+        <span class="trend-n">07</span>
+        <div class="trend-text">
+          <strong>AI Governance</strong>
+          <span>從政策文件走向系統設計問題——Shadow AI 是真實風險分水嶺</span>
+        </div>
+      </div>
+      <div class="trend-card">
+        <span class="trend-n">08</span>
+        <div class="trend-text">
+          <strong>作業端 AI</strong>
+          <span>主角不是生成式 AI，而是邊緣運算、感測融合與持續監控</span>
+        </div>
+      </div>
+      <div class="trend-card">
+        <span class="trend-n">09</span>
+        <div class="trend-text">
+          <strong>一人公司 + 多個 Agent</strong>
+          <span>將重塑知識工作的最小組織單位</span>
+        </div>
+      </div>
+      <div class="trend-card">
+        <span class="trend-n">10</span>
+        <div class="trend-text">
+          <strong>Full Stack 組裝能力</strong>
+          <span>模型 + 資料 + 算力 + 工具 + 流程 + 治理，真正的差異化不在單點</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 五、最終判讀 ─── -->
+  <div class="content-block">
+    <div class="section-header">
+      <div class="section-number">五</div>
+      <h2>最終判讀</h2>
+    </div>
+
+    <p style="margin-bottom:1.5rem">2026 年不是 AI 發展的終點，而更像是工程化的起點。過去幾年，展示一個厲害的模型並不難；但接下來真正困難的，是把模型、資料、算力、治理、工具與流程，組裝成一個能夠持續可靠運作的系統。能做到這件事的人或組織，才是在 AI 時代真正擁有競爭優勢的角色——不是最早用 AI 的人，而是最會把 AI 整進體系的人。</p>
+
+    <div class="final-quotes">
+      <div class="final-quote">
+        <span class="quote-icon">⚡</span>
+        <p>算力與晶片，決定 AI 能不能跑得動。</p>
+      </div>
+      <div class="final-quote">
+        <span class="quote-icon">🏗</span>
+        <p>資料、平台與治理，決定 AI 能不能進企業。</p>
+      </div>
+      <div class="final-quote">
+        <span class="quote-icon">🤖</span>
+        <p>Agent、Skill 與工作流，決定 AI 能不能真的替人做事。</p>
+      </div>
+    </div>
+
+    <div class="conclusion-box">
+      <p>AI 的下一階段，<strong>不是更會聊天</strong>，<br>
+      而是更能成為<strong>可治理、可擴張、可授權、可落地的生產系統</strong>。</p>
+    </div>
+  </div>
+
+  <!-- ─── 六、研究框架總覽 ─── -->
+  <div class="content-block">
+    <div class="section-header">
+      <div class="section-number">六</div>
+      <h2>研究框架總覽</h2>
+    </div>
+
+    <table class="framework-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>研究模組</th>
+          <th>議程 × 講者</th>
+          <th>核心提問</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="module-tag tag-1">產業成熟度</span></td>
+          <td>2026 台灣產業 AI 化大調查<br><small style="color:var(--ink-muted)">AIF 溫怡玲</small></td>
+          <td>企業 AI 化到哪了？</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="module-tag tag-2">Agent 治理</span></td>
+          <td>AI 代理新進化<br><small style="color:var(--ink-muted)">Neo Chen × 黃方志</small></td>
+          <td>Agent 進企業怎麼建體系？</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="module-tag tag-3">場域落地</span></td>
+          <td>工廠 × 港口 × 船岸 AI 實踐<br><small style="color:var(--ink-muted)">慧穩科技 × 利凌</small></td>
+          <td>AI 進現場怎麼真的跑起來？</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="module-tag tag-4">推論基礎設施</span></td>
+          <td>伺服器硬體商機<br><small style="color:var(--ink-muted)">DIGITIMES 蕭聖倫</small></td>
+          <td>Agent 商轉後底層怎麼被重寫？</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="module-tag tag-5">資料語意</span></td>
+          <td>AI EAP 企業 AI 智慧中樞<br><small style="color:var(--ink-muted)">精誠資訊 林宗瀛 Johnny</small></td>
+          <td>企業資料怎麼整成 AI 可用的 context？</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:1.25rem; font-size:0.88rem; color:var(--ink-muted)">
+      整體脈絡：需求端成熟度 → Agent 體系建立 → 現場作業落地 → 推論基礎設施重寫 → 資料語意中樞建構
+    </p>
+  </div>
+
+
+  <!-- ─── 七、三天後的個人觀察 ─── -->
+  <div class="content-block">
+    <div class="section-header">
+      <div class="section-number">七</div>
+      <h2>三天後的個人觀察</h2>
+    </div>
+
+    <div class="reflection-banner">
+      <div class="rb-tag">Personal Observations · 個人心得</div>
+      <h3>議程之外，我看見了什麼</h3>
+      <p>以下是三天下來，在現場觀察到、或是聽著議程邊想到的事。不一定精準，但值得記下來——因為這些感受，是數據和 PPT 給不了的。</p>
+    </div>
+
+    <!-- A. 企業心態 -->
+    <div class="reflection-block">
+      <h4>🏢 企業的心態，正在緩慢但真實地移動</h4>
+      <p>三年前，問企業「要不要用 AI」，答案是遲疑的。去年開始有人認真導入，但多半停在 PoC。今年的氣氛明顯不同——「要導入」已成共識，問題變成了「怎麼做」。</p>
+      <p>但這個「怎麼做」，比想像中難得多。很多人想到的第一步，還是<strong>作業優化</strong>——把現有流程用 AI 提速。這個出發點沒有錯，但也是最容易卡死的地方：公司原有的作業流程牽涉到習慣、考核、部門邊界，改動一個環節就可能影響一群人，而人一旦感受到工作模式被動搖，排斥感就跟著來了。所以卡住的不是技術，而是<strong>變革本身就難</strong>。</p>
+      <p>這也呼應了大調查的數字：6.4% 完全整合，不是偶然，而是大多數企業還在試著說服自己內部的過程中。</p>
+    </div>
+
+    <!-- B. 技術演進時間軸 -->
+    <div class="reflection-block">
+      <h4>📅 三年的技術演進，回頭看才發現節奏有多快</h4>
+      <p>站在 2026 年往回看，這三年的變化快到有點不真實：</p>
+      <div class="tech-timeline">
+        <div class="tl-year">
+          <div class="tl-year-label">2024</div>
+          <div class="tl-year-topic">AI 基礎期</div>
+          <div class="tl-year-desc">搞清楚怎麼用模型、怎麼寫 prompt、算力怎麼取得</div>
+        </div>
+        <div class="tl-year">
+          <div class="tl-year-label">2025</div>
+          <div class="tl-year-topic">RAG 普及期</div>
+          <div class="tl-year-desc">把公司文件餵給模型讓它回答問題，企業開始「連接資料」</div>
+        </div>
+        <div class="tl-year tl-now">
+          <div class="tl-year-label">2026 <span class="tl-now-badge">現在</span></div>
+          <div class="tl-year-topic">Agent 爆發期</div>
+          <div class="tl-year-desc">AI 從「被問才說話」走向「被交代任務、自己想辦法完成」</div>
+        </div>
+      </div>
+      <p>這個轉變背後有一條清楚的邏輯：從「你問我答」到「你交代我做」，AI 需要具備規劃能力、工具呼叫能力、以及記住過程的能力。這三個條件，現在都在快速成熟中。</p>
+    </div>
+
+    <!-- C. 算力→推論→記憶 -->
+    <div class="reflection-block">
+      <h4>🔄 算力 → 推論 → 長期記憶：焦點的三次位移</h4>
+      <p>AI 系統的發展重心，已經歷了三次清楚的位移，每一次都代表著上一個問題「基本解決了」，而下一個瓶頸浮現：</p>
+      <div class="focus-shift">
+        <div class="fs-card">
+          <div class="fs-phase">第一階段</div>
+          <div class="fs-title">算力</div>
+          <div class="fs-sub">「能不能跑得動？」GPU 搶手，訓練大模型是主旋律</div>
+          <div class="fs-key">→ 基本解決</div>
+        </div>
+        <div class="fs-card">
+          <div class="fs-phase">第二階段</div>
+          <div class="fs-title">推論</div>
+          <div class="fs-sub">「怎麼讓答案更深、更準、更有洞見？」思考型模型與 RAG 成熟</div>
+          <div class="fs-key">→ 快速成熟中</div>
+        </div>
+        <div class="fs-card fs-now">
+          <div class="fs-phase">第三階段 · 現在</div>
+          <div class="fs-title">長期記憶</div>
+          <div class="fs-sub">「Agent 要能持續自主活動，必須記住做過什麼、環境是什麼狀態」</div>
+          <div class="fs-key">→ 這才是關鍵戰場</div>
+        </div>
+      </div>
+      <p>沒有長期記憶，每次對話都從零開始，Agent 就只是「每次重新出發的助理」，而不是「一直在工作的夥伴」。這個差距，就是現在整個 AI 基礎設施正在全力解決的問題。</p>
+    </div>
+
+    <!-- D. 世界模型 -->
+    <div class="reflection-block">
+      <h4>🌍 世界模型與具身智慧：下一個邊界正在成形</h4>
+      <p>AI 在虛擬世界越來越能幹，下一個問題是：怎麼讓它進入實體世界？這牽涉到一個長期被研究、但近期開始有感覺的方向——<strong>世界模型（World Model）</strong>。</p>
+      <ul>
+        <li><strong>李飛飛</strong>的最新研究，試圖讓 AI 建立對物理世界的空間理解</li>
+        <li><strong>Yann LeCun</strong> 長期倡導 JEPA 架構，主張 AI 要像嬰兒一樣從觀察中學習世界運作的規律</li>
+        <li><strong>Tesla</strong> 以海量行車數據訓練自動駕駛，本質上就是在建構一個世界模型</li>
+        <li><strong>Joon Sung Park 的 Smallville（AI 小鎮）</strong>，則是觀察多個 AI Agent 在社會情境下如何自主互動的重要實驗</li>
+      </ul>
+      <p>落實到工業應用，答案是 <strong>real-to-sim → sim-to-real</strong> 的交互迭代：先把現實場景建成模擬器，在裡面大量訓練 AI 的決策能力，再把學到的能力移回真實環境、驗證和修正。這條路徑讓具身機器人的實現，從「遠在天邊的研究題目」開始變成「近在眼前的工程問題」。</p>
+    </div>
+
+    <!-- E. AI 理解世界 -->
+    <div class="reflection-block">
+      <h4>🧠 AI 如何理解世界：知識表示的三次演進</h4>
+      <p>如果說算力是 AI 的肌肉，那麼「知識表示」就是 AI 的語言——它決定了 AI 能理解哪些資訊、以什麼方式推理。</p>
+      <ul>
+        <li><strong>第一代：純文字。</strong>Markdown、JSON、結構化文本，AI 讀的是人類寫下來的東西。</li>
+        <li><strong>第二代：多模態。</strong>圖片、影音、音訊、感測器數據都可以輸入，AI 開始理解非語言的世界。</li>
+        <li><strong>第三代（進行中）：語意結構。</strong>從 RAG（找相關段落）走向 Ontology（定義概念關係），再走向 Knowledge Graph——讓 AI 不只知道答案，而是理解「為什麼是這個答案」。Palantir 的知識圖譜近期在美軍行動中的實際應用，是這個方向最具說服力的現實案例。</li>
+      </ul>
+      <p>精誠資訊的 SYSTEM OF CONTEXT 走的正是第三代的方向，只是落地在企業內部的決策場景裡。</p>
+    </div>
+
+    <!-- F. 部署光譜 -->
+    <div class="reflection-block">
+      <h4>📡 雲端、地端、邊緣端：部署光譜的三個位置，不是非此即彼</h4>
+      <p>去年初，我開始注意到邊緣端 AI 悄悄興起。今年這個感覺更確定了。</p>
+      <div class="deploy-spectrum">
+        <div class="ds-row">
+          <div class="ds-label">☁️ 雲端</div>
+          <div class="ds-content">
+            <div class="ds-title">算力集中，彈性最大</div>
+            <div class="ds-desc">適合知識型 Agent、Chatbot、大規模推論。延遲可接受、安全可控是前提。</div>
+          </div>
+        </div>
+        <div class="ds-row">
+          <div class="ds-label">🖥 地端</div>
+          <div class="ds-content">
+            <div class="ds-title">資料不出門，可控性強</div>
+            <div class="ds-desc">適合對資料主權有要求的企業，或需要整合內部系統的場景。是「邊緣端」與「雲端」之間的緩衝區。</div>
+          </div>
+        </div>
+        <div class="ds-row ds-edge">
+          <div class="ds-label">⚡ 邊緣端</div>
+          <div class="ds-content">
+            <div class="ds-title">最接近現場，快速反應，去中心化</div>
+            <div class="ds-desc">無人機飛行中的視覺判斷、港口攝影機的即時偵測，都無法等待雲端來回。邊緣端的優勢不只是速度——在通訊被干擾時仍能獨立決策，也是軍事場景去中心化的關鍵優勢。我認為邊緣端會逐漸成為顯學，因為它與實體作業面的連結最直接。</div>
+          </div>
+        </div>
+      </div>
+      <p>這三者不是三選一，而是一個光譜。哪個場景用雲端、哪個用地端、哪個往邊緣推，混合形態的系統設計能力，將會是未來幾年最值錢的工程判斷之一。</p>
+    </div>
+
+    <!-- G. 龍蝦崛起 -->
+    <div class="reflection-block">
+      <h4>🦞 龍蝦的崛起，與自主性的邊界</h4>
+      <p>最後說一件讓我印象深刻、也讓我有點認真思考的事。AI 的形態在短短幾年內換了好幾張臉，而且每一次換臉，自主程度都在往上一格：</p>
+      <div class="agent-steps">
+        <div class="as-step">
+          <div class="as-dot-wrap"><div class="as-dot">1</div><div class="as-line"></div></div>
+          <div class="as-body">
+            <div class="as-title">瀏覽器裡的聊天機器人</div>
+            <div class="as-desc">你問一句，它答一句。對話是唯一介面。</div>
+          </div>
+        </div>
+        <div class="as-step">
+          <div class="as-dot-wrap"><div class="as-dot">2</div><div class="as-line"></div></div>
+          <div class="as-body">
+            <div class="as-title">IDE / CLI 裡的程式助手</div>
+            <div class="as-desc">GitHub Copilot 開始幫你寫程式、補全邏輯。開發效率倍增，但還是「你決定、它執行」。</div>
+          </div>
+        </div>
+        <div class="as-step">
+          <div class="as-dot-wrap"><div class="as-dot">3</div><div class="as-line"></div></div>
+          <div class="as-body">
+            <div class="as-title">Computer Use：AI 開始「操作電腦」</div>
+            <div class="as-desc">AI 能看螢幕、點選介面、填表單。從「幫你想」跨到「幫你做」。</div>
+          </div>
+        </div>
+        <div class="as-step">
+          <div class="as-dot-wrap"><div class="as-dot">4</div><div class="as-line"></div></div>
+          <div class="as-body">
+            <div class="as-title">Agent 自主作業</div>
+            <div class="as-desc">接收任務目標、自己拆解步驟、呼叫工具、驗收結果。AI 開始像一個不需要被手把手帶的工作者。</div>
+          </div>
+        </div>
+        <div class="as-step as-now">
+          <div class="as-dot-wrap"><div class="as-dot">5</div><div class="as-line"></div></div>
+          <div class="as-body">
+            <div class="as-title">長期記憶 + 持續自主活動 ← 現在</div>
+            <div class="as-desc">AI 能記住過去做了什麼，持續在電腦上運作、跨應用完成複雜任務。這不只是「效率工具」，而是「一直在跑的數位工作者」。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="caution-box">
+        <span class="caution-icon">⚠️</span>
+        <p>再往下走一步——把這樣的 Agent 裝進機器人、裝進無人機、裝進邊緣端載具——它就不只在電腦裡跑了，而是在物理世界裡行動。這不是要製造恐慌，但這件事提醒了我：<strong>系統設計從一開始就要預留「控制點」與「緊急停止機制」。</strong>不是因為 AI 一定會出問題，而是因為一個能自主行動的系統，在設計初期就得定義清楚：誰有權限叫它停下來？它在什麼情況下應該主動暫停？邊界在哪裡？這不只是技術問題，更是治理問題。而這，也是三天展覽最後留給我最深的一個思考。</p>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /wrapper -->
+
+<footer>
+  AI EXPO 2026 參展研究筆記 | 2026-03-30
+</footer>
+
+<script>
+  function toggleLayer(header) {
+    const card = header.closest('.layer-card');
+    card.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
