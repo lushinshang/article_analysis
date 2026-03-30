@@ -716,6 +716,63 @@
       .focus-shift { grid-template-columns: 1fr; }
     }
 
+    /* ── 前情概要卡片 ── */
+    .prequel {
+      margin-bottom: 2.5rem;
+    }
+    .prequel-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .prequel-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.85rem;
+    }
+    @media (max-width: 640px) {
+      .prequel-cards { grid-template-columns: 1fr; }
+    }
+    .prequel-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .prequel-card:hover {
+      border-color: var(--accent-mid);
+      box-shadow: var(--shadow);
+    }
+    .prequel-date {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .prequel-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .prequel-sub {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+    }
+    .prequel-arrow {
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-top: 0.25rem;
+    }
+
     /* ── Footer ── */
     footer {
       text-align: center;
@@ -894,6 +951,31 @@
 </div>
 
 <div class="wrapper">
+
+  <!-- 前情概要 -->
+  <div class="prequel">
+    <div class="prequel-label">📖 前情概要 — 這篇筆記的素材來源</div>
+    <div class="prequel-cards">
+      <a class="prequel-card" href="https://hackmd.io/@lanss/H1U-fEWsbg" target="_blank">
+        <div class="prequel-date">Day 1 · 3/25（二）</div>
+        <div class="prequel-title">AI Expo Taiwan 2026<br>115/3/25 議程整理</div>
+        <div class="prequel-sub">開幕典禮 × 主權算力 × 台灣定位</div>
+        <div class="prequel-arrow">閱讀完整筆記 →</div>
+      </a>
+      <a class="prequel-card" href="https://hackmd.io/@lanss/HkSKLpfoWg" target="_blank">
+        <div class="prequel-date">Day 2 · 3/26（三）</div>
+        <div class="prequel-title">AI Expo Taiwan 2026<br>115/3/26 議程整理</div>
+        <div class="prequel-sub">國家算力 × Agentic AI × 智慧製造</div>
+        <div class="prequel-arrow">閱讀完整筆記 →</div>
+      </a>
+      <a class="prequel-card" href="https://hackmd.io/@lanss/SyW6HMVjWg" target="_blank">
+        <div class="prequel-date">Day 3 · 3/27（四）</div>
+        <div class="prequel-title">AI Expo Taiwan 2026<br>115/3/27 議程整理</div>
+        <div class="prequel-sub">代理人時代 × 工業大腦 × 邊緣智慧</div>
+        <div class="prequel-arrow">閱讀完整筆記 →</div>
+      </a>
+    </div>
+  </div>
 
   <!-- 一句話總結 -->
   <div class="hero-callout">
@@ -1696,6 +1778,33 @@
         <span class="caution-icon">⚠️</span>
         <p>再往下走一步——把這樣的 Agent 裝進機器人、裝進無人機、裝進邊緣端載具——它就不只在電腦裡跑了，而是在物理世界裡行動。這不是要製造恐慌，但這件事提醒了我：<strong>系統設計從一開始就要預留「控制點」與「緊急停止機制」。</strong>不是因為 AI 一定會出問題，而是因為一個能自主行動的系統，在設計初期就得定義清楚：誰有權限叫它停下來？它在什麼情況下應該主動暫停？邊界在哪裡？這不只是技術問題，更是治理問題。而這，也是三天展覽最後留給我最深的一個思考。</p>
       </div>
+    </div>
+
+    <!-- H. 電腦之後 -->
+    <div class="reflection-block">
+      <h4>🖥️ → 🎙️ → 🧠 &nbsp; 電腦，可能不再是通用工具了</h4>
+      <p>這三天有一個想法一直在我腦袋裡轉，但不是來自任何一場議程——而是把所有議程加在一起之後，浮現出來的感覺：</p>
+      <p><strong>電腦這個東西，也許正在走向它的最後一個世代。</strong></p>
+      <p>過去幾十年，電腦是人類做事的通用工具。文件、計算、溝通、設計，全都要打開電腦才能做。但現在，AI 已經可以接受語音、理解圖像、解讀意圖。再往前走幾步——介面變小了、嵌入了、消失了——你不需要一個盒子，你只需要說話，甚至只需要想。</p>
+      <p>龍蝦進化成小金蟲<span style="font-size:0.78rem;color:#9a7a5a">（咒術梗：強大的東西，往往最後縮成一個微小卻精準的存在）</span>——AI 也在走同一條路：從龐大的雲端服務，縮進耳機、縮進眼鏡、縮進晶片，最終縮進你每天生活的每個角落。你感覺不到它在哪裡，只感覺到「事情被完成了」。</p>
+      <p>辦公場所的樣子，應該也會跟著改變。當你不需要一台電腦才能工作，你在哪裡工作的意義就變了。會議室可能變成例外而非常態，辦公桌可能變成儀式而非必需。</p>
+    </div>
+
+    <!-- I. 旁邊那個人是誰 -->
+    <div class="reflection-block">
+      <h4>🤝 旁邊那個人，是人還是 Jarvis？</h4>
+      <p>展場上有個景象讓我停頓了一下：一個業務員向客戶介紹產品，旁邊接話補充數據的，是他的 AI Agent，反應速度跟真人差不多，還比真人更快找到對的資料。</p>
+      <p>如果 Agent 可以打電話、可以寫信、可以開會、可以追蹤任務、可以自主決策，那「和你一起工作的那個人」這個概念，要怎麼重新定義？未來的工作環境裡，你的同事可能是人，也可能是一個<strong>有名字、有任務、有記憶的 AI</strong>，甚至你不一定需要知道它不是人。</p>
+      <p>不是要製造恐慌。只是想誠實地說：<strong>這個邊界，正在變模糊。</strong>而且比大多數人預期的快。</p>
+    </div>
+
+    <!-- J. 開放式結語 -->
+    <div class="reflection-block" style="border-color:#c8c0e8; background:#f9f8ff;">
+      <h4 style="color:#4c1d95;">🔭 未來的工作型態，未來的生活型態——讓我們繼續看下去</h4>
+      <p style="color:#3b1f6e;">以上這些，不是預言，也不是分析報告。只是一個在展場走了三天之後，帶著一堆問號回家的人，試著把感受說清楚。</p>
+      <p style="color:#3b1f6e;">AI 正在改變的，不只是工具，而是<strong style="color:#4c1d95;">我們在哪裡工作、和誰一起工作、怎麼證明自己的價值</strong>這些更根本的事情。這些問題，現在沒有標準答案，但每一場像 AI EXPO 這樣的展會，都是一次對這些問題的公開演練。</p>
+      <p style="color:#3b1f6e;">下一次再去，我想帶著更具體的問題——不只是「AI 現在能做什麼」，而是「我想讓 AI 幫我變成什麼樣的人」。</p>
+      <p style="color:#7c3aed; font-weight:600; text-align:right; font-size:0.9rem; margin-top:0.5rem;">— 讓我們繼續看下去 🔮</p>
     </div>
 
   </div>
