@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>組織明明還在轉，為什麼感覺像死了一樣？</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f7f4;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --accent: #c0392b;
+      --accent-light: #fdf2f0;
+      --accent-mid: #f5c6c0;
+      --border: #e5e1da;
+      --nav-h: 56px;
+      --max-page: 1120px;
+      --max-body: 720px;
+      --max-img: 860px;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
+      line-height: 1.68;
+      letter-spacing: 0;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249, 247, 244, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .nav-inner::-webkit-scrollbar { display: none; }
+
+    .nav-link {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      border: 1px solid transparent;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: var(--accent-mid);
+    }
+
+    /* ── Page wrap ── */
+    .page-wrap {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 56px 0 44px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 52px;
+      max-width: var(--max-body);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      border: 1px solid var(--accent-mid);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 4vw, 3.1rem);
+      font-weight: 800;
+      line-height: 1.2;
+      text-wrap: balance;
+      max-width: var(--max-body);
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: var(--max-body);
+    }
+
+    .yt-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 20px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.15s;
+    }
+
+    .yt-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── Article ── */
+    article { max-width: var(--max-body); margin: 0 auto; }
+
+    section {
+      margin-bottom: 56px;
+      scroll-margin-top: calc(var(--nav-h) + 16px);
+    }
+
+    h2 {
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+      font-weight: 700;
+      line-height: 1.3;
+      text-wrap: balance;
+      margin-bottom: 22px;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 28px 0 10px;
+      line-height: 1.45;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.72;
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    blockquote {
+      border-left: 3px solid var(--accent-mid);
+      padding: 14px 20px;
+      margin: 28px 0;
+      background: var(--accent-light);
+      border-radius: 0 8px 8px 0;
+    }
+
+    blockquote p {
+      font-size: 0.95rem;
+      color: #7a2a20;
+      margin: 0;
+      font-style: italic;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 52px;
+    }
+
+    strong { font-weight: 700; color: inherit; }
+
+    /* ── Five causes cards ── */
+    .causes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 12px 0 28px;
+    }
+
+    .cause-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: 0 0 8px 8px;
+      padding: 18px 20px;
+    }
+
+    .cause-card h3 {
+      font-size: 0.92rem;
+      margin: 0 0 8px;
+      color: var(--text);
+    }
+
+    .cause-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .cause-card-full {
+      grid-column: 1 / -1;
+    }
+
+    /* ── Action items ── */
+    .action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 12px 0;
+    }
+
+    .action-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+
+    .action-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .action-body p {
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* ── Infographic ── */
+    .infographic-wrap {
+      margin: 28px 0 32px;
+      max-width: var(--max-img);
+    }
+
+    .infographic-wrap figure { margin: 0; }
+
+    .infographic-wrap img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      display: block;
+      border-radius: 10px;
+      background: #f0ede8;
+    }
+
+    .infographic-wrap figcaption {
+      margin-top: 10px;
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.52;
+    }
+
+    /* ── Closing callout ── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin: 24px 0 0;
+    }
+
+    .callout p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 64px;
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      header { padding: 40px 0 32px; }
+      .causes-grid { grid-template-columns: 1fr; }
+      .cause-card-full { grid-column: 1; }
+      section { margin-bottom: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-link" href="#look">你看到了</a>
+      <a class="nav-link" href="#smart">越聰明越看不見</a>
+      <a class="nav-link" href="#causes">五個停滯原因</a>
+      <a class="nav-link" href="#blindspot">領導的盲點</a>
+      <a class="nav-link" href="#action">改變從哪裡開始</a>
+      <a class="nav-link" href="#closing">結語</a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <header>
+      <div class="meta-tag">深度導讀｜哈佛商業評論 Dear Mary Ep.55</div>
+      <h1>組織明明還在轉，為什麼感覺像死了一樣？</h1>
+      <p class="subtitle">揭開5大人才管理盲點，正讓組織陷入停滯</p>
+      <a class="yt-link" href="https://www.youtube.com/watch?v=7jIYNCElk4Q" target="_blank" rel="noopener">
+        ▶ 原始節目：哈佛商業評論 Dear Mary Ep.55
+      </a>
+    </header>
+
+    <article>
+
+      <section id="look">
+        <h2>你看到了，但你說不出口</h2>
+        <p>你待在一家運作超過三十年的公司，親眼看著優秀的同事一個接一個默默離職——先是財務主管，然後是研發主管，接著是供應鏈的核心人物。不是被裁員，是自己走的。</p>
+        <p>組織還在運轉。每天早上大家還是打卡、開會、交報告。數字不難看，表面上一切正常。但你能感覺到，有什麼東西正在悄悄死去。</p>
+        <p>決策越來越保守，新專案一個個被暫緩，沒人敢提意見，就算提了也沒有下文。整個組織像一台引擎還在空轉的車——噪音沒停，卻沒有在往前走。</p>
+        <p>更讓你困惑的是：掌舵的人不笨。學歷頂尖、策略思維清晰、外界評價也不差。你就是想不透，為什麼這麼聰明的人，會讓公司走到這一步？</p>
+        <p>這個困惑，幾乎是每個曾在組織中「看見問題、卻無法改變」的人，都曾深夜反覆問自己的問題。</p>
+      </section>
+
+      <hr>
+
+      <section id="smart">
+        <h2>為什麼越聰明的人，越不願意看見問題？</h2>
+        <p>先說一個殘酷的事實：領導力不是學歷的副產品。</p>
+        <p>很多人當上主管，不是因為他們懂得帶人，而是因為他們的業務能力比別人強。工程師做得比別人好，就升工程師主管；業務拿下最多訂單，就升業務主管。從來沒有人在升他之前，先讓他學兩三年的管理學。</p>
+        <p>於是出現了一個奇怪的現象：職位越高的人，他的管理能力，往往是他所有能力裡面最後才練起來的。專業技術是他的強項，但建立團隊、培養人才、處理組織文化，這些能力他根本還沒學熟。</p>
+        <p>但問題更深。不只是「不懂管理」，而是很多高層主管，對自己公司的真實狀況，根本就活在另一個平行宇宙裡。</p>
+        <p>認知的落差不是偶發，是系統性的。高層主管爬得越高，他接收到的訊息就越過濾、越美化。沒有人想跟老闆說壞消息，沒有人想成為那個打壞氣氛的人。於是老闆活在一個精心維護的幻象裡，還以為那就是現實。</p>
+      </section>
+
+      <hr>
+
+      <section id="causes">
+        <h2>組織停滯的五個真正原因</h2>
+        <p>根據一份涵蓋兩千五百家企業和人資主管的大型調查，研究者整理出了五個幾乎所有組織都共有的人才管理漏洞。它們看起來都不像大問題，但加在一起，就足以讓一個公司從內部緩慢崩解。</p>
+
+        <div class="infographic-wrap">
+          <figure>
+            <img src="images/five_causes.png" alt="組織停滯的五大人才管理盲點資訊圖：文化誤判、快樂迷思、政治清場、領導誤解、直覺決策">
+            <figcaption>圖：五大人才管理盲點，加在一起讓組織從內部緩慢崩解</figcaption>
+          </figure>
+        </div>
+
+        <div class="causes-grid">
+          <div class="cause-card">
+            <h3>① 高層以為自己了解公司文化，但根本不了解</h3>
+            <p>領導層的自我敘事與員工實際體驗相差甚遠，卻沒有人敢告訴他真相，落差只會越來越大。</p>
+          </div>
+          <div class="cause-card">
+            <h3>② 把員工「快樂」當成目標，忽略了「投入」才是關鍵</h3>
+            <p>快樂和投入是兩件事。沒有成就感，就沒有內驅力；再多福利都只是安撫，不是動力。</p>
+          </div>
+          <div class="cause-card">
+            <h3>③ 視而不見的辦公室政治，正在悄悄清場</h3>
+            <p>最先離開的往往是有能力、有原則的人。劣幣驅逐良幣悄悄發生，等領導層意識到已是數年之後。</p>
+          </div>
+          <div class="cause-card">
+            <h3>④ 誤解了領導的本質</h3>
+            <p>把個人形象放在團隊利益前面，只信自己的判斷。這不是惡意，只是從來沒人告訴他遊戲規則已經不同了。</p>
+          </div>
+          <div class="cause-card cause-card-full">
+            <h3>⑤ 所有決策都靠直覺，從來不用數據</h3>
+            <p>覺得這個人幹練、覺得氣場合、覺得文化不錯——這些都是單點觀察，不是組織全貌。沒有系統性衡量，人才管理永遠停留在「我感覺應該是這樣」的階段。</p>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <section id="blindspot">
+        <h2>領導人「不是不知道」，而是他知道的跟你知道的，是兩件事</h2>
+        <p>現在回頭看那個讓你困惑的問題：為什麼聰明的領導人，會做出看起來不合理的決策？</p>
+        <p>有時候答案是：他真的沒看見。不是因為笨，而是因為他所在的高度，讓他幾乎不可能看見你看見的東西。每一層過濾、每一次美化過的匯報、每一個不敢說實話的中間人，都讓他和現實之間隔了一層厚厚的玻璃。</p>
+        <p>有時候答案是：他看見了，但他能動的時間有限、精力有限。一個管轄十幾個子公司的集團負責人，他沒有辦法深入了解每一家公司的人事動態。他只能信任他信任的人，授權他認為可靠的代理人。</p>
+        <p>還有一種可能，是最讓人不舒服的那種：領導人其實也沒有你想像中那麼高明。他在擅長的事情上確實很出色，但在他不擅長的構面，他的判斷可能跟任何人一樣有盲點，甚至更多——因為他已經太久沒有人敢跟他說不了。</p>
+      </section>
+
+      <hr>
+
+      <section id="action">
+        <h2>改變從哪裡開始</h2>
+        <p>診斷完問題，還要知道怎麼動手。五個盲點對應四個行動方向，每一個都是對症下藥：</p>
+
+        <div class="infographic-wrap">
+          <figure>
+            <img src="images/four_actions.png" alt="打破人才管理盲點的四個行動方向資訊圖：真實文化、投入指標、辦公室政治、客觀標準">
+            <figcaption>圖：四個行動方向——從診斷現況到建立可持續的人才管理機制</figcaption>
+          </figure>
+        </div>
+
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-num">①</div>
+            <div class="action-body">
+              <p><strong>去摸清公司的真實文化——不是老闆相信的那個版本</strong><br>
+              匿名問卷、非正式一對一、誠實記錄離職面談。方法不複雜，難的是願意承認現實可能跟你想的不一樣。</p>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-num">②</div>
+            <div class="action-body">
+              <p><strong>把「員工快樂嗎？」換成「員工投入嗎？」</strong><br>
+              不是問「你快樂嗎」，而是問「你覺得你的工作有沒有帶來影響？你有沒有成長的空間？」</p>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-num">③</div>
+            <div class="action-body">
+              <p><strong>正視辦公室政治，而不是假裝它不存在</strong><br>
+              定期觀察、主動介入——誰在結盟、誰被孤立、升遷標準有沒有被小圈圈悄悄扭曲。</p>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-num">④</div>
+            <div class="action-body">
+              <p><strong>用客觀標準衡量領導潛力，而不是靠感覺用人</strong><br>
+              真正要問的是：這個人能不能把團隊利益放在個人利益前面？他有沒有帶出比自己更強的人？</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <section id="closing">
+        <h2>結語</h2>
+        <p>這四件事，說起來都不難。難的是：它們每一件都需要主管願意主動承認「我可能沒看清楚」——而這，恰恰是很多成功者最難開口說出的話。</p>
+        <p>如果你在一個組織裡，親眼目睹以上這些場景，你能做的事情是什麼？</p>
+        <p>你未必有權力推動全面改革，但你能從自己的職責範圍開始：讓真實的數據而非美化的報告呈現出來，讓你直接影響的人感到投入而非只是快樂，讓至少一次升遷決策，是靠標準而非靠直覺做出的。</p>
+        <div class="callout">
+          <p>組織不是突然停滯的，要改變，也是同樣的路徑——一個決定、一次真實的對話，慢慢累積出來的。</p>
+        </div>
+      </section>
+
+    </article>
+
+    <footer>
+      <p>本文依據《哈佛商業評論》Dear Mary Ep.55 逐字稿整理，原始文章參考〈人才管理的壞習慣〉。</p>
+    </footer>
+  </div>
+
+  <script>
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navInner = document.querySelector('.nav-inner');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            const active = link.getAttribute('href') === '#' + id;
+            link.classList.toggle('active', active);
+            if (active) {
+              link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
