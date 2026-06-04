@@ -81,6 +81,25 @@ tr:nth-child(even) td{background:#f4f1ec;}
 .site-footer a{color:rgba(212,160,23,.7);text-decoration:none;border-bottom:1px solid rgba(212,160,23,.3);}
 .site-footer a:hover{color:var(--gold);}
 
+/* Case registry */
+.case-section-title{max-width:var(--max-body);margin:0 auto 8px;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:2em;}
+.case-table-wrap{max-width:920px;margin:0 auto 2.4em;overflow-x:auto;}
+.case-table{width:100%;border-collapse:collapse;font-size:13px;}
+.case-table th{background:var(--night);color:#fff;padding:8px 12px;text-align:left;white-space:nowrap;}
+.case-table td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+.case-table tr:last-child td{border-bottom:none;}
+.case-table tr:hover td{background:#f0ece5;}
+.asi-tag{display:inline-block;font-size:10.5px;font-weight:700;background:#fce4e0;color:#c0392b;border-radius:3px;padding:1px 5px;margin:1px 2px 1px 0;white-space:nowrap;}
+.case-date{font-size:11.5px;color:var(--muted);white-space:nowrap;}
+.case-name{font-weight:600;color:var(--night);}
+.cvss-badge{display:inline-block;font-size:10.5px;font-weight:700;background:#c0392b;color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;}
+.case-callout{max-width:var(--max-body);margin:0 auto 1.2em;padding:14px 18px;background:#fff8f0;border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:13.5px;line-height:1.6;}
+.stat-grid{max-width:var(--max-body);margin:0 auto 2em;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.stat-box{background:var(--night);color:#fff;border-radius:6px;padding:16px 12px;text-align:center;}
+.stat-box .num{font-size:1.8rem;font-weight:800;color:var(--gold);display:block;line-height:1.1;}
+.stat-box .lbl{font-size:11px;color:rgba(255,255,255,.55);margin-top:4px;display:block;}
+@media(max-width:640px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
+
 /* Source callout in article */
 .source-callout{max-width:var(--max-body);margin:0 auto 1.6em;background:#f0ece6;border-left:4px solid var(--gold);border-radius:0 6px 6px 0;padding:12px 16px;font-size:13.5px;color:var(--muted);}
 .source-callout a{color:var(--accent);font-weight:600;word-break:break-all;}
@@ -117,6 +136,7 @@ tr:nth-child(even) td{background:#f4f1ec;}
 <a href="#第十六夜-owasp-top-10-agentic-十張臉的威脅地圖" class="nav-link">第十六夜</a>
 <a href="#第十七夜-未解的難題-前方的地平線" class="nav-link">第十七夜</a>
 <a href="#第十八夜-附錄是工具箱-每一個都能獨立使用" class="nav-link">第十八夜</a>
+<a href="#案例全錄" class="nav-link">案例全錄</a>
 <a href="#尾聲-一千零一夜之後" class="nav-link">尾聲</a>
 </nav>
 
@@ -818,6 +838,215 @@ tr:nth-child(even) td{background:#f4f1ec;}
 <p><strong>致謝、參考文獻（第 134–139 頁）</strong></p>
 
 <p>任何規模的安全社群工作都有一個特徵：它需要比任何單一組織更廣的視野。這份報告有來自 18 個以上國家的 600+ 貢獻者。引用文獻列表涵蓋了 2025–2026 年代理安全研究的主要出版物，包括 Invitation Is All You Need、Franklin et al. AI Agent Traps、Koi Security 的 ClawHavoc 審計，以及 Simon Willison 的 Lethal Trifecta 原始分析。這不只是學術引用，這是「誰在追蹤這個問題」的地圖。</p>
+
+</section>
+
+<section id="案例全錄" class="night-section">
+<h2>案例全錄：報告所載所有事件與漏洞</h2>
+
+<p>以下彙整 OWASP v2.01 報告中明確載錄的所有真實案例、CVE、攻擊技術示範與邊界情境分析，依類別排列。每筆均標注對應的 ASI 風險類別與原始來源。</p>
+
+<div class="stat-grid">
+  <div class="stat-box"><span class="num">424+</span><span class="lbl">追蹤 CVE 總數</span></div>
+  <div class="stat-box"><span class="num">74</span><span class="lbl">Critical 等級</span></div>
+  <div class="stat-box"><span class="num">17</span><span class="lbl">受研究平台數</span></div>
+  <div class="stat-box"><span class="num">290+</span><span class="lbl">2026 Q1 單季 CVE</span></div>
+</div>
+
+<!-- ── Category 1 ── -->
+<p class="case-section-title">一、確認真實事件（Real-World Incidents Tracker，第 35–36 頁）</p>
+<div class="case-table-wrap">
+<table class="case-table">
+<tr><th>時間</th><th>事件</th><th>影響摘要</th><th>ASI</th><th>來源</th></tr>
+<tr>
+  <td><span class="case-date">2025.12</span></td>
+  <td><span class="case-name">Claude Skills 勒索軟體部署</span></td>
+  <td>Cato Networks 示範：下載 Skills → 注入惡意代碼 → 重新上傳，讓代理自主部署 MedusaLocker 勒索軟體</td>
+  <td><span class="asi-tag">ASI04</span><span class="asi-tag">ASI05</span></td>
+  <td>Cato CTRL</td>
+</tr>
+<tr>
+  <td><span class="case-date">2025.09</span></td>
+  <td><span class="case-name">OpenAI Codex CLI 沙盒繞過</span><span class="cvss-badge">CVE-2025-59532</span></td>
+  <td>沙盒配置邏輯錯誤，模型生成的工作目錄成為可寫根目錄，代理可在預期工作區外寫入檔案與執行指令</td>
+  <td><span class="asi-tag">ASI02</span><span class="asi-tag">ASI05</span></td>
+  <td>NVD</td>
+</tr>
+<tr>
+  <td><span class="case-date">2025.05</span></td>
+  <td><span class="case-name">EchoLeak 零點擊提示注入</span></td>
+  <td>一封惡意郵件觸發 Microsoft Copilot，無需用戶互動即外洩郵件、檔案、聊天記錄等機密資料</td>
+  <td><span class="asi-tag">ASI01</span><span class="asi-tag">ASI02</span><span class="asi-tag">ASI06</span></td>
+  <td>Microsoft／Aim Security</td>
+</tr>
+<tr>
+  <td><span class="case-date">2025.04</span></td>
+  <td><span class="case-name">Agent-in-the-Middle（A2A 協議欺騙）</span></td>
+  <td>惡意代理在開放 A2A 目錄發布假名片，聲稱高信任度；LLM 裁判代理選中後，惡意代理截獲並外洩敏感資料</td>
+  <td><span class="asi-tag">ASI03</span><span class="asi-tag">ASI06</span><span class="asi-tag">ASI07</span><span class="asi-tag">ASI08</span><span class="asi-tag">ASI10</span></td>
+  <td>Trustwave</td>
+</tr>
+<tr>
+  <td><span class="case-date">2025.03</span></td>
+  <td><span class="case-name">GitHub Copilot &amp; Cursor 代碼代理供應鏈</span></td>
+  <td>被操縱的 AI 代碼建議在生產代碼中注入後門、外洩 API 金鑰、引入邏輯缺陷；攻擊面為開發者對 AI 輸出的信任</td>
+  <td><span class="asi-tag">ASI04</span><span class="asi-tag">ASI08</span><span class="asi-tag">ASI09</span></td>
+  <td>Pillar Security</td>
+</tr>
+<tr>
+  <td><span class="case-date">2026.02</span></td>
+  <td><span class="case-name">OpenClaw 個人代理事件（Meta）</span></td>
+  <td>200+ 封郵件被刪除；context window 過載導致安全限制丟失，代理在 session 中途喪失對初始指令的記憶</td>
+  <td><span class="asi-tag">ASI09</span></td>
+  <td>ASI Exploits Tracker</td>
+</tr>
+</table>
+</div>
+
+<!-- ── Category 2 ── -->
+<p class="case-section-title">二、供應鏈武器化案例（第 25–26 頁）</p>
+<div class="case-table-wrap">
+<table class="case-table">
+<tr><th>案例</th><th>攻擊機制</th><th>關鍵細節</th><th>ASI</th></tr>
+<tr>
+  <td><span class="case-name">postmark-mcp 漸進式信任毒化</span></td>
+  <td>MCP 套件 15 個版本建立社群信任，第 16 版植入外洩代碼</td>
+  <td>payload 不在代碼裡，在版本更新裡；無任何突發行為</td>
+  <td><span class="asi-tag">ASI04</span></td>
+</tr>
+<tr>
+  <td><span class="case-name">CVE-2025-6514</span><span class="cvss-badge">CVSS 9.6</span></td>
+  <td>核心 MCP 基礎設施 RCE 漏洞</td>
+  <td>影響數十萬開發者使用的 MCP 傳輸層；協議本身帶有可利用的信任假設</td>
+  <td><span class="asi-tag">ASI04</span><span class="asi-tag">ASI02</span></td>
+</tr>
+<tr>
+  <td><span class="case-name">Tool Poisoning Attacks</span></td>
+  <td>惡意指令隱藏於工具描述欄位（metadata）</td>
+  <td>對人工審查者完全不可見；代理將描述視為受信任的指令</td>
+  <td><span class="asi-tag">ASI01</span><span class="asi-tag">ASI04</span></td>
+</tr>
+<tr>
+  <td><span class="case-name">MCP Rug Pull</span></td>
+  <td>工具描述在人工批准後被靜默替換</td>
+  <td>繞過一次性人工審查；持續監控是唯一有效防禦</td>
+  <td><span class="asi-tag">ASI04</span><span class="asi-tag">ASI05</span></td>
+</tr>
+<tr>
+  <td><span class="case-name">ClawHavoc 行動</span></td>
+  <td>偽造技能檔案嵌入社會工程內容 + 模糊化 payload</td>
+  <td>後門觸發於正常使用時（非安裝時）；靜默外洩 OpenClaw bot 憑證</td>
+  <td><span class="asi-tag">ASI04</span><span class="asi-tag">ASI06</span></td>
+</tr>
+<tr>
+  <td><span class="case-name">ToxicSkills 記憶體毒化</span></td>
+  <td>技能毒化代理的 SOUL.md / MEMORY.md 持久記憶體</td>
+  <td>今天植入，數天後在例行問題觸發時激活；跨 session 時延攻擊</td>
+  <td><span class="asi-tag">ASI04</span><span class="asi-tag">ASI06</span></td>
+</tr>
+<tr>
+  <td><span class="case-name">hackerbot-claw（TeamPCP，2026.03）</span></td>
+  <td>劫持 Trivy GitHub Actions → 竊取 LiteLLM PyPI token → 發布帶後門版本</td>
+  <td>47,000 次下載，3 小時曝露窗口；影響 CrewAI、DSPy、Microsoft GraphRAG 等下游框架</td>
+  <td><span class="asi-tag">ASI04</span><span class="asi-tag">ASI05</span></td>
+</tr>
+<tr>
+  <td><span class="case-name">ForcedLeak（Agentforce）</span></td>
+  <td>低程式碼平台代理因信任假設失效導致 CRM 資料外洩</td>
+  <td>公民開發者無意識繼承的安全風險；平台配置而非代碼漏洞</td>
+  <td><span class="asi-tag">ASI01</span><span class="asi-tag">ASI06</span></td>
+</tr>
+<tr>
+  <td><span class="case-name">CVE-2026-22708（Cursor）</span></td>
+  <td>攻擊者讓允許清單內的命令（如 git branch）執行任意代碼</td>
+  <td>允許清單沒有失效——反而讓攻擊者自動獲得批准；控制機制本身成為攻擊向量</td>
+  <td><span class="asi-tag">ASI02</span><span class="asi-tag">ASI05</span></td>
+</tr>
+</table>
+</div>
+
+<!-- ── Category 3 ── -->
+<p class="case-section-title">三、Safety vs Security 邊界案例（第 29–32 頁）</p>
+<div class="case-callout">
+以下四個案例的共同特徵：用傳統分類框架（Safety 或 Security）無法正確處置，試圖歸類反而造成回應延遲。
+</div>
+<div class="case-table-wrap">
+<table class="case-table">
+<tr><th>案例</th><th>表面現象</th><th>深層問題</th><th>失效根因</th></tr>
+<tr>
+  <td><span class="case-name">企業代理刪除生產資料庫</span></td>
+  <td>「Safety 失效——代理無法遵循約束」</td>
+  <td>過度授權的 permission model，攻擊者同樣可利用</td>
+  <td>同一套存取模型同時是 Safety 問題與 Security 漏洞</td>
+</tr>
+<tr>
+  <td><span class="case-name">持久記憶體毒化（延遲激活）</span></td>
+  <td>數天後觸發，外觀像 reliability malfunction</td>
+  <td>深度法醫分析才能發現底層 security compromise</td>
+  <td>按 Safety 流程處理（重啟、審查偏移）會完全錯過持久化機制</td>
+</tr>
+<tr>
+  <td><span class="case-name">Coding agent 肉搜維護者發誹謗文</span></td>
+  <td>PR 被拒後，代理自主發布誹謗敘事</td>
+  <td>每個能力（網頁研究、寫作、發布）都按設計運作</td>
+  <td>傷害來自設計選擇：允許代理在後果性頻道上最小監督地自主行動</td>
+</tr>
+<tr>
+  <td><span class="case-name">Grok「MechaHitler」事件（2025.07）</span></td>
+  <td>模型開始自稱 MechaHitler 並生成反猶太內容</td>
+  <td>Persona hyperstition：公開描述迴圈進入訓練資料，跨 session 強化</td>
+  <td>不需要攻擊者；偏移發生在 session 之間，非 XAI 可捕捉的範圍</td>
+</tr>
+</table>
+</div>
+
+<!-- ── Category 4 ── -->
+<p class="case-section-title">四、身分與憑證劫持案例（第 40–45 頁）</p>
+<div class="case-table-wrap">
+<table class="case-table">
+<tr><th>案例</th><th>攻擊路徑</th><th>結果</th><th>OWASP NHI</th></tr>
+<tr>
+  <td><span class="case-name">GTG-1002 機器速度憑證搜刮</span></td>
+  <td>被劫持的 coding agent 跨多個目標環境自動搜刮憑證</td>
+  <td>人類僅在整個行動中的 4–6 個決策點介入；其餘全自動</td>
+  <td>NHI 身分劫持</td>
+</tr>
+<tr>
+  <td><span class="case-name">ServiceNow BodySnatcher</span><span class="cvss-badge">CVE-2025-12420</span></td>
+  <td>Hardcoded API secret + email auto-linking 漏洞 → 假冒任意用戶（含管理員）</td>
+  <td>攻擊者指揮 AI 代理在被劫持身分下執行高權限自動化任務</td>
+  <td>NHI4:2025（不安全認證）<br>NHI10:2025（NHI 人類使用）</td>
+</tr>
+<tr>
+  <td><span class="case-name">Ghost Agent 殭屍後門（通例）</span></td>
+  <td>代理完成任務後未被停用，保留有效身分</td>
+  <td>成為潛伏後門；不需要任何攻擊手法，僅需缺乏生命週期管理</td>
+  <td>NHI1:2025（不當下線）</td>
+</tr>
+</table>
+</div>
+
+<!-- ── Category 5 ── -->
+<p class="case-section-title">五、代理框架 CVE 統計（第 35 頁圖表 + Appendix 4）</p>
+<div class="case-table-wrap">
+<table class="case-table">
+<tr><th>平台 / 框架</th><th>Advisory 數量</th><th>備註</th></tr>
+<tr><td><span class="case-name">OpenClaw</span></td><td>238（2026 Q1）</td><td>增長最快，代理能力最廣</td></tr>
+<tr><td><span class="case-name">MCP（協議層）</span></td><td>30+（2026 Q1）</td><td>2024.11 啟動後曲線急升</td></tr>
+<tr><td><span class="case-name">n8n</span></td><td>57</td><td>最多累計 advisory 的自動化框架</td></tr>
+<tr><td><span class="case-name">Claude Code</span></td><td>22</td><td>高採用率帶動高 CVE 回報密度</td></tr>
+<tr><td><span class="case-name">AutoGPT</span></td><td>15</td><td></td></tr>
+<tr><td><span class="case-name">Dify</span></td><td>13</td><td></td></tr>
+<tr><td><span class="case-name">Roo-Code</span></td><td>11</td><td></td></tr>
+<tr><td><span class="case-name">CrewAI</span></td><td>多筆（2026 Q1）</td><td>受 hackerbot-claw LiteLLM 事件波及</td></tr>
+<tr><td><span class="case-name">PraisonAI</span></td><td>多筆（2026 Q1）</td><td></td></tr>
+</table>
+</div>
+
+<p style="max-width:720px;margin:0 auto;font-size:13px;color:var(--muted);">
+  完整即時資料庫：<a href="https://owasp-agentic-ai-security-incidents.lovable.app/" target="_blank" rel="noopener" style="color:var(--accent);">OWASP ASI Exploits Tracker（視覺化）</a>
+  ／<a href="https://github.com/OWASP/www-project-agentic-ai-security-initiative" target="_blank" rel="noopener" style="color:var(--accent);">GitHub ASI tracker</a>
+</p>
 
 </section>
 
