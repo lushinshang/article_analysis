@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>空間智能的結構解碼：世界模型的功能分類與演進路徑</title>
+  <meta name="description" content="基於 Dr. Fei-Fei Li《A Functional Taxonomy of World Models》的深度導讀，以 POMDP 閉環拆解渲染器、模擬器與規劃器三大功能。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f7f4;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --text-caption: #666;
+      --accent: #3d5a8a;
+      --accent-light: #e8eef6;
+      --accent-green: #2d6a4f;
+      --accent-green-light: #e8f5ef;
+      --accent-red: #8a3d3d;
+      --accent-red-light: #f6e8e8;
+      --accent-purple: #5a3d8a;
+      --accent-purple-light: #ede8f6;
+      --border: #e0dbd4;
+      --blockquote-bg: #f0ede8;
+      --code-bg: #f0ede8;
+      --nav-bg: rgba(249, 247, 244, 0.95);
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+      --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      --max-page: 1120px;
+      --max-body: 720px;
+      --max-img: 860px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16.5px;
+      line-height: 1.68;
+      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Sticky Nav ── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+    .site-nav__inner {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .site-nav__inner::-webkit-scrollbar { display: none; }
+    .site-nav__label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+      padding-right: 0.75rem;
+      border-right: 1px solid var(--border);
+      margin-right: 0.25rem;
+      flex-shrink: 0;
+    }
+    .site-nav a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      transition: background 0.18s, color 0.18s;
+      flex-shrink: 0;
+    }
+    .site-nav a:hover { background: var(--accent-light); color: var(--accent); }
+
+    /* ── Hero Header ── */
+    .hero {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      padding: 4rem 2rem 2rem;
+    }
+    .hero__meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero__tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+    }
+    .hero__source {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .hero__source a { color: var(--accent); text-decoration: none; }
+    .hero__source a:hover { text-decoration: underline; }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      text-wrap: balance;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .hero__subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 680px;
+      text-wrap: balance;
+    }
+
+    /* ── Executive Summary Card ── */
+    .exec-summary {
+      max-width: var(--max-body);
+      margin: 2.5rem auto 0;
+      padding: 1.75rem 2rem;
+      background: linear-gradient(135deg, #eef3fb 0%, #f0edf8 100%);
+      border: 1px solid #d0daf0;
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .exec-summary__label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+    }
+    .exec-summary h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.85rem;
+      text-wrap: balance;
+    }
+    .exec-summary ol {
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .exec-summary li { font-size: 0.95rem; line-height: 1.65; color: var(--text); }
+    .exec-summary li strong { color: var(--accent); }
+    .exec-sub {
+      list-style: none;
+      padding-left: 1rem;
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .exec-sub li { font-size: 0.9rem; }
+    .exec-sub li::before { content: "▸ "; color: var(--accent); font-size: 0.8rem; }
+
+    /* ── Main Article ── */
+    .article {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    .article__body {
+      max-width: var(--max-body);
+      margin: 0 auto;
+    }
+
+    /* ── Section ── */
+    .section { margin-bottom: 4rem; }
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-number {
+      flex-shrink: 0;
+      width: 2.25rem;
+      height: 2.25rem;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.1rem;
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+      font-weight: 700;
+      line-height: 1.3;
+      text-wrap: balance;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 2rem 0 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    h3::before { content: ""; display: inline-block; width: 4px; height: 1.1em; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
+
+    p { margin-bottom: 1.1rem; }
+    strong { font-weight: 600; }
+
+    /* ── Blockquote (原文精要) ── */
+    .quote-block {
+      background: var(--blockquote-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+    }
+    .quote-block__label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .quote-block p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.72; margin-bottom: 0; }
+    .quote-block strong { color: var(--text); }
+
+    /* ── Lists ── */
+    ul, ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    li { line-height: 1.68; }
+
+    /* ── Warning Block (⚠️ 挑戰) ── */
+    .warn-block {
+      background: #fff8f0;
+      border: 1px solid #f0c070;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .warn-block__label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #b06000;
+      margin-bottom: 0.7rem;
+    }
+    .warn-block ul { padding-left: 1.25rem; }
+    .warn-block li { font-size: 0.95rem; color: var(--text); }
+    .warn-block strong { color: #7a3c00; }
+
+    /* ── Code / ASCII block ── */
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+      color: #333;
+      margin: 1.25rem 0;
+    }
+
+    /* ── Images & Figures ── */
+    .figure {
+      margin: 2.25rem auto;
+      text-align: center;
+    }
+    .figure--diagram { max-width: var(--max-body); }
+    .figure--wide { max-width: var(--max-img); }
+    .figure--full { max-width: var(--max-img); }
+
+    .figure img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      display: block;
+      margin: 0 auto;
+    }
+    .figure--wide img, .figure--full img {
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
+    figcaption {
+      margin-top: 0.65rem;
+      font-size: 0.82rem;
+      color: var(--text-caption);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    /* ── Badge chips for the three types ── */
+    .badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      vertical-align: middle;
+    }
+    .badge--renderer { background: #ffd2d2; color: #7a1a1a; }
+    .badge--simulator { background: #d2ffd2; color: #1a5c1a; }
+    .badge--planner   { background: #d2d2ff; color: #1a1a7a; }
+
+    /* ── Contract Cards ── */
+    .contract-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .contract-card {
+      border-radius: 12px;
+      padding: 1.1rem 1.1rem 1rem;
+      border: 1px solid transparent;
+    }
+    .contract-card--r { background: var(--accent-red-light); border-color: #f0c0c0; }
+    .contract-card--s { background: var(--accent-green-light); border-color: #b0e0c0; }
+    .contract-card--p { background: var(--accent-purple-light); border-color: #c0b8f0; }
+    .contract-card__title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .contract-card--r .contract-card__title { color: var(--accent-red); }
+    .contract-card--s .contract-card__title { color: var(--accent-green); }
+    .contract-card--p .contract-card__title { color: var(--accent-purple); }
+    .contract-card p { font-size: 0.88rem; color: var(--text); margin: 0; line-height: 1.6; }
+
+    /* ── Section Divider ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem auto;
+      max-width: var(--max-body);
+    }
+
+    /* ── Conclusion ── */
+    .conclusion {
+      background: linear-gradient(135deg, #1a2a3a 0%, #2d3a4d 100%);
+      border-radius: 16px;
+      padding: 2.5rem 2.5rem 2rem;
+      color: #e8ecf2;
+      margin-top: 2rem;
+      max-width: var(--max-body);
+    }
+    .conclusion h2 {
+      color: #fff;
+      font-size: 1.45rem;
+      margin-bottom: 1.25rem;
+      text-wrap: balance;
+    }
+    .conclusion p { color: #c8d2e0; font-size: 0.97rem; }
+    .conclusion strong { color: #9ec8f0; }
+    .conclusion ul {
+      padding-left: 0;
+      list-style: none;
+      gap: 0.65rem;
+    }
+    .conclusion li {
+      color: #c8d2e0;
+      font-size: 0.95rem;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .conclusion li::before {
+      content: "◆";
+      position: absolute;
+      left: 0;
+      color: #5a9cd6;
+      font-size: 0.6rem;
+      top: 0.45em;
+    }
+    .conclusion li strong { color: #9ec8f0; }
+    .conclusion .key-takeaway {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-top: 1.5rem;
+      font-size: 0.93rem;
+      color: #d8e4f2;
+      line-height: 1.75;
+    }
+
+    /* ── Footer ── */
+    footer {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      padding: 2rem 2rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer__note { font-size: 0.8rem; color: var(--text-caption); }
+    .footer__note a { color: var(--accent); text-decoration: none; }
+    .footer__note a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero { padding: 2.5rem 1.25rem 1.5rem; }
+      .article { padding: 2rem 1.25rem 4rem; }
+      .contract-grid { grid-template-columns: 1fr; }
+      .exec-summary { padding: 1.25rem 1.25rem; }
+      .conclusion { padding: 1.75rem 1.25rem 1.5rem; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .figure--wide, .figure--full { max-width: 100%; }
+    }
+    @media (max-width: 480px) {
+      body { font-size: 15.5px; }
+      h2 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Sticky Navigation ── -->
+<nav class="site-nav" role="navigation" aria-label="文章章節導航">
+  <div class="site-nav__inner">
+    <span class="site-nav__label">章節</span>
+    <a href="#section-1">一、本質澄清</a>
+    <a href="#section-2">二、POMDP 閉環</a>
+    <a href="#section-3">三、三大投影</a>
+    <a href="#section-4">四、模擬器支點</a>
+    <a href="#section-5">五、統一終局</a>
+    <a href="#conclusion">總結</a>
+  </div>
+</nav>
+
+<!-- ── Hero Header ── -->
+<header class="hero">
+  <div class="hero__meta">
+    <span class="hero__tag">深度導讀</span>
+    <span class="hero__source">
+      原文：<a href="https://drfeifei.substack.com/p/a-functional-taxonomy-of-world-models" target="_blank" rel="noopener">Dr. Fei-Fei Li — A Functional Taxonomy of World Models</a>
+    </span>
+  </div>
+  <h1>空間智能的結構解碼<br>世界模型的功能分類與演進路徑</h1>
+  <p class="hero__subtitle">
+    以控制論的 POMDP 閉環為骨架，拆解渲染器、模擬器與規劃器三大核心功能，
+    深度剖析模擬器作為實體 AI 落地支點的關鍵原因，以及統一世界模型的終局願景。
+  </p>
+
+  <!-- Executive Summary -->
+  <div class="exec-summary">
+    <div class="exec-summary__label">📌 核心摘要 Executive Summary</div>
+    <ol>
+      <li>
+        <strong>基質的根本差異</strong>：語言模型學習「文本」的統計結構；世界模型學習「空間與時間」的統計結構（光影、幾何、物理定律）。
+      </li>
+      <li>
+        <strong>控制論閉環 (POMDP)</strong>：世界模型可拆解為三個功能投影：
+        <ul class="exec-sub">
+          <li><span class="badge badge--renderer">渲染器 Renderer</span> 輸入動作，輸出觀測值像素，追求視覺逼真度</li>
+          <li><span class="badge badge--simulator">模擬器 Simulator</span> 輸入狀態描述，輸出物理狀態幾何，追求結構精確性</li>
+          <li><span class="badge badge--planner">規劃器 Planner</span> 輸入觀測值與目標，輸出動作指令，閉合感知與動作</li>
+        </ul>
+      </li>
+      <li>
+        <strong>模擬器的樞紐地位</strong>：渲染器商業成熟但物理空洞；規劃器前景迷人但受限實驗室。<strong>模擬器是解決 Sim-to-Real Gap、實現統一世界模型的關鍵支柱。</strong>
+      </li>
+    </ol>
+  </div>
+</header>
+
+<!-- ── Main Article ── -->
+<main class="article">
+  <div class="article__body">
+
+    <!-- ── Section 1 ── -->
+    <section class="section" id="section-1">
+      <div class="section-header">
+        <div class="section-number">一</div>
+        <h2>從文字到空間：世界模型的本質與定義澄清</h2>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-block__label">原文精要</div>
+        <p>「世界不是由文字組成的。」語言模型賦予機器概念與邏輯推理能力，但物理世界的運行基質完全不同。世界模型旨在學習時空的統計結構（光線投射、未觀測視角的幾何、物體受力後的物理行為）。目前電腦視覺、機器人、強化學習與生成式 AI 對「世界模型」的定義各執一詞，亟需精準的分類學。</p>
+      </div>
+
+      <p>大眾常將「會生成漂亮影片的 AI」等同於理解世界的「世界模型」。然而，語言模型是在離散的文字 token 間尋找統計規律，這是一種<strong>高維的符號抽象</strong>；但真實世界是連續的、具備物理幾何實體的。</p>
+
+      <p>世界模型所要解決的核心問題是：<strong>如何在沒有相機拍攝過的角度，預測光的反射？如何在物體受力時，預測其形變與運動軌跡？</strong></p>
+
+      <p>如果把語言模型比喻為「熟讀劇本的編劇」，能編出合乎邏輯的故事；那麼世界模型就是「實際在舞台上行走的特技演員」，必須即時面對重力、摩擦力與光影的物理考驗。</p>
+
+      <figure class="figure figure--wide">
+        <img src="images/llm_vs_wm.png" alt="語言模型與世界模型的根本差異：符號抽象 vs 時空幾何" loading="lazy">
+        <figcaption>語言模型學習文字符號的統計規律（高維抽象），世界模型學習時空的幾何與物理規律（連續實體）。兩者的基質截然不同。</figcaption>
+      </figure>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── Section 2 ── -->
+    <section class="section" id="section-2">
+      <div class="section-header">
+        <div class="section-number">二</div>
+        <h2>分類學底層的閉環：POMDP 的控制論本質</h2>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-block__label">原文精要</div>
+        <p>釐清混亂的起點，在於強化學習中經典的「部分可觀察馬可夫決策過程 (POMDP)」循環：智能體 (Agent) 採取動作 (Action) 改變世界狀態 (State)，但 Agent 無法直接看到 State，只能接收到局部觀測值 (Observation)。此感知與動作的閉環，正是世界模型所有功能的源頭。</p>
+      </div>
+
+      <p>「狀態 (State)」與「觀測值 (Observation)」的區分，是控制論中極為嚴謹的邊界定義：</p>
+
+      <ul>
+        <li><strong>State（狀態）</strong>：物理世界完整的底層真實 (Underlying Reality)，包含空間中所有物體的精確三維坐標、速度、質量、摩擦係數等。它是完整的，但對 Agent 而言是「不可直接觀測」的陰影。</li>
+        <li><strong>Observation（觀測值）</strong>：Agent 透過感測器（相機像素、雷達點雲、網膜光子）所獲得的「局部投影與殘缺視角」。</li>
+      </ul>
+
+      <p>這個互動迴圈構成世界模型所有功能的底層框架——<strong>POMDP 決策閉環</strong>：</p>
+
+      <figure class="figure figure--diagram">
+        <img src="images/pomdp_loop.png" alt="POMDP 決策閉環：Agent、State、Observation 的三角關係" loading="lazy">
+        <figcaption>POMDP 閉環：智能體採取動作改變底層狀態，狀態投影出局部觀測值，觀測值再回饋給智能體。「狀態」對 Agent 永遠是不完全可見的。</figcaption>
+      </figure>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── Section 3 ── -->
+    <section class="section" id="section-3">
+      <div class="section-header">
+        <div class="section-number">三</div>
+        <h2>世界模型的三大功能投影</h2>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-block__label">原文精要</div>
+        <p>當前被稱為世界模型的系統，其實是 POMDP 循環在不同維度的投影：<strong>渲染器</strong>輸出像素作為觀測值，核心指標是視覺逼真度；<strong>模擬器</strong>輸出幾何、物理與動力學上精確的「狀態」；<strong>規劃器</strong>輸入觀測值與目標，輸出「動作」，關閉感知-動作循環。</p>
+      </div>
+
+      <p>這三種模型在 POMDP 閉環中扮演著不同的函數映射關係：</p>
+
+      <figure class="figure figure--wide">
+        <img src="images/taxonomy.png" alt="世界模型三大功能投影：渲染器、模擬器、規劃器" loading="lazy">
+        <figcaption>三大功能投影各自對應 POMDP 閉環的不同環節：渲染器（Action→Pixels）、模擬器（State Description→Physical State）、規劃器（Obs+Goal→Action）。</figcaption>
+      </figure>
+
+      <p>這三者的「合約 (Contract)」有著本質的不同：</p>
+
+      <div class="contract-grid">
+        <div class="contract-card contract-card--r">
+          <div class="contract-card__title">🎨 渲染器的合約<br>視覺欺騙 (Visual Plausibility)</div>
+          <p>只要讓人的眼睛覺得「像真的」就好。即使火焰在物理上不合理，只要好看，在影視娛樂產業就通關。</p>
+        </div>
+        <div class="contract-card contract-card--s">
+          <div class="contract-card__title">⚙️ 模擬器的合約<br>物理一致性 (Structural & Physical Consistency)</div>
+          <p>幾何結構經得起檢驗，動力學符合牛頓定律。不只服務人類眼睛，更服務於需要與物理世界互動的演算法。</p>
+        </div>
+        <div class="contract-card contract-card--p">
+          <div class="contract-card__title">🧠 規劃器的合約<br>目標達成率 (Goal Accomplishment)</div>
+          <p>在不確定環境中，如何安全、有效地操作物體。解決從感知到行動的完整決策問題。</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── Section 4 ── -->
+    <section class="section" id="section-4">
+      <div class="section-header">
+        <div class="section-number">四</div>
+        <h2>為什麼「模擬器」是不可或缺的阿基米德支點？</h2>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-block__label">原文精要</div>
+        <p>模擬器是三者中得到公眾關注最少，但技術影響最深遠的。渲染器商業成熟度高，但無法用於設計或訓練；規劃器正值熱潮，但目前大多受限於實驗室的狹窄場景與短時序。<strong>模擬器是兩者的橋樑：幾何、物理和動力學是世界本體，模擬器正是這底層的骨架。</strong></p>
+      </div>
+
+      <p>從產業與工程落地的視角來看，三者的發展呈現了極大的不均衡：</p>
+
+      <h3>渲染器的虛華與瓶頸</h3>
+      <p>雖然以 Sora、Google Veo 等為代表的視訊生成模型能在商業上快速變現，但它們在本質上缺乏對三維幾何與物理邊界的顯式約束。這種缺少「隱式幾何約束」的像素預測，其泛化邊界是極度脆弱的——一旦用於自動駕駛或機器人訓練，任何一個物理學上的「幻覺」（如輪胎穿透地面、物體無端消失），都會導致控制演算法訓練失敗。</p>
+
+      <h3>規劃器的落地困境（The Reality Gap）</h3>
+      <p>近年機器人展示影片看似驚艷，但背後是高昂的「硬體與數據成本」。幾乎所有成果都限制在高度受控的實驗室、單一物體集與極短的任務時序中。要在真實的廚房、醫院、倉庫落地，必須克服海量的長尾分布問題。</p>
+
+      <h3>模擬器作為「數據發電機」與「安全防護網」</h3>
+      <p>真實世界採集機器人跌倒、碰撞的數據代價極高。模擬器提供了一個「無風險的平行宇宙」，讓 Agent 能在其中以萬倍速進行試錯。這正是 NVIDIA 重押 Omniverse、微軟等大廠佈局數位雙生的核心商業邏輯——<strong>掌握了模擬器，就掌握了實體 AI 訓練的數據源頭與定義權。</strong></p>
+
+      <figure class="figure figure--wide">
+        <img src="images/simulator_pivot.png" alt="模擬器是實體 AI 的阿基米德支點：三大功能的戰略地位比較" loading="lazy">
+        <figcaption>三大功能的戰略地位：渲染器（商業成熟但物理空洞）、模擬器（技術關鍵支柱）、規劃器（前景迷人但受限）。模擬器是連接虛擬訓練與真實部署的橋樑。</figcaption>
+      </figure>
+
+      <div class="warn-block">
+        <div class="warn-block__label">⚠️ 模擬器的三大工程挑戰</div>
+        <ul>
+          <li><strong>3D 資料稀缺性</strong>：相較於網路上無窮無盡的影片與文字，帶有精確幾何、材質、物理屬性標註的 3D 資料量少了好幾個數量級。</li>
+          <li><strong>Sim-to-Real Gap（模擬到真實的差距）</strong>：模擬器中的物理參數即使再逼真，與真實世界的物理接觸仍有微小落差，會導致在模擬中訓練完美的機器人到了實體世界直接癱瘓。</li>
+          <li><strong>生成式模擬器的物理崩塌</strong>：當使用 AI 生成 3D 幾何時，容易產生幾何自相交 (Self-intersection) 或比例失衡的物件，導致物理引擎計算出荒謬的力反饋（物體無限加速飛出）。</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── Section 5 ── -->
+    <section class="section" id="section-5">
+      <div class="section-header">
+        <div class="section-number">五</div>
+        <h2>邊界的融解與統一世界模型的終局</h2>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-block__label">原文精要</div>
+        <p>三大功能的邊界正在塌陷。對杯子幾何與物理有真正理解的模型，應能同時進行渲染、模擬與規劃。World Labs 推出的 <strong>Marble</strong> 是第一步，它能從多模態輸入直接生成 3D 可探索環境，同時輸出用於視覺的 3D 高斯潑濺 (Gaussian Splats) 與用於物理引擎的碰撞網格 (Collision Meshes)。終局是「統一世界模型」——單一基座模型能隨下游需求靈活切換輸出模式。</p>
+      </div>
+
+      <p>當前的技術趨勢是從「分離式的專有模型」走向「多模態統一架構」。以 World Labs 的 <strong>Marble</strong> 為例，它打破了「視覺」與「結構」的二分法：</p>
+
+      <pre>[多模態輸入：文字 / 影像 / 草圖]
+          ↓
+  【 Marble 世界基座模型 】
+          │
+          ├──▶ 視覺層：3D Gaussian Splats（極致渲染）
+          │
+          └──▶ 物理層：Collision Meshes（物理碰撞網格）</pre>
+
+      <p>這項技術的商業戰略價值巨大：</p>
+      <ul>
+        <li><strong>降低 3D 資產製作門檻</strong>：以往需要 3D 美術師手動拓撲、設定碰撞體；現在能一鍵生成可立即投入物理引擎運行的 3D 關卡。</li>
+        <li><strong>端到端具身智能訓練</strong>：規劃器可以直接在 Marble 生成的場景中行走，渲染器即時回傳像素（Observation），物理引擎即時計算碰撞（State），在單一模型內完成完整的 POMDP 閉環。</li>
+      </ul>
+
+      <figure class="figure figure--wide">
+        <img src="images/unified_wm.png" alt="統一世界模型終局：Marble 多模態輸入同時輸出視覺層與物理層" loading="lazy">
+        <figcaption>統一世界模型架構：單一基座模型從多模態輸入同時生成視覺渲染（3D Gaussian Splats）與物理結構（Collision Meshes），實現完整 POMDP 閉環。</figcaption>
+      </figure>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── Conclusion ── -->
+    <section id="conclusion">
+      <div class="conclusion">
+        <h2>🎯 總結：空間智能的戰略地圖</h2>
+        <p>世界模型不是單一的技術，而是<strong>人機協同與物理世界互動的架構體系</strong>。</p>
+        <ul style="margin: 1.25rem 0;">
+          <li><strong>語言模型</strong>給了機器「談論世界的舌頭」。</li>
+          <li><strong>世界模型</strong>則給了機器「理解與改變世界的身體」。</li>
+        </ul>
+        <p>在邁向通用具身智能 (General Embodied AI) 的路上，技術的演進可總結為：<strong>「視覺欺騙走向結構真實，單一感知走向決策閉環」</strong>。</p>
+        <div class="key-takeaway">
+          未來的勝負手不在於誰能生成最漂亮的展示影片（Renderer），而在於誰能建立<strong>最大規模、物理最精確、且能與規劃器無縫串接的生成式模擬器（Simulator）</strong>。這條從 Marble 到統一世界模型的長遠路徑，將徹底重塑機器智能與物理實體世界之間的關係，這正是空間智能 (Spatial Intelligence) 的長遠價值所在。
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /article__body -->
+</main>
+
+<!-- ── Footer ── -->
+<footer>
+  <p class="footer__note">
+    深度導讀基於 <a href="https://drfeifei.substack.com/p/a-functional-taxonomy-of-world-models" target="_blank" rel="noopener">Dr. Fei-Fei Li — A Functional Taxonomy of World Models</a>
+  </p>
+  <p class="footer__note">空間智能 · Spatial Intelligence · 2025</p>
+</footer>
+
+</body>
+</html>

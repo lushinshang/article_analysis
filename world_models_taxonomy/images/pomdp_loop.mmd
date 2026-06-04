@@ -1,0 +1,9 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f0f0ff', 'primaryTextColor': '#1a1a1a', 'primaryBorderColor': '#6666cc', 'lineColor': '#555', 'background': '#fafafa', 'fontSize': '16px'}}}%%
+graph TD
+    Agent["🤖 智能體 Agent"] -->|"採取 Action"| State("🌍 底層世界狀態 State<br/><small>完整物理真實</small>")
+    State -->|"投影出"| Obs("👁️ 局部觀測值 Observation / Pixels<br/><small>感測器殘缺視角</small>")
+    Obs -->|"輸入"| Agent
+
+    style State fill:#ffd6ff,stroke:#993399,stroke-width:2px,color:#1a1a1a
+    style Obs fill:#c8d8ff,stroke:#3355cc,stroke-width:2px,color:#1a1a1a
+    style Agent fill:#c8ffcc,stroke:#339933,stroke-width:2px,color:#1a1a1a

@@ -1,0 +1,21 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5ff', 'primaryTextColor': '#1a1a1a', 'primaryBorderColor': '#999', 'lineColor': '#555', 'background': '#fafafa', 'fontSize': '15px'}}}%%
+graph TD
+    subgraph WM["🗺️ 世界模型的三大功能投影 (A Functional Taxonomy)"]
+        R["🎨 渲染器<br/>Renderer<br/><small>合約：視覺逼真度</small>"]
+        S["⚙️ 模擬器<br/>Simulator<br/><small>合約：物理一致性</small>"]
+        P["🧠 規劃器<br/>Planner<br/><small>合約：目標達成率</small>"]
+    end
+
+    Action_Input["動作 Action"] -->|"驅動"| R
+    R -->|"輸出"| Pixels_Output["像素 / 觀測值<br/>Observation / Pixels"]
+
+    State_Desc["狀態 / 物理描述"] -->|"驅動"| S
+    S -->|"輸出"| Structure_Output["幾何 / 物理狀態<br/>State / Geometry"]
+
+    Obs_Goal["觀測值 Obs<br/>+ 目標 Goal"] -->|"輸入"| P
+    P -->|"輸出"| Action_Output["規劃動作<br/>Action"]
+
+    style R fill:#ffd2d2,stroke:#cc3333,stroke-width:2px,color:#1a1a1a
+    style S fill:#d2ffd2,stroke:#339933,stroke-width:2px,color:#1a1a1a
+    style P fill:#d2d2ff,stroke:#3333cc,stroke-width:2px,color:#1a1a1a
+    style WM fill:#f9f9f9,stroke:#999,stroke-width:1px
