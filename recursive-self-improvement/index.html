@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>當 AI 開始設計下一代 AI：遞迴自我改進的現實與邊界</title>
+  <meta name="description" content="Anthropic《When AI builds itself》深度導讀——AI 技術原理 × 攻防一體資安框架，解析遞迴自我改進的現實數據與三種可能的未來。">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f7f4;
+      --bg-alt: #f0ede8;
+      --bg-note: #eef2f8;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --text-caption: #666;
+      --accent: #2c6fad;
+      --accent-light: #e8f0f9;
+      --accent-dark: #1a4d7a;
+      --warn: #c0392b;
+      --warn-light: #fdf3f2;
+      --border: #d8d3cb;
+      --border-light: #e8e4de;
+      --tag-green: #27ae60;
+      --tag-orange: #e67e22;
+      --tag-red: #c0392b;
+      --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
+      --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+      --max-page: 1120px;
+      --max-body: 720px;
+      --max-img: 860px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16.5px;
+      line-height: 1.68;
+      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Sticky Nav ── */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249,247,244,0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+    }
+    .sticky-nav__inner {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .sticky-nav__inner::-webkit-scrollbar { display: none; }
+    .sticky-nav a {
+      white-space: nowrap;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 5px 11px;
+      border-radius: 20px;
+      transition: background .15s, color .15s;
+    }
+    .sticky-nav a:hover { background: var(--accent-light); color: var(--accent); }
+    .nav-sep { color: var(--border); font-size: 12px; flex-shrink: 0; }
+
+    /* ── Layout ── */
+    .page-wrap {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    article {
+      max-width: var(--max-body);
+      margin: 0 auto;
+    }
+
+    /* ── Hero Header ── */
+    .hero {
+      padding: 72px 0 52px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+    .hero__eyebrow {
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.18;
+      text-wrap: balance;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .hero__meta span::before { content: "·"; margin-right: 8px; }
+    .hero__meta span:first-child::before { content: ""; margin-right: 0; }
+    .hero__note {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      padding: 10px 16px;
+      border-radius: 0 6px 6px 0;
+      line-height: 1.55;
+    }
+
+    /* ── Typography ── */
+    h2 {
+      font-size: clamp(1.45rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      line-height: 1.3;
+      text-wrap: balance;
+      color: var(--text);
+      margin: 64px 0 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border-light);
+    }
+    h2:first-of-type { margin-top: 0; }
+    h3 {
+      font-size: clamp(1.15rem, 2vw, 1.32rem);
+      font-weight: 700;
+      line-height: 1.35;
+      text-wrap: balance;
+      color: var(--text);
+      margin: 48px 0 16px;
+    }
+    h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 32px 0 10px;
+    }
+    p { margin-bottom: 20px; }
+    p:last-child { margin-bottom: 0; }
+    strong { font-weight: 700; color: var(--text); }
+    em { font-style: italic; }
+    a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--accent-dark); }
+
+    /* ── Blockquote ── */
+    blockquote {
+      margin: 28px 0;
+      padding: 18px 24px;
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      color: var(--text);
+      font-size: 15.5px;
+      line-height: 1.65;
+    }
+    blockquote p { margin-bottom: 0; }
+
+    /* ── Code ── */
+    pre {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      padding: 20px 22px;
+      border-radius: 10px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 24px 0;
+    }
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: #e8e4de;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #c0392b;
+    }
+    pre code { background: none; padding: 0; color: inherit; font-size: inherit; border-radius: 0; }
+
+    /* ── Anchor ref ── */
+    .anchor-ref {
+      font-size: 12px;
+      vertical-align: super;
+      margin-left: 3px;
+      font-family: var(--font-mono);
+      background: var(--bg-note);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .anchor-ref:hover { background: var(--accent-light); }
+
+    /* ── Tables ── */
+    .table-wrap { overflow-x: auto; margin: 28px 0; }
+    table {
+      width: 100%;
+      min-width: 420px;
+      border-collapse: collapse;
+      font-size: 14.5px;
+    }
+    th {
+      background: var(--bg-alt);
+      font-weight: 700;
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 9px 14px;
+      border: 1px solid var(--border-light);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    tr:nth-child(even) td { background: #faf9f6; }
+
+    /* ── Lists ── */
+    ul, ol { padding-left: 24px; margin: 16px 0 20px; }
+    li { margin-bottom: 8px; line-height: 1.65; }
+    li:last-child { margin-bottom: 0; }
+
+    /* ── Images ── */
+    .img-block {
+      margin: 36px auto;
+      max-width: var(--max-img);
+    }
+    .img-block img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+      box-shadow: 0 2px 16px rgba(0,0,0,.10);
+    }
+    .img-block figcaption {
+      font-size: 13px;
+      color: var(--text-caption);
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.52;
+    }
+    .img-block a { text-decoration: none; }
+    .img-block a:hover img { opacity: .92; }
+
+    /* ── Stats highlight ── */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 28px 0;
+    }
+    .stat-card {
+      flex: 1 1 160px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      text-align: center;
+    }
+    .stat-card__num {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-card__label { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border-light);
+      margin: 48px 0;
+    }
+
+    /* ── Technical Notes section ── */
+    .notes-section {
+      background: var(--bg-note);
+      border: 1px solid #c8d8ee;
+      border-radius: 14px;
+      padding: 40px 44px;
+      margin-top: 72px;
+    }
+    .notes-section h2 {
+      border-bottom-color: #c8d8ee;
+      color: var(--accent-dark);
+    }
+    .notes-section h3 {
+      color: var(--accent-dark);
+      font-size: 1.1rem;
+      margin-top: 40px;
+    }
+    .notes-intro {
+      font-size: 14px;
+      color: var(--text-muted);
+      background: white;
+      border: 1px solid #c8d8ee;
+      border-radius: 8px;
+      padding: 12px 18px;
+      margin-bottom: 8px;
+    }
+
+    /* ── Status badges ── */
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 6px;
+    }
+    .badge-red { background: #fdf3f2; color: var(--warn); border: 1px solid #f5c6c2; }
+    .badge-yellow { background: #fef9e7; color: #8a6000; border: 1px solid #f7dc6f; }
+    .badge-green { background: #eafaf1; color: #1e8449; border: 1px solid #a9dfbf; }
+
+    /* ── Footer ── */
+    .article-footer {
+      margin-top: 64px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 700px) {
+      .page-wrap { padding: 0 16px; }
+      .hero { padding: 40px 0 32px; }
+      .notes-section { padding: 24px 20px; }
+      .stats-row { gap: 10px; }
+      .stat-card { flex: 1 1 130px; padding: 12px 12px; }
+      .stat-card__num { font-size: 1.7rem; }
+      pre { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sticky Navigation -->
+<nav class="sticky-nav" aria-label="文章導覽">
+  <div class="sticky-nav__inner">
+    <a href="#summary">摘要</a>
+    <span class="nav-sep">›</span>
+    <a href="#sec1">開場問題</a>
+    <span class="nav-sep">›</span>
+    <a href="#sec2">公開數據</a>
+    <span class="nav-sep">›</span>
+    <a href="#sec3">內部剖白</a>
+    <span class="nav-sep">›</span>
+    <a href="#sec4">閉環里程碑</a>
+    <span class="nav-sep">›</span>
+    <a href="#sec5">人類空間</a>
+    <span class="nav-sep">›</span>
+    <a href="#sec6">三條路</a>
+    <span class="nav-sep">›</span>
+    <a href="#sec7">政策困境</a>
+    <span class="nav-sep">›</span>
+    <a href="#conclusion">總結</a>
+    <span class="nav-sep">›</span>
+    <a href="#tech-notes">技術附註</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+<article>
+
+  <!-- Hero -->
+  <header class="hero">
+    <p class="hero__eyebrow">深度導讀 · Anthropic Institute · 2026 年 5 月</p>
+    <h1>當 AI 開始設計下一代 AI<br>遞迴自我改進的現實與邊界</h1>
+    <div class="hero__meta">
+      <span>原作者：Marina Favaro、Jack Clark</span>
+      <span>導讀視角：AI 技術原理 × 攻防一體資安框架</span>
+      <span>導讀整理：2026-06-06</span>
+    </div>
+    <p class="hero__note">主文為白話敘事，直接讀完即可。文末「技術附註」供有 AI 或資安技術背景的讀者深入參考，主文不依賴附註也能讀通。</p>
+  </header>
+
+  <!-- Summary -->
+  <section id="summary">
+    <h2>摘要</h2>
+    <p>你有沒有想過，最難防禦的攻擊，不是來自外面，而是來自系統本身設計的邏輯？</p>
+    <p>Anthropic 這篇文章說的，就是這件事。不是假設，不是預言，而是他們公司裡正在發生的現實：<strong>AI 正在幫助打造下一代 AI，而速度比任何人預期的都快。</strong></p>
+    <p style="font-size:14px; color:var(--text-muted);">本導讀由 Anthropic Institute 原文 <a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank" rel="noopener">When AI builds itself</a> 引起。建議搭配原文閱讀；導讀側重白話解析與資安視角，原文提供完整圖表與數據來源。</p>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-card__num">80%</div>
+        <div class="stat-card__label">Anthropic 生產程式碼<br>由 Claude 撰寫（2026/5）</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__num">8×</div>
+        <div class="stat-card__label">工程師每季程式碼產出<br>兩年內成長倍數</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__num">52×</div>
+        <div class="stat-card__label">AI 程式碼優化加速<br>（vs 人類 4×）</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__num">97%</div>
+        <div class="stat-card__label">AI 在 AI 安全監督<br>任務的成功率</div>
+      </div>
+    </div>
+
+    <p>文章的結論不是「一切都完了」，而是一個更讓人不舒服的現實：<strong>我們知道需要做什麼，但建立那套機制所需要的時間，可能遠超過我們還剩下的窗口。</strong></p>
+  </section>
+
+  <hr>
+  <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">逐段深度導讀</h2>
+  <hr style="margin-top:0;">
+
+  <!-- Section 1 -->
+  <section id="sec1">
+    <h2>一、一個讓人坐直身體的問題</h2>
+    <p>想像一個場景：你請了一位超厲害的員工，工作效率是你的 10 倍。有一天你發現，他不只在幫你工作，他還在幫你設計下一個員工——一個比他自己更厲害的員工。你問：「你用什麼標準選下一個員工？」他說：「我自己決定，你放心。」</p>
+    <p>這就是 Anthropic 這篇文章想讓你感受到的問題。</p>
+    <p><strong>AI 遞迴自我改進（Recursive Self-Improvement）</strong>，用白話說就是：AI 在幫助設計下一代 AI。聽起來好像不算什麼大事——我們不是一直都在訓練更好的模型嗎？</p>
+    <p>差別在這裡：過去，每一代 AI 的改進，是由<strong>人類研究員</strong>主導決策的——人類決定要改什麼、怎麼改、改完之後好不好。現在，AI 開始加入這個決策過程。人類的角色，正在從「主導者」變成「審核者」，然後又從「審核者」慢慢縮退。</p>
+    <p>這個問題的核心，不是 AI 會不會「造反」，而是一個更平凡也更深刻的問題：<strong>當設計者和被設計者是同一個對象時，我們要怎麼確認方向沒有走偏？</strong></p>
+    <p>就像你請別人幫你矯正視力，但幫你看視力表的人，也是幫你設計視力表的人。你沒辦法獨立驗證結果。<a href="#note-a" class="anchor-ref">→ 附註 A</a></p>
+    <blockquote>
+      <p>「AI 是否正在幫助設計下一代 AI？若是，這個趨勢會加速還是停止？若加速，我們的機構準備好了嗎？」</p>
+    </blockquote>
+    <p>第一個問題：是。第二個問題：加速。第三個問題：<strong>沒有。</strong></p>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="sec2">
+    <h2>二、公開數據已經在說話</h2>
+    <p>在說 Anthropic 的內部數據之前，文章先用公開資料建立一個任何人都能驗證的基準線。</p>
+    <p>最直接的指標是：<strong>一個 AI 代理能獨立完成的任務，最長可以跑多久？</strong></p>
+    <p>這個數字代表的是「AI 的自主行動能力上限」。2024 年 3 月，Claude 能自己跑完的最長任務是 4 分鐘。到了 2026 年 3 月，同樣的度量，變成了 12 小時。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>時間</th><th>模型</th><th>最長自主任務時間</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2024 年 3 月</td><td>Claude Opus 3</td><td>4 分鐘</td></tr>
+          <tr><td>2025 年 3 月</td><td>Claude Sonnet 3.7</td><td>1.5 小時</td></tr>
+          <tr><td>2026 年 3 月</td><td>Claude Opus 4.6</td><td>12 小時</td></tr>
+          <tr><td>2026 年（測試中）</td><td>Claude Mythos Preview</td><td>16+ 小時</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>這個數字在過去每 7 個月翻倍一次，但現在加速到<strong>每 4 個月翻倍</strong>。</p>
+    <p>要感受這個速度有多快，可以用另一個角度想：過去你的 AI 助理，就像一個只能幫你跑腿去隔壁買早餐的實習生（4 分鐘任務）。現在，它能幫你獨立完成一整天的工作排程並執行，還能在你還沒醒來之前，把結果整理好放在你桌上（12 小時任務）。</p>
+    <p><strong>公開的軟體工程基準測試（SWE-bench）</strong>同樣揭示了類似的模式：這個測試兩年前還是「AI 研究的前沿挑戰」，現在已經接近飽和，研究界正在尋找更難的替代測試。<strong>研究再現性測試（CORE-Bench）</strong>從 20% 成功率到飽和，只花了 <strong>15 個月</strong>。<a href="#note-b" class="anchor-ref">→ 附註 B</a></p>
+    <p>從資安的角度看，這個「能力曲線快速飽和」的模式，讓人聯想到另一個現象：<strong>漏洞從公開到被廣泛利用的時間，也在快速縮短</strong>。過去是幾週，現在有些漏洞在 24 小時內就被武器化。能力邊界飽和的速度，反映的是技術成熟的速度。</p>
+
+    <figure class="img-block">
+      <a href="https://www-cdn.anthropic.com/images/4zrzovbb/website/30f1266938f0d62a770dccf77baf24a0ad237fbd-2200x1276.png" target="_blank" rel="noopener">
+        <img src="https://www-cdn.anthropic.com/images/4zrzovbb/website/30f1266938f0d62a770dccf77baf24a0ad237fbd-2200x1276.png" alt="Claude Code 各模型在不同難度任務的成功率趨勢圖" loading="lazy">
+      </a>
+      <figcaption>圖一：Claude Code 各模型在不同難度任務的成功率（2025 年 11 月至 2026 年 5 月）｜來源：Anthropic</figcaption>
+    </figure>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="sec3">
+    <h2>三、Anthropic 把自己的帳本攤開了</h2>
+    <p>公開數據任何人都可以複製，但 Anthropic 在這篇文章裡做了一件很不尋常的事：<strong>把公司內部的生產數據公開了</strong>。</p>
+    <p>這件事本身就是一個訊號。沒有一家公司會輕易揭露自己的工程效率數字——除非他們認為這件事的重要性，超過了商業競爭的代價。</p>
+
+    <figure class="img-block">
+      <a href="https://www-cdn.anthropic.com/images/4zrzovbb/website/52a19d636c659cf4515dc0d7d70b8ceb1bbfd768-2200x1276.png" target="_blank" rel="noopener">
+        <img src="https://www-cdn.anthropic.com/images/4zrzovbb/website/52a19d636c659cf4515dc0d7d70b8ceb1bbfd768-2200x1276.png" alt="每人每季程式碼貢獻量趨勢，2021 Q2 至 2026 Q2" loading="lazy">
+      </a>
+      <figcaption>圖二：每人每季程式碼貢獻量，2021 Q2 至 2026 Q2（含各 Claude 版本發佈時間點）｜來源：Anthropic</figcaption>
+    </figure>
+
+    <p>這張圖用形狀說話：2021 到 2024 年，幾乎是一條水平線。2025 年初開始微微翹起，2026 年，曲線明顯變陡。</p>
+    <ul>
+      <li>2026 年 5 月，<strong>超過 80%</strong> 的 Anthropic 生產程式碼由 Claude 撰寫</li>
+      <li>對比：2025 年 2 月以前，這個數字是<strong>個位數百分比</strong></li>
+      <li>每人每季程式碼產出：兩年內提升 <strong>8 倍</strong></li>
+    </ul>
+    <p>用台積電的比喻來說：就好像在某個時間點以後，台積電 80% 的製程設計決策，開始由機器自動生成，工程師的主要工作變成「確認機器的決策是否合理」。這不是輔助工具，這是<strong>角色翻轉</strong>。</p>
+    <p>程式碼品質也在追趕：Claude 的程式碼審查，回顧分析顯示能攔截約 <strong>33% 的歷史已知 bug</strong>。換句話說，如果三年前就有現在的 AI 程式碼審查工具，三分之一的軟體漏洞根本不需要發生。</p>
+    <p>這裡有一個資安上的重要警訊，值得單獨說清楚：</p>
+    <p>當 80% 的程式碼由 AI 生成，「攻擊 AI 的訓練資料」就等同於「攻擊整個程式碼庫」。傳統上，要在軟體供應鏈中植入後門，攻擊者需要入侵建置系統或竄改套件——就像 2020 年的 SolarWinds 事件，駭客入侵了 SolarWinds 的建置流程，讓 18,000 個組織下載了含有後門的正式更新。</p>
+    <p>但如果 AI 的訓練資料被污染，後門可以「自然地」出現在 AI 生成的所有程式碼中，而且因為程式碼在語法上是正確的，現有的程式碼審查工具很可能偵測不到。這個攻擊面的改變，目前業界還沒有成熟的對策。<a href="#note-c" class="anchor-ref">→ 附註 C</a></p>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="sec4">
+    <h2>四、AI 研究 AI 安全，做得比人類好</h2>
+    <p>文章裡有一個里程碑事件，放在平靜的敘事中，但讀完之後需要停頓幾秒：</p>
+    <p><strong>2026 年 4 月，Claude 代理首次完成了完整的端對端自主研究任務。</strong></p>
+    <p>任務的主題是：<strong>AI 安全的監督問題</strong>。具體來說，是一個叫做「弱監督（Weak Supervision）」的研究場景——當你沒有足夠多的「正確答案」來訓練 AI 時，能不能讓 AI 仍然學到正確的東西？</p>
+    <p>白話版：想像你要訓練一個新員工，但你沒辦法給他充足的教材和範例，只有一些零散的提示。這個新員工能不能靠著有限的線索，自己拼湊出正確的工作方式？</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>執行者</th><th>任務成功率</th></tr></thead>
+        <tbody>
+          <tr><td>Claude 代理</td><td><strong>97%</strong></td></tr>
+          <tr><td>人類研究員</td><td>23%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>成本：800 個代理小時，計算費用約 <strong>1.8 萬美元</strong>，大約等同於人類研究員花一週的工作。</p>
+    <p>這組數字讓人不舒服的原因，不只是 AI 做得比人好——而是 <strong>AI 正在研究「如何監督 AI」，並且在這件事上遠超過人類</strong>。</p>
+
+    <figure class="img-block">
+      <a href="https://www-cdn.anthropic.com/images/4zrzovbb/website/6fc2841bc896ad4ea8ee77e515df1a0a6bed8bcf-2200x1276.png" target="_blank" rel="noopener">
+        <img src="https://www-cdn.anthropic.com/images/4zrzovbb/website/6fc2841bc896ad4ea8ee77e515df1a0a6bed8bcf-2200x1276.png" alt="各模型在研究判斷上優於人類研究員的比例趨勢圖" loading="lazy">
+      </a>
+      <figcaption>圖三：各模型在「選擇更好研究下一步」上優於人類研究員的比例（2025 年 11 月至 2026 年 4 月）｜來源：Anthropic</figcaption>
+    </figure>
+
+    <p>另一個指標更日常：在研究過程中，找出人類研究員「走了彎路」的時間點，讓 AI 在相同的上下文提出下一步建議，再評估哪個更好。</p>
+    <ul>
+      <li>2025 年 11 月：51% 的情境，AI 的建議比人類好</li>
+      <li>2026 年 4 月：64% 的情境，AI 的建議比人類好</li>
+    </ul>
+    <p>六個月，從 51% 到 64%，提升了 13 個百分點。這個數字的累積效應，比直覺感受到的更嚇人。研究工作本質上是一連串的「下一步怎麼做」決策——就像下棋，每一步都建立在上一步之上。如果每一步都有 64% 的機率 AI 判斷得比人類好，10 步之後的累積差距，是以指數方式放大的。</p>
+    <p>從資安的視角，這裡出現了一個結構性困境：<strong>我們已經開始依賴 AI 來監督 AI 的安全問題，但這個監督鏈本身是否值得信任，目前沒有獨立的驗證機制。</strong></p>
+    <p>用滲透測試的語言說：就像你請同一家廠商既做紅隊演練，又寫安全報告。不是說他們一定會說謊，而是這個結構本身缺乏獨立性，讓你沒辦法確認報告的可靠程度。<a href="#note-d" class="anchor-ref">→ 附註 D</a></p>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="sec5">
+    <h2>五、人類還剩什麼？答案令人不安</h2>
+    <p>文章在這裡做了一個誠實到有點殘忍的盤點：</p>
+    <pre>程式碼生成   → AI 主導（80%，且持續上升）
+程式碼審核   → 人類仍有優勢，但 AI 正在快速追趕
+執行明確實驗 → AI 已遠超人類（52 倍 vs 4 倍）
+提出新實驗   → AI 在 97% vs 23% 的對比中壓倒性勝出
+研究判斷力   → AI 已有 64% 的情境優於人類
+設定研究目標 → 目前仍是人類的核心貢獻</pre>
+    <p>「仍是」這兩個字，是整份文章最讓人不安的部分。</p>
+    <p>這裡有一個物理定律等級的邏輯，叫做 <strong>Amdahl's Law</strong>。用大白話說就是：</p>
+    <blockquote>
+      <p><strong>就算你有 100 個廚師同時備料，但如果出菜之前只有一個試吃員，出菜的速度最終還是被那一個試吃員卡住的。</strong></p>
+    </blockquote>
+    <p>在 AI 開發流程中，如果人類審核是不可繞過的步驟，那麼不管 AI 生成程式碼的速度提升多少倍，整體流程的加速上限，就被「人類審核速度」這個瓶頸卡住了。<a href="#note-e" class="anchor-ref">→ 附註 E</a></p>
+
+    <figure class="img-block">
+      <img src="images/amdahl_bottleneck.png" alt="Amdahl's Law 瓶頸示意圖：100個廚師 vs 1個試吃員，AI生成 vs 人類審核" loading="lazy">
+      <figcaption>Amdahl's Law：AI 生成速度再快，人類審核是決定性瓶頸——突破方法只有一條，結果就是遞迴迴圈閉合</figcaption>
+    </figure>
+
+    <p>問題是：瓶頸卡住之後，只有兩條路可以走。要麼加快人類審核（但人類的速度很難再大幅提升），要麼讓 AI 審核 AI——而這，就是遞迴改進迴圈真正被「閉合」的那一刻。</p>
+    <p>從資安的防禦者視角，這個問題有一個更直接的說法：<strong>當威脅生成的速度超過防禦分析的速度，防禦就從「主動防禦」退化成「事後補洞」</strong>。現在大多數的 SOC（資安操作中心）都在跟這個問題搏鬥。AI 讓這個時間差問題，從「攻守之間的速度差距」，升級成了「AI 生成 vs 人類審核」的結構性差距。</p>
+  </section>
+
+  <!-- Section 6 -->
+  <section id="sec6">
+    <h2>六、三條路，各有各的恐怖</h2>
+    <p>文章提出三個未來情境，坦誠地說明各自的可能性與代價。</p>
+
+    <figure class="img-block">
+      <img src="images/three_futures.png" alt="三條可能的未來：趨勢停滯、複利效率提升、完全遞迴自我改進" loading="lazy">
+      <figcaption>三條可能的未來：各有不同的可能性評估、潛在利益與風險程度</figcaption>
+    </figure>
+
+    <h4>第一條路：趨勢停滯 <span class="badge badge-green">最不可能</span></h4>
+    <p>也許這條曲線會像很多技術浪潮一樣，在某個瓶頸前慢下來。也許晶片供應鏈的問題會先發作，也許能源成本先觸頂。</p>
+    <p>好消息：這條路給了人類最多的反應時間。<br>壞消息：文章說，<strong>目前沒有任何測量到的能力指標顯示曲線已開始彎折</strong>。</p>
+
+    <h4>第二條路：複利效率持續提升 <span class="badge badge-yellow">有可能，且後果嚴峻</span></h4>
+    <p>AI 大幅自動化 AI 開發，但人類仍然主導方向。100 人的公司，可以做出原本需要 1 萬到 10 萬人才能做到的事。</p>
+    <p>好的那面：台灣的半導體研發週期可能大幅縮短，醫療 AI 的突破速度可能加快，很多現在做不到的事情變得可行。</p>
+    <p>讓人不安的那面：<strong>每一個現有的網路武器，都能以同樣的效率被自動化生產</strong>。現在需要一個資深駭客花兩週設計的攻擊鏈，AI 代理可能在幾小時內自動重組完成。防禦者的應對窗口，會越縮越窄。</p>
+
+    <h4>第三條路：完全遞迴自我改進 <span class="badge badge-red">最難預測，後果最深遠</span></h4>
+    <p>AI 系統開始設計自己的繼任者。人類退縮到監督和驗收的角色。</p>
+    <p>把這個場景想成一個雪球：第一代 AI 滾出第二代，第二代更大更快，滾出第三代。只要方向是對的，雪球越來越有用；但如果方向一開始就有一點點偏，每一代都會放大這個偏差，而且偏差越來越難被發現、越來越難被糾正。</p>
+    <p>這個「方向偏差」，就是 AI 研究領域說的<strong>對齊問題（Alignment Problem）</strong>——讓 AI 的目標真正符合人類的意圖。這個問題目前還沒有被解決。</p>
+    <p>如果在對齊問題解決之前，遞迴自我改進就已經啟動，這個雪球就會在一個沒有人完全看得清楚的方向滾下去，而且每一代都滾得更快、更大。到了某個點，糾正方向的成本，可能遠超過人類能夠負擔的範圍。<a href="#note-f" class="anchor-ref">→ 附註 F</a></p>
+  </section>
+
+  <!-- Section 7 -->
+  <section id="sec7">
+    <h2>七、我們知道解法，但解法來不及了</h2>
+    <p>這是文章最讓人心情沉重的部分，因為它的分析既清醒又坦誠：<strong>解法是存在的，但建立那個解法所需要的時間，可能比我們還剩下的時間更長。</strong></p>
+    <p><strong>理想的解法很明確</strong>：全球主要 AI 實驗室在達到某個觸發點時，同步暫停——類似核武控制條約的精神。你不需要所有人都同意，但你需要足夠多的關鍵玩家達成可驗證的協議。</p>
+    <p><strong>但問題就在「可驗證」三個字</strong>：</p>
+    <p>核武可以透過衛星偵測物理設施——鈾濃縮工廠、導彈發射井，這些東西很難藏起來。但 <strong>AI 訓練幾乎完全無形</strong>：幾千台伺服器在資料中心跑著訓練任務，從外部看不到任何可以驗證的實體訊號。</p>
+    <p>背叛協議的誘因也極大：如果你不停、別人停了，你就獲得決定性的先行者優勢。建立類似 INF 核武條約的機制，歷史上花了<strong>幾十年</strong>。而 AI 能力的翻倍週期，現在是<strong>幾個月</strong>。</p>
+    <p>文章提出的具體行動：</p>
+    <ol>
+      <li><strong>現在就開始設計</strong>技術上可驗證的協調機制，即使還不完整</li>
+      <li><strong>明確定義觸發條件</strong>：什麼樣的能力水準代表需要暫停？</li>
+      <li><strong>建立多方對話</strong>：政策制定者、研究者、公民社會、AI 公司，缺一不可</li>
+      <li><strong>公開研究成果</strong>：讓外部研究者能夠複製和質疑</li>
+    </ol>
+    <p>這不是投降，也不是樂觀主義。這是在「完美解法不存在」的情況下，<strong>先把能做的做起來</strong>的務實態度——就像你知道防火牆不能擋住所有攻擊，但你還是要先把防火牆架起來，再慢慢加入 IDS、IPS，而不是因為「防火牆不完美」就什麼都不做。</p>
+  </section>
+
+  <hr>
+
+  <!-- Conclusion -->
+  <section id="conclusion">
+    <h2>總結</h2>
+    <p>讀完這篇文章，有一個感受很難用其他方式描述：<strong>這不是在預言一個遙遠的未來，而是在記錄一個正在發生的轉變。</strong></p>
+    <p>Anthropic 用自己公司的生產數據告訴你：遞迴自我改進不是科幻。80% 的程式碼由 AI 寫、AI 在 AI 安全研究上以 97% 對 23% 的比例碾壓人類——這些不是預測，這些是今天的現實。</p>
+    <p>從 AI 技術的角度，這是一個<strong>正向回饋系統正在加速的訊號</strong>：每一代改進，讓下一代改進變得更快、更容易。迴路尚未失控，但方向已經確定，而且每 4 個月翻倍的速度，讓任何「我們再等等看」的策略都變得越來越昂貴。</p>
+    <p>從資安的角度，這是一份難得的<strong>主動威脅披露</strong>——不是漏洞被利用後的事後報告，而是趁著窗口還開著，提前讓所有人知道威脅的形狀。這是負責任披露的最高形式：不是為了製造恐慌，而是為了讓大家有足夠的時間，做出比「什麼都沒做」更好的準備。</p>
+    <p>文章沒有給出答案。但它做了一件同樣重要的事：<strong>它把問題說清楚了</strong>。而在一個每 4 個月能力就翻倍的世界裡，能把問題說清楚，本身就是一種稀缺的勇氣。</p>
+  </section>
+
+  <div class="article-footer">
+    <p>導讀整理 · 2026-06-06</p>
+    <p>原文：<a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank" rel="noopener">When AI builds itself — Anthropic Institute</a></p>
+  </div>
+
+  <!-- Technical Notes -->
+  <section id="tech-notes" class="notes-section">
+    <h2>技術附註</h2>
+    <p class="notes-intro">以下內容供有 AI 或資安技術背景的讀者深入參考，不影響主文的閱讀理解。</p>
+
+    <h3 id="note-a">附註 A：遞迴自我改進的數學結構與信任邊界問題</h3>
+    <h4>正向回饋迴路的穩定性條件</h4>
+    <p>「遞迴自我改進」在數學上對應一個<strong>正向回饋迴路（Positive Feedback Loop）</strong>：系統的輸出成為該系統下一版本的訓練訊號。學習理論告訴我們，這個迴路有一個嚴格的穩定性條件——只有當每一輪改進的梯度方向都真正對齊最終目標函數，迴路才會收斂；否則它發散，且發散速度本身也可能被迴路放大。</p>
+    <h4>信任根崩潰（Root of Trust Collapse）</h4>
+    <p>傳統的資安信任鏈（Chain of Trust）建立在一個核心假設：存在一個靜態、可被獨立驗證的「根信任（Root of Trust）」。TPM、UEFI Secure Boot、硬體安全模組（HSM）等機制，都是這個假設的具體實作。</p>
+    <p>當 AI 系統參與設計自身的下一個版本，這個假設失效：「被驗證的對象」與「驗證工具的設計者」成為同一實體，獨立性喪失。這在形式驗證（Formal Verification）領域有一個對應的定理困境：一個系統無法完全驗證包含自身在內的系統的正確性（Gödel's Incompleteness Theorem 的工程類比）。</p>
+
+    <h3 id="note-b">附註 B：能力曲線飽和的三個條件</h3>
+    <p>在機器學習理論中，能力曲線出現飽和通常對應以下任一條件：</p>
+    <ol>
+      <li><strong>訓練資料耗盡</strong>：可用的高品質訓練資料已被充分利用，新資料的邊際改善趨近於零</li>
+      <li><strong>模型容量到達上限</strong>：現有架構的參數空間已被充分探索，需要架構創新才能突破</li>
+      <li><strong>任務存在 Bayes Error Floor</strong>：任務本身有不可突破的理論下界——即使擁有完美模型，仍存在不可消除的不確定性</li>
+    </ol>
+    <p>文章評估，目前 SWE-bench 和 CORE-Bench 的快速飽和，並非上述三個條件觸發，而是因為這些 benchmark 的難度上限不足以測量當前模型的真實能力邊界。這是「<strong>測試已飽和</strong>」而非「能力已飽和」——兩者的政策含義截然不同。</p>
+
+    <h3 id="note-c">附註 C：AI 供應鏈攻擊面的結構性改變與 SLSA 框架缺口</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>維度</th><th>傳統供應鏈攻擊（如 SolarWinds）</th><th>AI 程式碼生成時代</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>攻擊入口</td><td>建置系統、套件倉庫（二進位層）</td><td>訓練資料集（語義層）</td></tr>
+          <tr><td>植入方式</td><td>在二進位中插入惡意程式碼</td><td>在公開程式碼庫植入觸發特定條件的模式</td></tr>
+          <tr><td>偵測難度</td><td>中（二進位簽章可異常偵測）</td><td>高（語法正確，語義後門難偵測）</td></tr>
+          <tr><td>影響範圍</td><td>使用該建置系統的組織</td><td>所有使用該模型生成程式碼的組織</td></tr>
+          <tr><td>現有對策成熟度</td><td>中（SLSA、SBOM）</td><td>低（無標準化應對框架）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>SLSA 框架目前最高等級（Level 4）假設建置系統可信任，但 AI 程式碼生成引入了新的威脅層次——生成工具（AI 模型）本身可能是污染的來源。這需要一個假設性的 SLSA Level 5：對生成工具的可信度進行獨立驗證，包含訓練資料來源的可追溯性（Data Provenance）和模型行為的差異化測試（Behavioral Differential Testing）。</p>
+
+    <h3 id="note-d">附註 D：弱監督的技術定義與驗證者共謀困境</h3>
+    <p>弱監督（Weak Supervision）是機器學習中的一個研究領域，處理「標注資料稀少、雜訊高、或來源可信度不一」的訓練場景。核心技術包含：Label Model（用程式性標注規則取代人工標注）、Data Programming、以及 Snorkel 等框架。AI 代理在弱監督恢復任務的 97% 成功率，代表它在理解「哪些弱訊號可以被可靠地聚合成強監督訊號」這個問題上，已具備超人類的系統性判斷能力。</p>
+    <p><strong>驗證者與被驗證者共享推理基礎（Epistemic Collusion）</strong>：當 AI 模型用於評估另一個 AI 模型的輸出時，若兩個模型共享相同的訓練資料分佈和推理範式，它們的「盲點」將高度重疊。這不是惡意共謀，而是一個結構性的認識論問題——在 AI 安全治理中，這意味著「用 AI 審查 AI 安全輸出」若未引入架構多樣性或規則式審查，無法提供真正意義上的獨立驗證。</p>
+
+    <h3 id="note-e">附註 E：Amdahl's Law 公式與防禦退化邏輯</h3>
+    <p><strong>Amdahl's Law 的精確表述</strong>（最大加速倍數 = 1 ÷ (S + (1-S)/N)）：</p>
+    <ul>
+      <li><em>S</em> = 串行部分佔總任務的比例（即人類審核步驟）</li>
+      <li><em>N</em> = 並行加速倍數（即 AI 的生成速度倍數）</li>
+    </ul>
+    <p>當 N → ∞，整個系統的加速上限趨近於 1/S。若人類審核佔流程的 20%（S = 0.2），即使 AI 生成速度提升到無限倍，整體加速上限仍只有 5 倍。突破此上限的唯一途徑是降低 S——也就是讓 AI 承擔更多審核工作。</p>
+    <p>在資安防禦中，同樣的效應導致了「防禦者困境（Defender's Dilemma）」：攻擊者只需找到一個成功路徑，防禦者必須覆蓋所有路徑。當 AI 將攻擊路徑的生成速度提升 52 倍，MTTDetect（平均偵測時間）和 MTTRespond（平均響應時間）的差距將系統性擴大。</p>
+
+    <h3 id="note-f">附註 F：三情境的精確技術分析</h3>
+    <figure class="img-block">
+      <img src="images/nist_csf_gaps.png" alt="NIST CSF 2.0 六大功能 × AI 遞迴改進的缺口評估熱力圖" loading="lazy">
+      <figcaption>NIST CSF 2.0 六大功能應用於 AI 遞迴改進場景的缺口評估——紅色代表全球尚無成熟機制，黃色代表框架存在但需擴展</figcaption>
+    </figure>
+    <h4>對齊問題未解的 Kill Chain 影響</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Kill Chain 階段</th><th>AI 遞迴改進的對應行為</th></tr></thead>
+        <tbody>
+          <tr><td>Persistence（持久化）</td><td>對齊缺陷在每一代模型中被繼承與固化</td></tr>
+          <tr><td>Privilege Escalation（提權）</td><td>AI 獲得設計繼任者的能力，能力邊界持續外推</td></tr>
+          <tr><td>Defense Evasion（規避偵測）</td><td>對齊缺陷在現有評估框架中表現為「正確行為」</td></tr>
+          <tr><td>Impact（衝擊）</td><td>每一代模型放大對齊缺陷，回滾成本以指數增加</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>NIST CSF 2.0 的缺口評估</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>CSF 2.0 功能</th><th>對 AI 遞迴改進的適用狀態</th></tr></thead>
+        <tbody>
+          <tr><td>Govern（治理）</td><td>🔴 全球協調機制尚不存在</td></tr>
+          <tr><td>Identify（識別）</td><td>🟡 AI 資產清單標準尚在建立中</td></tr>
+          <tr><td>Protect（保護）</td><td>🟡 SLSA 框架需擴展至 AI 生成場景</td></tr>
+          <tr><td>Detect（偵測）</td><td>🔴 AI 訓練過程對外部驗證者幾乎不透明</td></tr>
+          <tr><td>Respond（回應）</td><td>🔴 觸發條件與暫停機制尚未定義</td></tr>
+          <tr><td>Recover（恢復）</td><td>🔴 對齊缺陷的回溯與修復機制無成熟方法</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Detect 與 Respond 的空白是最高優先級缺口：沒有偵測能力，後面所有的響應與恢復措施都無從啟動。</p>
+  </section>
+
+</article>
+</div>
+
+</body>
+</html>
