@@ -102,18 +102,21 @@
   article strong{color:var(--accent);}
   article hr{border:none; border-top:1px solid var(--line); margin:48px 0;}
 
-  figure.summary-figure{margin:0;}
+  figure.summary-figure{margin:32px 0; padding:0 24px;}
   figure.summary-figure img{
-    width:100%; display:block;
+    width:100%; max-width:640px; display:block; margin:0 auto;
+    border-radius:12px;
     aspect-ratio:16/9;
     object-fit:cover;
+    box-shadow:0 6px 24px rgba(0,0,0,0.08);
   }
   figure.summary-figure figcaption{
-    max-width:1120px; margin:0 auto; padding:14px 24px;
+    max-width:640px; margin:10px auto 0; padding:0;
     color:var(--muted); font-size:14px; line-height:1.55; text-align:center;
   }
   @media (max-width:640px){
-    figure.summary-figure img{aspect-ratio:9/16;}
+    figure.summary-figure img{aspect-ratio:9/16; max-width:360px;}
+    figure.summary-figure figcaption{max-width:360px;}
   }
 
   figure.section-figure{margin:28px 0 36px;}
@@ -131,6 +134,28 @@
   @media (max-width:640px){
     figure.section-figure img{aspect-ratio:9/16; max-width:480px;}
     article, header.hero .page{padding-left:20px; padding-right:20px;}
+  }
+
+  /* lightbox：點擊圖片放大檢視 */
+  figure.summary-figure img, figure.section-figure img{cursor:zoom-in;}
+  .lightbox{
+    display:none;
+    position:fixed; inset:0; z-index:200;
+    background:rgba(26,26,26,0.88);
+    align-items:center; justify-content:center;
+    padding:24px;
+    cursor:zoom-out;
+  }
+  .lightbox.is-open{display:flex;}
+  .lightbox img{
+    max-width:96vw; max-height:92vh;
+    width:auto; height:auto;
+    border-radius:8px;
+    box-shadow:0 12px 48px rgba(0,0,0,0.4);
+  }
+  .lightbox .lightbox-hint{
+    position:absolute; top:20px; right:24px;
+    color:rgba(255,255,255,0.75); font-size:14px;
   }
 
   /* mermaid */
@@ -646,11 +671,40 @@ graph TD
   <div class="page">深度導讀解析 · 2026 Alphabet Annual Meeting of Shareholders</div>
 </footer>
 
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-hint">點擊或按 Esc 關閉</span>
+  <img src="" alt="">
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" integrity="sha384-qX9VvWkP79m/O121ZE6sOYp0nf/pldQgtvWDbkpzi+3mUo4Wn4Ix4cFzNPay3VaB" crossorigin="anonymous"></script>
 <script>
   if (typeof mermaid !== "undefined") {
     mermaid.initialize({ startOnLoad: true, theme: "neutral" });
   }
+</script>
+<script>
+  (function(){
+    var lightbox = document.getElementById("lightbox");
+    var lightboxImg = lightbox.querySelector("img");
+
+    function openLightbox(img){
+      lightboxImg.src = img.currentSrc || img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add("is-open");
+    }
+    function closeLightbox(){
+      lightbox.classList.remove("is-open");
+      lightboxImg.src = "";
+    }
+
+    document.querySelectorAll("figure.summary-figure img, figure.section-figure img").forEach(function(img){
+      img.addEventListener("click", function(){ openLightbox(img); });
+    });
+    lightbox.addEventListener("click", closeLightbox);
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape") closeLightbox();
+    });
+  })();
 </script>
 </body>
 </html>
