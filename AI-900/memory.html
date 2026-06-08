@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" name="viewport"/>
+    <meta content="AI-900 Microsoft Azure AI Fundamentals 核心觀念記憶卡" name="description"/>
+    <title>AI-900 核心觀念記憶卡 (Flashcards)</title>
+
+    <!-- 載入現代字型與圖示 -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="styles.css" rel="stylesheet"/>
+
+    <style>
+        /* 記憶卡專用 3D 翻牌樣式 */
+        .flashcard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+            perspective: 1000px; /* 3D 空間透視度 */
+        }
+
+        .flashcard {
+            height: 220px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .flashcard.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* 隱藏翻轉過去的背面 */
+            -webkit-backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        /* 正面樣式 */
+        .card-front {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 100%);
+            color: #111827;
+        }
+
+        /* 背面樣式 */
+        .card-back {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            color: #FFFFFF;
+            transform: rotateY(180deg); /* 預先旋轉 180 度 */
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #3B82F6;
+        }
+
+        .card-back .card-category {
+            color: #93C5FD;
+        }
+
+        .card-front-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-top: 10px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .card-back-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-hint {
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            text-align: center;
+            border-top: 1px dashed #E5E7EB;
+            padding-top: 8px;
+            margin-top: auto;
+        }
+
+        .card-back .card-hint {
+            color: #DBEAFE;
+            border-top: 1px dashed rgba(255,255,255,0.2);
+        }
+
+        /* 篩選標籤 */
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .filter-btn {
+            background-color: #FFFFFF;
+            color: #4B5563;
+            border: 1px solid #E5E7EB;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background-color: #F3F4F6;
+        }
+
+        .filter-btn.is-active {
+            background-color: #3B82F6;
+            color: #FFFFFF;
+            border-color: #3B82F6;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        /* 標記狀態按鈕 */
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+            margin-top: 10px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 6px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .btn-known {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #059669;
+        }
+        .btn-known:hover {
+            background-color: #10B981;
+            color: #FFFFFF;
+        }
+
+        .btn-unknown {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #DC2626;
+        }
+        .btn-unknown:hover {
+            background-color: #EF4444;
+            color: #FFFFFF;
+        }
+
+        /* 學習進度條 */
+        .progress-section {
+            background: #FFFFFF;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .progress-info {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .progress-bar-container {
+            flex-grow: 1;
+            height: 10px;
+            background-color: #E5E7EB;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0 20px;
+            max-width: 500px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981 0%, #3B82F6 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .known-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #10B981;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .card.is-known .known-tag {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 回到首頁導覽按鈕 -->
+        <div class="home-navigation">
+            <a href="index.html" class="btn-back-home">🏠 回到首頁主選單</a>
+        </div>
+
+        <h1>🧠 AI-900 核心觀念記憶卡 (Flashcards)</h1>
+        
+        <!-- 進度條 -->
+        <div class="progress-section">
+            <div class="progress-info">
+                學習進度：<span id="known-count">0</span> / <span id="total-count">0</span> 已記住
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <button onclick="resetProgress()" class="filter-btn" style="font-size: 0.8rem; padding: 6px 12px;">重設進度</button>
+        </div>
+
+        <!-- 分類篩選 -->
+        <div class="filter-container">
+            <button class="filter-btn is-active" onclick="filterCards('all', this)">全部觀念</button>
+            <button class="filter-btn" onclick="filterCards('principles', this)">負責任 AI 原則</button>
+            <button class="filter-btn" onclick="filterCards('ml-types', this)">機器學習類型</button>
+            <button class="filter-btn" onclick="filterCards('metrics', this)">評估指標</button>
+            <button class="filter-btn" onclick="filterCards('services', this)">Azure AI 服務</button>
+        </div>
+
+        <!-- 記憶卡容器 -->
+        <div class="flashcard-container" id="cards-container">
+            <!-- 記憶卡會由 JS 動態生成 -->
+        </div>
+    </div>
+
+    <script>
+        // 記憶卡資料庫
+        const cardData = [
+            // 負責任 AI
+            { id: 1, category: "principles", catName: "負責任 AI 原則", term: "公平性 (Fairness)", desc: "AI 系統應公平對待所有人，避免因性別、種族、年齡等因素產生偏見或差別待遇。", example: "貸款核准系統不應受申請人的性別或族裔影響。" },
+            { id: 2, category: "principles", catName: "負責任 AI 原則", term: "可靠性與安全性 (Reliability & Safety)", desc: "AI 系統在非預期情況下應正常運行，防範可能危害生命財產安全的錯誤。", example: "自動駕駛系統遇到惡劣天氣時，應能安全減速並安全停靠。" },
+            { id: 3, category: "principles", catName: "負責任 AI 原則", term: "隱私權與安全性 (Privacy & Security)", desc: "AI 系統應保護敏感資料，避免個資外洩，並具備自我抵禦惡意攻擊的能力。", example: "病歷分析 AI 應妥善加密患者資料，符合醫療隱私法規。" },
+            { id: 4, category: "principles", catName: "負責任 AI 原則", term: "包容性 (Inclusiveness)", desc: "AI 系統設計應考量多樣化的使用者，確保身心障礙者或少數族群也能受惠。", example: "視障人士可透過語音助理操作網頁，或提供輔助字幕。" },
+            { id: 5, category: "principles", catName: "負責任 AI 原則", term: "透明度 (Transparency)", desc: "AI 系統的決策邏輯應易於理解、可解釋，讓使用者知道系統如何得出結論。", example: "理財 AI 提供投資建議時，需列出其依據的財務數據。" },
+            { id: 6, category: "principles", catName: "負責任 AI 原則", term: "責任 (Accountability)", desc: "設計、部署和維護 AI 系統的人員應對系統決策與後果承擔責任。", example: "若臉部辨識系統誤判，背後的開發公司與操作單位需負法律與道德責任。" },
+            
+            // 機器學習類型
+            { id: 7, category: "ml-types", catName: "機器學習類型", term: "監督式學習 (Supervised)", desc: "訓練資料中「包含標籤 (Labels)」，模型學習輸入特徵與標籤之間的映射關係。", example: "迴歸與分類都屬於監督式學習。" },
+            { id: 8, category: "ml-types", catName: "機器學習類型", term: "非監督式學習 (Unsupervised)", desc: "訓練資料「不含標籤」，模型自行尋找資料內部的結構、規律或進行分群。", example: "叢集 (Clustering) 就是最具代表性的非監督式學習。" },
+            { id: 9, category: "ml-types", catName: "機器學習類型", term: "迴歸 (Regression)", desc: "監督式學習的一種，預測的標籤是「連續性的數值」。", example: "根據日期、天氣與氣溫，預測冰淇淋的銷售數量或預測房價。" },
+            { id: 10, category: "ml-types", catName: "機器學習類型", term: "分類 (Classification)", desc: "監督式學習的一種，預測的標籤是「離散的類別」。分為二元分類與多類別分類。", example: "預測郵件是否為垃圾郵件（二元），或辨識企鵝的種類（多類別）。" },
+            { id: 11, category: "ml-types", catName: "機器學習類型", term: "叢集 (Clustering)", desc: "非監督式學習，將特徵相似的項目自動分組在一起。", example: "根據消費習慣與頻率，自動將客戶分為不同的市場區隔群組。" },
+
+            // 評估指標
+            { id: 12, category: "metrics", catName: "評估指標", term: "平均絕對誤差 (MAE)", desc: "迴歸指標。預測值與真實值誤差絕對值的平均值。對異常值較不敏感。", example: "MAE 越接近 0 越好。公式為：Σ|y_pred - y_true| / n" },
+            { id: 13, category: "metrics", catName: "評估指標", term: "均方根誤差 (RMSE)", desc: "迴歸指標。誤差平方和平均後的算術平方根。對極端異常值極為敏感。", example: "RMSE 越接近 0 越好。會對較大的預測誤差施加更大懲罰。" },
+            { id: 14, category: "metrics", catName: "評估指標", term: "決定係數 (R²)", desc: "迴歸指標。代表模型能解釋目標變數變異量的比例。介於 0 與 1 之間。", example: "R² 越接近 1 代表模型擬合度越好，對資料的預測能力越強。" },
+            { id: 15, category: "metrics", catName: "評估指標", term: "精確度 (Precision)", desc: "分類指標。所有「被預測為正樣本」中，真正為正樣本的比例。重視「不抓錯」。", example: "在垃圾郵件過濾中，避免將一般郵件誤判為垃圾郵件需追求高 Precision。" },
+            { id: 16, category: "metrics", catName: "評估指標", term: "召回率 (Recall)", desc: "分類指標。所有「真實為正樣本」中，被正確預測出來的比例。重視「不漏抓」。", example: "在癌症診斷中，應確保所有真正患病的病患都被篩檢出來，需追求高 Recall。" },
+            { id: 17, category: "metrics", catName: "評估指標", term: "F1 分數 (F1-Score)", desc: "精確度 (Precision) 與召回率 (Recall) 的調和平均數。平衡兩者的綜合指標。", example: "當資料集類別極度不平衡時，F1-Score 比純準確率 (Accuracy) 更能真實反映模型效能。" },
+
+            // Azure AI 服務
+            { id: 18, category: "services", catName: "Azure AI 服務", term: "Azure AI Foundry", desc: "專為開發人員與資料科學家設計的協作平台，可整合、定型與部署生成式 AI 模型與代理程式。", example: "可在其中管理 Azure OpenAI 模型的微調與部署。" },
+            { id: 19, category: "services", catName: "Azure AI 服務", term: "文件智慧服務 (Document Intelligence)", desc: "使用機器學習技術，自動從掃描的表單、PDF 文件或圖片中擷取文字、鍵值對與表格結構。", example: "自動識別與輸入發票上的商家名稱、統編與消費總額。" },
+            { id: 20, category: "services", catName: "Azure AI 服務", term: "內容安全 (Content Safety)", desc: "檢測並過濾文字與圖片中的有害內容，如暴力、仇恨言論、色情與自殘等。", example: "社群平台使用此服務自動過濾使用者上傳的敏感圖片與言論。" }
+        ];
+
+        // 讀取 localStorage 記憶狀態
+        let knownCards = JSON.parse(localStorage.getItem('ai900_known_cards')) || [];
+
+        // 初始化渲染
+        function init() {
+            renderCards(cardData);
+            updateProgress();
+        }
+
+        // 渲染記憶卡
+        function renderCards(cards) {
+            const container = document.getElementById('cards-container');
+            container.innerHTML = '';
+
+            cards.forEach(card => {
+                const isKnown = knownCards.includes(card.id);
+                
+                const cardEl = document.createElement('div');
+                cardEl.className = `flashcard ${isKnown ? 'is-known' : ''}`;
+                cardEl.setAttribute('data-id', card.id);
+                cardEl.setAttribute('data-category', card.category);
+
+                cardEl.innerHTML = `
+                    <div class="card-face card-front" onclick="flipCard(this.parentElement)">
+                        <span class="known-tag"><i class="fa-solid fa-check"></i> 已記住</span>
+                        <div class="card-category">${card.catName}</div>
+                        <div class="card-front-title">${card.term}</div>
+                        <div class="card-hint"><i class="fa-solid fa-rotate"></i> 點擊卡片翻轉查看解析</div>
+                    </div>
+                    <div class="card-face card-back">
+                        <div class="card-category">${card.catName}</div>
+                        <div class="card-back-content">
+                            <p><strong>概念：</strong>${card.desc}</p>
+                            <p style="margin-top: 8px;"><strong>實例：</strong><span style="color: #BFDBFE;">${card.example}</span></p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="action-btn btn-known" onclick="event.stopPropagation(); markAsKnown(${card.id}, true)">
+                                <i class="fa-solid fa-circle-check"></i> 我記住了
+                            </button>
+                            <button class="action-btn btn-unknown" onclick="event.stopPropagation(); markAsKnown(${card.id}, false)">
+                                <i class="fa-solid fa-circle-xmark"></i> 還要再背
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardEl);
+            });
+        }
+
+        // 翻轉卡片
+        function flipCard(cardEl) {
+            cardEl.classList.toggle('is-flipped');
+        }
+
+        // 標記是否記住
+        function markAsKnown(id, isKnown) {
+            const index = knownCards.indexOf(id);
+            if (isKnown) {
+                if (index === -1) knownCards.push(id);
+            } else {
+                if (index !== -1) knownCards.splice(index, 1);
+            }
+            
+            // 儲存狀態
+            localStorage.setItem('ai900_known_cards', JSON.stringify(knownCards));
+            
+            // 更新 UI 狀態
+            const cardEl = document.querySelector(`.flashcard[data-id="${id}"]`);
+            if (cardEl) {
+                if (isKnown) {
+                    cardEl.classList.add('is-known');
+                } else {
+                    cardEl.classList.remove('is-known');
+                }
+                // 自動翻回正面
+                if (cardEl.classList.contains('is-flipped')) {
+                    cardEl.classList.remove('is-flipped');
+                }
+            }
+            
+            updateProgress();
+        }
+
+        // 更新進度條
+        function updateProgress() {
+            const total = cardData.length;
+            const known = knownCards.filter(id => cardData.some(c => c.id === id)).length;
+            
+            document.getElementById('total-count').textContent = total;
+            document.getElementById('known-count').textContent = known;
+            
+            const percent = total > 0 ? (known / total) * 100 : 0;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+        }
+
+        // 重設進度
+        function resetProgress() {
+            if(confirm("確定要清除所有已記住的卡片進度嗎？")) {
+                knownCards = [];
+                localStorage.removeItem('ai900_known_cards');
+                document.querySelectorAll('.flashcard').forEach(card => {
+                    card.classList.remove('is-known');
+                    card.classList.remove('is-flipped');
+                });
+                updateProgress();
+            }
+        }
+
+        // 分類篩選邏輯
+        function filterCards(category, btn) {
+            // 切換按鈕狀態
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+
+            // 篩選卡片
+            const cards = document.querySelectorAll('.flashcard');
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 頁面載入後執行
+        window.onload = init;
+    </script>
+</body>
+</html>
