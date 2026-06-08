@@ -1,0 +1,3196 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI-900 精選考題 (完整 119 題 - 最終修正版)</title>
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="styles.css" rel="stylesheet"/><script defer="" src="script.js"></script></head>
+<body>
+<div class="container">
+<div class="home-navigation">
+    <a href="index.html" class="btn-back-home">🏠 回到首頁主選單</a>
+</div>
+<h1>AI-900: Microsoft Azure AI Fundamentals 精選考題 (完整 119 題 - 最終修正版)</h1>
+<div class="global-controls">
+<button id="hide-all-answers">隱藏所有答案</button>
+<button id="toggle-all-answers">全部顯示/隱藏解析</button>
+</div>
+<!-- 命題大綱過濾器 -->
+<div class="outline-filter">
+<h3>選擇命題大綱 (Skills Measured)</h3>
+<ul>
+<!-- 數字將由 JS 動態填入 -->
+<li><button class="active" data-filter="all" onclick="filterQuestions('all', this)">全部顯示</button></li>
+<li><button data-filter="outline-1" onclick="filterQuestions('outline-1', this)">描述人工智慧工作負載和考量</button>
+</li>
+<li><button data-filter="outline-2" onclick="filterQuestions('outline-2', this)">描述 Azure
+                        上機器學習的基本原則</button></li>
+<li><button data-filter="outline-3" onclick="filterQuestions('outline-3', this)">描述 Azure
+                        上的電腦視覺工作負載的特點</button></li>
+<li><button data-filter="outline-4" onclick="filterQuestions('outline-4', this)">描述 Azure 上自然語言處理 (NLP)
+                        工作負載的特點</button></li>
+</ul>
+</div>
+<h2>精選考題</h2>
+<div id="questions-wrapper">
+<!-- Questions will be dynamically inserted here by JavaScript -->
+<!-- Question 1 -->
+<div class="question-card" data-category="outline-4" id="q-1">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 具名實體辨識可用來擷取文字字串中的日期與時間。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 關鍵片語擷取可用來擷取文件字串中的重要片語。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 關鍵片語擷取可用來擷取文件字串中的所有城市名稱。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-1', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-1">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. <span class="chinese-noun">具名實體辨識 (NER)</span> 的功能是識別和分類文字中預先定義的類別，例如人物、地點、組織、日期、時間等。
+                            </li>
+<li>2. <span class="chinese-noun">關鍵片語擷取</span> 的功能是評估文字並找出主要討論點或核心概念。</li>
+<li>3. 要擷取特定類別的實體（如「城市名稱」），應該使用<span class="chinese-noun">具名實體辨識 (NER)</span>。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>請記住兩者的區別：<span class="keyword-highlight">NER
+                            是找出「誰、什麼、哪裡、何時」</span>；<span class="keyword-highlight">關鍵片語擷取是找出「主要在談論什麼」</span>。</div>
+</div>
+</div>
+<!-- Question 2 -->
+<div class="question-card" data-category="outline-3" id="q-2">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>使用 <span class="chinese-noun">Azure AI 電腦視覺</span>服務可以執行哪一項動作？</p>
+<ul>
+<li><input id="q2a" name="q2" type="radio"/><label for="q2a">1. 識別直播影片中的動物品種</label></li>
+<li><input id="q2b" name="q2" type="radio"/><label for="q2b">2. 建立訓練影片的縮圖</label></li>
+<li><input checked="" id="q2c" name="q2" type="radio"/><label for="q2c">3. 擷取手寫信件中的資料</label></li>
+<li><input id="q2d" name="q2" type="radio"/><label for="q2d">4. 擷取文件中的關鍵片語</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-2', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-2">
+<div class="answer"><strong>答案：</strong> 3. 擷取手寫信件中的資料</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">Azure AI 電腦視覺</span>服務包含<span class="keyword-highlight">光學字元辨識 (OCR)</span> 功能，此功能專門用於從影像中讀取印刷和<span class="keyword-highlight">手寫文字</span>。<ul>
+<li>1, 2：處理直播影片或建立縮圖通常會使用 <span class="chinese-noun">Azure Video Indexer</span>。</li>
+<li>4：擷取關鍵片語是<span class="chinese-noun">自然語言處理 (NLP)</span> 的工作。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>只要看到「從圖片/文件/手寫中讀取文字」，就要馬上想到 <span class="eng-abbr">OCR</span>，它隸屬於<span class="chinese-noun">電腦視覺</span>。</div>
+</div>
+</div>
+<!-- Question 3 -->
+<div class="question-card" data-category="outline-4" id="q-3">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>下列何種情況應該使用<span class="chinese-noun">關鍵片語擷取</span>？</p>
+<ul>
+<li><input id="q3a" name="q3" type="radio"/><label for="q3a">1. 將一些文件從英文翻譯成德文</label></li>
+<li><input checked="" id="q3b" name="q3" type="radio"/><label for="q3b">2. 辨識那些文件提供相同主題的資訊</label>
+</li>
+<li><input id="q3c" name="q3" type="radio"/><label for="q3c">3. 辨識餐廳的評論為正面或負面</label></li>
+<li><input id="q3d" name="q3" type="radio"/><label for="q3d">4. 根據音軌為影片產生字幕</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-3', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-3">
+<div class="answer"><strong>答案：</strong> 2. 辨識那些文件提供相同主題的資訊</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">關鍵片語擷取</span>的功能是從文件中找出<span class="keyword-highlight">主要論點</span>或<span class="keyword-highlight">核心主題</span>。透過比較不同文件的關鍵片語，我們可以判斷它們是否在討論相同的主題。<ul>
+<li>1: 翻譯文件使用<span class="chinese-noun">翻譯工具</span>。</li>
+<li>3: 辨識評論是<span class="chinese-noun">情感分析</span>。</li>
+<li>4: 從音軌產生字幕是<span class="chinese-noun">語音轉換文字</span>。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>關鍵片語擷取的核心用途是「摘要」和「主題分類」。</div>
+</div>
+</div>
+<!-- Question 4 -->
+<div class="question-card" data-category="outline-4" id="q-4">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1.
+                            下列服務呼叫將接受英文文字做為輸入並且輸出法文和義大利文文字：`/translate?from=it&amp;to=fr&amp;to=en`</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2.
+                            下列服務呼叫將接受英文文字做為輸入並且輸出法文和義大利文文字：`/translate?from=en&amp;to=fr&amp;to=it`</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 翻譯服務可用來將文件從英文翻譯為法文。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-4', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-4">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-correct">是</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. `from=it` 表示輸入是義大利文，不符。</li>
+<li>2. `from=en` 表示輸入是英文，`to=fr&amp;to=it` 表示輸出到法文和義大利文，正確。</li>
+<li>3. 這是翻譯服務的基本功能。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>請記住 REST API 呼叫中的參數意義：`from` 代表來源語言，`to` 代表目標語言。</div>
+</div>
+</div>
+<!-- Question 5 -->
+<div class="question-card" data-category="outline-4" id="q-5">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 聊天機器人只能使用自訂程式碼來建置。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. Azure Bot Service 提供用於裝載交談式機器人的服務。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 使用 Azure Bot Service 建置的機器人可與 Microsoft Teams 使用者交流。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-5', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-5">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-correct">是</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 錯誤。Azure 提供了低程式碼/無程式碼的平台，例如 <span class="chinese-noun">Power Virtual Agents</span>。
+                            </li>
+<li>2. <span class="chinese-noun">Azure Bot Service</span> 的核心功能就是提供平台來開發、部署和管理聊天機器人。</li>
+<li>3. <span class="chinese-noun">Azure Bot Service</span> 支援多種「通道」(Channels)，包括 Microsoft
+                                Teams。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>記住 Azure Bot Service 的三大特點：1) 提供開發框架和託管服務；2) 支援多種通道；3)
+                        可整合其他 AI 服務。</div>
+</div>
+</div>
+<!-- Question 6 -->
+<div class="question-card" data-category="outline-4" id="q-6">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您需要建立一套客戶支援解決方案，協助客戶存取資訊。該解決方案必須支援電話、電子郵件與即時聊天式管道。您應該使用下列哪一種 AI 解決方案？</p>
+<ul>
+<li><input id="q6a" name="q6" type="radio"/><label for="q6a">1. 自然語言處理 (NLP)</label></li>
+<li><input checked="" id="q6b" name="q6" type="radio"/><label for="q6b">2. 聊天機器人</label></li>
+<li><input id="q6c" name="q6" type="radio"/><label for="q6c">3. 機器學習</label></li>
+<li><input id="q6d" name="q6" type="radio"/><label for="q6d">4. 電腦視覺</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-6', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-6">
+<div class="answer"><strong>答案：</strong> 2. 聊天機器人</div>
+<div class="rationale"><strong>解析：</strong>題目描述了一個需要跨多個<span class="keyword-highlight">交談式管道</span>的系統，這正是<span class="chinese-noun">聊天機器人
+                            (Chatbot)</span> 的典型應用場景。NLP 是聊天機器人背後的<span class="keyword-highlight">技術</span>，但聊天機器人是具體的<span class="keyword-highlight">解決方案</span>。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>當題目提到「交談」、「互動式問答」、「跨多個訊息管道」時，答案通常是「聊天機器人」。</div>
+</div>
+</div>
+<!-- Question 7 -->
+<div class="question-card" data-category="outline-4" id="q-7">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>自然語言處理可用於：</p>
+<ul>
+<li><input checked="" id="q7a" name="q7" type="radio"/><label for="q7a">1. 將 E-Mail
+                                分類為工作郵件或個人郵件。</label></li>
+<li><input id="q7b" name="q7" type="radio"/><label for="q7b">2. 預測未來的租車數。</label></li>
+<li><input id="q7c" name="q7" type="radio"/><label for="q7c">3. 顯示溫度過高時停止工廠作業。</label></li>
+<li><input id="q7d" name="q7" type="radio"/><label for="q7d">4. 預測哪個網站的瀏覽者會執行交易。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-7', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-7">
+<div class="answer"><strong>答案：</strong> 1. 將 E-Mail 分類為工作郵件或個人郵件。</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">自然語言處理 (NLP)</span>
+                        的核心是理解和處理人類語言。將電子郵件根據其<span class="keyword-highlight">內容</span>進行分類是一個典型的 NLP 任務，稱為<span class="keyword-highlight">文字分類</span>。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到處理「文字內容」或「語音」的場景，就要聯想到 NLP。</div>
+</div>
+</div>
+<!-- Question 8 -->
+<div class="question-card" data-category="outline-4" id="q-8">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您可以使用下列哪一種 AI 服務，擷取使用者輸入的意圖 (例如「稍後請回電」)？</p>
+<ul>
+<li><input id="q8a" name="q8" type="radio"/><label for="q8a">1. Azure 認知搜尋</label></li>
+<li><input id="q8b" name="q8" type="radio"/><label for="q8b">2. Azure AI 語音</label></li>
+<li><input id="q8c" name="q8" type="radio"/><label for="q8c">3. Azure AI 翻譯工具</label></li>
+<li><input checked="" id="q8d" name="q8" type="radio"/><label for="q8d">4. Azure AI 語言</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-8', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-8">
+<div class="answer"><strong>答案：</strong> 4. Azure AI 語言</div>
+<div class="rationale"><strong>解析：</strong>從使用者語句中擷取<span class="keyword-highlight">意圖
+                            (Intent)</span> 是<span class="chinese-noun">交談語言理解 (CLU)</span> 的核心功能，而 CLU 是 <span class="chinese-noun">Azure AI 語言</span>服務的一部分。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>理解使用者「想做什麼」(意圖) 的任務由 <span class="chinese-noun">Azure
+                            AI 語言</span>服務中的 CLU 功能負責。</div>
+</div>
+</div>
+<!-- Question 9 -->
+<div class="question-card" data-category="outline-4" id="q-9">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您要使用自然語言處理來處理 Microsoft
+                        新聞報導的文字。您收到如下所示輸出。請問您執行了下列何種類型的自然語言處理？<br/>[註：此題附有一張圖片，左側為一段新聞文字，右側將文字中的「現在」、「學生」、「教師」等詞彙標記為
+                        [DateTime]、[PersonType] 等實體。]</p>
+<ul>
+<li><input id="q9a" name="q9" type="radio"/><label for="q9a">1. 翻譯</label></li>
+<li><input id="q9b" name="q9" type="radio"/><label for="q9b">2. 關鍵片語擷取</label></li>
+<li><input id="q9c" name="q9" type="radio"/><label for="q9c">3. 情感分析</label></li>
+<li><input checked="" id="q9d" name="q9" type="radio"/><label for="q9d">4. 實體辨識</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-9', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-9">
+<div class="answer"><strong>答案：</strong> 4. 實體辨識</div>
+<div class="rationale"><strong>解析：</strong>圖片顯示的過程是從文字中找出特定類別的詞彙（如日期時間、人物類型）並加以標記。這正是<span class="keyword-highlight">具名實體辨識 (NER)</span> 的定義。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到文字被加上 [地點]、[人名]、[組織]、[日期] 等標籤，就是實體辨識。</div>
+</div>
+</div>
+<!-- Question 10 -->
+<div class="question-card" data-category="outline-4" id="q-10">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>圖中顯示下列哪一種類型的 AI 解決方案？<br/>[註：此題附有一張顯示知識庫問答管理介面的圖片。]</p>
+<ul>
+<li><input id="q10a" name="q10" type="radio"/><label for="q10a">1. 機器學習模型</label></li>
+<li><input checked="" id="q10b" name="q10" type="radio"/><label for="q10b">2. 聊天機器人</label></li>
+<li><input id="q10c" name="q10" type="radio"/><label for="q10c">3. 情感分析解決方案</label></li>
+<li><input id="q10d" name="q10" type="radio"/><label for="q10d">4. 電腦視覺應用程式</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-10', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-10">
+<div class="answer"><strong>答案：</strong> 2. 聊天機器人</div>
+<div class="rationale"><strong>解析：</strong>圖片顯示的是一個<span class="keyword-highlight">知識庫 (Knowledge
+                            Base)</span> 問答管理介面，這是建立<span class="chinese-noun">聊天機器人</span>的核心元件之一。知識庫用於儲存問答配對，讓機器人可以根據使用者的問題找到對應的答案。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到「知識庫」、「問答配對 (QnA)」等介面，就要聯想到這是為了支援「聊天機器人」而建置的。</div>
+</div>
+</div>
+<!-- Question 11 -->
+<div class="question-card" data-category="outline-4" id="q-11">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您建置一套自訂問題解答解決方案。並建立了一個使用知識庫回應客戶要求的機器人。您需要確認在不新增額外技能的情況下，該機器人可以執行的工作。您應該指定何者？</p>
+<ul>
+<li><input checked="" id="q11a" name="q11" type="radio"/><label for="q11a">1. 同時回答多位使用者的問題</label>
+</li>
+<li><input id="q11b" name="q11" type="radio"/><label for="q11b">2. 登記客戶購買的商品</label></li>
+<li><input id="q11c" name="q11" type="radio"/><label for="q11c">3. 為客戶提供退貨授權 (RMA) 號</label></li>
+<li><input id="q11d" name="q11" type="radio"/><label for="q11d">4. 登記客訴內容</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-11', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-11">
+<div class="answer"><strong>答案：</strong> 1. 同時回答多位使用者的問題</div>
+<div class="rationale"><strong>解析：</strong>基於<span class="chinese-noun">Azure Bot
+                            Service</span>建立的機器人，其底層平台天生就具備<span class="keyword-highlight">延展性</span>，能夠處理來自多位使用者的並行請求。其他選項都需要額外的邏輯和後端系統整合，屬於「新增的額外技能」。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>雲端服務的一個核心優勢就是可擴展性。基礎的問答機器人就能處理大量併發請求。</div>
+</div>
+</div>
+<!-- Question 12 -->
+<div class="question-card" data-category="outline-4" id="q-12">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>您可以在下列哪兩種情況中使用語音合成解決方案？每個正確答案都呈現一個完整的解決方案。</p>
+<ul>
+<li><input checked="" id="q12a" name="q12" type="checkbox"/><label for="q12a">1.
+                                使用電話鍵盤將信用卡號碼輸入到電話時，可以朗讀輸入號碼的自動語音。</label></li>
+<li><input checked="" id="q12b" name="q12" type="checkbox"/><label for="q12b">2. 可以用語音與玩家交談的電腦遊戲 AI
+                                角色。</label></li>
+<li><input id="q12c" name="q12" type="checkbox"/><label for="q12c">3. 為新聞廣播產生即時字幕。</label></li>
+<li><input id="q12d" name="q12" type="checkbox"/><label for="q12d">4. 從會議錄音中擷取關鍵片語。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-12', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-12">
+<div class="answer"><strong>答案：</strong> 1, 2</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">語音合成 (Speech Synthesis)</span>
+                        也稱為<span class="keyword-highlight">文字轉換語音 (Text-to-Speech)</span>，是將文字資料轉換為語音。<ul>
+<li>1 &amp; 2: 都是將文字（號碼、台詞）轉換成語音。</li>
+<li>3: 產生字幕是將語音轉成文字 (<span class="eng-abbr">Speech-to-Text</span>)。</li>
+<li>4: 擷取關鍵片語是<span class="chinese-noun">自然語言處理</span>。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>記住方向性：<span class="keyword-highlight">文字 -&gt; 語音</span>
+                        是「語音合成」；<span class="keyword-highlight">語音 -&gt; 文字</span> 是「語音辨識」。</div>
+</div>
+</div>
+<!-- Question 13 -->
+<div class="question-card" data-category="outline-4" id="q-13">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(配對題)"></div>
+<div class="question-body">
+<p>您計劃使用 Azure AI 服務來開發語音控制的個人助理應用程式。請將 Azure AI 服務與適當的工作配對。</p>
+<div class="matching-container">
+<div class="matching-column">
+<h4>服務 (Service)</h4>
+<ul class="matching-list">
+<li class="matching-item">A. Azure AI 語言</li>
+<li class="matching-item">B. Azure AI 語音服務</li>
+<li class="matching-item">C. Azure AI 翻譯工具</li>
+</ul>
+</div>
+<div class="matching-column">
+<h4>工作 (Task)</h4>
+<div class="matching-answer-area"><input id="q13_ans1" maxlength="1" placeholder="?" type="text"/><label for="q13_ans1">將使用者的語音轉換為文字</label></div>
+<div class="matching-answer-area"><input id="q13_ans2" maxlength="1" placeholder="?" type="text"/><label for="q13_ans2">識別使用者的意圖</label></div>
+<div class="matching-answer-area"><input id="q13_ans3" maxlength="1" placeholder="?" type="text"/><label for="q13_ans3">向使用者提供口語回應</label></div>
+</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-13', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-13">
+<div class="answer"><strong>答案：</strong><br/>
+                        1. <span class="matching-correct-answer">(B. Azure AI 語音服務)</span> - 將使用者的語音轉換為文字<br/>
+                        2. <span class="matching-correct-answer">(A. Azure AI 語言)</span> - 識別使用者的意圖<br/>
+                        3. <span class="matching-correct-answer">(B. Azure AI 語音服務)</span> - 向使用者提供口語回應</div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li><span class="keyword-highlight">語音轉文字</span> 是 <span class="chinese-noun">Azure AI
+                                    語音服務</span>的核心功能。</li>
+<li><span class="keyword-highlight">識別意圖</span> 是 <span class="chinese-noun">Azure AI
+                                    語言</span>服務中 CLU 的功能。</li>
+<li><span class="keyword-highlight">提供口語回應</span> (文字轉語音) 也是 <span class="chinese-noun">Azure AI 語音服務</span>的核心功能。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>一個完整的語音助理流程：<br/>使用者說話 -&gt; <b>語音服務 (Speech-to-Text)</b>
+                        -&gt; 取得文字 -&gt; <b>語言服務 (CLU)</b> -&gt; 理解意圖 -&gt; 系統產生回覆文字 -&gt; <b>語音服務 (Text-to-Speech)</b> -&gt; 助理說話。</div>
+</div>
+</div>
+<!-- ... Questions 14 to 118 ... -->
+<!-- Question 14 -->
+<div class="question-card" data-category="outline-4" id="q-14">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 聊天機器人可以支援語音輸入。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 每一種溝通管道都需要一個不同聊天機器人。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 聊天機器人可以結合自然語言及受限的回應選項來管理交談程序。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-14', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-14">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>3. <span class="yes-no-answer-feedback yes-no-correct">是</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 是。透過整合 <span class="chinese-noun">Azure AI 語音服務</span>，聊天機器人可以處理語音輸入和輸出。</li>
+<li>2. 否。Azure Bot Service 的設計理念是「建置一次，部署到多個通道」，一個機器人可以同時服務於網站、Teams、Messenger等多個管道。</li>
+<li>3. 是。良好的對話設計通常混合使用開放式的自然語言理解和引導式的選項（如按鈕、快速回覆），以提升使用者體驗和對話效率。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>記住 Bot Service 的「多通道支援」是一個關鍵特性。</div>
+</div>
+</div>
+<!-- Question 15 -->
+<div class="question-card" data-category="outline-4" id="q-15">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您管理一個包含客戶評論的網站。您需要儲存這些評論的英文版，然後辨識每位使用者的地理位置，並以當地語言向使用者展示評論。您應該使用下列何種類型的自然語言處理工作負載？</p>
+<ul>
+<li><input id="q15a" name="q15" type="radio"/><label for="q15a">1. 語言模組化</label></li>
+<li><input checked="" id="q15b" name="q15" type="radio"/><label for="q15b">2. 翻譯</label></li>
+<li><input id="q15c" name="q15" type="radio"/><label for="q15c">3. 語音辨識</label></li>
+<li><input id="q15d" name="q15" type="radio"/><label for="q15d">4. 關鍵片語擷取</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-15', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-15">
+<div class="answer"><strong>答案：</strong> 2. 翻譯</div>
+<div class="rationale">
+<strong>解析：</strong>題目的核心需求是將儲存的英文評論，以使用者的「當地語言」來展示。這個過程就是將文字從一種語言（英文）轉換成另一種語言（當地語言），這正是<span class="keyword-highlight">翻譯 (Translation)</span> 工作負載的功能。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>當題目涉及到將內容從一種語言變成另一種語言時，答案幾乎總是「翻譯」。</div>
+</div>
+</div>
+<!-- Question 16 -->
+<div class="question-card" data-category="outline-4" id="q-16">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(配對題)"></div>
+<div class="question-body">
+<p>您計劃將 Azure AI 語言服務 API 功能套用至技術支援報修系統。請將 Azure AI 語言服務 API 功能與適當的自然語言處理案例配對。</p>
+<div class="matching-container">
+<div class="matching-column">
+<h4>功能 (Feature)</h4>
+<ul class="matching-list">
+<li class="matching-item">1. 實體辨識</li>
+<li class="matching-item">2. 關鍵片語擷取</li>
+<li class="matching-item">3. 語言偵測</li>
+<li class="matching-item">4. 情感分析</li>
+</ul>
+</div>
+<div class="matching-column">
+<h4>案例 (Scenario)</h4>
+<div class="matching-answer-area"><input id="q16_ans1" maxlength="1" placeholder="?" type="text"/><label for="q16_ans1">A. 根據支援報修中所包含文字了解客戶的不滿意程度。</label></div>
+<div class="matching-answer-area"><input id="q16_ans2" maxlength="1" placeholder="?" type="text"/><label for="q16_ans2">B. 彙總支援報修中重要資訊。</label></div>
+<div class="matching-answer-area"><input id="q16_ans3" maxlength="1" placeholder="?" type="text"/><label for="q16_ans3">C. 從支援報修中擷取關鍵日期。</label></div>
+</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-16', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-16">
+<div class="answer"><strong>答案：</strong><br/>
+                        A. <span class="matching-correct-answer">(4. 情感分析)</span><br/>
+                        B. <span class="matching-correct-answer">(2. 關鍵片語擷取)</span><br/>
+                        C. <span class="matching-correct-answer">(1. 實體辨識)</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>A. 了解「不滿意程度」是判斷文字情緒（正面、負面、中性），這正是<span class="keyword-highlight">情感分析</span>的功能。</li>
+<li>B. 「彙總重要資訊」或找出文章重點是<span class="keyword-highlight">關鍵片語擷取</span>的典型應用。</li>
+<li>C. 「關鍵日期」是一種特定類別的資訊（時間實體），需要用<span class="keyword-highlight">實體辨識</span>來擷取。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>情感分析→情緒；關鍵片語→重點；實體辨識→特定名詞（人、事、時、地、物）。</div>
+</div>
+</div>
+<!-- Question 17 -->
+<div class="question-card" data-category="outline-4" id="q-17">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>您需要為商務聊天機器人提供內容，以協助其為使用者解答簡單的查詢。下列哪三種方式是使用語言服務的問題解答來建立問與答文字？</p>
+<ul>
+<li><input checked="" id="q17a" name="q17" type="checkbox"/><label for="q17a">1.
+                                從預先定義的資料來源匯入閒聊內容。</label></li>
+<li><input checked="" id="q17b" name="q17" type="checkbox"/><label for="q17b">2. 手動輸入問題與答案。</label>
+</li>
+<li><input id="q17c" name="q17" type="checkbox"/><label for="q17c">3. 將機器人連線到 Cortana 頻道，並們用
+                                Cortana 提問。</label></li>
+<li><input checked="" id="q17d" name="q17" type="checkbox"/><label for="q17d">4.
+                                從現有的網頁產生問題與答案。</label></li>
+<li><input id="q17e" name="q17" type="checkbox"/><label for="q17e">5. 使用 Azure Machine Learning
+                                自動化 ML，根據包含問題與答案組的檔案來定型模型。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-17', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-17">
+<div class="answer"><strong>答案：</strong> 1, 2, 4</div>
+<div class="rationale"><strong>解析：</strong>Azure AI 語言服務的問題解答功能 (前身為 QnA Maker) 建立知識庫主要有三種方式：<ul>
+<li><span class="keyword-highlight">從現有資料來源匯入</span>：例如 FAQ 網頁、PDF、Word 文件。選項 4 符合。</li>
+<li><span class="keyword-highlight">手動編輯</span>：直接在入口網站中新增或編輯問答配對。選項 2 符合。</li>
+<li><span class="keyword-highlight">匯入閒聊內容</span>：服務提供預設的閒聊集（如專業、友善風格）來讓機器人更具人性化。選項 1 符合。
+                            </li>
+</ul>Cortana 是使用者通道，不是內容來源。AutoML 用於訓練複雜的機器學習模型，不是用來建立問答知識庫。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>記住建立知識庫的三大來源：URL/檔案、手動輸入、內建閒聊。</div>
+</div>
+</div>
+<!-- Question 18 -->
+<div class="question-card" data-category="outline-4" id="q-18">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>可以用來建置使用內建自然語言處理模型的無程式碼應用程式。</p>
+<ul>
+<li><input id="q18a" name="q18" type="radio"/><label for="q18a">1. Azure Health Bot</label></li>
+<li><input checked="" id="q18b" name="q18" type="radio"/><label for="q18b">2. Microsoft Bot
+                                Framework</label></li>
+<li><input id="q18c" name="q18" type="radio"/><label for="q18c">3. Power Virtual
+                                Agents</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-18', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-18">
+<div class="answer"><strong>答案：</strong> 2. Microsoft Bot Framework</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">Microsoft Bot Framework</span> 提供了完整的開發工具和 SDK，可以用來建置使用內建自然語言處理模型的應用程式。它整合了 Azure AI 服務（如 LUIS、QnA Maker）來處理自然語言理解。<ul>
+<li>Power Virtual Agents 雖然是無程式碼工具，但主要用於建置對話式機器人，而非一般的 NLP 應用程式。</li>
+<li>Azure Health Bot 是專為醫療保健產業設計的特殊服務。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>Bot Framework 提供完整的 NLP 整合能力，適合建置各種使用自然語言處理的應用程式。</div>
+</div>
+</div>
+<!-- Question 19 -->
+<div class="question-card" data-category="outline-4" id="q-19">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>識別電話號碼時，會使用哪種類型的自然語言處理 (NLP) 實體？</p>
+<ul>
+<li><input checked="" id="q19a" name="q19" type="radio"/><label for="q19a">1. 規則運算式</label></li>
+<li><input id="q19b" name="q19" type="radio"/><label for="q19b">2. Pattern.any</label></li>
+<li><input id="q19c" name="q19" type="radio"/><label for="q19c">3. machine-learned</label></li>
+<li><input id="q19d" name="q19" type="radio"/><label for="q19d">4. 清單</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-19', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-19">
+<div class="answer"><strong>答案：</strong> 1. 規則運算式</div>
+<div class="rationale"><strong>解析：</strong>電話號碼、電子郵件地址、產品ID 等具有<span class="keyword-highlight">固定格式或模式</span>的文字，最適合使用<span class="keyword-highlight">規則運算式
+                            (Regular Expression, Regex)</span> 實體來擷取。這比機器學習實體更精確且不需要訓練。<ul>
+<li>machine-learned 用於上下文相關的實體。</li>
+<li>清單 (List) 用於已知的同義字詞組。</li>
+<li>Pattern.any 是模式中的萬用字元，不是實體類型。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>當需要擷取的資訊有明確的「格式」或「模式」（如電話、郵遞區號、Email），首選就是規則運算式實體。
+                    </div>
+</div>
+</div>
+<!-- Question 20 -->
+<div class="question-card" data-category="outline-4" id="q-20">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您有一個 Azure 機器人。您要新增常見問題集 (FAQ) 的支援。您該使用哪項 Azure AI 服務以支援常見問題集？</p>
+<ul>
+<li><input id="q20a" name="q20" type="radio"/><label for="q20a">1. Azure AI 翻譯工具</label></li>
+<li><input id="q20b" name="q20" type="radio"/><label for="q20b">2. Azure AI 語音</label></li>
+<li><input checked="" id="q20c" name="q20" type="radio"/><label for="q20c">3. Azure AI 語言</label>
+</li>
+<li><input id="q20d" name="q20" type="radio"/><label for="q20d">4. Azure AI 文件智慧服務</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-20', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-20">
+<div class="answer"><strong>答案：</strong> 3. Azure AI 語言</div>
+<div class="rationale"><strong>解析：</strong>支援常見問題集 (FAQ) 的功能是 <span class="chinese-noun">Azure AI
+                            語言</span>服務中的<span class="keyword-highlight">問題解答 (Question Answering)</span>
+                        功能。它可以讓您建立一個知識庫，機器人可以查詢該知識庫來回答使用者的問題。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>記住：FAQ、知識庫、問答配對 (QnA) 都指向 <span class="chinese-noun">Azure AI 語言</span>服務的「問題解答」功能。</div>
+</div>
+</div>
+<!-- Question 21 -->
+<div class="question-card" data-category="outline-4" id="q-21">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 您可以使用 Azure AI 語言服務的問題解答查詢 Azure SQL 資料庫。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 若您希望知識庫針對詢問類似問題的不同使用者，提供相同答案，則應該使用 Azure AI 語言服務的問題解答。
+                        </div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. Azure AI 語言服務的問題解答可以判斷使用者語句的意圖。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-21', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-21">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 問題解答功能是基於其自身的<span class="keyword-highlight">知識庫</span>，而不是直接查詢 SQL
+                                資料庫。它處理的是非結構化的問答配對。</li>
+<li>2. 這是問題解答的核心價值。它使用 NLP 來理解問題的語意，因此即使問題的措辭略有不同（例如「如何重設密碼？」和「我忘了密碼怎麼辦？」），也能對應到同一個標準答案。
+                            </li>
+<li>3. 判斷使用者語句的<span class="keyword-highlight">意圖 (Intent)</span> 是 <span class="chinese-noun">Azure AI 語言</span>服務中的另一個功能——<span class="chinese-noun">交談語言理解
+                                    (CLU)</span> 的工作，而不是問題解答。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>區分「問題解答」和「CLU」：問題解答是「問-答」配對；CLU 是分析「意圖」和「實體」以觸發複雜動作。
+                    </div>
+</div>
+</div>
+<!-- Question 22 -->
+<div class="question-card" data-category="outline-4" id="q-22">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. Azure AI 語言服務可以識別文字是以何種語言撰寫。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. Azure AI 語言服務可以偵測文件中的手寫簽名。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. Azure AI 語言服務可以識別文件中所提及的公司和組織。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-22', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-22">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>3. <span class="yes-no-answer-feedback yes-no-correct">是</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 是的，這是<span class="keyword-highlight">語言偵測</span>功能，它是 Azure AI 語言服務的一部分。</li>
+<li>2. 否。偵測影像或文件中的視覺元素（如手寫簽名）是<span class="chinese-noun">電腦視覺</span>或<span class="chinese-noun">文件智慧服務</span>的工作，而不是語言服務。</li>
+<li>3. 是的，這是<span class="keyword-highlight">具名實體辨識 (NER)</span> 功能，可以識別出「組織」這一類別的實體。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>牢記各服務的界線：語言服務處理「文字的意義」，電腦視覺服務處理「影像的內容」。</div>
+</div>
+</div>
+<!-- Question 23 -->
+<div class="question-card" data-category="outline-4" id="q-23">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>您可以使用 Azure OpenAI 生成式 AI 應用程式產生哪兩種類型的內容？每個正確答案都呈現一個完整的解決方案。</p>
+<ul>
+<li><input id="q23a" name="q23" type="checkbox"/><label for="q23a">1. 影片</label></li>
+<li><input checked="" id="q23b" name="q23" type="checkbox"/><label for="q23b">2. 影像</label></li>
+<li><input checked="" id="q23c" name="q23" type="checkbox"/><label for="q23c">3. 文字</label></li>
+<li><input id="q23d" name="q23" type="checkbox"/><label for="q23d">4. 音訊</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-23', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-23">
+<div class="answer"><strong>答案：</strong> 2, 3</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">Azure OpenAI
+                            服務</span>目前主要提供用於生成以下內容的模型：<ul>
+<li><span class="keyword-highlight">文字</span>：使用 GPT-4、GPT-3.5 等模型可以生成文章、程式碼、摘要、對話等。</li>
+<li><span class="keyword-highlight">影像</span>：使用 DALL-E 模型可以根據文字描述生成新的影像。</li>
+</ul>目前，Azure OpenAI 服務不直接提供生成影片或音訊的模型。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>Azure OpenAI = GPT (文字/程式碼) + DALL-E (影像)。</div>
+</div>
+</div>
+<!-- Question 24 -->
+<div class="question-card" data-category="outline-4" id="q-24">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>轉換器模型中的三個階段是什麼？每個正確答案都呈現一個完整的解決方案。</p>
+<ul>
+<li><input id="q24a" name="q24" type="checkbox"/><label for="q24a">1. 物件偵測</label></li>
+<li><input checked="" id="q24b" name="q24" type="checkbox"/><label for="q24b">2. 下一個 Token
+                                預測</label></li>
+<li><input checked="" id="q24c" name="q24" type="checkbox"/><label for="q24c">3. Token 化</label>
+</li>
+<li><input checked="" id="q24d" name="q24" type="checkbox"/><label for="q24d">4. 內嵌計算</label></li>
+<li><input id="q24e" name="q24" type="checkbox"/><label for="q24e">5. 匿名化</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-24', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-24">
+<div class="answer"><strong>答案：</strong> 2, 3, 4</div>
+<div class="rationale"><strong>解析：</strong>大型語言模型（如基於轉換器架構的 GPT）處理文字的流程大致如下：<ul>
+<li>1. <span class="keyword-highlight">Token 化
+                                    (Tokenization)</span>：將輸入的文字分解成更小的單元（Token），如單詞或子詞。</li>
+<li>2. <span class="keyword-highlight">內嵌計算 (Embedding)</span>：將每個 Token 轉換為一個數值向量，這個向量代表了該
+                                Token 的語意。</li>
+<li>3. <span class="keyword-highlight">下一個 Token 預測 (Next Token
+                                    Prediction)</span>：模型的核心任務，根據前面的 Tokens 序列，預測最有可能出現的下一個 Token，並依此生成回應。</li>
+</ul>物件偵測是電腦視覺任務，匿名化是資料前處理步驟，但不是模型核心階段。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>記住LLM生成文字的流程：文字 -&gt; 碎塊(Token) -&gt; 數字向量(Embedding) -&gt;
+                        預測下一個 -&gt; 組合回文字。</div>
+</div>
+</div>
+<!-- Question 25 -->
+<div class="question-card" data-category="outline-4" id="q-25">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>以下何者可用來根據使用者提供的句子完成段落？</p>
+<ul>
+<li><input id="q25a" name="q25" type="radio"/><label for="q25a">1. Azure AI 視覺</label></li>
+<li><input id="q25b" name="q25" type="radio"/><label for="q25b">2. Azure AI 語言</label></li>
+<li><input checked="" id="q25c" name="q25" type="radio"/><label for="q25c">3. Azure OpenAI</label>
+</li>
+<li><input id="q25d" name="q25" type="radio"/><label for="q25d">4. Azure Machine Learning</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-25', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-25">
+<div class="answer"><strong>答案：</strong> 3. Azure OpenAI</div>
+<div class="rationale"><strong>解析：</strong>根據提供的文字（提示）來<span class="keyword-highlight">完成段落、生成後續內容</span>是<span class="chinese-noun">生成式 AI (Generative
+                            AI)</span> 的核心能力。在 Azure 服務中，這項功能由 <span class="chinese-noun">Azure OpenAI</span> 服務的 GPT
+                        系列模型提供。這項任務被稱為「完成 (Completion)」。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到「生成」、「創作」、「完成句子/段落」、「寫程式碼」等任務，就要想到 Azure OpenAI。
+                    </div>
+</div>
+</div>
+<!-- Question 26 -->
+<div class="question-card" data-category="outline-4" id="q-26">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(配對題)"></div>
+<div class="question-body">
+<p>請將 Azure OpenAI 大型語言模型 (LLM) 程序與適當的工作配對。</p>
+<div class="matching-container">
+<div class="matching-column">
+<h4>程序 (Process)</h4>
+<ul class="matching-list">
+<li class="matching-item">1. 分類 (Classification)</li>
+<li class="matching-item">2. 摘要 (Summarization)</li>
+<li class="matching-item">3. 產生 (Generation)</li>
+<li class="matching-item">4. 翻譯 (Translation)</li>
+</ul>
+</div>
+<div class="matching-column">
+<h4>工作 (Task)</h4>
+<div class="matching-answer-area"><input id="q26_ans1" maxlength="1" placeholder="?" type="text"/><label for="q26_ans1">A. 偵測小說作品的類型。</label></div>
+<div class="matching-answer-area"><input id="q26_ans2" maxlength="1" placeholder="?" type="text"/><label for="q26_ans2">B. 根據文字輸入建立重點清單。</label></div>
+<div class="matching-answer-area"><input id="q26_ans3" maxlength="1" placeholder="?" type="text"/><label for="q26_ans3">C. 根據產品描述建立廣告標語。</label></div>
+</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-26', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-26">
+<div class="answer"><strong>答案：</strong><br/>
+                        A. <span class="matching-correct-answer">(1. 分類)</span><br/>
+                        B. <span class="matching-correct-answer">(2. 摘要)</span><br/>
+                        C. <span class="matching-correct-answer">(3. 產生)</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>A. 偵測作品屬於哪種「類型」（如科幻、愛情、懸疑），是將輸入分配到預定義類別中的<span class="keyword-highlight">分類</span>任務。
+                            </li>
+<li>B. 建立「重點清單」是從長篇文字中提取核心內容，這正是<span class="keyword-highlight">摘要</span>任務。</li>
+<li>C. 「建立廣告標語」是從無到有創造新的文字內容，這屬於<span class="keyword-highlight">產生</span>任務。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>分類=貼標籤；摘要=抓重點；產生=無中生有。</div>
+</div>
+</div>
+<!-- Question 27 -->
+<div class="question-card" data-category="outline-3" id="q-27">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您需要產生用於摺頁冊的卡通。每個卡通都將以文字描述為基礎。您應該使用下列哪一個 Azure OpenAI 模型？</p>
+<ul>
+<li><input id="q27a" name="q27" type="radio"/><label for="q27a">1. GPT-3.5</label></li>
+<li><input id="q27b" name="q27" type="radio"/><label for="q27b">2. GPT-4</label></li>
+<li><input checked="" id="q27c" name="q27" type="radio"/><label for="q27c">3. DALL-E</label></li>
+<li><input id="q27d" name="q27" type="radio"/><label for="q27d">4. Codex</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-27', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-27">
+<div class="answer"><strong>答案：</strong> 3. DALL-E</div>
+<div class="rationale"><strong>解析：</strong>從<span class="keyword-highlight">文字描述生成影像</span>（如卡通）是
+                        <span class="chinese-noun">DALL-E</span> 模型的核心功能。GPT 系列模型主要用於生成文字和程式碼，Codex 是專門優化程式碼生成的模型。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>文字生成影像 -&gt; DALL-E。這是一對一的對應關係。</div>
+</div>
+</div>
+<!-- Question 28 -->
+<div class="question-card" data-category="outline-4" id="q-28">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>下列延伸模組 (適用於 Microsoft Visual Studio Code) 會使用 OpenAI Codex 模型。</p>
+<ul>
+<li><input checked="" id="q28a" name="q28" type="radio"/><label for="q28a">1. GitHub Copilot</label>
+</li>
+<li><input id="q28b" name="q28" type="radio"/><label for="q28b">2. GitHub 原始檔控制</label></li>
+<li><input id="q28c" name="q28" type="radio"/><label for="q28c">3. IntelliSense</label></li>
+<li><input id="q28d" name="q28" type="radio"/><label for="q28d">4. Microsoft 365 Copilot</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-28', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-28">
+<div class="answer"><strong>答案：</strong> 1. GitHub Copilot</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">GitHub Copilot</span> 是一個
+                        AI 程式碼助理，它背後的核心技術就是基於 OpenAI 的 <span class="keyword-highlight">Codex</span> 模型（現在更多是基於更強大的 GPT-4
+                        模型）。它可以在 VS Code 等編輯器中提供程式碼建議和補全。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>程式碼生成助理 = GitHub Copilot。</div>
+</div>
+</div>
+<!-- Question 29 -->
+<div class="question-card" data-category="outline-4" id="q-29">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您應該設定哪一個參數，才能在使用 Azure OpenAI GPT-3.5 模型之聊天解決方案的回應中產生更多樣化的 Token？</p>
+<ul>
+<li><input checked="" id="q29a" name="q29" type="radio"/><label for="q29a">1. 存在懲罰</label></li>
+<li><input id="q29b" name="q29" type="radio"/><label for="q29b">2. 停止序列</label></li>
+<li><input id="q29c" name="q29" type="radio"/><label for="q29c">3. 包含過去的訊息</label></li>
+<li><input id="q29d" name="q29" type="radio"/><label for="q29d">4. 回應上限</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-29', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-29">
+<div class="answer"><strong>答案：</strong> 1. 存在懲罰</div>
+<div class="rationale"><strong>解析：</strong>在 Azure OpenAI 參數中，<span class="keyword-highlight">存在懲罰
+                            (Presence penalty)</span> 是一個介於 -2.0 和 2.0 之間的數字，正值會懲罰已在文字中出現過的 Token，從而<span class="keyword-highlight">鼓勵模型談論新的主題</span>，增加回應的多樣性。<ul>
+<li>停止序列：告訴模型在哪裡停止生成。</li>
+<li>包含過去的訊息：提供對話歷史。</li>
+<li>回應上限：限制生成長度。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>想讓AI不重複、更有創意 -&gt; 增加 `Temperature` 或 `Presence
+                        penalty`。想讓AI更專注、減少胡言亂語 -&gt; 增加 `Frequency penalty`。</div>
+</div>
+</div>
+<!-- Question 30 -->
+<div class="question-card" data-category="outline-4" id="q-30">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 轉換器模型架構會使用自我注意力。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 轉換器模型架構包含編碼器區塊和解碼器區塊。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 轉換器模型架構包含加密區塊或解密區塊。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-30', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-30">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 是。<span class="keyword-highlight">自我注意力 (Self-Attention)</span> 機制是轉換器 (Transformer)
+                                模型架構的革命性核心，它允許模型在處理一個詞時權衡句子中所有其他詞的重要性。</li>
+<li>2. 是。原始的轉換器模型包含一個<span class="keyword-highlight">編碼器 (Encoder)</span> 來理解輸入，和一個<span class="keyword-highlight">解碼器 (Decoder)</span> 來生成輸出。後來的模型如 GPT 系列主要是基於解碼器架構。</li>
+<li>3. 否。加密/解密是密碼學術語，與轉換器模型的 AI 架構無關。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>Transformer = Attention is All You
+                        Need。記住「注意力機制」和「編碼器-解碼器」是其兩大關鍵詞。</div>
+</div>
+</div>
+<!-- Question 31 -->
+<div class="question-card" data-category="outline-1" id="q-31">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 您可以使用自己的資料微調 Azure OpenAI 模型。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 預先訓練的生成式 AI 模型是 Azure OpenAI 的元件。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 若要建置符合 Microsoft 負責任 AI 準則的解決方案，您必須建置和訓練自己的模型。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-31', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-31">
+<div class="answer"><strong>答案 (根據題目來源)：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/><strong>(注意：第一題的答案可能與現況不符，請參考解析)</strong>
+</div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 根據題目提供的答案為「否」，但在<span class="keyword-highlight">實際情況中，Azure OpenAI 是支援使用自己的資料進行微調
+                                    (Fine-tuning)
+                                    的</span>。這可能是一道舊題目或有爭議的題目。在考試中，如果遇到，需要根據當時的知識和題庫趨勢判斷。然而，從技術角度看，這個敘述是正確的。</li>
+<li>2. 是的。<span class="chinese-noun">Azure OpenAI</span> 的核心就是提供強大的<span class="keyword-highlight">預先訓練模型</span>（如 GPT-4, DALL-E）作為服務。</li>
+<li>3. 否。Microsoft 提倡使用其經過負責任 AI 準則審核和調整的預訓練模型，使用者可以在此基礎上建置應用，而無需從頭訓練自己的模型。</li>
+</ul>
+</div>
+<div class="exam-tip">
+<strong>考試小技巧：</strong>注意題庫的時效性。第一題在現實中是「是」，但如果題庫答案是「否」，可能需要按題庫答案作答，同時理解其背後的技術事實。
+                    </div>
+</div>
+</div>
+<!-- Question 32 -->
+<div class="question-card" data-category="outline-3" id="q-32">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您需要根據使用者提示產生影像。您應該使用下列哪一個 Azure OpenAI 模型？</p>
+<ul>
+<li><input id="q32a" name="q32" type="radio"/><label for="q32a">1. GPT-3</label></li>
+<li><input id="q32b" name="q32" type="radio"/><label for="q32b">2. GPT-4</label></li>
+<li><input checked="" id="q32c" name="q32" type="radio"/><label for="q32c">3. DALL-E</label></li>
+<li><input d"="" name="q32" type="radio"/><label for="q32d">4. Codex</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-32', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-32">
+<div class="answer"><strong>答案：</strong> 3. DALL-E</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">DALL-E</span> 是 OpenAI
+                        開發的專門用於根據文字提示（prompt）生成影像的生成式 AI 模型。GPT 系列用於文字，Codex 用於程式碼。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>這是一個重複的核心概念：影像生成 -&gt; DALL-E。</div>
+</div>
+</div>
+<!-- Question 33 -->
+<div class="question-card" data-category="outline-3" id="q-33">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>您可以使用 Azure OpenAI DALL-E 模型執行下列兩個動作？每個正確答案都呈現一個完整的解決方案。</p>
+<ul>
+<li><input id="q33a" name="q33" type="checkbox"/><label for="q33a">1. 產生影像標題。</label></li>
+<li><input checked="" id="q33b" name="q33" type="checkbox"/><label for="q33b">2. 修改影像。</label></li>
+<li><input checked="" id="q33c" name="q33" type="checkbox"/><label for="q33c">3. 建立影像。</label></li>
+<li><input id="q33d" name="q33" type="checkbox"/><label for="q33d">4. 偵測影像中的物件。</label></li>
+<li><input id="q33e" name="q33" type="checkbox"/><label for="q33e">5. 使用光學字元辨識 (OCR)。</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-33', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-33">
+<div class="answer"><strong>答案：</strong> 2, 3</div>
+<div class="rationale"><strong>解析：</strong>DALL-E 模型主要有兩大功能：<ul>
+<li><span class="keyword-highlight">建立影像 (Image Generation)</span>：根據文字提示從頭開始創建新影像。</li>
+<li><span class="keyword-highlight">修改影像 (Image
+                                    Editing/Inpainting/Outpainting)</span>：根據提示編輯現有影像的特定區域。</li>
+</ul>產生影像標題是 Azure AI 視覺的「影像描述」功能。物件偵測和 OCR 也是 Azure AI 視覺的功能，不是 DALL-E 的。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>DALL-E 不僅能「無中生有」，還能「錦上添花」或「改頭換面」（修改影像）。</div>
+</div>
+</div>
+<!-- Question 34 -->
+<div class="question-card" data-category="outline-4" id="q-34">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>您可以使用下列哪兩項工具來呼叫 Azure OpenAI 服務？每個正確答案都呈現一個完整的解決方案。</p>
+<ul>
+<li><input checked="" id="q34a" name="q34" type="checkbox"/><label for="q34a">1. 適用於 Python 的 Azure
+                                SDK</label></li>
+<li><input id="q34b" name="q34" type="checkbox"/><label for="q34b">2. 適用於 JavaScript 的
+                                Azure SDK</label></li>
+<li><input checked="" id="q34c" name="q34" type="checkbox"/><label for="q34c">3. Azure REST
+                                API</label></li>
+<li><input id="q34d" name="q34" type="checkbox"/><label for="q34d">4. Azure 命令列介面 (CLI)</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-34', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-34">
+<div class="answer"><strong>答案：</strong> 1, 3</div>
+<div class="rationale"><strong>解析：</strong>與 Azure OpenAI 服務互動的主要程式設計方式有：<ul>
+<li><span class="keyword-highlight">REST API</span>：這是最底層、最通用的方式，任何可以發送 HTTP 請求的語言都可以使用。
+                            </li>
+<li><span class="keyword-highlight">SDK (軟體開發套件)</span>：Azure 為多種語言提供了 SDK 來簡化 API 的呼叫，其中
+                                <span class="keyword-highlight">Python</span> 和 .NET 是最主要支援的。
+                            </li>
+</ul>雖然 Azure CLI 可以用來管理 Azure OpenAI *資源*（如建立、刪除部署），但它不直接用於發送提示以*呼叫模型*進行推斷。JavaScript SDK
+                        的支援可能不如 Python 完整或處於預覽階段。最標準的答案是 REST API 和 Python SDK。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>呼叫 Azure 服務的標準方法永遠包括 REST API 和主要的 SDK (特別是 Python)。
+                    </div>
+</div>
+</div>
+<!-- Question 35 -->
+<div class="question-card" data-category="outline-4" id="q-35">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>請問哪一個 Azure OpenAI 模型可用於開發程式碼？</p>
+<ul>
+<li><input id="q35a" name="q35" type="radio"/><label for="q35a">1. Whisper</label></li>
+<li><input checked="" id="q35b" name="q35" type="radio"/><label for="q35b">2. GPT-4-32k</label></li>
+<li><input id="q35c" name="q35" type="radio"/><label for="q35c">3.
+                                microsoft-swinv2-base-patch4-window12-192-22k</label></li>
+<li><input id="q35d" name="q35" type="radio"/><label for="q35d">4. DALL-E</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-35', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-35">
+<div class="answer"><strong>答案：</strong> 2. GPT-4-32k</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">GPT-4</span> 和 GPT-3.5
+                        系列模型都具備強大的自然語言和<span class="keyword-highlight">程式碼生成</span>能力。它們是驅動 GitHub Copilot 等工具的基礎。<ul>
+<li>Whisper 是用於語音轉文字的模型。</li>
+<li>選項3 是一個電腦視覺模型（Swin Transformer）。</li>
+<li>DALL-E 用於影像生成。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到程式碼開發/生成，就找 GPT 系列的模型。</div>
+</div>
+</div>
+<!-- Question 36 -->
+<div class="question-card" data-category="outline-4" id="q-36">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. Azure OpenAI GPT-3.5 Turbo 模型可以將語音轉譯為文字。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. Azure OpenAI DALL-E 模型會根據文字提示產生影像。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. Azure OpenAI 內嵌文字模型可以根據文字相似性將文字轉換為數值向量。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-36', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-36">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-correct">是</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 否。將語音轉譯為文字是 <span class="keyword-highlight">Whisper</span> 模型的功能。GPT-3.5 Turbo
+                                用於處理和生成文字。</li>
+<li>2. 是。這是 DALL-E 模型的核心功能。</li>
+<li>3. 是。這是<span class="keyword-highlight">內嵌 (Embedding)</span>
+                                模型的定義。它將文字轉換為向量，以便進行語意搜尋、相似性比較等任務。</li>
+</ul>
+</div>
+<div class="exam-tip">
+<strong>考試小技巧：</strong>精準記住每個模型的功能：GPT→文字，DALL-E→影像，Whisper→語音轉文字，Embedding→文字轉向量。
+                    </div>
+</div>
+</div>
+<!-- Question 37 -->
+<div class="question-card" data-category="outline-1" id="q-37">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>您有一個使用 Azure OpenAI GPT-3.5 大型語言模型 (LLM) 回答技術性問題的聊天機器人。下列哪兩個敘述正確描述了該聊天機器人？每個正確答案都呈現一個完整的解決方案。</p>
+<ul>
+<li><input id="q37a" name="q37" type="checkbox"/><label for="q37a">1. 該聊天機器人將一律提供準確的資料。</label>
+</li>
+<li><input checked="" id="q37b" name="q37" type="checkbox"/><label for="q37b">2.
+                                該聊天機器人可能會使用不準確的資料回應。</label></li>
+<li><input checked="" id="q37c" name="q37" type="checkbox"/><label for="q37c">3.
+                                基礎知識資料可用來限制聊天機器人的輸出。</label></li>
+<li><input id="q37d" name="q37" type="checkbox"/><label for="q37d">4. 該聊天機器人適合用來執行醫療診斷。</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-37', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-37">
+<div class="answer"><strong>答案：</strong> 2, 3</div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>2. 正確。大型語言模型可能會產生「幻覺」(Hallucination)，即編造看似合理但不正確的資訊。這是 LLM 的一個固有風險，屬於<span class="keyword-highlight">可靠性</span>的考量。</li>
+<li>3. 正確。透過<span class="keyword-highlight">基礎知識 (Grounding)</span> 或檢索增強生成 (RAG)
+                                技術，可以將模型的回應限制在您提供的特定資料範圍內，從而提高準確性並減少幻覺。</li>
+<li>1. 錯誤。由於幻覺的可能性，不能保證 LLM 一律準確。</li>
+<li>4. 錯誤。由於可靠性和準確性的問題，將 LLM 直接用於高風險領域（如醫療診斷）是不負責任的，違反了<span class="keyword-highlight">可靠性與安全性</span>以及<span class="keyword-highlight">權責</span>的
+                                AI 原則。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>負責任 AI 的一個重要考點是 LLM
+                        可能會出錯（產生幻覺），以及如何透過「提供您自己的資料」(Grounding) 來緩解這個問題。</div>
+</div>
+</div>
+<!-- Question 38 -->
+<div class="question-card" data-category="outline-4" id="q-38">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>您可以使用哪兩個資源來分析程式碼並產生程式碼函式的說明和程式碼註解？</p>
+<ul>
+<li><input id="q38a" name="q38" type="checkbox"/><label for="q38a">1. Azure OpenAI Whisper
+                                模型</label></li>
+<li><input id="q38b" name="q38" type="checkbox"/><label for="q38b">2. Azure OpenAI DALL-E
+                                模型</label></li>
+<li><input checked="" id="q38c" name="q38" type="checkbox"/><label for="q38c">3. Azure OpenAI GPT-4
+                                模型</label></li>
+<li><input checked="" id="q38d" name="q38" type="checkbox"/><label for="q38d">4. GitHub Copilot
+                                服務</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-38', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-38">
+<div class="answer"><strong>答案：</strong> 3, 4</div>
+<div class="rationale"><strong>解析：</strong>分析程式碼並生成說明/註解是程式碼理解和生成的任務。<ul>
+<li><span class="keyword-highlight">Azure OpenAI GPT-4
+                                    模型</span>：具有強大的程式碼處理能力，可以直接透過提示來完成這類任務。</li>
+<li><span class="keyword-highlight">GitHub Copilot
+                                    服務</span>：這是一個專為程式開發設計的產品，其核心功能之一就是解釋和註解程式碼，它底層就是由 GPT 模型驅動的。</li>
+</ul>Whisper 用於語音，DALL-E 用於影像。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>處理程式碼的任務，答案通常是 GPT 模型或基於它的產品 (GitHub Copilot)。</div>
+</div>
+</div>
+<!-- Question 39 -->
+<div class="question-card" data-category="outline-4" id="q-39">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>以下何者可用來建置為網站創作短篇文章的 AI 模型？</p>
+<ul>
+<li><input checked="" id="q39a" name="q39" type="radio"/><label for="q39a">1. Azure OpenAI
+                                Studio</label></li>
+<li><input id="q39b" name="q39" type="radio"/><label for="q39b">2. 文件智慧服務工作室</label></li>
+<li><input id="q39c" name="q39" type="radio"/><label for="q39c">3. ChatGPT</label></li>
+<li><input id="q39d" name="q39" type="radio"/><label for="q39d">4. GitHub Copilot</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-39', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-39">
+<div class="answer"><strong>答案：</strong> 1. Azure OpenAI Studio</div>
+<div class="rationale"><strong>解析：</strong>題目問的是「建置 AI 模型」的工具。在 Azure 生態系中，<span class="keyword-highlight">Azure OpenAI Studio</span> 是一個圖形化介面，讓開發者可以探索、實驗、設定和部署 OpenAI
+                        模型來完成如「創作短篇文章」這樣的任務。<ul>
+<li>文件智慧服務工作室用於處理表單和文件。</li>
+<li>ChatGPT 是一個應用程式，而不是建置模型的平台。</li>
+<li>GitHub Copilot 是程式碼助理。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>Azure 中帶有 "Studio" 的服務通常是該服務的圖形化工作台。OpenAI Studio
+                        用於實驗和部署 OpenAI 模型。</div>
+</div>
+</div>
+<!-- Question 40 -->
+<div class="question-card" data-category="outline-4" id="q-40">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>以下哪一個詞彙是用來描述上傳您自己的資料以自訂 Azure OpenAI 模型？</p>
+<ul>
+<li><input checked="" id="q40a" name="q40" type="radio"/><label for="q40a">1. 微調</label></li>
+<li><input id="q40b" name="q40" type="radio"/><label for="q40b">2. 完成</label></li>
+<li><input id="q40c" name="q40" type="radio"/><label for="q40c">3. 基礎知識</label></li>
+<li><input id="q40d" name="q40" type="radio"/><label for="q40d">4. 提示工程</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-40', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-40">
+<div class="answer"><strong>答案：</strong> 1. 微調</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">微調 (Fine-tuning)</span>
+                        是指使用您自己的訓練資料來進一步訓練預先訓練好的模型，以使其在特定任務上表現更好或具備特定知識風格的過程。<ul>
+<li>完成 (Completion) 是指讓模型根據提示生成後續內容。</li>
+<li>基礎知識 (Grounding) 是指在推斷時提供資料讓模型參考，而不是訓練模型。</li>
+<li>提示工程 (Prompt Engineering) 是指設計有效的輸入提示。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>用自己的資料「訓練」模型 -&gt; 微調 (Fine-tuning)。在「使用」模型時提供資料給它參考 -&gt;
+                        基礎知識 (Grounding / RAG)。</div>
+</div>
+</div>
+<!-- Question 41 -->
+<div class="question-card" data-category="outline-4" id="q-41">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>請問如何才能確保 Azure OpenAI 模型會產生包含最近事件的準確回應？</p>
+<ul>
+<li><input checked="" id="q41a" name="q41" type="radio"/><label for="q41a">1. 新增基礎知識資料</label></li>
+<li><input id="q41b" name="q41" type="radio"/><label for="q41b">2. 新增訓練資料</label></li>
+<li><input id="q41c" name="q41" type="radio"/><label for="q41c">3. 新增小樣本學習</label></li>
+<li><input id="q41d" name="q41" type="radio"/><label for="q41d">4. 修改系統訊息</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-41', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-41">
+<div class="answer"><strong>答案：</strong> 1. 新增基礎知識資料</div>
+<div class="rationale"><strong>解析：</strong>預訓練模型的知識有其「截止日期」。要讓模型回應包含「最近事件」等模型訓練時沒有的資訊，最好的方法是使用<span class="keyword-highlight">基礎知識 (Grounding)</span>，也就是所謂的<span class="keyword-highlight">檢索增強生成 (RAG)</span>。這個方法會在使用者提問時，先從一個最新的資料來源（如 Bing
+                        搜尋、文件庫）檢索相關資訊，然後將這些資訊連同原始問題一起發送給模型，讓模型基於這些最新資訊來產生回應。選項 2 的訓練資料指的是微調，成本高且不即時。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>需要「最新資訊」或「特定領域知識」 -&gt; 接上你自己的資料庫 (Grounding / RAG)。</div>
+</div>
+</div>
+<!-- Question 42 -->
+<div class="question-card" data-category="outline-1" id="q-42">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>您正在建置 AI 應用程式。您需要確保應用程式使用負責任 AI 的準則。請問您應該遵循下列哪兩個準則？</p>
+<ul>
+<li><input id="q42a" name="q42" type="checkbox"/><label for="q42a">1. 實作敏捷式軟體開發 (Agile Software
+                                Development) 方法</label></li>
+<li><input checked="" id="q42b" name="q42" type="checkbox"/><label for="q42b">2.
+                                建立風險治理委員會，包括合法小組的成員、風險治理小組的成員、以及隱私保護專家。</label></li>
+<li><input id="q42c" name="q42" type="checkbox"/><label for="q42c">3. 防止洩漏使用 AI
+                                演算法自動做出決策。</label></li>
+<li><input checked="" id="q42d" name="q42" type="checkbox"/><label for="q42d">4. 實作 AI
+                                模型驗證的程序，做為軟體檢閱程序的一部分。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-42', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-42">
+<div class="answer"><strong>答案：</strong> 2, 4</div>
+<div class="rationale"><strong>解析：</strong>實踐負責任 AI (Responsible AI) 涉及流程和治理：<ul>
+<li>2. 建立跨職能的<span class="keyword-highlight">治理委員會</span>是<span class="chinese-noun">權責
+                                    (Accountability)</span> 原則的體現，確保決策過程中有來自不同領域的專家監督。</li>
+<li>4. 將<span class="keyword-highlight">模型驗證</span>納入開發流程是<span class="chinese-noun">可靠性與安全性
+                                    (Reliability and Safety)</span> 原則的體現，確保模型在部署前的品質和穩定性。</li>
+</ul>敏捷開發是軟體工程方法，不直接等同於 RAI。選項3的說法太絕對，「防止洩漏」應是「揭露」或「透明化」，且完全禁止自動決策並非 RAI 的要求，而是要求決策過程可解釋、公平。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>負責任 AI 不僅是技術問題，更是「流程」和「治理」問題。建立委員會、實施驗證流程都是其重要實踐。</div>
+</div>
+</div>
+<!-- Question 43 -->
+<div class="question-card" data-category="outline-1" id="q-43">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 根據歷史資料預測房價為異常偵測範例。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 在慣常模式中尋找偏差以識別可疑的登入為異常偵測範例。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 根據患者的病歷預測患者是否會罹患糖尿病為異常偵測範例。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-43', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-43">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 否。預測一個連續的數值（房價）是<span class="keyword-highlight">迴歸 (Regression)</span> 問題。</li>
+<li>2. 是。在正常模式中找出不尋常的事件（偏差、可疑登入）是<span class="keyword-highlight">異常偵測 (Anomaly
+                                    Detection)</span> 的典型定義。</li>
+<li>3. 否。預測一個分類結果（是/否會罹患糖尿病）是<span class="keyword-highlight">分類 (Classification)</span> 問題。
+                            </li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>異常偵測 = "這個正常嗎？" / "這是特例嗎？"。迴歸 = "多少錢？"。分類 = "是哪一類？"。
+                    </div>
+</div>
+</div>
+<!-- Question 44 -->
+<div class="question-card" data-category="outline-1" id="q-44">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>當重要欄位包含不尋常或缺少值時，確保 AI 系統不會提供預測，是負責任 AI 的什麼準則？</p>
+<ul>
+<li><input id="q44a" name="q44" type="radio"/><label for="q44a">1. 包容性</label></li>
+<li><input id="q44b" name="q44" type="radio"/><label for="q44b">2. 隱私權與安全性</label></li>
+<li><input checked="" id="q44c" name="q44" type="radio"/><label for="q44c">3. 可靠性與安全性</label></li>
+<li><input id="q44d" name="q44" type="radio"/><label for="q44d">4. 透明度</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-44', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-44">
+<div class="answer"><strong>答案：</strong> 3. 可靠性與安全性</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">可靠性與安全性 (Reliability and
+                            Safety)</span> 原則強調 AI
+                        系統應在預期的和非預期的條件下都能穩定、安全地運作。當輸入資料有問題（不尋常或缺少）時，一個可靠的系統應該能識別這種情況並優雅地失敗（例如拒絕提供預測），而不是給出一個基於錯誤資料的、潛在有害的預測。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>可靠性 = 系統在各種情況下（包括出錯時）的表現是否穩健、可預期。</div>
+</div>
+</div>
+<!-- Question 45 -->
+<div class="question-card" data-category="outline-4" id="q-45">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您的網站有一個用來協助客戶的聊天機器人。您需要根據客戶在聊天機器人中鍵入的內容，偵測客戶何時感到沮喪。您應該使用下列哪一種類型的 AI 工作負載？</p>
+<ul>
+<li><input id="q45a" name="q45" type="radio"/><label for="q45a">1. 迴歸</label></li>
+<li><input checked="" id="q45b" name="q45" type="radio"/><label for="q45b">2. 自然語言處理</label></li>
+<li><input id="q45c" name="q45" type="radio"/><label for="q45c">3. 異常偵測</label></li>
+<li><input id="q45d" name="q45" type="radio"/><label for="q45d">4. 電腦視覺</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-45', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-45">
+<div class="answer"><strong>答案：</strong> 2. 自然語言處理</div>
+<div class="rationale"><strong>解析：</strong>偵測客戶的「沮喪」情緒，是從他們「鍵入的內容」（即文字）中分析其情感。這是一個典型的<span class="keyword-highlight">自然語言處理 (NLP)</span> 任務，具體來說是<span class="keyword-highlight">情感分析
+                            (Sentiment Analysis)</span>。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>分析文字/對話中的情緒、觀點、滿意度，都是情感分析的範疇，隸屬於 NLP。</div>
+</div>
+</div>
+<!-- Question 46 -->
+<div class="question-card" data-category="outline-3" id="q-46">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>貴公司想要打造瓶罐回收機。此回收機必須能夠自動識別正確形狀的瓶罐，拒收所有其他項目。公司應該使用哪種 AI 工作負載？</p>
+<ul>
+<li><input id="q46a" name="q46" type="radio"/><label for="q46a">1. 自然語言處理</label></li>
+<li><input checked="" id="q46b" name="q46" type="radio"/><label for="q46b">2. 電腦視覺</label></li>
+<li><input id="q46c" name="q46" type="radio"/><label for="q46c">3. 知識探礦</label></li>
+<li><input id="q46d" name="q46" type="radio"/><label for="q46d">4. 異常偵測</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-46', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-46">
+<div class="answer"><strong>答案：</strong> 2. 電腦視覺</div>
+<div class="rationale"><strong>解析：</strong>回收機需要「看」到投入的物品，並根據其「形狀」等視覺特徵來做判斷。這種處理和理解影像資訊的任務，屬於<span class="keyword-highlight">電腦視覺 (Computer Vision)</span> 工作負載。具體來說，這可能是一個<span class="keyword-highlight">影像分類</span>（這是瓶子/這不是瓶子）或<span class="keyword-highlight">物件偵測</span>的應用。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>凡是涉及到讓機器「看」和「理解」影像或影片的場景，都屬於電腦視覺。</div>
+</div>
+</div>
+<!-- Question 47 -->
+<div class="question-card" data-category="outline-2" id="q-47">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>預測貸款是否償還的銀行系統是哪個類型的機器學習範例。</p>
+<ul>
+<li><input checked="" id="q47a" name="q47" type="radio"/><label for="q47a">1. 分類</label></li>
+<li><input id="q47b" name="q47" type="radio"/><label for="q47b">2. 叢集</label></li>
+<li><input id="q47c" name="q47" type="radio"/><label for="q47c">3. 迴歸</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-47', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-47">
+<div class="answer"><strong>答案：</strong> 1. 分類</div>
+<div class="rationale">
+<strong>解析：</strong>這個問題的預測結果是離散的類別：「會償還」或「不會償還」。當模型需要將輸入分配到兩個或多個預先定義的類別中時，這個任務就是<span class="keyword-highlight">分類 (Classification)</span>。
+                    </div>
+<div class="exam-tip">
+<strong>考試小技巧：</strong>預測的答案是「是/否」、「類別A/B/C」、「通過/不通過」等，就是分類。如果預測的是一個數字，如價格或溫度，那就是迴歸。
+                    </div>
+</div>
+</div>
+<!-- Question 48 -->
+<div class="question-card" data-category="outline-4" id="q-48">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 監視線上服務的評論是否包含不雅用語為一項自然語言處理範例。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 辨識影像中品牌標誌為一項自然語言處理範例。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 監視公開新聞網站是否包含產品負面陳述為一項自然語言處理範例。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-48', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-48">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>3. <span class="yes-no-answer-feedback yes-no-correct">是</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 是。分析評論「文字」內容是否包含特定類型的用語（不雅用語），是 NLP 中的內容審核或文字分類任務。</li>
+<li>2. 否。辨識「影像」中的品牌標誌是<span class="chinese-noun">電腦視覺</span>的任務（物件偵測或品牌偵測）。</li>
+<li>3. 是。分析新聞網站的「文字」內容是否包含負面陳述，是 NLP 中的<span class="chinese-noun">情感分析</span>任務。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>再次強調服務邊界：處理文字意義 -&gt; NLP；處理影像內容 -&gt; 電腦視覺。</div>
+</div>
+</div>
+<!-- Question 49 -->
+<div class="question-card" data-category="outline-1" id="q-49">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>Microsoft 責任 AI 的指導準則是哪三項？</p>
+<ul>
+<li><input id="q49a" name="q49" type="checkbox"/><label for="q49a">1. 決斷性</label></li>
+<li><input id="q49b" name="q49" type="checkbox"/><label for="q49b">2. 固執性</label></li>
+<li><input id="q49c" name="q49" type="checkbox"/><label for="q49c">3. 知識性</label></li>
+<li><input checked="" id="q49d" name="q49" type="checkbox"/><label for="q49d">4. 公平性</label></li>
+<li><input checked="" id="q49e" name="q49" type="checkbox"/><label for="q49e">5. 包容性</label></li>
+<li><input checked="" id="q49f" name="q49" type="checkbox"/><label for="q49f">6. 可靠性和安全性</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-49', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-49">
+<div class="answer"><strong>答案：</strong> 4, 5, 6</div>
+<div class="rationale"><strong>解析：</strong>Microsoft 定義了六項負責任 AI 的指導原則：<span class="keyword-highlight">公平性 (Fairness)</span>、<span class="keyword-highlight">可靠性與安全性
+                            (Reliability and Safety)</span>、<span class="keyword-highlight">隱私權與安全性 (Privacy and
+                            Security)</span>、<span class="keyword-highlight">包容性 (Inclusiveness)</span>、<span class="keyword-highlight">透明度 (Transparency)</span>，以及<span class="keyword-highlight">權責
+                            (Accountability)</span>。選項 4、5、6 都是這六大原則的一部分。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>務必記住這六大原則，它們是 AI-900 的高頻考點。可以用首字縮寫來幫助記憶。</div>
+</div>
+</div>
+<!-- Question 50 -->
+<div class="question-card" data-category="outline-4" id="q-50">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>下列哪兩個案例是自然語言處理工作負載範例？每個正確答案都呈現一個完整的解決方案。</p>
+<ul>
+<li><input id="q50a" name="q50" type="checkbox"/><label for="q50a">1.
+                                監控機器溫度，以在溫度達到特定閾值時打開風扇。</label></li>
+<li><input checked="" id="q50b" name="q50" type="checkbox"/><label for="q50b">2.
+                                可以回答諸如「今天天氣如何？」等問題的家用智慧型裝置。</label></li>
+<li><input id="q50c" name="q50" type="checkbox"/><label for="q50c">3. 自動將車前燈插入汽車的生產線機械。</label>
+</li>
+<li><input checked="" id="q50d" name="q50" type="checkbox"/><label for="q50d">4.
+                                使用知識庫以互動方式回答使用者問題的網站。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-50', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-50">
+<div class="answer"><strong>答案：</strong> 2, 4</div>
+<div class="rationale"><strong>解析：</strong>NLP 處理的是人類語言。<ul>
+<li>2. 家用智慧型裝置需要理解使用者的<span class="keyword-highlight">口語問題</span>（如「今天天氣如何？」），這是典型的 NLP
+                                (語音辨識 + 意圖理解) 應用。</li>
+<li>4. 網站使用知識庫進行互動式問答，需要理解使用者<span class="keyword-highlight">輸入的文字問題</span>，並從知識庫中找到匹配的答案，這也是 NLP (問題解答) 的應用。</li>
+</ul>選項 1 是基於規則的自動化或異常偵測。選項 3 是機器人流程自動化或電腦視覺引導的機械操作。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>尋找與「對話」、「文字理解」、「語音命令」相關的場景，這些都是 NLP 的範疇。</div>
+</div>
+</div>
+<!-- Question 51 -->
+<div class="question-card" data-category="outline-1" id="q-51">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>說明用以定型模型的資料來源是哪一項責任 AI 準則的範例？</p>
+<ul>
+<li><input id="q51a" name="q51" type="radio"/><label for="q51a">1. 隱私權與安全性</label></li>
+<li><input id="q51b" name="q51" type="radio"/><label for="q51b">2. 公平性</label></li>
+<li><input id="q51c" name="q51" type="radio"/><label for="q51c">3. 可靠性與安全性</label></li>
+<li><input checked="" id="q51d" name="q51" type="radio"/><label for="q51d">4. 透明度</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-51', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-51">
+<div class="answer"><strong>答案：</strong> 4. 透明度</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">透明度 (Transparency)</span>
+                        原則強調 AI 系統的運作方式應該是可以被理解的。這包括了公開用來訓練模型的資料來源、模型的目的、它的能力和限制等。讓使用者和開發者知道模型是如何被建立的，是實現透明度的關鍵一步。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>透明度 = 讓人們能夠「看穿」AI
+                        系統，了解它是如何運作和做出決策的。包括解釋性（explainability）和文件記錄。</div>
+</div>
+</div>
+<!-- Question 52 -->
+<div class="question-card" data-category="outline-1" id="q-52">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>公司正在探索語音辨識技術在其智慧型家用裝置中的使用。公司想要找出可能無意間遺漏特定使用者群組的任何屏障。這是下列何者責任 AI 的 Microsoft 指導準則範例？</p>
+<ul>
+<li><input id="q52a" name="q52" type="radio"/><label for="q52a">1. 權責</label></li>
+<li><input id="q52b" name="q52" type="radio"/><label for="q52b">2. 公平性</label></li>
+<li><input id="q52c" name="q52" type="radio"/><label for="q52c">3. 隱私權與安全性</label></li>
+<li><input checked="" id="q52d" name="q52" type="radio"/><label for="q52d">4. 包容性</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-52', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-52">
+<div class="answer"><strong>答案：</strong> 4. 包容性</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">包容性
+                            (Inclusiveness)</span> 原則旨在確保 AI
+                        系統能夠服務於盡可能廣泛的人群，賦予人們力量，而不是設置障礙。題中提到的「找出可能無意間遺漏特定使用者群組的任何屏障」（例如，語音辨識可能對某些口音或方言的辨識效果不佳），正是包容性設計的核心考量。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>公平性 (Fairness) 關注的是「不應對不同群體產生差別對待或偏見」；而包容性
+                        (Inclusiveness) 關注的是「設計時是否考慮到了不同能力和背景的人群，確保所有人都能使用」。</div>
+</div>
+</div>
+<!-- Question 53 -->
+<div class="question-card" data-category="outline-1" id="q-53">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>AI 系統不應反映用於訓練系統的資料集偏差，是下列哪個 Microsoft 責任 AI 的準則。</p>
+<ul>
+<li><input id="q53a" name="q53" type="radio"/><label for="q53a">1. 權責性</label></li>
+<li><input checked="" id="q53b" name="q53" type="radio"/><label for="q53b">2. 公平性</label></li>
+<li><input id="q53c" name="q53" type="radio"/><label for="q53c">3. 包容性</label></li>
+<li><input id="q53d" name="q53" type="radio"/><label for="q53d">4. 透明度</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-53', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-53">
+<div class="answer"><strong>答案：</strong> 2. 公平性</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">公平性 (Fairness)</span>
+                        原則的核心就是解決和緩解 AI 系統中的<span class="keyword-highlight">偏差
+                            (Bias)</span>。如果訓練資料本身存在偏差（例如，某個性別或種族的資料過多或過少），AI 模型就會學習到這種偏差，並在預測中體現出來，從而對不同群體產生不公平的影響。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到「偏差 (Bias)」，第一個想到的就應該是「公平性 (Fairness)」。</div>
+</div>
+</div>
+<!-- Question 54 -->
+<div class="question-card" data-category="outline-1" id="q-54">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(配對題)"></div>
+<div class="question-body">
+<p>請將左側資料行所列的適當準則，拖曳至右側對應的需求。</p>
+<div class="matching-container">
+<div class="matching-column">
+<h4>準則 (Principle)</h4>
+<ul class="matching-list">
+<li class="matching-item">1. 權責</li>
+<li class="matching-item">2. 公平性</li>
+<li class="matching-item">3. 包容性</li>
+<li class="matching-item">4. 隱私權和安全性</li>
+<li class="matching-item">5. 可靠性與安全性</li>
+<li class="matching-item">6. 透明度</li>
+</ul>
+</div>
+<div class="matching-column">
+<h4>需求 (Requirement)</h4>
+<div class="matching-answer-area"><input id="q54_ans1" maxlength="1" placeholder="?" type="text"/><label for="q54_ans1">必須記錄決策流程，讓相關人員得以確認特定報償的根據。</label></div>
+<div class="matching-answer-area"><input id="q54_ans2" maxlength="1" placeholder="?" type="text"/><label for="q54_ans2">只有決策流程相關人員可以看到客戶的個人資訊。</label></div>
+<div class="matching-answer-area"><input id="q54_ans3" maxlength="1" placeholder="?" type="text"/><label for="q54_ans3">使用螢幕助讀程式或其他輔助技術的使用者必須能存取此系統。</label></div>
+</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-54', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-54">
+<div class="answer"><strong>答案：</strong><br/>
+                        1. <span class="matching-correct-answer">(6. 透明度)</span><br/>
+                        2. <span class="matching-correct-answer">(4. 隱私權和安全性)</span><br/>
+                        3. <span class="matching-correct-answer">(3. 包容性)</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 「記錄決策流程」以便「確認根據」，這是為了讓人們理解系統為何做出某個決策，完全符合<span class="keyword-highlight">透明度</span>的定義。</li>
+<li>2. 「只有相關人員可以看到客戶個人資訊」，這是資料存取控制，是保護使用者隱私的核心措施，屬於<span class="keyword-highlight">隱私權和安全性</span>原則。</li>
+<li>3. 確保使用「螢幕助讀程式」等輔助技術的人也能使用系統，這是為了賦予不同能力的人同等的使用權利，是<span class="keyword-highlight">包容性</span>的典型範例。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>這是對六大原則核心定義的直接考察。透明度→可解釋；隱私→個資保護；包容→人人可用。</div>
+</div>
+</div>
+<!-- Question 55 -->
+<div class="question-card" data-category="outline-4" id="q-55">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>建立錄音的文字記錄是下列何者的範例：</p>
+<ul>
+<li><input id="q55a" name="q55" type="radio"/><label for="q55a">1. 電腦視覺工作負載。</label></li>
+<li><input id="q55b" name="q55" type="radio"/><label for="q55b">2. 知識採礦工作負載。</label></li>
+<li><input checked="" id="q55c" name="q55" type="radio"/><label for="q55c">3. 自然語言處理 (NLP)
+                                工作負載。</label>
+</li>
+<li><input id="q55d" name="q55" type="radio"/><label for="q55d">4. 生成式 AI 工作負載。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-55', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-55">
+<div class="answer"><strong>答案：</strong> 3. 自然語言處理 (NLP) 工作負載。</div>
+<div class="rationale"><strong>解析：</strong>將「錄音」（語音）轉換成「文字記錄」的過程，稱為<span class="keyword-highlight">語音轉換文字 (Speech-to-Text)</span> 或語音辨識。這項技術是<span class="chinese-noun">自然語言處理 (NLP)</span> 領域的一個核心部分，因為它處理的是人類的自然語言（語音形式）。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>記住 NLP 包含處理文字和語音。語音轉文字 (Speech-to-Text) 和文字轉語音
+                        (Text-to-Speech) 都是 NLP 的範疇。</div>
+</div>
+</div>
+<!-- Question 56 -->
+<div class="question-card" data-category="outline-1" id="q-56">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您要建置 AI 系統。該包含哪項工作以協助服務符合 Microsoft 責任 AI 透明度準則？</p>
+<ul>
+<li><input id="q56a" name="q56" type="radio"/><label for="q56a">1. 確定定型資料集具有母體代表性。</label></li>
+<li><input id="q56b" name="q56" type="radio"/><label for="q56b">2. 啟用自動調整功能，以確保服務能根據需求調整。</label>
+</li>
+<li><input checked="" id="q56c" name="q56" type="radio"/><label for="q56c">3.
+                                提供文件以利開發人員偵錯程式碼。</label></li>
+<li><input id="q56d" name="q56" type="radio"/><label for="q56d">4.
+                                確定所有視覺效果都有可供螢幕助讀程式讀取的相關聯文字。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-56', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-56">
+<div class="answer"><strong>答案：</strong> 3. 提供文件以利開發人員偵錯程式碼。</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">透明度 (Transparency)</span>
+                        準則要求 AI 系統的運作是可理解的。提供良好的<span class="keyword-highlight">文件
+                            (Documentation)</span>，解釋系統的設計、功能、限制，以及如何使用和偵錯，是實現透明度的重要手段。<ul>
+<li>1. 資料代表性主要關乎<span class="chinese-noun">公平性</span>。</li>
+<li>2. 自動調整關乎<span class="chinese-noun">可靠性</span>和效能。</li>
+<li>4. 輔助功能關乎<span class="chinese-noun">包容性</span>。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>透明度 = 文件 + 解釋性。記住這兩點。</div>
+</div>
+</div>
+<!-- Question 57 -->
+<div class="question-card" data-category="outline-1" id="q-57">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>下列哪一項敘述是 Microsoft 責任 AI 準則的範例？</p>
+<ul>
+<li><input id="q57a" name="q57" type="radio"/><label for="q57a">1. AI 系統必須只能公開提供的資料。</label></li>
+<li><input id="q57b" name="q57" type="radio"/><label for="q57b">2. AI 系統必須保障公司的利益。</label></li>
+<li><input checked="" id="q57c" name="q57" type="radio"/><label for="q57c">3. AI 系統必須易於理解。</label>
+</li>
+<li><input id="q57d" name="q57" type="radio"/><label for="q57d">4. AI 系統必須將個人詳細資料公開。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-57', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-57">
+<div class="answer"><strong>答案：</strong> 3. AI 系統必須易於理解。</div>
+<div class="rationale"><strong>解析：</strong>「易於理解」直接對應到<span class="keyword-highlight">透明度
+                            (Transparency)</span> 原則。一個負責任的 AI 系統應該讓使用者和開發者能夠理解它為什麼會做出特定的決策。<ul>
+<li>選項1和2非 RAI 原則。</li>
+<li>選項4完全違反了<span class="chinese-noun">隱私權與安全性</span>原則。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>這是對六大原則基本概念的考察，將「易於理解」與「透明度」建立直接連結。</div>
+</div>
+</div>
+<!-- Question 58 -->
+<div class="question-card" data-category="outline-4" id="q-58">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您有一些儲存成文字檔案的保險理賠報表。您需要從報表中擷取關鍵字詞以產生摘要。您應該使用下列哪一種類型的 AI 工作負載？</p>
+<ul>
+<li><input id="q58a" name="q58" type="radio"/><label for="q58a">1. 異常偵測</label></li>
+<li><input id="q58b" name="q58" type="radio"/><label for="q58b">2. 電腦視覺</label></li>
+<li><input id="q58c" name="q58" type="radio"/><label for="q58c">3. 知識採礦</label></li>
+<li><input checked="" id="q58d" name="q58" type="radio"/><label for="q58d">4. 自然語言處理</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-58', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-58">
+<div class="answer"><strong>答案：</strong> 4. 自然語言處理</div>
+<div class="rationale"><strong>解析：</strong>任務是從「文字檔案」中「擷取關鍵字詞」以「產生摘要」。這整個流程——處理文字、找出重點、生成摘要——都是<span class="keyword-highlight">自然語言處理 (NLP)</span>
+                        的核心任務。具體可能用到關鍵片語擷取和摘要功能。知識採礦是一個更廣泛的概念，通常涉及從大量非結構化和結構化資料中大規模地擷取洞見，而 NLP 是實現知識採礦的關鍵技術之一。在本題中，NLP
+                        是更直接和精確的答案。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到「從文字中擷取關鍵字/重點/摘要」，直接聯想到 NLP。</div>
+</div>
+</div>
+<!-- Question 59 -->
+<div class="question-card" data-category="outline-4" id="q-59">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 會回答諸如「我的下一場約會是何時？」等問題的家用智慧型裝置為交談式 AI 的範例。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 公司網站上的互動式網路聊天功能可以使用 Azure Bot Service 實作。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 為預先錄製影片自動產生字幕是交談式 AI 的範例。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-59', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-59">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 是。家用智慧型裝置透過語音進行問答互動，是<span class="keyword-highlight">交談式 AI (Conversational
+                                    AI)</span> 的典型應用。</li>
+<li>2. 是。<span class="chinese-noun">Azure Bot Service</span> 正是為實作這類互動式網路聊天（聊天機器人）而設計的平台。
+                            </li>
+<li>3. 否。自動產生字幕是將語音轉換為文字，這是一個單向的<span class="keyword-highlight">語音辨識</span>任務，缺乏「交談」所需的互動性。交談式 AI 強調的是雙向的、來回的互動。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>交談式 AI 的關鍵字是「互動 (Interaction)」、「對話
+                        (Dialogue)」。單向的轉換不是交談。</div>
+</div>
+</div>
+<!-- Question 60 -->
+<div class="question-card" data-category="outline-2" id="q-60">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 您使用未標記的資料定型迴歸模型。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 分類技術用來預測一段時間後的連續數值。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 依共同特性分組項目為叢集範例。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-60', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-60">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>2. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>3. <span class="yes-no-answer-feedback yes-no-correct">是</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 否。<span class="keyword-highlight">迴歸</span>和分類都屬於<span class="keyword-highlight">監督式學習</span>，需要使用包含「標籤」（已知答案）的資料來進行定型。使用未標記資料的是非監督式學習，如叢集。
+                            </li>
+<li>2. 否。預測「連續數值」的技術是<span class="keyword-highlight">迴歸</span>。<span class="keyword-highlight">分類</span>用來預測離散的類別。</li>
+<li>3. 是。這正是<span class="keyword-highlight">叢集 (Clustering)</span>
+                                的定義，它是一種非監督式學習，旨在根據資料點的相似性將它們自動分組。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>這是對三種基本機器學習類型的核心定義的考察，務必牢記：迴歸→預測數值，分類→預測類別，叢集→自動分群。
+                    </div>
+</div>
+</div>
+<!-- ... continuing ... -->
+<!-- Question 61 -->
+<div class="question-card" data-category="outline-1" id="q-61">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>開發 AI 自動駕駛汽車系統時，應套用哪個 Microsoft 責任 AI 的準則，以確保系統在生命週期內維持一致的作業。</p>
+<ul>
+<li><input id="q61a" name="q61" type="radio"/><label for="q61a">1. 公平性</label></li>
+<li><input checked="" id="q61b" name="q61" type="radio"/><label for="q61b">2. 可靠性與安全性</label></li>
+<li><input id="q61c" name="q61" type="radio"/><label for="q61c">3. 權責性</label></li>
+<li><input id="q61d" name="q61" type="radio"/><label for="q61d">4. 包容性</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-61', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-61">
+<div class="answer"><strong>答案：</strong> 2. 可靠性與安全性</div>
+<div class="rationale"><strong>解析：</strong>對於自動駕駛汽車這種高風險應用，「維持一致的作業」和確保其不會造成傷害是至關重要的。這直接對應到<span class="keyword-highlight">可靠性與安全性 (Reliability and Safety)</span> 原則。該原則要求 AI
+                        系統必須穩健、安全，並且在各種條件下都能如預期般運作。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到高風險場景，如醫療、自動駕駛、金融交易，首先要考慮的就是「可靠性與安全性」。</div>
+</div>
+</div>
+<!-- Question 62 -->
+<div class="question-card" data-category="outline-4" id="q-62">
+<div class="question-meta">描述 Azure 上自然語言處理 (NLP) 工作負載的特點 (25-30%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>可以回答「台積電股票價格是多少？」這種問題的智慧型裝置是哪一種 AI 工作負載的範例？</p>
+<ul>
+<li><input id="q62a" name="q62" type="radio"/><label for="q62a">1. 異常偵測</label></li>
+<li><input checked="" id="q62b" name="q62" type="radio"/><label for="q62b">2. 自然語言處理</label></li>
+<li><input id="q62c" name="q62" type="radio"/><label for="q62c">3. 電腦視覺</label></li>
+<li><input id="q62d" name="q62" type="radio"/><label for="q62d">4. 知識採礦</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-62', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-62">
+<div class="answer"><strong>答案：</strong> 2. 自然語言處理</div>
+<div class="rationale">
+<strong>解析：</strong>智慧型裝置需要先理解使用者用「自然語言」提出的問題（「台積電股票價格是多少？」），然後才能去查找答案。這個「理解問題」的過程就是<span class="keyword-highlight">自然語言處理
+                            (NLP)</span>。具體來說，它會用到語音辨識、實體辨識（識別出「台積電」）和意圖理解（理解使用者想查詢「股票價格」）。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>與人類進行語言（語音或文字）互動的系統，其核心都離不開 NLP。</div>
+</div>
+</div>
+<!-- Question 63 -->
+<div class="question-card" data-category="outline-2" id="q-63">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>下列哪個模型可以用以預測拍賣品售價。</p>
+<ul>
+<li><input id="q63a" name="q63" type="radio"/><label for="q63a">1. 分類</label></li>
+<li><input id="q63b" name="q63" type="radio"/><label for="q63b">2. 叢集</label></li>
+<li><input checked="" id="q63c" name="q63" type="radio"/><label for="q63c">3. 迴歸</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-63', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-63">
+<div class="answer"><strong>答案：</strong> 3. 迴歸</div>
+<div class="rationale"><strong>解析：</strong>「售價」是一個<span class="keyword-highlight">連續的數值</span>。當機器學習模型的目標是預測一個數值時，這個任務就屬於<span class="keyword-highlight">迴歸 (Regression)</span>。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>預測「多少錢？」、「多高？」、「多少度？」等數值 -&gt; 迴歸。</div>
+</div>
+</div>
+<!-- Question 64 -->
+<div class="question-card" data-category="outline-2" id="q-64">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(配對題)"></div>
+<div class="question-body">
+<p>請將工作與適當的機器學習模型配對。</p>
+<div class="matching-container">
+<div class="matching-column">
+<h4>模型 (Model)</h4>
+<ul class="matching-list">
+<li class="matching-item">1. 分類</li>
+<li class="matching-item">2. 迴歸</li>
+<li class="matching-item">3. 叢集</li>
+</ul>
+</div>
+<div class="matching-column">
+<h4>案例 (Scenario)</h4>
+<div class="matching-answer-area"><input id="q64_ans1" maxlength="1" placeholder="?" type="text"/><label for="q64_ans1">根據人口統計資料為乘客指派類別。</label></div>
+<div class="matching-answer-area"><input id="q64_ans2" maxlength="1" placeholder="?" type="text"/><label for="q64_ans2">根據飛行距離預測消耗的燃油量。</label></div>
+<div class="matching-answer-area"><input id="q64_ans3" maxlength="1" placeholder="?" type="text"/><label for="q64_ans3">根據人口統計資料預測乘客是否會錯過他們的航班。</label></div>
+</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-64', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-64">
+<div class="answer"><strong>答案：</strong><br/>
+                        1. <span class="matching-correct-answer">(3. 叢集)</span><br/>
+                        2. <span class="matching-correct-answer">(2. 迴歸)</span><br/>
+                        3. <span class="matching-correct-answer">(1. 分類)</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 「為乘客指派類別」且沒有預先定義的類別，是典型的<span class="keyword-highlight">叢集</span>任務，目標是自動找出乘客中的自然群體。
+                            </li>
+<li>2. 預測「消耗的燃油量」是一個數值，因此是<span class="keyword-highlight">迴歸</span>任務。</li>
+<li>3. 預測「是否會錯過航班」是一個二元（是/否）的結果，因此是<span class="keyword-highlight">分類</span>任務。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>這是對三種基本機器學習模型應用的經典考察。</div>
+</div>
+</div>
+<!-- Question 65 -->
+<div class="question-card" data-category="outline-2" id="q-65">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 若為迴歸模型，標籤必須是數值。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 若為叢集模型，必須提供標籤。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 若為分類模型，標籤必須為數值。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-65', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-65">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 是。迴歸模型的目標就是預測一個數值，所以它的標籤（要預測的目標）必須是數值。</li>
+<li>2. 否。叢集是<span class="keyword-highlight">非監督式學習</span>，它處理的是<span class="keyword-highlight">未標記</span>的資料，模型會自動尋找資料中的結構和分組，不需要預先提供標籤。</li>
+<li>3. 否。分類模型的標籤是<span class="keyword-highlight">類別</span>（可以是文字，如"貓"、"狗"；或用數字代表的類別，如 0,
+                                1），而不是必須為連續的數值。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>監督式學習 (迴歸、分類) 需要標籤；非監督式學習 (叢集) 不需要標籤。</div>
+</div>
+</div>
+<!-- Question 66 -->
+<div class="question-card" data-category="outline-2" id="q-66">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您想預測某國家公園內動物的數量，應該使用下列哪種類型的 Azure 機器學習模型類型？</p>
+<ul>
+<li><input id="q66a" name="q66" type="radio"/><label for="q66a">1. 分類</label></li>
+<li><input checked="" id="q66b" name="q66" type="radio"/><label for="q66b">2. 迴歸</label></li>
+<li><input id="q66c" name="q66" type="radio"/><label for="q66c">3. 叢集</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-66', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-66">
+<div class="answer"><strong>答案：</strong> 2. 迴歸</div>
+<div class="rationale"><strong>解析：</strong>預測「動物的數量」是在預測一個<span class="keyword-highlight">連續的數值</span>。當機器學習的目標是預測一個數字時，這個任務屬於<span class="keyword-highlight">迴歸 (Regression)</span>。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>預測一個「數量」或「數值」（如價格、溫度、數量）-&gt; 迴歸。</div>
+</div>
+</div>
+<!-- Question 67 -->
+<div class="question-card" data-category="outline-2" id="q-67">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您需要預測某個區域的動物族群規模。您應該使用下列哪一種 Azure Machine Learning 類型？</p>
+<ul>
+<li><input id="q67a" name="q67" type="radio"/><label for="q67a">1. 分類</label></li>
+<li><input checked="" id="q67b" name="q67" type="radio"/><label for="q67b">2. 迴歸</label></li>
+<li><input id="q67c" name="q67" type="radio"/><label for="q67c">3. 叢集</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-67', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-67">
+<div class="answer"><strong>答案：</strong> 2. 迴歸</div>
+<div class="rationale"><strong>解析：</strong>與前一題相同，預測「動物族群規模」是在預測一個<span class="keyword-highlight">數值</span>。這種預測數值的任務是<span class="keyword-highlight">迴歸
+                            (Regression)</span>。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>這是迴歸概念的重複考察，加深記憶。</div>
+</div>
+</div>
+<!-- Question 68 -->
+<div class="question-card" data-category="outline-2" id="q-68">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您該使用哪種機器學習類型預測下個月售出的禮品卡數量？</p>
+<ul>
+<li><input id="q68a" name="q68" type="radio"/><label for="q68a">1. 分類</label></li>
+<li><input checked="" id="q68b" name="q68" type="radio"/><label for="q68b">2. 迴歸</label></li>
+<li><input id="q68c" name="q68" type="radio"/><label for="q68c">3. 叢集</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-68', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-68">
+<div class="answer"><strong>答案：</strong> 2. 迴歸</div>
+<div class="rationale"><strong>解析：</strong>預測「售出的禮品卡數量」是在預測一個具體的<span class="keyword-highlight">數值</span>。因此，這是一個<span class="keyword-highlight">迴歸
+                            (Regression)</span> 問題。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>三種基本模型類型的區分是高頻考點，務必掌握。</div>
+</div>
+</div>
+<!-- Question 69 -->
+<div class="question-card" data-category="outline-2" id="q-69">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>您需要使用以下資料集來預測指定客戶的收入範圍，應該將下列哪兩個欄位用作特徵？<br/>[註：此題附有一張表格，包含「名字」、「姓氏」、「年齡」、「教育程度」、「收入範圍」等欄位及範例資料。]
+                    </p>
+<ul>
+<li><input id="q69a" name="q69" type="checkbox"/><label for="q69a">1. 名字</label></li>
+<li><input id="q69b" name="q69" type="checkbox"/><label for="q69b">2. 姓氏</label></li>
+<li><input checked="" id="q69c" name="q69" type="checkbox"/><label for="q69c">3. 教育程度</label></li>
+<li><input id="q69d" name="q69" type="checkbox"/><label for="q69d">4. 收入範圍</label></li>
+<li><input checked="" id="q69e" name="q69" type="checkbox"/><label for="q69e">5. 年齡</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-69', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-69">
+<div class="answer"><strong>答案：</strong> 3, 5</div>
+<div class="rationale"><strong>解析：</strong>在機器學習中，<span class="keyword-highlight">特徵
+                            (Feature)</span> 是用來進行預測的輸入變數。而要預測的目標變數稱為<span class="keyword-highlight">標籤
+                            (Label)</span>。本題要預測的是「收入範圍」，所以「收入範圍」是標籤。而「教育程度」和「年齡」是用來預測收入的有用資訊，因此它們是特徵。名字和姓氏通常是識別碼，不具有預測能力。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>Feature = 輸入/依據；Label = 輸出/目標。</div>
+</div>
+</div>
+<!-- Question 70 -->
+<div class="question-card" data-category="outline-2" id="q-70">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>有一個 Azure 機器學習的定型資料集共有 45,000
+                        筆記錄，該模型可以預測產品的品質。下表為其資料的範例：<br/>[註：此題附有一張表格，包含「日期」、「時間」、「質量(公斤)」、「溫度(C)」、「品質測試」等欄位，其中品質測試的結果為「通過」或「不通過」。]<br/>請根據上面資料回答下列敘述是否正確：
+                    </p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 「質量(公斤)」為特徵。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 「品質測試」為標籤。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 「溫度(C)」為標籤。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-70', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-70">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 「質量」和「溫度」都是用來預測品質的輸入資訊，因此它們是<span class="keyword-highlight">特徵
+                                    (Feature)</span>。所以敘述1正確。</li>
+<li>2. 「品質測試」（通過/不通過）是模型要預測的目標結果，因此它是<span class="keyword-highlight">標籤
+                                    (Label)</span>。所以敘述2正確。</li>
+<li>3. 「溫度」是特徵，不是標籤。一個模型通常只有一個標籤。所以敘述3錯誤。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>這是對特徵和標籤概念的再次考察，非常重要。</div>
+</div>
+</div>
+<!-- Question 71 -->
+<div class="question-card" data-category="outline-2" id="q-71">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您該使用哪種機器學習類型找出有相似購物習慣的人員族群？</p>
+<ul>
+<li><input id="q71a" name="q71" type="radio"/><label for="q71a">1. 分類</label></li>
+<li><input id="q71b" name="q71" type="radio"/><label for="q71b">2. 迴歸</label></li>
+<li><input checked="" id="q71c" name="q71" type="radio"/><label for="q71c">3. 叢集</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-71', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-71">
+<div class="answer"><strong>答案：</strong> 3. 叢集</div>
+<div class="rationale"><strong>解析：</strong>任務是「找出...族群」，也就是將客戶根據「相似的購物習慣」進行<span class="keyword-highlight">分群</span>。這裡沒有預先定義好的類別（如「高價值客戶」、「低價值客戶」），而是讓演算法自動發現資料中的自然群體。這正是<span class="keyword-highlight">叢集 (Clustering)</span> 的定義，它是一種非監督式學習。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到「分群」、「找出相似群體」、「客戶區隔」等，就要想到叢集。</div>
+</div>
+</div>
+<!-- Question 72 -->
+<div class="question-card" data-category="outline-2" id="q-72">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. Azure Machine Learning 設計工具提供拖放視覺效果畫布，以供建置、測試和部署機器學習模型。
+                        </div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. Azure Machine Learning 設計工具可將進度儲存為管線草稿。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. Azure Machine Learning 設計工具可併入自訂的 JavaScript 函式。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-72', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-72">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 是。這正是<span class="chinese-noun">設計工具 (Designer)</span> 的核心定義：一個<span class="keyword-highlight">拖放式的視覺化介面</span>。</li>
+<li>2. 是。您可以隨時將正在進行的管線儲存為草稿，以便稍後繼續編輯。</li>
+<li>3. 否。設計工具允許您透過「執行 Python 指令碼」或「執行 R 指令碼」模組來併入自訂程式碼，但它不支援<span class="keyword-highlight">JavaScript</span>。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>設計工具 = 拖放 + 視覺化 + 管線。支援的自訂程式碼是 Python 和 R。</div>
+</div>
+</div>
+<!-- Question 73 -->
+<div class="question-card" data-category="outline-2" id="q-73">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(配對題)"></div>
+<div class="question-body">
+<p>您計劃使用下面資料集，訓練一個預測房價類別的模型。請問家庭收入和房價類別分別屬於下列何者？<br/>[註：此題附有一張表格，包含「家庭收入」、「郵遞區號」、「房價類別」(低、中、高) 等欄位。]
+                    </p>
+<div class="matching-container">
+<div class="matching-column">
+<h4>項目 (Item)</h4>
+<ul class="matching-list">
+<li class="matching-item">A. 家庭收入</li>
+<li class="matching-item">B. 房價類別</li>
+</ul>
+</div>
+<div class="matching-column">
+<h4>類型 (Type)</h4>
+<div class="matching-answer-area"><input id="q73_ans1" maxlength="1" placeholder="?" type="text"/><label for="q73_ans1">1. 特徵(Feature)</label></div>
+<div class="matching-answer-area"><input id="q73_ans2" maxlength="1" placeholder="?" type="text"/><label for="q73_ans2">2. 標籤(Label)</label></div>
+</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-73', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-73">
+<div class="answer"><strong>答案：</strong><br/>
+                        A. <span class="matching-correct-answer">(1. 特徵)</span><br/>
+                        B. <span class="matching-correct-answer">(2. 標籤)</span></div>
+<div class="rationale"><strong>解析：</strong>模型要「預測房價類別」，因此「房價類別」是要預測的目標，即<span class="keyword-highlight">標籤 (Label)</span>。而「家庭收入」是用來進行預測的輸入資訊，因此是<span class="keyword-highlight">特徵 (Feature)</span>。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>反覆練習區分特徵和標籤，這是機器學習的基礎。</div>
+</div>
+</div>
+<!-- Question 74 -->
+<div class="question-card" data-category="outline-2" id="q-74">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>關於機器學習的過程，你該如何分割資料以供訓練及評估之用？</p>
+<ul>
+<li><input id="q74a" name="q74" type="radio"/><label for="q74a">1. 用特徵進行訓練，標籤則用來進行評估。</label>
+</li>
+<li><input id="q74b" name="q74" type="radio"/><label for="q74b">2. 用標籤進行訓練，特徵則用來進行評估。</label>
+</li>
+<li><input id="q74c" name="q74" type="radio"/><label for="q74c">3. 將資料隨機分割為訓練資料行和評估資料行。</label>
+</li>
+<li><input checked="" id="q74d" name="q74" type="radio"/><label for="q74d">4.
+                                將資料隨機分割為訓練資料列和評估資料列。</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-74', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-74">
+<div class="answer"><strong>答案：</strong> 4. 將資料隨機分割為訓練資料列和評估資料列。</div>
+<div class="rationale"><strong>解析：</strong>正確的資料分割方法是將整個資料集的<span class="keyword-highlight">資料列
+                            (Rows)</span> 進行隨機分割，一部分作為<span class="keyword-highlight">訓練集 (Training
+                            Set)</span>，另一部分作為<span class="keyword-highlight">測試/評估集 (Test/Evaluation Set)</span>。通常的比例是
+                        70/30 或 80/20。每一筆資料列都包含特徵和標籤，訓練時模型從訓練集中學習特徵與標籤的關係，然後在評估集上測試其預測能力。分割資料行是錯誤的，因為這樣會破壞特徵和標籤之間的對應關係。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>資料分割是按「列」分的，不是按「行」分的。</div>
+</div>
+</div>
+<!-- Question 75 -->
+<div class="question-card" data-category="outline-2" id="q-75">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>您使用 Azure Machine Learning 設計工具發佈推斷管線。您應該使用下列哪兩個參數來存取 Web 服務？</p>
+<ul>
+<li><input id="q75a" name="q75" type="checkbox"/><label for="q75a">1. 模型名稱</label></li>
+<li><input checked="" id="q75b" name="q75" type="checkbox"/><label for="q75b">2. REST 端點</label>
+</li>
+<li><input checked="" id="q75c" name="q75" type="checkbox"/><label for="q75c">3. 驗證金鑰</label></li>
+<li><input id="q75d" name="q75" type="checkbox"/><label for="q75d">4. 定型端點</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-75', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-75">
+<div class="answer"><strong>答案：</strong> 2, 3</div>
+<div class="rationale"><strong>解析：</strong>當您將一個模型部署為 Web 服務後，外部應用程式需要兩個關鍵資訊來呼叫它：<ul>
+<li><span class="keyword-highlight">REST 端點 (REST Endpoint)</span>：這是 Web 服務的唯一 URL 位址。</li>
+<li><span class="keyword-highlight">驗證金鑰 (Authentication
+                                    Key)</span>：這是一個秘密金鑰，用於驗證呼叫者的身份，確保只有授權的應用程式可以使用該服務。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>呼叫已部署的 Web 服務 = 端點 (地址) + 金鑰 (鑰匙)。</div>
+</div>
+</div>
+<!-- Question 76 -->
+<div class="question-card" data-category="outline-2" id="q-76">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>應該如何使用 Azure Machine Learning 的設計工具建立叢集模型並評估該模型？</p>
+<ul>
+<li><input id="q76a" name="q76" type="radio"/><label for="q76a">1.
+                                將原始資料集分割成特徵和標籤資料集，使用特徵資料集進行評估。</label></li>
+<li><input checked="" id="q76b" name="q76" type="radio"/><label for="q76b">2.
+                                將原始資料集分割成定型和測試資料集，使用測試資料集進行評估。</label></li>
+<li><input id="q76c" name="q76" type="radio"/><label for="q76c">3.
+                                將原始資料集分割成定型和測試資料集，使用定型資料集進行評估。</label></li>
+<li><input id="q76d" name="q76" type="radio"/><label for="q76d">4. 使用原始資料集進行定型和評估。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-76', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-76">
+<div class="answer"><strong>答案：</strong> 2. 將原始資料集分割成定型和測試資料集，使用測試資料集進行評估。</div>
+<div class="rationale"><strong>解析：</strong>在 Azure Machine Learning 設計工具中，即使是<span class="keyword-highlight">叢集 (Clustering)</span> 模型，也建議將資料集分割為<span class="keyword-highlight">定型資料集 (Training Set)</span> 和<span class="keyword-highlight">測試資料集
+                            (Test
+                            Set)</span>。這樣做可以評估模型在未見過的資料上的表現，避免過度擬合。雖然叢集是非監督式學習，但使用測試集進行評估仍然可以幫助我們了解模型的分群效果是否具有一般性。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>在 Azure ML 設計工具中，無論是監督式還是非監督式學習，都建議使用訓練/測試集分割來評估模型。
+                    </div>
+</div>
+</div>
+<!-- Question 77 -->
+<div class="question-card" data-category="outline-2" id="q-77">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 自動化機器學習讓您能夠將自訂 Python 程式碼包含在訓練管線中。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 自動化機器學習實作機器學習解決方案無需程式設計經驗。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 自動化機器學習使您能夠在互動式畫布中以視覺方式連接資料集和模組。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-77', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-77">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 否。<span class="keyword-highlight">自動化 ML (Automated ML)</span>
+                                的目的是自動化整個流程，不允許使用者插入自訂的訓練程式碼。需要自訂程式碼應使用 Notebooks 或 SDK。</li>
+<li>2. 是。自動化 ML 的主要優勢之一就是讓沒有深厚程式設計或機器學習背景的使用者也能夠訓練出高效能的模型。</li>
+<li>3. 否。「在互動式畫布中以視覺方式連接資料集和模組」是 <span class="chinese-noun">Azure Machine Learning 設計工具
+                                    (Designer)</span> 的描述，不是自動化 ML。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>區分 AutoML 和 Designer：AutoML = 自動化，點幾下就好；Designer =
+                        拖放，自己組裝管線。</div>
+</div>
+</div>
+<!-- Question 78 -->
+<div class="question-card" data-category="outline-2" id="q-78">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>使用上次的消費日期、消費頻率、消費金額 (RFM) 值，來識別客群中的客層，為下列何種機器學習模型的範例？</p>
+<ul>
+<li><input id="q78a" name="q78" type="radio"/><label for="q78a">1. 分類</label></li>
+<li><input id="q78b" name="q78" type="radio"/><label for="q78b">2. 迴歸</label></li>
+<li><input checked="" id="q78c" name="q78" type="radio"/><label for="q78c">3. 叢集</label></li>
+<li><input id="q78d" name="q78" type="radio"/><label for="q78d">4. 正規化</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-78', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-78">
+<div class="answer"><strong>答案：</strong> 3. 叢集</div>
+<div class="rationale"><strong>解析：</strong>RFM 分析的目的是「識別客群中的客層」，也就是將客戶<span class="keyword-highlight">分群</span>。這是一個典型的<span class="keyword-highlight">叢集
+                            (Clustering)</span> 應用，模型會根據 RFM 這三個特徵的相似性將客戶自動分為不同的群組（如高價值客戶、潛在流失客戶等）。正規化是資料前處理的步驟，不是一種模型。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>RFM 分析是叢集的一個經典商業應用案例。</div>
+</div>
+</div>
+<!-- Question 79 -->
+<div class="question-card" data-category="outline-2" id="q-79">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您有一個資料集，其中包含指定時間內發生的計程車行程訊息，如下列選項所示。您需要訓練一個模型來預測計程車行程的費用，應該用什麼選項作為特徵？</p>
+<ul>
+<li><input id="q79a" name="q79" type="radio"/><label for="q79a">1. 各計程車行程的車資</label></li>
+<li><input checked="" id="q79b" name="q79" type="radio"/><label for="q79b">2. 各計程車行程的單程距離</label>
+</li>
+<li><input id="q79c" name="q79" type="radio"/><label for="q79c">3. 資料集中的計程車行程數</label></li>
+<li><input id="q79d" name="q79" type="radio"/><label for="q79d">4. 各計程車行程的單程 ID</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-79', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-79">
+<div class="answer"><strong>答案：</strong> 2. 各計程車行程的單程距離</div>
+<div class="rationale"><strong>解析：</strong>模型要預測的是「行程的費用」，所以「費用」是標籤
+                        (Label)。而「單程距離」是影響費用的重要因素，因此是絕佳的<span class="keyword-highlight">特徵 (Feature)</span>。行程 ID
+                        是唯一識別碼，沒有預測價值。行程總數是整個資料集的統計值，不是單筆資料的特徵。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>再次練習找出哪個是輸入(特徵)，哪個是輸出(標籤)。</div>
+</div>
+</div>
+<!-- Question 80 -->
+<div class="question-card" data-category="outline-2" id="q-80">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 根據不同使用量來統計資料分組文件為叢集範例。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 根據症狀和診斷測試結果分組相似病患為叢集範例。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 根據花粉計數預測某人會罹患輕度、中度還是嚴重的過敏症狀為叢集範例。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-80', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-80">
+<div class="answer"><strong>答案：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 是。「分組文件」是典型的<span class="keyword-highlight">叢集</span>應用，例如將新聞文章自動分為體育、政治、娛樂等群組。</li>
+<li>2. 是。「分組相似病患」也是叢集應用，可以在醫療上幫助發現具有相似特徵的病患群體。</li>
+<li>3. 否。預測「輕度、中度、嚴重」這三個預先定義好的類別，是一個<span class="keyword-highlight">分類
+                                    (Classification)</span> 問題，不是叢集。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>沒有預設標籤，自動分群 -&gt; 叢集。有預設標籤，預測屬於哪個 -&gt; 分類。</div>
+</div>
+</div>
+<!-- Question 81 -->
+<div class="question-card" data-category="outline-2" id="q-81">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您必須利用現有的資料集建立訓練資料集和驗證資料集。您應該使用 Azure Machine Learning 設計工具的哪些模組？</p>
+<ul>
+<li><input id="q81a" name="q81" type="radio"/><label for="q81a">1. 選取資料集中的資料行</label></li>
+<li><input id="q81b" name="q81" type="radio"/><label for="q81b">2. 合併資料</label></li>
+<li><input checked="" id="q81c" name="q81" type="radio"/><label for="q81c">3. 分割資料</label></li>
+<li><input id="q81d" name="q81" type="radio"/><label for="q81d">4. 新增資料列</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-81', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-81">
+<div class="answer"><strong>答案：</strong> 3. 分割資料</div>
+<div class="rationale"><strong>解析：</strong>在 Azure ML 設計工具中，用於將單一資料集分割成訓練集和驗證（或測試）集的標準模組是<span class="keyword-highlight">分割資料 (Split Data)</span> 模組。您可以設定分割的比例，例如 70% 的資料列用於訓練，30%
+                        的資料列用於驗證。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>建立訓練集/測試集 = 分割資料 (Split Data) 模組。</div>
+</div>
+</div>
+<!-- Question 82 -->
+<div class="question-card" data-category="outline-2" id="q-82">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>在 Azure Machine Learning 設計工具中，您可以使用下列何者，以探索潛在特徵資料行中值的分佈。</p>
+<ul>
+<li><input id="q82a" name="q82" type="radio"/><label for="q82a">1. Normalize Data (正常化資料)
+                                模組</label></li>
+<li><input id="q82b" name="q82" type="radio"/><label for="q82b">2. Select Columns in Dataset
+                                (選取資料集中的資料行) 模組</label></li>
+<li><input checked="" id="q82c" name="q82" type="radio"/><label for="q82c">3. 資料集輸出視覺化特徵</label>
+</li>
+<li><input id="q82d" name="q82" type="radio"/><label for="q82d">4. 評估結果視覺化特徵</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-82', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-82">
+<div class="answer"><strong>答案：</strong> 3. 資料集輸出視覺化特徵</div>
+<div class="rationale"><strong>解析：</strong>在設計工具中，您可以右鍵點擊任何資料集模組的輸出點，然後選擇<span class="keyword-highlight">視覺化
+                            (Visualize)</span>。這會打開一個視窗，您可以在其中選取任何資料行，並查看其統計摘要（如平均值、中位數）和分佈直方圖。這是進行探索式資料分析 (EDA) 的主要方式。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>想要「看」資料長什麼樣子（統計、圖表），就在模組輸出點上按「視覺化」。</div>
+</div>
+</div>
+<!-- Question 83 -->
+<div class="question-card" data-category="outline-2" id="q-83">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(排序題)"></div>
+<div class="question-body">
+<p>您想要使用 Azure Machine Learning 設計工具部署 Azure Machine Learning 模型。您應該依序執行下列哪四項動作？(請將適當的動作按照正確順序排列。)
+                    </p>
+<ul>
+<li><label>1. 內嵌及準備資料集。</label></li>
+<li><label>2. 對驗證資料集評估模型。</label></li>
+<li><label>3. 對原始資料集評估模型。</label></li>
+<li><label>4. 定型模型。</label></li>
+<li><label>5. 將資料隨機分割為訓練資料與驗證資料。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-83', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-83">
+<div class="answer"><strong>答案順序：</strong> 1, 5, 4, 2</div>
+<div class="rationale"><strong>解析：</strong>標準的監督式學習流程如下：
+                        <ol>
+<li><b>(1) 內嵌及準備資料集</b>：這是第一步，載入並清理資料。</li>
+<li><b>(5) 將資料隨機分割為訓練資料與驗證資料</b>：準備好資料後，將其分割。</li>
+<li><b>(4) 定型模型</b>：使用訓練資料集來訓練演算法。</li>
+<li><b>(2) 對驗證資料集評估模型</b>：使用從未見過的驗證資料集來評估模型的效能。</li>
+</ol>
+                        選項3是錯誤的，不應該用整個原始資料集來評估。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>記住標準流程：準備資料 -&gt; 分割資料 -&gt; 訓練模型 -&gt; 評估模型。</div>
+</div>
+</div>
+<!-- Question 84 -->
+<div class="question-card" data-category="outline-2" id="q-84">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>針對下列何者，您可使用資料集的其中一部分來準備機器學習模型並保持資料集平衡，以驗證結果。</p>
+<ul>
+<li><input id="q84a" name="q84" type="radio"/><label for="q84a">1. 時間限制</label></li>
+<li><input id="q84b" name="q84" type="radio"/><label for="q84b">2. 特徵工程</label></li>
+<li><input id="q84c" name="q84" type="radio"/><label for="q84c">3. MLflow 模型</label></li>
+<li><input checked="" id="q84d" name="q84" type="radio"/><label for="q84d">4. 模型定型</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-84', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-84">
+<div class="answer"><strong>答案：</strong> 4. 模型定型</div>
+<div class="rationale">
+<strong>解析：</strong>題目描述了機器學習的核心過程：使用「資料集的一部分」（即訓練集）來「準備機器學習模型」（即訓練）。這個過程的正式名稱就是<span class="keyword-highlight">模型定型 (Model Training)</span>。而用另一部分資料來「驗證結果」則是模型評估。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>用資料教電腦學東西的過程，就叫「定型」或「訓練」。</div>
+</div>
+</div>
+<!-- Question 85 -->
+<div class="question-card" data-category="outline-2" id="q-85">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>建置迴歸模型時，標籤的資料類型必須是？</p>
+<ul>
+<li><input id="q85a" name="q85" type="radio"/><label for="q85a">1. 布林值</label></li>
+<li><input id="q85b" name="q85" type="radio"/><label for="q85b">2. 日期時間</label></li>
+<li><input checked="" id="q85c" name="q85" type="radio"/><label for="q85c">3. 數值</label></li>
+<li><input id="q85d" name="q85" type="radio"/><label for="q85d">4. 文字</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-85', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-85">
+<div class="answer"><strong>答案：</strong> 3. 數值</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">迴歸 (Regression)</span>
+                        模型的定義就是預測一個<span class="keyword-highlight">連續的數值</span>。因此，它的標籤（要預測的目標）必須是數值類型（如整數或浮點數）。布林值或文字是分類問題的標籤。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>迴歸 -&gt; 數值標籤；分類 -&gt; 類別標籤。</div>
+</div>
+</div>
+<!-- Question 86 -->
+<div class="question-card" data-category="outline-2" id="q-86">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>評估模型效能時，下列何者使用 0 和 1 值的網格顯示預測和實際的正負值。</p>
+<ul>
+<li><input id="q86a" name="q86" type="radio"/><label for="q86a">1. AUC 計量</label></li>
+<li><input checked="" id="q86b" name="q86" type="radio"/><label for="q86b">2. 混淆矩陣</label></li>
+<li><input id="q86c" name="q86" type="radio"/><label for="q86c">3. ROC 曲線</label></li>
+<li><input id="q86d" name="q86" type="radio"/><label for="q86d">4. 閾值</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-86', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-86">
+<div class="answer"><strong>答案：</strong> 2. 混淆矩陣</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">混淆矩陣 (Confusion
+                            Matrix)</span> 是評估<span class="keyword-highlight">分類</span>模型效能的標準工具。它是一個網格（矩陣），顯示了模型的預測值（正/負）與實際值（正/負）之間的對應關係，包含四個象限：真陽性(TP)、假陽性(FP)、真陰性(TN)、假陰性(FN)。ROC
+                        曲線和 AUC 是基於混淆矩陣計算出來的指標。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>顯示 TP/FP/TN/FN 的 2x2 表格 -&gt; 混淆矩陣。</div>
+</div>
+</div>
+<!-- Question 87 -->
+<div class="question-card" data-category="outline-2" id="q-87">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>資料集包含右圖資料行：<br/>[註：此題附有一張表格，顯示 ColumnA 到 ColumnE 皆為數值或整數類型。]<br/>您有一個根據其他數值資料行預測 ColumnE
+                        值的機器學習模型。請問是下列哪一種模型？</p>
+<ul>
+<li><input checked="" id="q87a" name="q87" type="radio"/><label for="q87a">1. 迴歸</label></li>
+<li><input id="q87b" name="q87" type="radio"/><label for="q87b">2. 分析</label></li>
+<li><input id="q87c" name="q87" type="radio"/><label for="q87c">3. 叢集</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-87', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-87">
+<div class="answer"><strong>答案：</strong> 1. 迴歸</div>
+<div class="rationale"><strong>解析：</strong>題目指出要預測的目標 ColumnE 是一個<span class="keyword-highlight">數值</span>。根據其他數值資料行來預測一個數值目標，這是<span class="keyword-highlight">迴歸
+                            (Regression)</span> 模型的標準定義。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>輸入是數字，輸出也是數字 -&gt; 迴歸。</div>
+</div>
+</div>
+<!-- Question 88 -->
+<div class="question-card" data-category="outline-2" id="q-88">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>下列何者會針對指定的計算目標執行工作，並且為實驗和工作流程進行系統化追蹤？</p>
+<ul>
+<li><input id="q88a" name="q88" type="radio"/><label for="q88a">1. 元件</label></li>
+<li><input id="q88b" name="q88" type="radio"/><label for="q88b">2. 資料集</label></li>
+<li><input id="q88c" name="q88" type="radio"/><label for="q88c">3. 管線</label></li>
+<li><input checked="" id="q88d" name="q88" type="radio"/><label for="q88d">4. Azure Machine Learning
+                                作業</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-88', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-88">
+<div class="answer"><strong>答案：</strong> 4. Azure Machine Learning 作業</div>
+<div class="rationale"><strong>解析：</strong>在 Azure Machine Learning v2 的概念中，<span class="keyword-highlight">作業 (Job)</span>
+                        是指在指定的計算目標上執行單一訓練工作的執行個體。它可以是一個指令碼的單次執行，或是整個管線的執行。作業會被系統化地追蹤，記錄其輸入、輸出、記錄檔和計量，這正是題目所描述的「系統化追蹤」。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>在 Azure ML v2 中，「作業 (Job)」是執行和追蹤訓練的基本單位。</div>
+</div>
+</div>
+<!-- Question 89 -->
+<div class="question-card" data-category="outline-2" id="q-89">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>Azure Machine Learning 設計工具可讓您建立機器學習模型，藉由：</p>
+<ul>
+<li><input checked="" id="q89a" name="q89" type="radio"/><label for="q89a">1.
+                                在視覺效果畫布上新增與連結模組</label></li>
+<li><input id="q89b" name="q89" type="radio"/><label for="q89b">2. 自動執行一般資料準備工作</label></li>
+<li><input id="q89c" name="q89" type="radio"/><label for="q89c">3. 自動選取演算法以建置最精確的模型</label></li>
+<li><input id="q89d" name="q89" type="radio"/><label for="q89d">4. 使用 Code First 筆記本體驗</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-89', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-89">
+<div class="answer"><strong>答案：</strong> 1. 在視覺效果畫布上新增與連結模組</div>
+<div class="rationale"><strong>解析：</strong>這正是 <span class="chinese-noun">Azure Machine Learning
+                            設計工具 (Designer)</span> 的核心定義。它提供一個<span class="keyword-highlight">視覺化畫布</span>，使用者可以透過<span class="keyword-highlight">拖放和連結模組</span>的方式來建構機器學習管線。選項 2 和 3 是自動化 ML (AutoML) 的特性。選項 4 是指使用
+                        Notebooks。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>設計工具 = 拖放 + 連結模組 + 畫布。</div>
+</div>
+</div>
+<!-- Question 90 -->
+<div class="question-card" data-category="outline-2" id="q-90">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您使用自動化機器學習使用者介面 (UI) 建置機器學習模型。您必須確保此模型符合 Microsoft 責任 AI 的透明度準則。試問您應該如何做？</p>
+<ul>
+<li><input id="q90a" name="q90" type="radio"/><label for="q90a">1. 將並行反覆運算上限設為 [0]。</label></li>
+<li><input checked="" id="q90b" name="q90" type="radio"/><label for="q90b">2. 啟用最佳解釋模型。</label></li>
+<li><input id="q90c" name="q90" type="radio"/><label for="q90c">3. 將驗證類型設為 [自動]。</label></li>
+<li><input id="q90d" name="q90" type="radio"/><label for="q90d">4. 將主要計量設為 [精確度]。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-90', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-90">
+<div class="answer"><strong>答案：</strong> 2. 啟用最佳解釋模型。</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">透明度 (Transparency)</span>
+                        原則的一個關鍵實踐是<span class="keyword-highlight">可解釋性 (Explainability)</span>。在自動化 ML
+                        的設定中，您可以勾選「啟用最佳解釋模型 (Enable explain best model)」選項。當 AutoML
+                        作業完成後，它會為效能最佳的模型產生一個解釋儀表板，顯示哪些特徵對預測的影響最大，從而提高模型的透明度。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>透明度 -&gt; 解釋性。在 AutoML 中，這對應到「解釋模型」這個選項。</div>
+</div>
+</div>
+<!-- ... and so on up to question 100 -->
+<!-- Question 91 -->
+<div class="question-card" data-category="outline-2" id="q-91">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>請問您應該採取什麼措施以減少機器學習分類模型所產生的誤判為真之數目？</p>
+<ul>
+<li><input id="q91a" name="q91" type="radio"/><label for="q91a">1. 增加定型反覆運算的數目。</label></li>
+<li><input id="q91b" name="q91" type="radio"/><label for="q91b">2. 修改有利於錯誤否定的閾值。</label>
+</li>
+<li><input checked="" id="q91c" name="q91" type="radio"/><label for="q91c">3. 修改有利於誤判為真的閾值。</label>
+</li>
+<li><input id="q91d" name="q91" type="radio"/><label for="q91d">4. 在定型資料中納入測試資料。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-91', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-91">
+<div class="answer"><strong>答案：</strong> 3. 修改有利於誤判為真的閾值。</div>
+<div class="rationale"><strong>解析：</strong>在分類模型中，<span class="keyword-highlight">誤判為真 (False
+                            Positive)</span> 是指模型將負例錯誤地預測為正例。模型的預測通常基於一個機率分數和一個<span class="keyword-highlight">閾值
+                            (Threshold)</span>。要減少誤判為真，我們需要變得「更嚴格」，也就是<span class="keyword-highlight">提高閾值</span>。例如，將原本
+                        0.5 的閾值提高到 0.8，這樣只有機率非常高的樣本才會被預測為正例，從而減少了誤判為真的數量（但可能會增加漏判，即偽陰性）。因此，正確的做法是「修改有利於誤判為真的閾值」。
+                    </div>
+<div class="exam-tip">
+<strong>考試小技巧：</strong>想減少誤判（把不是的當成是的），就要把標準提高（提高閾值）。想減少漏判（把是的當成不是的），就要把標準放寬（降低閾值）。
+                    </div>
+</div>
+</div>
+<!-- Question 92 -->
+<div class="question-card" data-category="outline-2" id="q-92">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您想要使用 Azure Machine Learning 工作室與自動化機器學習 (自動化 ML)，建置一個模型並加以訓練？您應先建立下列哪一項？</p>
+<ul>
+<li><input id="q92a" name="q92" type="radio"/><label for="q92a">1. Jupyter Notebook</label></li>
+<li><input id="q92b" name="q92" type="radio"/><label for="q92b">2. 已註冊的資料集</label></li>
+<li><input checked="" id="q92c" name="q92" type="radio"/><label for="q92c">3. Machine Learning
+                                工作區</label>
+</li>
+<li><input id="q92d" name="q92" type="radio"/><label for="q92d">4. Machine Learning
+                                設計工具管線</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-92', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-92">
+<div class="answer"><strong>答案：</strong> 3. Machine Learning 工作區</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">Azure Machine Learning
+                            工作區</span>是 Azure 上進行所有機器學習活動的<span class="keyword-highlight">頂層資源和基礎容器</span>。無論您是想使用自動化
+                        ML、設計工具、Notebooks 或是 SDK，都必須先建立一個工作區。工作區會集中管理您所有的資產，如資料集、計算資源、模型、實驗等。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>在 Azure ML 中，一切始於工作區 (Workspace)。它是所有 ML 活動的家。</div>
+</div>
+</div>
+<!-- Question 93 -->
+<div class="question-card" data-category="outline-3" id="q-93">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您要籌辦一場慈善活動，其內容包含在 Twitter 上發佈人們帶著墨鏡的相片。您需要確保只轉推符合下列要求的相片：包含一或多張臉部、包含至少一名戴著墨鏡的人。您應該使用下列何者來分析影像？
+                    </p>
+<ul>
+<li><input id="q93a" name="q93" type="radio"/><label for="q93a">1. Azure AI 電腦視覺服務中的 [描述影像]
+                                作業</label></li>
+<li><input checked="" id="q93b" name="q93" type="radio"/><label for="q93b">2. 臉部服務中的 [偵測] 作業</label>
+</li>
+<li><input id="q93c" name="q93" type="radio"/><label for="q93c">3. Azure AI 電腦視覺服務中的 [分析影像]
+                                作業</label></li>
+<li><input id="q93d" name="q93" type="radio"/><label for="q93d">4. 臉部服務中的 [驗證] 作業</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-93', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-93">
+<div class="answer"><strong>答案：</strong> 2. 臉部服務中的 [偵測] 作業</div>
+<div class="rationale"><strong>解析：</strong>本題的需求是「偵測臉部」以及臉部的「屬性」（是否戴墨鏡）。<span class="chinese-noun">Azure AI 臉部服務</span>的<span class="keyword-highlight">偵測
+                            (Detect)</span>作業正是專門用於這個目的。它不僅可以定位影像中的臉部，還能回傳多種臉部屬性，包括是否戴眼鏡（如太陽眼鏡）、情緒、年齡、頭部姿勢等。雖然 Azure AI
+                        電腦視覺服務的 [分析影像] 作業也能偵測臉部，但臉部服務能提供更詳細且專業的臉部屬性資訊，特別適合本題需求。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>當題目強調「臉部」及其「屬性」（如是否戴眼鏡、情緒、年齡等）時，首選 <span class="chinese-noun">臉部服務</span> 的 [偵測] 作業。</div>
+</div>
+</div>
+<!-- Question 94 -->
+<div class="question-card" data-category="outline-2" id="q-94">
+<div class="question-meta">描述 Azure 上機器學習的基本原則 (30-35%)</div>
+<div class="question-title" data-original-title="(配對題)"></div>
+<div class="question-body">
+<p>您需要使用 Azure 機器學習設計工具建置一個能預測單車價格的模型。請問圖 A、B、C 中應該使用哪種模組類型來完成此模型？<br/>[註：此題附有一張流程圖，A 指向資料集，B
+                        在分割資料之後，C 在訓練模型之後。]</p>
+<div class="matching-container">
+<div class="matching-column">
+<h4>模組 (Module)</h4>
+<ul class="matching-list">
+<li>1. 轉換為 CSV</li>
+<li>2. K 均值叢集</li>
+<li>3. 線性迴歸</li>
+<li>4. 選取資料集中的資料行</li>
+<li>5. 分割資料</li>
+<li>6. 評分模型</li>
+</ul>
+</div>
+<div class="matching-column">
+<h4>位置 (Location)</h4>
+<div class="matching-answer-area"><input id="q94_ans1" maxlength="1" placeholder="?" type="text"/><label for="q94_ans1">A (指向資料集)</label></div>
+<div class="matching-answer-area"><input id="q94_ans2" maxlength="1" placeholder="?" type="text"/><label for="q94_ans2">B (在分割資料之後)</label></div>
+<div class="matching-answer-area"><input id="q94_ans3" maxlength="1" placeholder="?" type="text"/><label for="q94_ans3">C (在訓練模型之後)</label></div>
+</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-94', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-94">
+<div class="answer"><strong>答案：</strong><br/>
+                        A. <span class="matching-correct-answer">(4. 選取資料集中的資料行)</span><br/>
+                        B. <span class="matching-correct-answer">(3. 線性迴歸)</span><br/>
+                        C. <span class="matching-correct-answer">(6. 評分模型)</span><br/>
+<strong>(注意：原始答案 B-5, C-6 有誤，已根據標準流程修正)</strong>
+</div>
+<div class="rationale"><strong>解析：</strong>一個標準的 Azure ML 設計工具迴歸模型流程如下：
+                        <ol>
+<li>載入資料集。</li>
+<li><b>A: 選取資料集中的資料行</b>：選擇用於訓練的特徵和標籤，去除不必要的欄位。</li>
+<li>分割資料 (Split Data)：將資料分成訓練集和測試集。</li>
+<li><b>B: 線性迴歸 (或其他迴歸演算法)</b>：選擇要使用的學習演算法。</li>
+<li>訓練模型 (Train Model)：將演算法和訓練集連接起來進行訓練。</li>
+<li><b>C: 評分模型 (Score Model)</b>：使用訓練好的模型對測試集進行預測。</li>
+<li>評估模型 (Evaluate Model)：比較預測結果和真實標籤，評估模型效能。</li>
+</ol>
+                        原始答案 B-5 (分割資料) 有誤，因為圖中 B 的位置是在分割資料之後。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>務必記住 Azure ML 設計工具的標準流程：資料準備 -&gt; 分割 -&gt; 選演算法 -&gt; 訓練 -&gt; 評分
+                        -&gt; 評估。</div>
+</div>
+</div>
+<!-- Question 95 -->
+<div class="question-card" data-category="outline-1" id="q-95">
+<div class="question-meta">描述人工智慧工作負載和考量 (20-25%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您使用自動化機器學習使用者介面 (UI) 建置機器學習模型。您必須確保此模型符合 Microsoft 責任 AI 的透明度準則。試問您應該如何做？</p>
+<ul>
+<li><input checked="" id="q95a" name="q95" type="radio"/><label for="q95a">1. 解釋模型。</label></li>
+<li><input id="q95b" name="q95" type="radio"/><label for="q95b">2. 註冊模型。</label></li>
+<li><input id="q95c" name="q95" type="radio"/><label for="q95c">3. 佈建推斷叢集。</label></li>
+<li><input id="q95d" name="q95" type="radio"/><label for="q95d">4. 註冊訓練資料。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-95', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-95">
+<div class="answer"><strong>答案：</strong> 1. 解釋模型。</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">透明度 (Transparency)</span>
+                        的一個核心是<span class="keyword-highlight">可解釋性 (Explainability)</span>，即理解模型為何做出特定預測。在自動化 ML
+                        中，您可以啟用「解釋最佳模型」的選項。這會產生一個儀表板，顯示特徵的重要性等資訊，幫助您了解模型的內部運作方式，從而符合透明度準則。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>透明度 = 可解釋性。在 AutoML 中，這對應到「解釋模型」或「特徵重要性」的功能。</div>
+</div>
+</div>
+<!-- Question 96 -->
+<div class="question-card" data-category="outline-3" id="q-96">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您需要為社交媒體建置影像標記解決方案，以便自動標記朋友的影像。您應該使用哪一個 Azure AI 服務？</p>
+<ul>
+<li><input checked="" id="q96a" name="q96" type="radio"/><label for="q96a">1. 臉部</label></li>
+<li><input id="q96b" name="q96" type="radio"/><label for="q96b">2. Azure AI 文件智慧服務</label></li>
+<li><input id="q96c" name="q96" type="radio"/><label for="q96c">3. Azure AI 電腦視覺</label></li>
+<li><input id="q96d" name="q96" type="radio"/><label for="q96d">4. Azure AI 語言</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-96', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-96">
+<div class="answer"><strong>答案：</strong> 1. 臉部</div>
+<div class="rationale"><strong>解析：</strong>「自動標記朋友」的任務，其核心是<span class="keyword-highlight">識別
+                            (Identify)</span> 影像中的臉部是誰。這是一個典型的 1:N (一對多) 比對，將影像中的臉部與一個已註冊的人員群組進行比對。這項功能由專門的 <span class="chinese-noun">Azure AI 臉部</span>服務提供。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>需要辨識「這個人是誰？」時，使用臉部服務的「識別」功能。</div>
+</div>
+</div>
+<!-- Question 97 -->
+<div class="question-card" data-category="outline-3" id="q-97">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>下列何者用於在一個影像中識別多種項目。</p>
+<ul>
+<li><input id="q97a" name="q97" type="radio"/><label for="q97a">1. 影像分類</label></li>
+<li><input id="q97b" name="q97" type="radio"/><label for="q97b">2. 影像描述</label></li>
+<li><input checked="" id="q97c" name="q97" type="radio"/><label for="q97c">3. 物件偵測</label></li>
+<li><input id="q97d" name="q97" type="radio"/><label for="q97d">4. 光學字元辨識 (OCR)</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-97', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-97">
+<div class="answer"><strong>答案：</strong> 3. 物件偵測</div>
+<div class="rationale"><strong>解析：</strong><span class="keyword-highlight">物件偵測 (Object
+                            Detection)</span> 的任務不僅是識別影像中有哪些物件，還要找出它們在影像中的<span class="keyword-highlight">位置</span>（通常用邊界方塊表示）。因此，它可以在一張影像中同時識別出「多個」不同或相同的項目，並標出它們各自的位置。影像分類只會給整個影像一個標籤。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>分類 = 這張圖「是」什麼？ 物件偵測 = 這張圖裡「有」什麼，以及它們「在哪裡」？</div>
+</div>
+</div>
+<!-- Question 98 -->
+<div class="question-card" data-category="outline-3" id="q-98">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>下列何者可用於讀取輸送帶上的產品標籤。</p>
+<ul>
+<li><input id="q98a" name="q98" type="radio"/><label for="q98a">1. 影像分類</label></li>
+<li><input id="q98b" name="q98" type="radio"/><label for="q98b">2. 影像處理</label></li>
+<li><input id="q98c" name="q98" type="radio"/><label for="q98c">3. 物件偵測</label></li>
+<li><input checked="" id="q98d" name="q98" type="radio"/><label for="q98d">4. 光學字元辨識 (OCR)</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-98', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-98">
+<div class="answer"><strong>答案：</strong> 4. 光學字元辨識 (OCR)</div>
+<div class="rationale"><strong>解析：</strong>任務的核心是「讀取」產品「標籤」上的文字。從影像中讀取文字資訊，正是<span class="keyword-highlight">光學字元辨識 (Optical Character Recognition, OCR)</span> 的功能。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到「讀取文字」、「擷取文字」、「抄寫文字」從圖片或文件中，就是 OCR。</div>
+</div>
+</div>
+<!-- Question 99 -->
+<div class="question-card" data-category="outline-3" id="q-99">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>下列何項服務的功能可從手寫文件中擷取文字？</p>
+<ul>
+<li><input id="q99a" name="q99" type="radio"/><label for="q99a">1. 臉部辨識</label></li>
+<li><input id="q99b" name="q99" type="radio"/><label for="q99b">2. 物件偵測</label></li>
+<li><input checked="" id="q99c" name="q99" type="radio"/><label for="q99c">3. 光學字元辨識 (OCR)</label>
+</li>
+<li><input id="q99d" name="q99" type="radio"/><label for="q99d">4. 影像分類</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-99', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-99">
+<div class="answer"><strong>答案：</strong> 3. 光學字元辨識 (OCR)</div>
+<div class="rationale"><strong>解析：</strong>與上一題類似，從「手寫文件」中「擷取文字」是<span class="keyword-highlight">光學字元辨識 (OCR)</span> 的核心應用。Azure AI 視覺服務的 OCR 功能同時支援印刷體和手寫體。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>OCR 不僅能讀印刷體，也能讀手寫體。</div>
+</div>
+</div>
+<!-- Question 100 -->
+<div class="question-card" data-category="outline-3" id="q-100">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>當您在處理馬拉松比賽的相片時，為辨識相片中的跑者身分，必須讀取跑者運動衫上的號碼。您應該使用哪種電腦視覺類型？</p>
+<ul>
+<li><input id="q100a" name="q100" type="radio"/><label for="q100a">1. 影像分類</label></li>
+<li><input id="q100b" name="q100" type="radio"/><label for="q100b">2. 物件偵測</label></li>
+<li><input checked="" id="q100c" name="q100" type="radio"/><label for="q100c">3. 光學字元辨識
+                                (OCR)</label></li>
+<li><input id="q100d" name="q100" type="radio"/><label for="q100d">4. 臉部辨識</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-100', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-100">
+<div class="answer"><strong>答案：</strong> 3. 光學字元辨識 (OCR)</div>
+<div class="rationale"><strong>解析：</strong>任務的關鍵是「讀取」運動衫上的「號碼」（文字）。從影像中讀取文字/數字，正是<span class="keyword-highlight">光學字元辨識 (OCR)</span> 的功能。雖然臉部辨識也可以識別跑者，但題目明確指出是透過讀取「號碼」來識別，因此 OCR
+                        是最直接的答案。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>仔細閱讀題目，找出執行的關鍵動作。這裡的動作是「讀取號碼」，而不是「辨識臉孔」。</div>
+</div>
+</div>
+<!-- Question 101 -->
+<div class="question-card" data-category="outline-3" id="q-101">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(配對題)"></div>
+<div class="question-body">
+<p>請將電腦視覺工作負載類型與適當的案例配對。</p>
+<div class="matching-container">
+<div class="matching-column">
+<h4>工作負載類型 (Workload Type)</h4>
+<ul class="matching-list">
+<li class="matching-item">1. 影像分類</li>
+<li class="matching-item">2. 物件偵測</li>
+<li class="matching-item">3. 光學字元辨識</li>
+</ul>
+</div>
+<div class="matching-column">
+<h4>案例 (Scenario)</h4>
+<div class="matching-answer-area"><input id="q101_ans1" maxlength="1" placeholder="?" type="text"/><label for="q101_ans1">A. 產生影像標題。</label></div>
+<div class="matching-answer-area"><input id="q101_ans2" maxlength="1" placeholder="?" type="text"/><label for="q101_ans2">B. 擷取電影海報影像中的電影名稱。</label></div>
+<div class="matching-answer-area"><input id="q101_ans3" maxlength="1" placeholder="?" type="text"/><label for="q101_ans3">C. 找到影像中的車輛。</label></div>
+</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-101', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-101">
+<div class="answer"><strong>答案：</strong><br/>
+                        A. <span class="matching-correct-answer">(1. 影像分類)</span><br/>
+                        B. <span class="matching-correct-answer">(3. 光學字元辨識)</span><br/>
+                        C. <span class="matching-correct-answer">(2. 物件偵測)</span></div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>A. 產生影像標題（或描述）是<span class="chinese-noun">Azure AI
+                                    視覺</span>服務的一項功能，它綜合分析影像內容後給出一個整體的描述，概念上最接近對整個影像進行<span class="keyword-highlight">分類</span>和理解。</li>
+<li>B. 從電影海報中「擷取電影名稱」（文字），是典型的<span class="keyword-highlight">光學字元辨識 (OCR)</span> 應用。</li>
+<li>C. 「找到」影像中的車輛，不僅要識別出有車，還要標出其位置，這是<span class="keyword-highlight">物件偵測</span>的任務。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>這是對電腦視覺三大核心任務的經典考察。描述/標題 -&gt; 分類；讀取文字 -&gt; OCR；找東西+位置 -&gt;
+                        物件偵測。</div>
+</div>
+</div>
+<!-- Question 102 -->
+<div class="question-card" data-category="outline-3" id="q-102">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(是非題)"></div>
+<div class="question-body">
+<p>下列各項敘述如果成立，請選取 [是]；否則請選取 [否]。</p>
+<div class="yes-no-item">
+<div class="yes-no-question-text">1. 物件偵測可以識別影像中受損產品的位置。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">2. 物件偵測可以識別影像中受損產品的多個實例。</div>
+</div>
+<div class="yes-no-item">
+<div class="yes-no-question-text">3. 物件偵測可以識別影像中多種類型的受損產品。</div>
+</div>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-102', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-102">
+<div class="answer"><strong>答案 (根據題目來源)：</strong><br/>1. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>2. <span class="yes-no-answer-feedback yes-no-correct">是</span><br/>3. <span class="yes-no-answer-feedback yes-no-incorrect">否</span><br/><strong>(注意：第三題的答案可能有爭議，請參考解析)</strong>
+</div>
+<div class="rationale"><strong>解析：</strong>
+<ul>
+<li>1. 是。物件偵測的核心功能之一就是返回物件的<span class="keyword-highlight">位置</span>（邊界方塊）。</li>
+<li>2. 是。物件偵測可以在一張圖中找出同一類別的<span class="keyword-highlight">多個實例</span>（例如，找出所有受損的產品）。</li>
+<li>3. 否 (有爭議)。標準的物件偵測模型一次只能偵測一個類別（單類別分類器）。但是，使用<span class="chinese-noun">自訂視覺</span>服務時，您可以訓練一個<span class="keyword-highlight">多類別</span>的物件偵測模型，該模型可以同時識別多種類型的物件（例如「刮傷的產品」和「凹陷的產品」）。題目的答案為「否」，可能是基於最基礎的單類別模型概念。
+                            </li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>物件偵測的輸出 = 類別 + 位置 +
+                        信賴度。它可以處理單張影像中的多個物件。對於多類別問題，雖然技術上可行，但考試題目可能基於簡化模型來提問。</div>
+</div>
+</div>
+<!-- Question 103 -->
+<div class="question-card" data-category="outline-3" id="q-103">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>下列哪一個範例是根據影片摘要計算某區域的動物數目？</p>
+<ul>
+<li><input id="q103a" name="q103" type="radio"/><label for="q103a">1. 預測</label></li>
+<li><input id="q103b" name="q103" type="radio"/><label for="q103b">2. 異常偵測</label></li>
+<li><input id="q103c" name="q103" type="radio"/><label for="q103c">3. 知識採礦</label></li>
+<li><input checked="" id="q103d" name="q103" type="radio"/><label for="q103d">4. 電腦視覺</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-103', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-103">
+<div class="answer"><strong>答案：</strong> 4. 電腦視覺</div>
+<div class="rationale"><strong>解析：</strong>任務是從「影片」中「計算動物數目」。這需要 AI
+                        能夠「看懂」影片內容，識別出動物並進行計數。處理和理解視覺資訊（影像或影片）是<span class="keyword-highlight">電腦視覺</span>工作負載的核心。這通常會使用物件偵測來完成。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>只要任務涉及從影像或影片中提取資訊，答案幾乎總是電腦視覺。</div>
+</div>
+</div>
+<!-- Question 104 -->
+<div class="question-card" data-category="outline-3" id="q-104">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您需要建置一個會識別影像中名人的應用程式。您應該使用哪一項服務？</p>
+<ul>
+<li><input id="q104a" name="q104" type="radio"/><label for="q104a">1. Azure OpenAI 服務</label>
+</li>
+<li><input checked="" id="q104b" name="q104" type="radio"/><label for="q104b">2. Azure AI 視覺</label>
+</li>
+<li><input id="q104c" name="q104" type="radio"/><label for="q104c">3. 交談語言理解 (CLU)</label></li>
+<li><input id="q104d" name="q104" type="radio"/><label for="q104d">4. Azure Machine
+                                Learning</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-104', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-104">
+<div class="answer"><strong>答案：</strong> 2. Azure AI 視覺</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">Azure AI
+                            視覺</span>（舊稱電腦視覺）服務的影像分析功能中，包含一個<span class="keyword-highlight">網域特定模型</span>，專門用於「識別名人」。您只需呼叫 API，它就能從影像中辨識出數千位全球知名的名人。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>Azure AI 視覺服務內建了一些預訓練好的特定領域模型，如名人辨識和地標辨識，可以直接使用，無需自己訓練。
+                    </div>
+</div>
+</div>
+<!-- Question 105 -->
+<div class="question-card" data-category="outline-3" id="q-105">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>「判斷影像中汽車位置，並估計車與車之間的距離。」應該使用哪種電腦視覺類型？</p>
+<ul>
+<li><input id="q105a" name="q105" type="radio"/><label for="q105a">1. 臉部分析</label></li>
+<li><input checked="" id="q105b" name="q105" type="radio"/><label for="q105b">2. 物件偵測</label></li>
+<li><input id="q105c" name="q105" type="radio"/><label for="q105c">3. 影像分類</label></li>
+<li><input id="q105d" name="q105" type="radio"/><label for="q105d">4. 光學字元辨識</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-105', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-105">
+<div class="answer"><strong>答案：</strong> 2. 物件偵測</div>
+<div class="rationale"><strong>解析：</strong>任務要求「判斷汽車位置」，這正是<span class="keyword-highlight">物件偵測
+                            (Object Detection)</span> 的核心功能。物件偵測會回傳每個偵測到的物件（汽車）的類別和位置座標（邊界方塊）。有了這些座標，就可以進一步計算它們之間的距離。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>需要知道物件「在哪裡」，就是物件偵測。</div>
+</div>
+</div>
+<!-- Question 106 -->
+<div class="question-card" data-category="outline-3" id="q-106">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>使用 Azure AI 電腦視覺可執行下列哪兩項工作？每個正確答案都是一個完整的解決方案。</p>
+<ul>
+<li><input id="q106a" name="q106" type="checkbox"/><label for="q106a">1. 將影像中的文字翻譯為不同語言。</label>
+</li>
+<li><input checked="" id="q106b" name="q106" type="checkbox"/><label for="q106b">2. 辨識手寫文字。</label>
+</li>
+<li><input id="q106c" name="q106" type="checkbox"/><label for="q106c">3. 訓練自訂影像分類模型。</label></li>
+<li><input checked="" id="q106d" name="q106" type="checkbox"/><label for="q106d">4. 偵測影像中臉部。</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-106', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-106">
+<div class="answer"><strong>答案：</strong> 2, 4</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">Azure AI 電腦視覺</span> (現為 Azure
+                        AI 視覺) 是一個通用的視覺服務，其功能包括：<ul>
+<li>2. <span class="keyword-highlight">辨識手寫文字</span>：這是其 OCR 功能的一部分。</li>
+<li>4. <span class="keyword-highlight">偵測影像中臉部</span>：這是其影像分析功能的一部分，可以返回臉部的位置。</li>
+</ul>選項 1 是一個兩步驟的過程：先用電腦視覺的 OCR 讀取文字，再用<span class="chinese-noun">翻譯工具</span>服務翻譯文字，單靠電腦視覺無法完成。選項 3 訓練「自訂」模型是 <span class="chinese-noun">Azure AI 自訂視覺</span>服務的工作。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>區分通用服務和自訂服務：Azure AI 視覺提供「預訓練好的」通用能力；Azure AI
+                        自訂視覺讓您用「自己的資料訓練」專屬模型。</div>
+</div>
+</div>
+<!-- Question 107 -->
+<div class="question-card" data-category="outline-3" id="q-107">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您可以透過下列何項服務，使用自己的影像來定型物件偵測模型。</p>
+<ul>
+<li><input id="q107a" name="q107" type="radio"/><label for="q107a">1. Azure AI 電腦視覺</label></li>
+<li><input checked="" id="q107b" name="q107" type="radio"/><label for="q107b">2. Azure AI
+                                自訂視覺服務</label>
+</li>
+<li><input id="q107c" name="q107" type="radio"/><label for="q107c">3. Azure AI 文件智慧服務</label>
+</li>
+<li><input id="q107d" name="q107" type="radio"/><label for="q107d">4. 媒體用影片分析器</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-107', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-107">
+<div class="answer"><strong>答案：</strong> 2. Azure AI 自訂視覺服務</div>
+<div class="rationale">
+<strong>解析：</strong>題目的關鍵字是「使用自己的影像」和「定型」。當需要使用自己的資料來訓練一個專門的視覺模型（無論是影像分類還是物件偵測）時，應該使用 <span class="chinese-noun">Azure AI 自訂視覺 (Custom Vision)</span> 服務。它提供了一個簡單的介面，讓您上傳、標記影像並訓練自己的模型。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到「自訂」、「自己的影像」、「訓練特定物件」，就要想到自訂視覺 (Custom Vision)。</div>
+</div>
+</div>
+<!-- Question 108 -->
+<div class="question-card" data-category="outline-3" id="q-108">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您的公司專門製造小工具。而您擁有 1,000 張小工具的數位相片。若您需要在這些相片中識別出小工具的位置，則您應該使用下列何者？</p>
+<ul>
+<li><input id="q108a" name="q108" type="radio"/><label for="q108a">1. Azure AI 電腦視覺空間分析</label>
+</li>
+<li><input checked="" id="q108b" name="q108" type="radio"/><label for="q108b">2. Azure AI
+                                自訂視覺物件偵測</label>
+</li>
+<li><input id="q108c" name="q108" type="radio"/><label for="q108c">3. Azure AI 電腦視覺影像分析</label>
+</li>
+<li><input id="q108d" name="q108" type="radio"/><label for="q108d">4. Azure AI 自訂視覺分類</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-108', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-108">
+<div class="answer"><strong>答案：</strong> 2. Azure AI 自訂視覺物件偵測</div>
+<div class="rationale"><strong>解析：</strong>這個場景有兩個關鍵點：1.
+                        您的公司有自己「專門」的小工具，這意味著通用的視覺模型可能不認識它，需要用「自己的相片」來訓練。2. 您需要識別小工具的「位置」。結合這兩點，最適合的解決方案是使用 <span class="chinese-noun">Azure AI 自訂視覺</span>服務來訓練一個專門的<span class="keyword-highlight">物件偵測</span>模型。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>自訂的物件 + 需要位置 = 自訂視覺物件偵測。</div>
+</div>
+</div>
+<!-- Question 109 -->
+<div class="question-card" data-category="outline-3" id="q-109">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您需要建置一個會識別影像中名人的應用程式。應該使用哪種電腦視覺工作負載類型？</p>
+<ul>
+<li><input checked="" id="q109a" name="q109" type="radio"/><label for="q109a">1. 臉部辨識</label></li>
+<li><input id="q109b" name="q109" type="radio"/><label for="q109b">2. 物件偵測</label></li>
+<li><input id="q109c" name="q109" type="radio"/><label for="q109c">3. 影像分類</label></li>
+<li><input id="q109d" name="q109" type="radio"/><label for="q109d">4. 光學字元辨識</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-109', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-109">
+<div class="answer"><strong>答案：</strong> 1. 臉部辨識</div>
+<div class="rationale"><strong>解析：</strong>「識別名人」是<span class="keyword-highlight">臉部辨識 (Face
+                            Recognition)</span> 的一個特定應用。雖然 Azure AI
+                        視覺服務本身提供了名人辨識功能，但從工作負載類型來看，這屬於臉部辨識的範疇，因為它需要分析臉部特徵並將其與已知的名人資料庫進行比對。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>這題考察的是對工作負載的分類理解。識別「是誰」就是臉部辨識。</div>
+</div>
+</div>
+<!-- Question 110 -->
+<div class="question-card" data-category="outline-3" id="q-110">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>在下列哪兩種情況中可以使用 Azure AI 文件智慧服務？每個正確答案都是一個完整的解決方案。</p>
+<ul>
+<li><input checked="" id="q110a" name="q110" type="checkbox"/><label for="q110a">1.
+                                從發票中擷取發票號碼</label></li>
+<li><input checked="" id="q110b" name="q110" type="checkbox"/><label for="q110b">2.
+                                根據收據辨識零售商</label></li>
+<li><input id="q110c" name="q110" type="checkbox"/><label for="q110c">3. 在目錄中尋找產品影像</label></li>
+<li><input id="q110d" name="q110" type="checkbox"/><label for="q110d">4. 將表格從法文翻譯成英文</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-110', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-110">
+<div class="answer"><strong>答案：</strong> 1, 2</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">Azure AI 文件智慧服務 (Document
+                            Intelligence)</span> 專門用於從文件和表單中提取文字、鍵值對和表格結構。<ul>
+<li>1 &amp; 2: 從發票或收據中提取特定欄位（如發票號碼、零售商名稱）是文件智慧服務的<span class="keyword-highlight">預建模型</span>（如發票模型、收據模型）的核心功能。</li>
+</ul>選項 3 是影像搜尋或物件偵測的任務。選項 4 是翻譯任務，應使用翻譯工具服務。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>看到「發票」、「收據」、「表單」、「W-2稅單」等標準化文件處理，就要想到文件智慧服務。</div>
+</div>
+</div>
+<!-- Question 111 -->
+<div class="question-card" data-category="outline-3" id="q-111">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(多選題)"></div>
+<div class="question-body">
+<p>使用電腦視覺可執行下列哪兩項工作？每個正確答案都是一個完整的解決方案。</p>
+<ul>
+<li><input checked="" id="q111a" name="q111" type="checkbox"/><label for="q111a">1.
+                                偵測影像中的色彩配置。</label></li>
+<li><input id="q111b" name="q111" type="checkbox"/><label for="q111b">2. 將文字翻譯為不同語言。</label></li>
+<li><input id="q111c" name="q111" type="checkbox"/><label for="q111c">3. 擷取關鍵詞組。</label></li>
+<li><input id="q111d" name="q111" type="checkbox"/><label for="q111d">4. 預測股票價格。</label></li>
+<li><input checked="" id="q111e" name="q111" type="checkbox"/><label for="q111e">5.
+                                偵測影像中的商標。</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-111', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-111">
+<div class="answer"><strong>答案：</strong> 1, 5</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">Azure AI
+                            視覺</span>的影像分析功能非常豐富，其中包括：<ul>
+<li>1. <span class="keyword-highlight">色彩配置偵測</span>：可以識別影像的主要色彩和輔助色彩。</li>
+<li>5. <span class="keyword-highlight">品牌偵測</span>：可以從影像中識別出數千個全球知名品牌的商標。</li>
+</ul>選項 2 是翻譯任務，選項 3 是 NLP 任務，選項 4 是機器學習的迴歸任務。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>除了物件偵測、OCR 等，也要了解電腦視覺還包含色彩分析、品牌偵測、影像類型判斷（如線條畫）等細分功能。
+                    </div>
+</div>
+</div>
+<!-- Question 112 -->
+<div class="question-card" data-category="outline-3" id="q-112">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>AI 解決方案可協助攝影師取得更佳人像相片，方法是提供下列哪一項臉部功能範例之曝光、雜訊與遮蔽的回饋。</p>
+<ul>
+<li><input checked="" id="q112a" name="q112" type="radio"/><label for="q112a">1. 分析</label></li>
+<li><input id="q112b" name="q112" type="radio"/><label for="q112b">2. 偵測</label></li>
+<li><input id="q112c" name="q112" type="radio"/><label for="q112c">3. 辨識</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-112', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-112">
+<div class="answer"><strong>答案：</strong> 1. 分析</div>
+<div class="rationale"><strong>解析：</strong>題目描述的「曝光、雜訊、遮蔽」等都屬於影像的「品質屬性」。<span class="chinese-noun">臉部服務</span>的偵測作業可以返回這些品質屬性，這個過程屬於對臉部影像的<span class="keyword-highlight">分析
+                            (Analysis)</span>。它不只是偵測到臉部的存在，更是深入分析其各種屬性以提供回饋。選項中的「分析」是最能概括這個過程的詞彙。</div>
+<div class="exam-tip">
+<strong>考試小技巧：</strong>偵測(Detect)是找到它，辨識(Identify/Verify)是知道它是誰，分析(Analyze)是了解它的各種屬性。
+                    </div>
+</div>
+</div>
+<!-- Question 113 -->
+<div class="question-card" data-category="outline-3" id="q-113">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>哪一項 Azure AI 服務可用來找出包含敏感性資訊的文件？</p>
+<ul>
+<li><input id="q113a" name="q113" type="radio"/><label for="q113a">1. Azure AI 自訂視覺</label></li>
+<li><input id="q113b" name="q113" type="radio"/><label for="q113b">2. Azure AI 文件智慧服務</label>
+</li>
+<li><input checked="" id="q113c" name="q113" type="radio"/><label for="q113c">3. 交談語言理解</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-113', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-113">
+<div class="answer"><strong>答案：</strong> 3. 交談語言理解</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">交談語言理解</span>服務提供了<span class="keyword-highlight">PII (個人識別資訊)
+                            偵測</span>功能，可以從文字內容中識別和標記出敏感資訊，如姓名、地址、社會安全號碼等。這個功能特別適合用於處理非結構化的文字內容，包括文件中的文字。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>處理「文字」中的「敏感資訊/PII」，交談語言理解服務提供了專門的 PII
+                        偵測功能，可以有效地識別和保護個人識別資訊。</div>
+</div>
+</div>
+<!-- Question 114 -->
+<div class="question-card" data-category="outline-3" id="q-114">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>下列哪項服務可用於擷取駕照上的資訊以填入資料庫中。</p>
+<ul>
+<li><input id="q114a" name="q114" type="radio"/><label for="q114a">1. Azure AI 電腦視覺</label></li>
+<li><input id="q114b" name="q114" type="radio"/><label for="q114b">2. 交談語言理解</label></li>
+<li><input id="q114c" name="q114" type="radio"/><label for="q114c">3. Azure AI 自訂視覺</label></li>
+<li><input checked="" id="q114d" name="q114" type="radio"/><label for="q114d">4. Azure AI
+                                文件智慧服務</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-114', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-114">
+<div class="answer"><strong>答案：</strong> 4. Azure AI 文件智慧服務</div>
+<div class="rationale"><strong>解析：</strong><span class="chinese-noun">Azure AI
+                            文件智慧服務</span>提供了一個<span class="keyword-highlight">預建的識別文件 (ID)
+                            模型</span>，該模型專門用於從全球的護照和美國駕照等身份證件中提取關鍵資訊，如姓名、出生日期、證件號碼等。這比使用通用的 OCR 後再自己解析要高效和準確得多。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>處理身份證件（駕照、護照） -&gt; 文件智慧服務的預建 ID 模型。</div>
+</div>
+</div>
+<!-- Question 115 -->
+<div class="question-card" data-category="outline-3" id="q-115">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您正在建置工具來處理零售商店的影像，使能夠識別競爭對手的產品。其解決方案是必須使用您公司提供的影像來定型。則您應該使用下列哪一項 Azure AI 服務？</p>
+<ul>
+<li><input id="q115a" name="q115" type="radio"/><label for="q115a">1. Azure AI 文件智慧服務</label>
+</li>
+<li><input id="q115b" name="q115" type="radio"/><label for="q115b">2. Azure AI 電腦視覺</label></li>
+<li><input id="q115c" name="q115" type="radio"/><label for="q115c">3. 臉部</label></li>
+<li><input checked="" id="q115d" name="q115" type="radio"/><label for="q115d">4. Azure AI
+                                自訂視覺</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-115', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-115">
+<div class="answer"><strong>答案：</strong> 4. Azure AI 自訂視覺</div>
+<div class="rationale">
+<strong>解析：</strong>關鍵字是「識別競爭對手的產品」（一個特定的、非通用的物件）和「必須使用您公司提供的影像來定型」。這清楚地表明需要一個<span class="keyword-highlight">自訂訓練</span>的模型。在視覺領域，這項任務由 <span class="chinese-noun">Azure AI
+                            自訂視覺</span>服務完成。
+                    </div>
+<div class="exam-tip"><strong>考試小技巧：</strong>自訂物件 + 自有資料訓練 = 自訂視覺。</div>
+</div>
+</div>
+<!-- Question 116 -->
+<div class="question-card" data-category="outline-3" id="q-116">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您需要建立一個模型，為個人數位相片加上標籤。您應該使用哪一項 Azure AI 服務？</p>
+<ul>
+<li><input checked="" id="q116a" name="q116" type="radio"/><label for="q116a">1. Azure AI
+                                電腦視覺</label></li>
+<li><input id="q116b" name="q116" type="radio"/><label for="q116b">2. Azure AI 自訂視覺</label></li>
+<li><input id="q116c" name="q116" type="radio"/><label for="q116c">3. Azure AI 文件智慧服務</label>
+</li>
+<li><input id="q116d" name="q116" type="radio"/><label for="q116d">4. Azure AI 語言</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-116', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-116">
+<div class="answer"><strong>答案：</strong> 1. Azure AI 電腦視覺</div>
+<div class="rationale"><strong>解析：</strong>為相片「加上標籤」(Tagging) 是 <span class="chinese-noun">Azure AI
+                            電腦視覺</span>（現為 Azure AI 視覺）的一項核心功能。其影像分析 API
+                        可以識別影像中的數千個可辨識物件、生物、風景和動作，並返回這些標籤。因為是處理通用的「個人數位相片」，使用預訓練好的通用模型是最高效的方式。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>為一般照片自動生成描述性標籤（如 "天空", "建築", "狗"），使用通用的 Azure AI 視覺服務。
+                    </div>
+</div>
+</div>
+<!-- Question 117 -->
+<div class="question-card" data-category="outline-3" id="q-117">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>您需要建置一個會建立影像描述的應用程式。您應該使用哪一項服務？</p>
+<ul>
+<li><input id="q117a" name="q117" type="radio"/><label for="q117a">1. Azure OpenAI 服務</label>
+</li>
+<li><input checked="" id="q117b" name="q117" type="radio"/><label for="q117b">2. Azure AI 視覺</label>
+</li>
+<li><input id="q117c" name="q117" type="radio"/><label for="q117c">3. 交談語言理解 (CLU)</label></li>
+<li><input id="q117d" name="q117" type="radio"/><label for="q117d">4. Azure Machine
+                                Learning</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-117', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-117">
+<div class="answer"><strong>答案：</strong> 2. Azure AI 視覺</div>
+<div class="rationale"><strong>解析：</strong>「建立影像描述」（也稱為影像標題生成, Image Captioning）是 <span class="chinese-noun">Azure AI 視覺</span>服務的一項標準功能。它能分析影像內容並生成一句通順的人類可讀句子來描述影像。雖然 Azure OpenAI
+                        的多模態模型也能做到，但在 AI-900 的範疇內，這項經典功能通常歸屬於 Azure AI 視覺服務。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>為圖片生成一句話的描述 -&gt; 影像描述/標題生成 (Image Captioning)，由 Azure AI
+                        視覺提供。</div>
+</div>
+</div>
+<!-- Question 118 -->
+<div class="question-card" data-category="outline-3" id="q-118">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>電腦視覺功能可部署來？</p>
+<ul>
+<li><input id="q118a" name="q118" type="radio"/><label for="q118a">1. 為網站部署文字聊天機器人。</label></li>
+<li><input id="q118b" name="q118" type="radio"/><label for="q118b">2. 識別線上商店的異常客戶行為。</label></li>
+<li><input checked="" id="q118c" name="q118" type="radio"/><label for="q118c">3.
+                                將臉部辨識功能整合到應用程式。</label>
+</li>
+<li><input id="q118d" name="q118" type="radio"/><label for="q118d">4. 建議對內送電子郵件的自動化回覆。</label>
+</li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-118', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-118">
+<div class="answer"><strong>答案：</strong> 3. 將臉部辨識功能整合到應用程式。</div>
+<div class="rationale"><strong>解析：</strong>臉部辨識是<span class="keyword-highlight">電腦視覺</span>領域的一個重要分支。Azure 提供的臉部服務就是一種電腦視覺功能，可以輕易地整合到應用程式中。<ul>
+<li>1 &amp; 4: 是自然語言處理 (NLP) 的任務。</li>
+<li>2: 是異常偵測的任務。</li>
+</ul>
+</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>臉部辨識、物件偵測、OCR 都是電腦視覺的具體應用。</div>
+</div>
+</div>
+<!-- Question 119 -->
+<div class="question-card" data-category="outline-3" id="q-119">
+<div class="question-meta">描述 Azure 上的電腦視覺工作負載的特點 (15-20%)</div>
+<div class="question-title" data-original-title="(選擇題)"></div>
+<div class="question-body">
+<p>使用 <span class="chinese-noun">Azure AI 文件智慧服務</span>中預建收據模型可以處理影像大小上限為何？</p>
+<ul>
+<li><input id="q119a" name="q119" type="radio"/><label for="q119a">1. 5MB</label></li>
+<li><input id="q119b" name="q119" type="radio"/><label for="q119b">2. 10 MB</label></li>
+<li><input checked="" id="q119c" name="q119" type="radio"/><label for="q119c">3. 50 MB</label></li>
+<li><input id="q119d" name="q119" type="radio"/><label for="q119d">4. 100 MB</label></li>
+</ul>
+</div>
+<button class="answer-toggle" onclick="toggleAnswer('ans-119', this)">顯示答案與解析</button>
+<div class="answer-content" id="ans-119">
+<div class="answer"><strong>答案：</strong> 3. 50 MB</div>
+<div class="rationale"><strong>解析：</strong>根據 Microsoft 的官方文件，<span class="chinese-noun">Azure AI
+                            文件智慧服務</span>的輸入要求之一是，對於付費 (S0) 層，檔案大小必須小於 <span class="keyword-highlight">50 MB</span>。對於免費
+                        (F0) 層，檔案大小限制為 4 MB。題目沒有特別指明層級，但 50 MB 是該服務支援的上限。</div>
+<div class="exam-tip"><strong>考試小技巧：</strong>雖然具體的數字限制在考試中較少出現，但了解服務的基本限制（如檔案大小、影像尺寸）有助於建立完整的知識體系。記住
+                        50MB 這個常見的上限。</div>
+</div>
+</div>
+</div> <!-- Close questions-wrapper -->
+</div> <!-- Close container -->
+
+</body>
+</html>

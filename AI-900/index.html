@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AI-900 Microsoft Azure AI Fundamentals 學習入口</title>
+    
+    <!-- 載入現代字型與圖示 -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    
+    <style>
+        /* 全域重設與變數 */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+            --bg-gradient: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --azure-blue: #0078D4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* 頂部漸層裝飾條 */
+        .top-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #0078D4 0%, #50E6FF 50%, #8B5CF6 100%);
+            width: 100%;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 40px auto;
+            flex-grow: 1;
+        }
+
+        /* 標頭區 */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            letter-spacing: -0.03em;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* 卡片網格 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* 單個卡片樣式 */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* 卡片裝飾背景光暈 */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            z-index: 0;
+            transition: all 0.5s ease;
+        }
+
+        /* 卡片懸停動畫 */
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .card:hover::before {
+            transform: scale(1.8);
+        }
+
+        /* 卡片內容架構 */
+        .card-header {
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            z-index: 1;
+            flex-grow: 1;
+            margin-bottom: 25px;
+        }
+
+        /* 徽章與圖示 */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .badge-p1 { background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); }
+        .badge-p2 { background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%); }
+        .badge-p3 { background: linear-gradient(135deg, #EC4899 0%, #BE185D 100%); }
+        .badge-p4 { background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%); }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* 動態按鈕 */
+        .card-footer {
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-tag {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4B5563;
+            background: #E5E7EB;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .action-link {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2563EB;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s ease;
+        }
+
+        .card:hover .action-link {
+            gap: 10px;
+            color: #1D4ED8;
+        }
+
+        /* 快速統計區 */
+        .info-panel {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-num {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1E3A8A;
+        }
+
+        .info-lbl {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* 頁尾 */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* 動畫 */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 響應式微調 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .info-panel {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部漸層條 -->
+    <div class="top-bar"></div>
+
+    <div class="container">
+        <!-- 標頭區 -->
+        <header>
+            <h1>🎓 AI-900 學習與題庫系統</h1>
+            <p>Microsoft Azure AI Fundamentals 認證考試重點整理與精選模擬題庫</p>
+        </header>
+
+        <!-- 快速資訊面板 -->
+        <div class="info-panel">
+            <div class="info-item">
+                <div class="info-num">475 題</div>
+                <div class="info-lbl">總收錄題數</div>
+            </div>
+            <div class="info-item">
+                <div class="info-num">4 個單元</div>
+                <div class="info-lbl">題庫與考點整理</div>
+            </div>
+            <div class="info-item">
+                <div class="info-num">100%</div>
+                <div class="info-lbl">繁體中文詳解</div>
+            </div>
+        </div>
+
+        <!-- 卡片網格區 -->
+        <div class="grid">
+            
+            <!-- Part 1 -->
+            <a href="AI-900_part1_268題.html" class="card">
+                <div class="card-header">
+                    <span class="badge badge-p1">PART 1</span>
+                    <h3 class="card-title">
+                        <i class="fa-solid fa-list-check" style="color: #3B82F6;"></i> 精選考題 (I)
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-desc">收錄第一部分精選考題，涵蓋人工智慧基本概念、Azure 機器學習基本原則與實務觀念檢定。</p>
+                </div>
+                <div class="card-footer">
+                    <span class="stat-tag">268 題</span>
+                    <span class="action-link">開始練習 <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Part 2 -->
+            <a href="AI-900_part2_119題.html" class="card">
+                <div class="card-header">
+                    <span class="badge badge-p2">PART 2</span>
+                    <h3 class="card-title">
+                        <i class="fa-solid fa-clipboard-question" style="color: #8B5CF6;"></i> 精選考題 (II)
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-desc">精選模擬考題第二部分（修正版），著重在電腦視覺、自然語言處理（NLP）等工作負載題型解析。</p>
+                </div>
+                <div class="card-footer">
+                    <span class="stat-tag">119 題</span>
+                    <span class="action-link">開始練習 <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Part 3 -->
+            <a href="AI-900_part3_88題.html" class="card">
+                <div class="card-header">
+                    <span class="badge badge-p3">PART 3</span>
+                    <h3 class="card-title">
+                        <i class="fa-solid fa-circle-check" style="color: #EC4899;"></i> 精選考題 (III)
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-desc">第三部分精選考題，提供考前衝刺的高頻題型與詳盡解析，幫助釐清易混淆的概念。</p>
+                </div>
+                <div class="card-footer">
+                    <span class="stat-tag">88 題</span>
+                    <span class="action-link">開始練習 <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Part 4 -->
+            <a href="AI-900_part4.html" class="card">
+                <div class="card-header">
+                    <span class="badge badge-p4">PART 4</span>
+                    <h3 class="card-title">
+                        <i class="fa-solid fa-book-open" style="color: #06B6D4;"></i> 重點整理
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-desc">歸納考試必背重點，包含負責任 AI 六大原則、機器學習三大類型（監督式與非監督式）與常見評估指標。</p>
+                </div>
+                <div class="card-footer">
+                    <span class="stat-tag">觀念彙整</span>
+                    <span class="action-link">閱讀重點 <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- 頁尾 -->
+    <footer>
+        <p>© 2026 AI-900 Microsoft Azure AI Fundamentals 學習系統. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
