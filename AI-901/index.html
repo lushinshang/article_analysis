@@ -1,0 +1,3154 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-901 Microsoft Azure AI Fundamentals 題庫教材</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212b;
+      --muted: #5a6877;
+      --line: #d9e0e7;
+      --paper: #f7f4ed;
+      --surface: #ffffff;
+      --accent: #0f766e;
+      --accent-strong: #134e4a;
+      --warm: #b45309;
+      --soft: #eef8f6;
+      --mark: #ffff0030;
+      --shadow: 0 18px 48px rgba(23, 33, 43, .10);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(247, 244, 237, .98), rgba(236, 242, 239, .95)),
+        var(--paper);
+      font-family: "Microsoft JhengHei", "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.72;
+    }
+
+    a { color: inherit; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 22px;
+      overflow: auto;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 255, 255, .82);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      margin-bottom: 24px;
+      padding: 18px 16px;
+      border-bottom: 1px solid var(--line);
+      border: 1px solid rgba(15, 118, 110, .18);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(238, 248, 246, .92), rgba(255, 255, 255, .88)),
+        #fff;
+      box-shadow: 0 12px 28px rgba(23, 33, 43, .08);
+    }
+
+    .brand-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--accent-strong);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-decoration: none;
+    }
+
+    .brand h1 {
+      margin: 12px 0 14px;
+      color: #111827;
+      font-size: 18px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .course-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 40px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--accent-strong);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.35;
+      text-decoration: none;
+      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+
+    .course-link:hover {
+      color: var(--accent);
+    }
+
+    .course-link span {
+      color: var(--warm);
+      font-weight: 900;
+    }
+
+    .course-link::after {
+      content: "→";
+      display: inline-grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .outline-group {
+      margin: 18px 0;
+    }
+
+    .outline-group h2 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: var(--warm);
+      letter-spacing: .03em;
+    }
+
+    .outline-button {
+      width: 100%;
+      min-height: 42px;
+      margin: 7px 0;
+      padding: 9px 11px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+      line-height: 1.35;
+      text-align: left;
+      transition: background .18s ease, border-color .18s ease, color .18s ease;
+    }
+
+    .outline-button:hover,
+    .outline-button.is-active {
+      border-color: rgba(15, 118, 110, .25);
+      background: var(--soft);
+      color: var(--accent-strong);
+    }
+
+    main {
+      padding: 34px clamp(18px, 4vw, 58px) 64px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(220px, .6fr);
+      gap: 24px;
+      align-items: end;
+      max-width: 1120px;
+      margin: 0 auto 28px;
+      padding: 30px 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero h2 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .stat-panel {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .78);
+    }
+
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    .stat strong { color: var(--accent-strong); }
+
+    .content {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .source-note {
+      margin: 0 0 22px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      background: rgba(255, 255, 255, .70);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .question-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .question-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfa;
+    }
+
+    .qid {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: var(--accent-strong);
+      color: white;
+      font-weight: 800;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      max-width: 100%;
+      min-height: 34px;
+      padding: 4px 10px;
+      border: 1px solid rgba(15, 118, 110, .28);
+      border-radius: 8px;
+      background: var(--soft);
+      color: var(--accent-strong);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .question-body {
+      padding: 22px;
+      min-width: 0;
+    }
+
+    .section {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:first-child { padding-top: 0; }
+    .section:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .section h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--accent-strong);
+    }
+
+    .prompt {
+      margin: 0 0 14px;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.58;
+      overflow-wrap: anywhere;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .options li {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fcfcfb;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .letter {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: #e8ecef;
+      font-weight: 800;
+    }
+
+    .options li.correct {
+      border-color: rgba(15, 118, 110, .45);
+      background: var(--soft);
+    }
+
+    .options li.correct .letter {
+      background: var(--accent);
+      color: white;
+    }
+
+    .options.yesno-options li {
+      grid-template-columns: minmax(0, 1fr) 56px 56px;
+      align-items: center;
+    }
+
+    .options.yesno-options .letter {
+      display: none;
+    }
+
+    .options.yesno-options .yesno-option-head {
+      min-height: 26px;
+      padding: 0 12px;
+      border: 0;
+      background: transparent;
+      color: #1f2937;
+      font-weight: 900;
+    }
+
+    .options.yesno-options .yesno-option-head span {
+      justify-self: center;
+    }
+
+    .yesno-inline-choice {
+      display: inline-grid;
+      place-items: center;
+      justify-self: center;
+      width: 24px;
+      height: 24px;
+      border: 4px solid #cbd5e1;
+      border-radius: 999px;
+      background: #fff;
+    }
+
+    .yesno-inline-choice.is-selected {
+      border-color: var(--accent);
+      background: radial-gradient(circle at center, var(--accent) 0 42%, transparent 45%);
+      box-shadow: 0 0 0 4px #dcfce7;
+    }
+
+    .answer-box {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border: 2px solid rgba(15, 118, 110, .34);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #fffdf2, #ecfdf5);
+    }
+
+    .answer-box p { margin: 0; }
+
+    .answer-box strong {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      margin-right: 6px;
+      padding: 2px 8px;
+      border-radius: 7px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .type-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 9px;
+      border-radius: 8px;
+      background: #1f2937;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .type-demo {
+      margin: 14px 0;
+      padding: 14px;
+      border: 1px solid rgba(15, 118, 110, .26);
+      border-radius: 8px;
+      background: #f8fffc;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .type-demo h4 {
+      margin: 0 0 10px;
+      color: var(--accent-strong);
+      font-size: 15px;
+    }
+
+    .mock-sentence {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .mock-dropdown {
+      width: min(100%, 440px);
+      max-width: 100%;
+      margin-top: 10px;
+      border: 2px solid #9aa9c5;
+      border-radius: 6px;
+      background: #ffffff;
+      box-shadow: 0 10px 24px rgba(23, 33, 43, .12);
+      overflow: hidden;
+    }
+
+    .mock-select-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 36px;
+      padding: 4px 8px 4px 10px;
+      border-bottom: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .mock-arrow {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 26px;
+      border-left: 1px solid #cbd5e1;
+      color: #334155;
+      font-size: 12px;
+    }
+
+    .mock-options {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mock-option {
+      padding: 7px 10px;
+      border-top: 1px solid #eef2f7;
+      color: #243244;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .mock-option.is-correct {
+      background: #dcfce7;
+      color: #166534;
+      font-weight: 900;
+      box-shadow: inset 4px 0 0 var(--accent);
+    }
+
+    .demo-grid {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .demo-grid li {
+      display: grid;
+      grid-template-columns: minmax(130px, .45fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .demo-answer {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      width: fit-content;
+      padding: 3px 9px;
+      border-radius: 7px;
+      background: #dcfce7;
+      color: #166534;
+      font-weight: 900;
+    }
+
+    .drag-match-demo {
+      display: grid;
+      grid-template-columns: minmax(180px, .42fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+      min-width: 0;
+    }
+
+    .drag-bank,
+    .drop-area {
+      display: grid;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .drag-heading,
+    .drop-heading {
+      margin: 0 0 2px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .drag-item {
+      display: flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 2px dashed #22c55e;
+      border-radius: 6px;
+      background: #f7fff7;
+      color: #1f2937;
+      font-weight: 800;
+      box-shadow: inset 4px 0 0 rgba(34, 197, 94, .22);
+    }
+
+    .drag-item::before {
+      content: "⋮⋮";
+      margin-right: 8px;
+      color: #94a3b8;
+      letter-spacing: -2px;
+    }
+
+    .drop-row {
+      display: grid;
+      grid-template-columns: minmax(160px, .46fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+    }
+
+    .drop-target-label {
+      color: #334155;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .drop-answer {
+      display: flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 2px dashed #ef4444;
+      border-radius: 6px;
+      background: #fffafa;
+      color: #1f2937;
+      font-weight: 900;
+      box-shadow: inset 4px 0 0 rgba(239, 68, 68, .18);
+      overflow-wrap: anywhere;
+    }
+
+    .drop-answer::before {
+      content: "⋮⋮";
+      margin-right: 8px;
+      color: #94a3b8;
+      letter-spacing: -2px;
+    }
+
+    .code-match-demo .code-fill-demo {
+      margin-top: 0;
+    }
+
+    .inline-drop-answer {
+      display: inline-flex;
+      align-items: center;
+      min-width: 150px;
+      min-height: 28px;
+      margin: 0 4px;
+      padding: 2px 9px;
+      border: 2px solid #334155;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #0f766e;
+      font-weight: 900;
+      vertical-align: middle;
+      box-shadow: inset 4px 0 0 rgba(15, 118, 110, .18);
+    }
+
+    .code-answer {
+      margin: 10px 0 0;
+      padding: 12px;
+      overflow-x: auto;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      background: #052e16;
+      color: #dcfce7;
+      font-family: Consolas, "Cascadia Code", monospace;
+      font-size: 14px;
+      line-height: 1.55;
+      white-space: pre;
+    }
+
+    .code-fill-demo {
+      display: grid;
+      gap: 0;
+      margin-top: 10px;
+      overflow-x: auto;
+      max-width: 100%;
+      border: 1px solid #93c5fd;
+      border-radius: 8px;
+      background: #f8fbff;
+      font-family: Consolas, "Cascadia Code", monospace;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .code-fill-line {
+      display: flex;
+      align-items: flex-start;
+      min-height: 28px;
+      white-space: pre;
+      width: max-content;
+      min-width: 100%;
+    }
+
+    .code-line-no {
+      flex: 0 0 38px;
+      padding: 2px 8px;
+      color: #64748b;
+      text-align: right;
+      user-select: none;
+    }
+
+    .code-line-text {
+      min-width: max-content;
+      padding: 2px 10px 2px 0;
+    }
+
+    .code-keyword { color: #7c3aed; font-weight: 800; }
+    .code-module { color: #0369a1; font-weight: 800; }
+    .code-call { color: #0f766e; font-weight: 800; }
+    .code-string { color: #b45309; font-weight: 800; }
+
+    .code-dropdown {
+      display: inline-block;
+      min-width: min(560px, 72vw);
+      margin: 0 4px;
+      vertical-align: top;
+      border: 2px solid #3b82f6;
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, .18);
+      white-space: normal;
+    }
+
+    .code-select-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 32px;
+      padding: 3px 0 3px 10px;
+      border-bottom: 1px solid #bfdbfe;
+      background: #eff6ff;
+    }
+
+    .code-select-value {
+      color: #1d4ed8;
+      font-weight: 900;
+    }
+
+    .code-select-arrow {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      min-height: 28px;
+      border-left: 1px solid #93c5fd;
+      color: #1e3a8a;
+    }
+
+    .code-options {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      background: #fff;
+    }
+
+    .code-option {
+      padding: 5px 10px;
+      border-top: 1px solid #dbeafe;
+      color: #1f2937;
+      font-weight: 700;
+    }
+
+    .code-option.is-correct {
+      background: #dbeafe;
+      color: #1d4ed8;
+      box-shadow: inset 4px 0 0 #2563eb;
+      font-weight: 900;
+    }
+
+    .multi-note {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      margin-top: 10px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: #fff7ed;
+      color: #9a3412;
+      font-weight: 800;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .mini-panel {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fcfcfb;
+    }
+
+    .mini-panel h4 {
+      margin: 0 0 8px;
+      color: var(--accent-strong);
+      font-size: 15px;
+    }
+
+    .mini-panel p { margin: 0; color: var(--muted); }
+
+    .term-zh { color: rgb(0, 0, 255); font-weight: bold; }
+    .term-en { color: rgb(255, 0, 0); font-weight: bold; }
+    .term-abbr { color: rgb(128, 0, 128); font-weight: bold; }
+    .highlight { background: var(--mark); }
+
+    .hidden { display: none; }
+
+    @media (max-width: 1024px) {
+      .layout {
+        grid-template-columns: minmax(230px, 280px) minmax(0, 1fr);
+      }
+
+      .sidebar {
+        padding: 22px 16px;
+      }
+
+      main {
+        padding: 28px 22px 56px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .mock-dropdown {
+        width: min(100%, 520px);
+      }
+
+      .code-dropdown {
+        min-width: min(520px, 68vw);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        max-height: none;
+        padding: 18px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand {
+        margin-bottom: 14px;
+      }
+
+      .sidebar .outline-button,
+      .sidebar .outline-group {
+        min-width: 220px;
+      }
+
+      .sidebar {
+        display: block;
+      }
+
+      .outline-group {
+        margin: 12px 0;
+      }
+
+      .sidebar::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+
+      .outline-group {
+        margin: 12px 0;
+      }
+
+      .hero,
+      .analysis-grid {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        padding: 22px 16px 44px;
+      }
+
+      .hero h2 {
+        font-size: 32px;
+      }
+
+      .demo-grid li {
+        grid-template-columns: 1fr;
+      }
+
+      .drag-match-demo,
+      .drop-row {
+        grid-template-columns: 1fr;
+      }
+
+      .drop-target-label {
+        text-align: left;
+      }
+
+    }
+
+    @media (max-width: 640px) {
+      .sidebar {
+        padding: 14px 12px;
+      }
+
+      .brand {
+        padding: 14px 12px;
+      }
+
+      .brand-kicker,
+      .brand h1,
+      .course-link {
+        font-size: 16px;
+      }
+
+      .course-link::after {
+        width: 24px;
+        height: 24px;
+      }
+
+      main {
+        padding: 16px 10px 36px;
+      }
+
+      .hero {
+        margin-bottom: 18px;
+        padding: 18px 0 14px;
+      }
+
+      .hero h2 {
+        font-size: 28px;
+        line-height: 1.18;
+      }
+
+      .hero p,
+      .source-note {
+        font-size: 14px;
+      }
+
+      .stat-panel,
+      .source-note,
+      .question-card,
+      .type-demo,
+      .answer-box,
+      .mini-panel {
+        border-radius: 8px;
+      }
+
+      .question-head {
+        padding: 14px 12px;
+        gap: 8px;
+      }
+
+      .qid,
+      .tag,
+      .type-chip {
+        min-height: 30px;
+        font-size: 13px;
+      }
+
+      .question-body {
+        padding: 14px 12px;
+      }
+
+      .section {
+        padding: 14px 0;
+      }
+
+      .section h3 {
+        font-size: 17px;
+      }
+
+      .prompt {
+        font-size: 16px;
+        line-height: 1.55;
+      }
+
+      .options {
+        gap: 8px;
+      }
+
+      .options li {
+        grid-template-columns: 30px minmax(0, 1fr);
+        gap: 8px;
+        padding: 9px 10px;
+      }
+
+      .letter {
+        width: 26px;
+        height: 26px;
+      }
+
+      .options.yesno-options li {
+        grid-template-columns: minmax(0, 1fr) 42px 42px;
+      }
+
+      .yesno-inline-choice {
+        width: 20px;
+        height: 20px;
+        border-width: 3px;
+      }
+
+      .mock-dropdown {
+        width: 100%;
+      }
+
+      .mock-sentence {
+        font-size: 15px;
+      }
+
+      .mock-option {
+        padding: 8px 9px;
+      }
+
+      .drag-match-demo {
+        gap: 12px;
+      }
+
+      .drag-item,
+      .drop-answer {
+        min-height: 32px;
+        padding: 6px 8px;
+      }
+
+      .drop-row {
+        gap: 6px;
+      }
+
+      .code-fill-demo,
+      .code-answer {
+        font-size: 13px;
+      }
+
+      .code-line-no {
+        flex-basis: 30px;
+        padding: 2px 6px;
+      }
+
+      .code-dropdown {
+        min-width: 300px;
+      }
+
+      .inline-drop-answer {
+        min-width: 118px;
+      }
+
+      .answer-box {
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero h2 {
+        font-size: 25px;
+      }
+
+      .outline-button {
+        font-size: 13px;
+      }
+
+      .question-head {
+        align-items: flex-start;
+      }
+
+      .tag {
+        width: 100%;
+      }
+
+      .options.yesno-options li {
+        grid-template-columns: minmax(0, 1fr) 36px 36px;
+      }
+
+      .code-dropdown {
+        min-width: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" aria-label="AI-901 考試大綱">
+      <div class="brand">
+        <a class="brand-kicker" href="https://shopee.tw/aeqoxmc2op">HTML 考題小舖</a>
+        <h1>AI-901 題庫</h1>
+        <a class="course-link" href="https://exam.kt.idv.tw/my/courses.php">
+          <span>[Moodle]</span> 我的課程首頁
+        </a>
+      </div>
+
+      <button class="outline-button is-active" type="button" data-filter="all">全部題目 (50題)</button>
+
+      <div class="outline-group">
+        <h2>識別 AI 概念與能力</h2>
+        <button class="outline-button" type="button" data-filter="responsible-ai">描述負責任 AI 的原則 (7題)</button>
+        <button class="outline-button" type="button" data-filter="model-components">識別 AI 模型的組件與配置 (8題)</button>
+        <button class="outline-button" type="button" data-filter="workloads">識別 AI 工作負載 (2題)</button>
+      </div>
+
+      <div class="outline-group">
+        <h2>透過使用 Microsoft Foundry 實施 AI 解決方案</h2>
+        <button class="outline-button" type="button" data-filter="gen-ai-foundry">使用 Foundry 實作生成式 AI 應用程式與代理 (9題)</button>
+        <button class="outline-button" type="button" data-filter="text-speech-foundry">使用 Foundry 實作文字與語音的 AI 解決方案 (7題)</button>
+        <button class="outline-button" type="button" data-filter="vision-foundry">透過使用 Foundry 實現具備電腦視覺與影像生成能力的 AI 解決方案 (8題)</button>
+        <button class="outline-button" type="button" data-filter="info-extraction-foundry">使用 Foundry 實作資訊擷取的 AI 解決方案 (9題)</button>
+      </div>
+    </aside>
+
+    <main>
+
+
+      <div class="content">
+
+
+        <article class="question-card" data-category="text-speech-foundry">
+          <header class="question-head">
+            <span class="qid">Question 1</span>
+            <span class="tag">使用 Foundry 實作文字與語音的 AI 解決方案</span>
+          </header>
+
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You need to convert written customer notifications into natural-sounding spoken audio that can be played over a phone system.</p>
+              <p class="prompt">Which Azure Speech in Foundry Tools capability should you use?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>speaker recognition</span></li>
+                <li class="correct"><span class="letter">B</span><span>speech synthesis</span></li>
+                <li><span class="letter">C</span><span>speech recognition</span></li>
+                <li><span class="letter">D</span><span>speech translation</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> B. speech synthesis</p>
+              </div>
+            </section>
+
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你需要將書面的客戶通知轉換成自然流暢的語音，讓電話系統可以播放。</p>
+              <p class="prompt">你應該使用 <span class="term-en">Azure Speech</span> 在 <span class="term-en">Foundry Tools</span> 中的哪一項功能？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span><span class="term-zh">說話者辨識</span> (<span class="term-en">speaker recognition</span>)</span></li>
+                <li class="correct"><span class="letter">B</span><span><span class="term-zh">語音合成</span> (<span class="term-en">speech synthesis</span>)</span></li>
+                <li><span class="letter">C</span><span><span class="term-zh">語音辨識</span> (<span class="term-en">speech recognition</span>)</span></li>
+                <li><span class="letter">D</span><span><span class="term-zh">語音翻譯</span> (<span class="term-en">speech translation</span>)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>B。<span class="term-zh">語音合成</span> (<span class="term-en">speech synthesis</span>)</p>
+              </div>
+            </section>
+
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>
+                本題的關鍵動作是把「書面文字」轉成「可播放的自然語音」。在 <span class="term-en">Azure Speech</span> 服務中，這種由文字產生語音的能力稱為
+                <span class="term-zh">語音合成</span> (<span class="term-en">speech synthesis</span>)，也常稱為
+                <span class="term-zh">文字轉語音</span> (<span class="term-en">text to speech</span>, <span class="term-abbr">TTS</span>)。
+                因此，當情境是電話系統要播放客戶通知、客服語音、提醒訊息或其他從文字稿產生的語音內容時，應選擇
+                <span class="highlight">speech synthesis</span>。
+              </p>
+              <p>
+                這題容易混淆的地方在於四個選項都和語音有關，但方向不同。<span class="term-zh">語音辨識</span>
+                (<span class="term-en">speech recognition</span>) 是把人說的語音轉成文字，方向剛好相反；
+                <span class="term-zh">語音翻譯</span> (<span class="term-en">speech translation</span>) 是把語音內容轉成另一種語言；
+                <span class="term-zh">說話者辨識</span> (<span class="term-en">speaker recognition</span>) 則是用聲音判斷或驗證說話者身分。
+                題目沒有要求辨識誰在說話，也沒有要求翻譯或將語音轉文字，所以正確答案只能是 B。
+              </p>
+
+              <div class="analysis-grid">
+                <div class="mini-panel">
+                  <h4>為什麼 B 正確</h4>
+                  <p>題目要求「written customer notifications」變成「spoken audio」，也就是文字輸入、語音輸出，正符合語音合成。</p>
+                </div>
+                <div class="mini-panel">
+                  <h4>其他選項為什麼錯</h4>
+                  <p>A 是辨識說話者；C 是語音轉文字；D 是語音跨語言翻譯。三者都不符合文字轉語音的需求。</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="workloads">
+          <header class="question-head">
+            <span class="qid">Question 2</span>
+            <span class="tag">識別 AI 工作負載</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> An AI workload that produces new content based on user input is an example of <span class="term-en">generative AI</span>.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>根據使用者輸入產生新內容的 <span class="term-zh">AI 工作負載</span>，是 <span class="term-zh">生成式 AI</span> (<span class="term-en">generative AI</span>) 的例子。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">生成式 AI</span> (<span class="term-en">generative AI</span>) 的考點是「產生新內容」。只要題目描述模型根據使用者提示、指令或輸入，產生文字、圖片、程式碼、音訊或其他新輸出，就屬於生成式 AI 工作負載。相較之下，<span class="term-en">content understanding</span> 是理解既有內容，<span class="term-en">information extraction</span> 是從內容中擷取結構化資訊，<span class="term-en">text analysis</span> 則是分析既有文字，例如情感、實體、關鍵片語或摘要。本題關鍵字是 produces new content，所以答案是 <span class="highlight">generative AI</span>。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="responsible-ai">
+          <header class="question-head">
+            <span class="qid">Question 3</span>
+            <span class="tag">描述負責任 AI 的原則</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are developing an AI-powered customer support application.</p>
+              <p class="prompt">Which task is an example of the Microsoft responsible AI principle of inclusiveness?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>Provide explanations about how predictions are generated.</span></li>
+                <li class="correct"><span class="letter">B</span><span>Design the interface to support multiple languages and screen readers.</span></li>
+                <li><span class="letter">C</span><span>Evaluate model outputs across demographic groups to reduce bias.</span></li>
+                <li><span class="letter">D</span><span>Encrypt stored customer data and restrict access by using role-based controls.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> B. Design the interface to support multiple languages and screen readers.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在開發一個由 AI 驅動的客服應用程式。</p>
+              <p class="prompt">哪一項工作屬於 Microsoft <span class="term-zh">負責任 AI</span> 原則中的 <span class="term-zh">包容性</span>？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span>說明預測結果是如何產生的。</span></li>
+                <li class="correct"><span class="letter">B</span><span>設計支援多語言與螢幕閱讀器的介面。</span></li>
+                <li><span class="letter">C</span><span>跨人口族群評估模型輸出，以降低偏差。</span></li>
+                <li><span class="letter">D</span><span>加密儲存的客戶資料，並使用角色型存取控制限制存取。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>B。設計支援多語言與螢幕閱讀器的介面。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">包容性</span> (<span class="term-en">inclusiveness</span>) 強調 AI 系統應讓不同能力、語言背景與使用需求的人都能有效使用。支援多語言與螢幕閱讀器，直接對應到可及性與多元使用者需求，因此符合包容性。A 說明預測如何產生，屬於 <span class="term-zh">透明度</span> (<span class="term-en">transparency</span>)；C 跨族群降低偏差，屬於 <span class="term-zh">公平性</span> (<span class="term-en">fairness</span>)；D 加密與角色型存取控制，屬於 <span class="term-zh">隱私權與安全性</span> (<span class="term-en">privacy and security</span>)。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="responsible-ai">
+          <header class="question-head">
+            <span class="qid">Question 4</span>
+            <span class="tag">描述負責任 AI 的原則</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> Evaluating model outcomes across demographic groups to reduce bias is an example of <span class="term-en">fairness</span>.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>跨人口族群評估模型結果以降低偏差，是 <span class="term-zh">公平性</span> (<span class="term-en">fairness</span>) 的例子。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">公平性</span> (<span class="term-en">fairness</span>) 要求 AI 系統避免對不同人口群體造成不合理偏差或歧視。本題的 across demographic groups 與 reduce bias 都直接指向公平性。<span class="term-zh">責任歸屬</span> (<span class="term-en">accountability</span>) 是確保人與組織對 AI 系統及其影響負責；<span class="term-zh">隱私權與安全性</span> 著重資料保護與存取控制；<span class="term-zh">透明度</span> 則著重讓使用者理解 AI 的使用方式、能力與限制。因此本題答案是 fairness。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="text-speech-foundry">
+          <header class="question-head">
+            <span class="qid">Question 5</span>
+            <span class="tag">使用 Foundry 實作文字與語音的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are using the Azure Speech SDK to develop a Python application that supports real-time spoken conversations.</p>
+              <p class="prompt">Which Azure speech class should you use to configure the connection to the Azure Speech service?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>AudioConfig</span></li>
+                <li><span class="letter">B</span><span>SpeechSynthesizer</span></li>
+                <li class="correct"><span class="letter">C</span><span>SpeechConfig</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> C. SpeechConfig</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在使用 <span class="term-en">Azure Speech SDK</span> 開發支援即時語音對話的 <span class="term-en">Python</span> 應用程式。</p>
+              <p class="prompt">你應該使用哪一個 Azure Speech 類別來設定連線到 Azure Speech 服務？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span><span class="term-zh">音訊設定</span> (<span class="term-en">AudioConfig</span>)</span></li>
+                <li><span class="letter">B</span><span><span class="term-zh">語音合成器</span> (<span class="term-en">SpeechSynthesizer</span>)</span></li>
+                <li class="correct"><span class="letter">C</span><span><span class="term-zh">語音設定</span> (<span class="term-en">SpeechConfig</span>)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>C。<span class="term-zh">語音設定</span> (<span class="term-en">SpeechConfig</span>)</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>本題依題意修正為 <span class="term-en">SpeechConfig</span>。在 <span class="term-en">Azure Speech SDK</span> 中，若要設定連線到 Azure Speech 服務，應使用 <span class="term-en">SpeechConfig</span>，因為它負責設定訂用帳戶金鑰、區域或授權資訊。<span class="term-en">AudioConfig</span> 主要指定音訊輸入或輸出，例如麥克風、喇叭或音訊檔；<span class="term-en">SpeechSynthesizer</span> 是執行語音合成的物件，不是設定服務連線的類別。PDF 原文的 C 選項為 <span class="term-en">AuditOutputConfig</span>，但依題目語意判斷應為誤植，因此本頁採用較合理且符合 SDK 用法的 <span class="term-en">SpeechConfig</span>。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="gen-ai-foundry">
+          <header class="question-head">
+            <span class="qid">Question 6</span>
+            <span class="tag">使用 Foundry 實作生成式 AI 應用程式與代理</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">Yes</span><span>Setting tool_choice to auto lets the agent/model decide whether to call a tool.</span></li>
+                <li class="correct"><span class="letter">No</span><span>Setting tool_choice to none means the model decides whether to call a tool.</span></li>
+                <li class="correct"><span class="letter">Yes</span><span>Setting tool_choice to required means the agent must call one or more tools during the run.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> Yes, No, Yes</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">是</span><span>將 <span class="term-en">tool_choice</span> 設為 <span class="term-en">auto</span>，會讓代理或模型自行決定是否呼叫工具。</span></li>
+                <li class="correct"><span class="letter">否</span><span>將 <span class="term-en">tool_choice</span> 設為 <span class="term-en">none</span>，表示模型會自行決定是否呼叫工具。</span></li>
+                <li class="correct"><span class="letter">是</span><span>將 <span class="term-en">tool_choice</span> 設為 <span class="term-en">required</span>，表示代理在執行期間必須呼叫一個或多個工具。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：是、否、是。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">Microsoft Foundry Agent Service</span> 的 <span class="term-en">tool_choice</span> 用來控制代理是否以及如何使用工具。<span class="term-en">auto</span> 代表讓模型依照使用者要求與上下文自行判斷是否需要工具，因此第一個敘述正確。<span class="term-en">none</span> 代表禁止工具呼叫，不是讓模型自由決定，所以第二個敘述錯誤。<span class="term-en">required</span> 代表強制在執行期間呼叫一個或多個工具，因此第三個敘述正確。本題考的是代理工具使用策略，歸入生成式 AI 應用程式與代理。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="info-extraction-foundry">
+          <header class="question-head">
+            <span class="qid">Question 7</span>
+            <span class="tag">使用 Foundry 實作資訊擷取的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are developing an application that extracts fields from PDFs by using Azure Content Understanding in Foundry Tools.</p>
+              <p class="prompt">You need to use the Python SDK to submit a PDF for analysis and retrieve the extraction results.</p>
+              <p class="prompt">What should you do?</p>
+              <ul class="options" aria-label="English options">
+                <li class="correct"><span class="letter">A</span><span>Call begin_analyze(), and then call poller.result() to retrieve the results.</span></li>
+                <li><span class="letter">B</span><span>Submit the PDF to an analyzer and read the results from the request headers.</span></li>
+                <li><span class="letter">C</span><span>Use optical character recognition (OCR) to extract text from the PDF and map the fields in the code.</span></li>
+                <li><span class="letter">D</span><span>Call analyze() to return the extracted fields synchronously in the same request.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> A. Call begin_analyze(), and then call poller.result() to retrieve the results.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在開發一個應用程式，使用 <span class="term-en">Foundry Tools</span> 中的 <span class="term-en">Azure Content Understanding</span> 從 PDF 擷取欄位。</p>
+              <p class="prompt">你需要使用 <span class="term-en">Python SDK</span> 提交 PDF 進行分析，並取回擷取結果。你應該怎麼做？</p>
+              <ul class="options" aria-label="中文選項">
+                <li class="correct"><span class="letter">A</span><span>呼叫 <span class="term-en">begin_analyze()</span>，再呼叫 <span class="term-en">poller.result()</span> 取回結果。</span></li>
+                <li><span class="letter">B</span><span>將 PDF 提交給分析器，並從要求標頭讀取結果。</span></li>
+                <li><span class="letter">C</span><span>使用 <span class="term-zh">光學字元辨識</span> (<span class="term-abbr">OCR</span>, <span class="term-en">Optical Character Recognition</span>) 從 PDF 擷取文字，再於程式碼中對應欄位。</span></li>
+                <li><span class="letter">D</span><span>呼叫 <span class="term-en">analyze()</span>，在同一個同步要求中回傳擷取欄位。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>A。呼叫 <span class="term-en">begin_analyze()</span>，再呼叫 <span class="term-en">poller.result()</span> 取回結果。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">Azure Content Understanding</span> 的文件與欄位分析通常屬於 <span class="term-zh">長時間執行作業</span> (<span class="term-en">long-running operation</span>)。在 <span class="term-en">Python SDK</span> 中，常見流程是先呼叫 <span class="term-en">begin_analyze()</span> 提交分析工作，取得 poller 後再呼叫 <span class="term-en">poller.result()</span> 等待並取回結果。B 錯在擷取結果不是從要求標頭讀取；C 錯在題目要求使用 Content Understanding 的欄位擷取流程，不是自行建立 OCR 對應；D 錯在這類分析不是單純同步 <span class="term-en">analyze()</span> 就立即回傳完整結果。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="model-components">
+          <header class="question-head">
+            <span class="qid">Question 8</span>
+            <span class="tag">識別 AI 模型的組件與配置</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You have a Microsoft Foundry project that has a generative AI model deployment.</p>
+              <p class="prompt">You need to ensure that responses generated by the model minimize costs and remain within a defined length.</p>
+              <p class="prompt">Which parameter should you configure?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>Temperature</span></li>
+                <li class="correct"><span class="letter">B</span><span>Max Completion Tokens</span></li>
+                <li><span class="letter">C</span><span>Top P</span></li>
+                <li><span class="letter">D</span><span>Model version settings</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> B. Max Completion Tokens</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你有一個 <span class="term-en">Microsoft Foundry</span> 專案，其中已部署 <span class="term-zh">生成式 AI</span> 模型。</p>
+              <p class="prompt">你需要確保模型產生的回應能降低成本，並維持在定義好的長度內。你應該設定哪一個參數？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span><span class="term-zh">溫度</span> (<span class="term-en">Temperature</span>)</span></li>
+                <li class="correct"><span class="letter">B</span><span><span class="term-zh">最大完成權杖數</span> (<span class="term-en">Max Completion Tokens</span>)</span></li>
+                <li><span class="letter">C</span><span><span class="term-en">Top P</span></span></li>
+                <li><span class="letter">D</span><span><span class="term-zh">模型版本設定</span> (<span class="term-en">Model version settings</span>)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>B。<span class="term-zh">最大完成權杖數</span> (<span class="term-en">Max Completion Tokens</span>)</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">Max Completion Tokens</span> 用來限制模型在完成回應時最多可產生的 <span class="term-zh">權杖</span> (<span class="term-en">token</span>) 數。輸出權杖會影響回應長度，也會影響使用成本，因此若題目要求控制長度並降低成本，就應設定最大完成權杖數。<span class="term-en">Temperature</span> 與 <span class="term-en">Top P</span> 主要控制輸出的隨機性與取樣方式，會影響創意或多樣性，但不直接限制輸出長度；模型版本設定也不是控制回應長度的參數。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="model-components">
+          <header class="question-head">
+            <span class="qid">Question 9</span>
+            <span class="tag">識別 AI 模型的組件與配置</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">Yes</span><span>Generating a response to a user prompt occurs during the inference stage.</span></li>
+                <li class="correct"><span class="letter">No</span><span>A generative AI model generates responses by copying stored documents directly from the model's training data.</span></li>
+                <li class="correct"><span class="letter">Yes</span><span>A generative AI model produces output by predicting the next token based on patterns learned from the model's training data.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> Yes, No, Yes</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">是</span><span>模型針對使用者提示產生回應，是發生在 <span class="term-zh">推論</span> (<span class="term-en">inference</span>) 階段。</span></li>
+                <li class="correct"><span class="letter">否</span><span><span class="term-zh">生成式 AI</span> 模型是直接複製訓練資料中儲存的文件來產生回應。</span></li>
+                <li class="correct"><span class="letter">是</span><span><span class="term-zh">生成式 AI</span> 模型會根據從訓練資料學到的模式，預測下一個 <span class="term-zh">權杖</span> (<span class="term-en">token</span>) 來產生輸出。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：是、否、是。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>模型部署後，使用者輸入提示並由模型產生回應的階段稱為 <span class="term-zh">推論</span> (<span class="term-en">inference</span>)，所以第一個敘述正確。生成式 AI 並不是正常情況下直接複製訓練資料中的完整文件，而是依據訓練時學到的統計模式產生輸出，因此第二個敘述錯誤。大型語言模型通常以 <span class="term-zh">權杖</span> 為單位，根據提示與上下文預測下一個可能權杖，逐步形成完整回應，因此第三個敘述正確。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="vision-foundry">
+          <header class="question-head">
+            <span class="qid">Question 10</span>
+            <span class="tag">透過使用 Foundry 實現具備電腦視覺與影像生成能力的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">Yes</span><span>In the Foundry playground, you can upload a local image and include text in the same message when prompting a multimodal model.</span></li>
+                <li class="correct"><span class="letter">No</span><span>When using the OpenAI Responses API and a vision-enabled model, images can be provided only as base64-encoded image data.</span></li>
+                <li class="correct"><span class="letter">No</span><span>Prompts that include images require deploying a text-only model because multimodal capabilities are handled by the application layer.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> Yes, No, No</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">是</span><span>在 <span class="term-en">Foundry playground</span> 中，提示 <span class="term-zh">多模態模型</span> 時，可以上傳本機圖片並在同一則訊息中加入文字。</span></li>
+                <li class="correct"><span class="letter">否</span><span>使用 <span class="term-en">OpenAI Responses API</span> 與支援視覺的模型時，圖片只能以 <span class="term-en">base64</span> 編碼資料提供。</span></li>
+                <li class="correct"><span class="letter">否</span><span>包含圖片的提示需要部署純文字模型，因為多模態能力由應用程式層處理。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：是、否、否。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>支援視覺的 <span class="term-zh">多模態模型</span> 可以同時接收圖片與文字提示，因此在 Foundry playground 中上傳圖片並搭配文字是正確情境。<span class="term-en">Responses API</span> 的圖片輸入不只限於 <span class="term-en">base64</span>，也可以透過圖片 URL 等形式提供，所以第二個敘述錯誤。若提示包含圖片，應使用支援視覺的多模態模型，而不是純文字模型；多模態理解能力不是由應用程式層自行取代模型能力。因此本題依官方大綱歸入電腦視覺與影像生成能力。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="vision-foundry">
+          <header class="question-head">
+            <span class="qid">Question 11</span>
+            <span class="tag">透過使用 Foundry 實現具備電腦視覺與影像生成能力的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> When using the OpenAI Responses API and a vision-enabled model, you can include an image in a request by providing the image as a base64-encoded image data.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>使用 <span class="term-en">OpenAI Responses API</span> 與支援視覺的模型時，可以將圖片以 <span class="term-en">base64</span> 編碼圖片資料提供給要求。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>支援視覺的模型可透過 <span class="term-en">input_image</span> 這類輸入項目接收圖片。圖片可用 URL 或 <span class="term-en">base64</span> 編碼資料提供；本題要求完成句子，因此正確補入的是 base64-encoded image data。CSV 檔不是視覺模型的圖片輸入格式，MP4 是影片內容而非圖片格式，SAS 權杖只是受保護資源的存取權杖，不等於圖片資料本身。依官方大綱，這題屬於具備電腦視覺能力的 AI 解決方案。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="responsible-ai">
+          <header class="question-head">
+            <span class="qid">Question 12</span>
+            <span class="tag">描述負責任 AI 的原則</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">No</span><span>Fairness can be achieved by focusing solely on improving the overall accuracy of an AI model.</span></li>
+                <li class="correct"><span class="letter">Yes</span><span>Evaluating AI system outputs to identify and reduce bias across demographic groups supports fairness.</span></li>
+                <li class="correct"><span class="letter">No</span><span>Ensuring fairness for an AI system means that all users always receive the same output from the system.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> No, Yes, No</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">否</span><span>只要專注提升 AI 模型的整體準確率，就能達成公平性。</span></li>
+                <li class="correct"><span class="letter">是</span><span>評估 AI 系統輸出，以識別並降低不同人口族群間的偏差，有助於公平性。</span></li>
+                <li class="correct"><span class="letter">否</span><span>確保 AI 系統公平，表示所有使用者永遠都會收到相同輸出。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：否、是、否。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">公平性</span> (<span class="term-en">fairness</span>) 不等於整體準確率高。模型可能整體準確率很好，卻對特定族群表現較差或產生偏誤，因此第一個敘述錯誤。跨人口族群評估輸出並降低偏差，正是公平性的實務做法，所以第二個敘述正確。公平也不是所有人一定得到完全相同輸出，而是在合理差異下避免不公平偏差與歧視，因此第三個敘述錯誤。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="text-speech-foundry">
+          <header class="question-head">
+            <span class="qid">Question 13</span>
+            <span class="tag">使用 Foundry 實作文字與語音的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are developing an application that converts text into spoken audio and saves the synthesized audio to a file by using Azure Speech in Foundry Tools.</p>
+              <p class="prompt">How should you complete the Python code?</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> audio_config = speechsdk.audio.AudioOutputConfig(filename="output.wav")</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在使用 <span class="term-en">Foundry Tools</span> 中的 <span class="term-en">Azure Speech</span>，開發一個將文字轉成語音並把合成音訊儲存成檔案的應用程式。</p>
+              <p class="prompt">你應該如何完成 <span class="term-en">Python</span> 程式碼？</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong><span class="term-en">audio_config = speechsdk.audio.AudioOutputConfig(filename="output.wav")</span></p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>題目明確要求將合成後的語音「儲存到檔案」。在 Azure Speech SDK for Python 中，<span class="term-en">AudioOutputConfig(filename="output.wav")</span> 會把語音合成輸出寫入指定的 WAV 檔。若使用 stream 參數，通常是將音訊導向記憶體串流，方便程式後續處理，而不是直接存檔。<span class="term-en">AudioStreamFormat</span> 則是定義串流格式，例如 PCM 編碼或取樣率，不是指定檔案輸出目的地。因此正確完成方式是設定 <span class="term-en">AudioOutputConfig</span> 的 <span class="term-en">filename</span>。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="text-speech-foundry">
+          <header class="question-head">
+            <span class="qid">Question 14</span>
+            <span class="tag">使用 Foundry 實作文字與語音的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">No</span><span>Voice Live returns only transcribed text.</span></li>
+                <li class="correct"><span class="letter">No</span><span>Voice Live requires you to separately implement speech to text and text to speech services.</span></li>
+                <li class="correct"><span class="letter">Yes</span><span>Voice Live combines speech to text, reasoning, and text to speech into a single conversational experience.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> No, No, Yes</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">否</span><span><span class="term-en">Voice Live</span> 只會回傳轉錄文字。</span></li>
+                <li class="correct"><span class="letter">否</span><span><span class="term-en">Voice Live</span> 要求你分別實作語音轉文字與文字轉語音服務。</span></li>
+                <li class="correct"><span class="letter">是</span><span><span class="term-en">Voice Live</span> 將語音轉文字、推理與文字轉語音整合成單一對話體驗。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：否、否、是。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">Voice Live</span> 的用途不是單純語音轉錄。它支援即時雙向語音應用，能把語音辨識、語言理解或推理，以及文字轉語音整合在同一個即時對話流程中。因此「只回傳轉錄文字」是錯的；「必須自行分開實作 STT 與 TTS」也不符合 Voice Live 的整合式體驗。第三個敘述描述其核心能力：把語音輸入、AI 推理與語音輸出整合成對話式體驗，所以正確。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="workloads">
+          <header class="question-head">
+            <span class="qid">Question 15</span>
+            <span class="tag">識別 AI 工作負載</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You need to build an AI solution that generates marketing email drafts based on a short description of a product and its target audience.</p>
+              <p class="prompt">Which AI workload should you use?</p>
+              <ul class="options" aria-label="English options">
+                <li class="correct"><span class="letter">A</span><span>generative AI</span></li>
+                <li><span class="letter">B</span><span>computer vision</span></li>
+                <li><span class="letter">C</span><span>text classification</span></li>
+                <li><span class="letter">D</span><span>speech recognition</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> A. generative AI</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你需要建立一個 AI 解決方案，根據產品與目標受眾的簡短描述，產生行銷電子郵件草稿。</p>
+              <p class="prompt">你應該使用哪一種 AI 工作負載？</p>
+              <ul class="options" aria-label="中文選項">
+                <li class="correct"><span class="letter">A</span><span><span class="term-zh">生成式 AI</span> (<span class="term-en">generative AI</span>)</span></li>
+                <li><span class="letter">B</span><span><span class="term-zh">電腦視覺</span> (<span class="term-en">computer vision</span>)</span></li>
+                <li><span class="letter">C</span><span><span class="term-zh">文字分類</span> (<span class="term-en">text classification</span>)</span></li>
+                <li><span class="letter">D</span><span><span class="term-zh">語音辨識</span> (<span class="term-en">speech recognition</span>)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>A。<span class="term-zh">生成式 AI</span> (<span class="term-en">generative AI</span>)</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>本題的關鍵是 generates marketing email drafts，也就是根據輸入產生新的文字內容。這正是 <span class="term-zh">生成式 AI</span> 的工作負載。<span class="term-zh">電腦視覺</span> 用於理解影像或影片；<span class="term-zh">文字分類</span> 是把既有文字分到類別，例如垃圾郵件判斷或主題分類；<span class="term-zh">語音辨識</span> 則是把口語音訊轉成文字。題目要產生新行銷文案，所以答案是 A。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="gen-ai-foundry">
+          <header class="question-head">
+            <span class="qid">Question 16</span>
+            <span class="tag">使用 Foundry 實作生成式 AI 應用程式與代理</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You have a Microsoft Foundry project that contains a generative AI model deployment.</p>
+              <p class="prompt">You test the model by using the Foundry playground.</p>
+              <p class="prompt">You need to develop an application that sends requests to the deployed model. Which information must the application include to call the model?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>The model training dataset</span></li>
+                <li><span class="letter">B</span><span>The Foundry project display name</span></li>
+                <li><span class="letter">C</span><span>The exported playground session history</span></li>
+                <li class="correct"><span class="letter">D</span><span>The model endpoint and authentication credentials</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> D. The model endpoint and authentication credentials</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你有一個 <span class="term-en">Microsoft Foundry</span> 專案，其中包含生成式 AI 模型部署，並已在 <span class="term-en">Foundry playground</span> 測試模型。</p>
+              <p class="prompt">你需要開發一個應用程式，將要求傳送到已部署的模型。應用程式必須包含哪些資訊才能呼叫模型？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span>模型訓練資料集</span></li>
+                <li><span class="letter">B</span><span>Foundry 專案顯示名稱</span></li>
+                <li><span class="letter">C</span><span>匯出的 playground 工作階段歷程記錄</span></li>
+                <li class="correct"><span class="letter">D</span><span>模型端點與驗證認證</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>D。模型端點與驗證認證。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>應用程式要呼叫已部署模型，必須知道服務 <span class="term-zh">端點</span> (<span class="term-en">endpoint</span>)，並提供可驗證身分的認證，例如 API 金鑰或 Microsoft Entra ID 驗證資訊。模型訓練資料集不是呼叫部署模型所需資訊；專案顯示名稱只是管理介面的名稱；匯出的 playground 歷程可用於參考提示，但不能取代端點與驗證資訊。因此答案是 D。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="model-components">
+          <header class="question-head">
+            <span class="qid">Question 17</span>
+            <span class="tag">識別 AI 模型的組件與配置</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">No</span><span>In the new Microsoft Foundry portal, you must fine-tune a model before you can deploy the model.</span></li>
+                <li class="correct"><span class="letter">No</span><span>In the new Microsoft Foundry portal, you can test a model from the model catalog only after you deploy the model.</span></li>
+                <li class="correct"><span class="letter">No</span><span>In the new Microsoft Foundry portal, you can deploy a model from the model catalog only after retraining the model.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> No, No, No</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">否</span><span>在新的 <span class="term-en">Microsoft Foundry portal</span> 中，必須先微調模型才能部署模型。</span></li>
+                <li class="correct"><span class="letter">否</span><span>在新的 <span class="term-en">Microsoft Foundry portal</span> 中，只有部署模型之後，才能測試模型目錄中的模型。</span></li>
+                <li class="correct"><span class="letter">否</span><span>在新的 <span class="term-en">Microsoft Foundry portal</span> 中，只有重新訓練模型之後，才能從模型目錄部署模型。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：否、否、否。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">微調</span> (<span class="term-en">fine-tuning</span>) 是可選的模型調整方式，不是部署前的必備步驟，因此第一個敘述錯誤。Foundry 的模型目錄與 playground 可用於探索、原型設計與驗證，不能說「只有部署後」才可測試，所以第二個敘述也太絕對。從模型目錄部署模型不需要先重新訓練或微調，選取模型後可依部署流程建立部署，因此第三個敘述錯誤。本題考模型部署與配置概念。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="text-speech-foundry">
+          <header class="question-head">
+            <span class="qid">Question 18</span>
+            <span class="tag">使用 Foundry 實作文字與語音的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are developing a voice application that listens for spoken commands and converts them into text by using Azure Speech in Foundry Tools.</p>
+              <p class="prompt">How should you complete the Python code?</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> recognizer.recognize_once()</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在使用 <span class="term-en">Foundry Tools</span> 中的 <span class="term-en">Azure Speech</span>，開發一個聆聽語音命令並將其轉換成文字的語音應用程式。</p>
+              <p class="prompt">你應該如何完成 <span class="term-en">Python</span> 程式碼？</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong><span class="term-en">recognizer.recognize_once()</span></p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>題目要求的是將語音命令轉成文字，也就是 <span class="term-zh">語音轉文字</span> (<span class="term-en">speech to text</span>)。在 Speech SDK 中，<span class="term-en">SpeechRecognizer</span> 可用來從音訊輸入進行辨識；若是一次性辨識，常用方法是 <span class="term-en">recognize_once()</span>。<span class="term-en">speak_text_async()</span> 是文字轉語音，不符合方向；<span class="term-en">start_continuous_recognition()</span> 用於連續辨識；<span class="term-en">start_keyword_recognition()</span> 則偏向喚醒詞或關鍵字辨識，不是本題的基本語音命令轉文字。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="gen-ai-foundry">
+          <header class="question-head">
+            <span class="qid">Question 19</span>
+            <span class="tag">使用 Foundry 實作生成式 AI 應用程式與代理</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You have a Microsoft Foundry project that contains an agent named Agent1.</p>
+              <p class="prompt">You need to ensure that Agent1 always calls an Azure function when the agent responds to user input.</p>
+              <p class="prompt">To what should you set tool_choice for Agent1?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>auto</span></li>
+                <li><span class="letter">B</span><span>none</span></li>
+                <li class="correct"><span class="letter">C</span><span>required</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> C. required</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你有一個 <span class="term-en">Microsoft Foundry</span> 專案，其中包含名為 Agent1 的代理。</p>
+              <p class="prompt">你需要確保 Agent1 回應使用者輸入時，一律呼叫 <span class="term-en">Azure Function</span>。Agent1 的 <span class="term-en">tool_choice</span> 應設定為什麼？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span><span class="term-en">auto</span></span></li>
+                <li><span class="letter">B</span><span><span class="term-en">none</span></span></li>
+                <li class="correct"><span class="letter">C</span><span><span class="term-en">required</span></span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>C。<span class="term-en">required</span></p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">tool_choice</span> 控制代理或模型是否呼叫工具。<span class="term-en">auto</span> 代表模型自行判斷是否要呼叫工具，因此不能保證一定呼叫 Azure Function；<span class="term-en">none</span> 代表不呼叫工具；<span class="term-en">required</span> 代表必須呼叫一個或多個工具。題目要求 always calls，因此要設定為 <span class="highlight">required</span>。這題和 Foundry 代理工具呼叫控制有關，歸入生成式 AI 應用程式與代理。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="vision-foundry">
+          <header class="question-head">
+            <span class="qid">Question 20</span>
+            <span class="tag">透過使用 Foundry 實現具備電腦視覺與影像生成能力的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> Information extraction solutions that detect and read text in scanned documents and images rely on computer vision.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>能偵測並讀取掃描文件與影像中文字的資訊擷取解決方案，仰賴 <span class="term-zh">電腦視覺</span> (<span class="term-en">computer vision</span>)。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>從掃描文件或圖片中偵測並讀取文字，通常會用到 <span class="term-zh">光學字元辨識</span> (<span class="term-abbr">OCR</span>, <span class="term-en">Optical Character Recognition</span>)。OCR 是電腦視覺能力的一種，能從影像或文件中辨識列印或手寫文字。雖然題幹提到 information extraction，但它描述的底層能力是從影像讀取文字，因此依官方大綱更精準放在「具備電腦視覺與影像生成能力的 AI 解決方案」。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="info-extraction-foundry">
+          <header class="question-head">
+            <span class="qid">Question 21</span>
+            <span class="tag">使用 Foundry 實作資訊擷取的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> When content is submitted to Azure Content Understanding in Foundry Tools, the analysis is asynchronous.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>當內容提交至 <span class="term-en">Foundry Tools</span> 中的 <span class="term-en">Azure Content Understanding</span> 時，分析是 <span class="term-zh">非同步</span> (<span class="term-en">asynchronous</span>) 的。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">Azure Content Understanding</span> 會執行多步驟內容處理，例如 <span class="term-abbr">OCR</span>、語音轉錄、欄位對應與結構化輸出，因此通常採用 <span class="term-zh">長時間執行作業</span> (<span class="term-en">long-running operation</span>, <span class="term-abbr">LRO</span>) 模式。開發者會先呼叫 <span class="term-en">begin_analyze()</span> 提交內容，取得 poller 後再呼叫 <span class="term-en">poller.result()</span> 等待處理完成並取回結構化結果。同步分析、只回傳非結構化純文字，或只限 OCR，都不符合 Content Understanding 的能力範圍。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="info-extraction-foundry">
+          <header class="question-head">
+            <span class="qid">Question 22</span>
+            <span class="tag">使用 Foundry 實作資訊擷取的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are developing an application that extracts structured information from different types of content by using Azure Content Understanding in Foundry Tools.</p>
+              <p class="prompt">You need to extract scanned invoices in the PDF format and voicemail recordings in the WAV format. Which type of analyzer should you use for each content type?</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> Scanned invoices in PDF format: document analyzer. Voicemail recordings in WAV format: audio analyzer.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在使用 <span class="term-en">Foundry Tools</span> 中的 <span class="term-en">Azure Content Understanding</span>，開發可從不同內容類型擷取結構化資訊的應用程式。</p>
+              <p class="prompt">你需要從 PDF 格式的掃描發票與 WAV 格式的語音留言擷取資訊。每種內容類型應使用哪一種分析器？</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>PDF 掃描發票：文件分析器；WAV 語音留言：音訊分析器。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">Azure Content Understanding</span> 的 analyzer 會依內容類型處理文件、圖片、音訊或影片，並輸出欄位、逐字稿或結構化 JSON。PDF 掃描發票屬於文件或表單內容，因此應使用 <span class="term-zh">文件分析器</span> (<span class="term-en">document analyzer</span>)；WAV 語音留言屬於音訊內容，因此應使用 <span class="term-zh">音訊分析器</span> (<span class="term-en">audio analyzer</span>)。重點是先辨識內容媒介，再選擇相對應的分析器類型。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="text-speech-foundry">
+          <header class="question-head">
+            <span class="qid">Question 23</span>
+            <span class="tag">使用 Foundry 實作文字與語音的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Your company has thousands of recorded customer support calls in multiple languages stored as audio files in Azure Storage.</p>
+              <p class="prompt">You need to generate text transcripts of all the recordings. Which Azure Speech in Foundry Tools capability should you use?</p>
+              <ul class="options" aria-label="English options">
+                <li class="correct"><span class="letter">A</span><span>speech to text batch transcription</span></li>
+                <li><span class="letter">B</span><span>speech to text real-time transcription</span></li>
+                <li><span class="letter">C</span><span>text to speech</span></li>
+                <li><span class="letter">D</span><span>speech translation</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> A. speech to text batch transcription</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你的公司在 <span class="term-en">Azure Storage</span> 中存放數千通多語言客服錄音檔。</p>
+              <p class="prompt">你需要為所有錄音產生文字逐字稿。你應該使用 <span class="term-en">Foundry Tools</span> 中 <span class="term-en">Azure Speech</span> 的哪一項功能？</p>
+              <ul class="options" aria-label="中文選項">
+                <li class="correct"><span class="letter">A</span><span><span class="term-zh">語音轉文字批次轉錄</span> (<span class="term-en">speech to text batch transcription</span>)</span></li>
+                <li><span class="letter">B</span><span><span class="term-zh">語音轉文字即時轉錄</span> (<span class="term-en">speech to text real-time transcription</span>)</span></li>
+                <li><span class="letter">C</span><span><span class="term-zh">文字轉語音</span> (<span class="term-en">text to speech</span>)</span></li>
+                <li><span class="letter">D</span><span><span class="term-zh">語音翻譯</span> (<span class="term-en">speech translation</span>)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>A。<span class="term-zh">語音轉文字批次轉錄</span>。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>題目有兩個關鍵：錄音已經存在於 Azure Storage，而且數量是 thousands。這代表不是即時麥克風輸入，而是大量儲存音訊要批次處理。因此應選擇 <span class="term-zh">批次轉錄</span> (<span class="term-en">batch transcription</span>)。即時轉錄適合直播或即時通話；文字轉語音是把文字產生音訊，方向相反；語音翻譯著重跨語言翻譯，不是產生所有錄音的逐字稿。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="info-extraction-foundry">
+          <header class="question-head">
+            <span class="qid">Question 24</span>
+            <span class="tag">使用 Foundry 實作資訊擷取的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are developing a web app that processes invoices to calculate expenses.</p>
+              <p class="prompt">You need to extract structured fields, including nested values, from the invoices by using a defined schema. What should you use?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>a transcription workflow in Azure Speech in Foundry Tools</span></li>
+                <li><span class="letter">B</span><span>an optical character recognition (OCR)-only document processing pipeline</span></li>
+                <li class="correct"><span class="letter">C</span><span>an analyzer in Azure Content Understanding in Foundry Tools</span></li>
+                <li><span class="letter">D</span><span>an Azure AI Search service</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> C. an analyzer in Azure Content Understanding in Foundry Tools</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在開發一個處理發票以計算費用的 Web 應用程式。</p>
+              <p class="prompt">你需要使用定義好的結構描述，從發票擷取結構化欄位，包含巢狀值。你應該使用什麼？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span><span class="term-en">Azure Speech</span> 中的轉錄工作流程</span></li>
+                <li><span class="letter">B</span><span>只使用 <span class="term-abbr">OCR</span> 的文件處理管線</span></li>
+                <li class="correct"><span class="letter">C</span><span><span class="term-en">Azure Content Understanding</span> 中的分析器</span></li>
+                <li><span class="letter">D</span><span><span class="term-en">Azure AI Search</span> 服務</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>C。<span class="term-en">Azure Content Understanding</span> 中的分析器。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>題目要求用定義好的 schema 擷取發票的結構化欄位，甚至包含巢狀值。<span class="term-en">Azure Content Understanding</span> 的 analyzer 正是用來定義如何分析內容、要擷取哪些欄位，以及如何形成結構化輸出。Azure Speech 的轉錄流程處理音訊轉文字；只使用 OCR 可以讀出文字，但無法完整滿足 schema、欄位與巢狀值需求；Azure AI Search 偏向索引與查詢，不是發票欄位擷取 schema 的處理單元。因此答案是 C。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="model-components">
+          <header class="question-head">
+            <span class="qid">Question 25</span>
+            <span class="tag">識別 AI 模型的組件與配置</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">No</span><span>System prompts can be used to authorize users.</span></li>
+                <li class="correct"><span class="letter">No</span><span>A system prompt is used to reduce tokens per minute (TPM).</span></li>
+                <li class="correct"><span class="letter">Yes</span><span>A system prompt guides the behavior of a generative AI model.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> No, No, Yes</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">否</span><span><span class="term-zh">系統提示</span> (<span class="term-en">system prompt</span>) 可用來授權使用者。</span></li>
+                <li class="correct"><span class="letter">否</span><span><span class="term-zh">系統提示</span> 可用來降低每分鐘權杖數 (<span class="term-abbr">TPM</span>, <span class="term-en">tokens per minute</span>)。</span></li>
+                <li class="correct"><span class="letter">是</span><span><span class="term-zh">系統提示</span> 會引導生成式 AI 模型的行為。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：否、否、是。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">系統提示</span> (<span class="term-en">system prompt</span>) 也稱為 system message，用來設定模型的角色、語氣、回應風格、限制與輸出格式。它不能取代身分驗證、授權或存取控制，所以第一個敘述錯誤。<span class="term-abbr">TPM</span> 是部署或服務層級的配額與輸送量概念，系統提示不能直接降低 TPM，所以第二個敘述錯誤。系統提示確實會引導生成式 AI 模型行為，因此第三個敘述正確。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="responsible-ai">
+          <header class="question-head">
+            <span class="qid">Question 26</span>
+            <span class="tag">描述負責任 AI 的原則</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are reviewing best practices for using AI at your company.</p>
+              <p class="prompt">Which Microsoft responsible AI principle is each task an example of?</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> Evaluating model outputs to avoid bias: Fairness. Encrypting sensitive customer data and restricting access: Privacy and security. Informing users about AI interaction, capabilities, and limitations: Transparency. Testing AI systems under different conditions: Reliability and safety.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在檢視公司使用 AI 的最佳做法。每個工作各屬於哪一項 Microsoft 負責任 AI 原則？</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>評估模型輸出以避免特定人口族群偏差：公平性。加密敏感客戶資料並限制授權人員存取：隱私權與安全性。告知使用者正在與 AI 互動並說明能力與限制：透明度。於不同條件下測試 AI 系統以降低非預期失敗：可靠性與安全性。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">公平性</span> (<span class="term-en">fairness</span>) 強調避免不公平偏差，因此跨族群檢查模型輸出屬於公平性。<span class="term-zh">隱私權與安全性</span> (<span class="term-en">privacy and security</span>) 著重保護個資與敏感資料，並避免未授權存取，所以加密與權限控管屬於此原則。<span class="term-zh">透明度</span> (<span class="term-en">transparency</span>) 要讓使用者知道自己正在與 AI 互動，並了解系統目的、能力與限制。<span class="term-zh">可靠性與安全性</span> (<span class="term-en">reliability and safety</span>) 則要求系統在不同條件下穩定、安全運作，因此測試與驗證可降低非預期失敗。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="text-speech-foundry">
+          <header class="question-head">
+            <span class="qid">Question 27</span>
+            <span class="tag">使用 Foundry 實作文字與語音的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Your company processes customer support emails.</p>
+              <p class="prompt">You need to implement an AI solution that automatically identifies mentions of people, organizations, and locations in the emails. Which text analysis technique should you use?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>sentiment analysis</span></li>
+                <li class="correct"><span class="letter">B</span><span>Named Entity Recognition (NER)</span></li>
+                <li><span class="letter">C</span><span>summarization</span></li>
+                <li><span class="letter">D</span><span>key phrase extraction</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> B. Named Entity Recognition (NER)</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你的公司處理客服電子郵件。你需要實作一個 AI 解決方案，自動識別郵件中提到的人員、組織與地點。</p>
+              <p class="prompt">你應該使用哪一種文字分析技術？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span><span class="term-zh">情感分析</span> (<span class="term-en">sentiment analysis</span>)</span></li>
+                <li class="correct"><span class="letter">B</span><span><span class="term-zh">命名實體辨識</span> (<span class="term-abbr">NER</span>, <span class="term-en">Named Entity Recognition</span>)</span></li>
+                <li><span class="letter">C</span><span><span class="term-zh">摘要</span> (<span class="term-en">summarization</span>)</span></li>
+                <li><span class="letter">D</span><span><span class="term-zh">關鍵片語擷取</span> (<span class="term-en">key phrase extraction</span>)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>B。<span class="term-zh">命名實體辨識</span> (<span class="term-abbr">NER</span>, <span class="term-en">Named Entity Recognition</span>)</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">命名實體辨識</span> (<span class="term-abbr">NER</span>, <span class="term-en">Named Entity Recognition</span>) 用來從非結構化文字中找出並分類實體，例如人名、組織、地點、日期或其他類別。本題明確要求識別 people、organizations、locations，因此正是 NER。情感分析判斷正面、負面或中立情緒；摘要產生較短版本；關鍵片語擷取找重要片語，但不一定將其分類成人員、組織或地點。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="model-components">
+          <header class="question-head">
+            <span class="qid">Question 28</span>
+            <span class="tag">識別 AI 模型的組件與配置</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">No</span><span>The Temperature parameter can be set before deploying a model.</span></li>
+                <li class="correct"><span class="letter">No</span><span>During inference, the model name is used to route requests to a specific deployment.</span></li>
+                <li class="correct"><span class="letter">Yes</span><span>After a model is deployed, both code and testing tools can be used to interact with the model.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> No, No, Yes</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">否</span><span><span class="term-en">Temperature</span> 參數可以在部署模型前設定。</span></li>
+                <li class="correct"><span class="letter">否</span><span>推論期間，模型名稱會用來將要求路由到特定部署。</span></li>
+                <li class="correct"><span class="letter">是</span><span>模型部署後，可以使用程式碼與測試工具和模型互動。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：否、否、是。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">Temperature</span> 是推論或請求時的參數，用來控制生成回應的隨機性，不是模型部署前的必要部署設定，所以第一個敘述錯誤。Azure OpenAI 或 Microsoft Foundry 的應用程式要求通常路由到特定 <span class="term-zh">部署名稱</span>，不是直接靠底層模型名稱路由，所以第二個敘述錯誤。模型部署後，可以在 playground 或測試工具中互動，也可以使用端點、部署名稱與認證從程式碼呼叫，因此第三個敘述正確。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="responsible-ai">
+          <header class="question-head">
+            <span class="qid">Question 29</span>
+            <span class="tag">描述負責任 AI 的原則</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> Ensuring that human reviewers oversee AI-generated decisions and remain responsible for the final output is an example of accountability.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>確保人工審查者監督 AI 產生的決策，並對最終輸出負責，是 <span class="term-zh">責任歸屬</span> (<span class="term-en">accountability</span>) 的例子。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">責任歸屬</span> (<span class="term-en">accountability</span>) 的核心是人與組織仍需對 AI 系統及其影響負責。題目中的 human reviewers oversee 與 remain responsible for the final output 都明確指出人類監督與最終責任，因此答案是 accountability。公平性聚焦避免偏差；隱私權與安全性聚焦資料保護與存取限制；透明度聚焦說明 AI 使用方式、能力與限制。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="gen-ai-foundry">
+          <header class="question-head">
+            <span class="qid">Question 30</span>
+            <span class="tag">使用 Foundry 實作生成式 AI 應用程式與代理</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> To define an agent's role and behaviors, you must configure a system prompt for the agent.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>若要定義代理的角色與行為，必須為代理設定 <span class="term-zh">系統提示</span> (<span class="term-en">system prompt</span>)。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>在 Microsoft Foundry 或 Azure AI 代理情境中，<span class="term-zh">系統提示</span> 也可稱為 system instructions，用來描述代理的角色、行為規則、限制、語氣與輸出方式。deployment slot 與部署或路由有關，不是定義代理角色；embedding index 用於向量搜尋或檢索情境；fine-tuning job 是透過訓練調整模型行為，但不是執行階段定義代理角色與行為的標準設定。本題屬於「使用 Foundry 實作生成式 AI 應用程式與代理」中的提示設計與代理行為設定。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="vision-foundry">
+          <header class="question-head">
+            <span class="qid">Question 31</span>
+            <span class="tag">透過使用 Foundry 實現具備電腦視覺與影像生成能力的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You have a Microsoft Foundry project that contains a vision-enabled model deployment.</p>
+              <p class="prompt">You use the Azure OpenAI Responses API to send a prompt to the model. You need to provide an image for analysis.</p>
+              <p class="prompt">Which content item should you include in the request?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>image_base64</span></li>
+                <li><span class="letter">B</span><span>image_generation</span></li>
+                <li><span class="letter">C</span><span>output_image</span></li>
+                <li class="correct"><span class="letter">D</span><span>input_image</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> D. input_image</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你有一個 <span class="term-en">Microsoft Foundry</span> 專案，其中包含支援視覺的模型部署。</p>
+              <p class="prompt">你使用 <span class="term-en">Azure OpenAI Responses API</span> 將提示傳送給模型，並需要提供圖片進行分析。要求中應包含哪一種內容項目？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span><span class="term-en">image_base64</span></span></li>
+                <li><span class="letter">B</span><span><span class="term-en">image_generation</span></span></li>
+                <li><span class="letter">C</span><span><span class="term-en">output_image</span></span></li>
+                <li class="correct"><span class="letter">D</span><span><span class="term-en">input_image</span></span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>D。<span class="term-en">input_image</span></p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>使用支援視覺的模型進行圖片分析時，圖片必須作為輸入內容傳入。<span class="term-en">Responses API</span> 的多模態要求會使用結構化內容項目，例如 <span class="term-en">input_text</span> 與 <span class="term-en">input_image</span>。<span class="term-en">image_base64</span> 可能描述圖片資料格式，但不是內容項目類型；<span class="term-en">image_generation</span> 是影像生成，不是提供圖片分析；<span class="term-en">output_image</span> 指生成輸出，不是輸入。因此答案是 <span class="term-en">input_image</span>。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="gen-ai-foundry">
+          <header class="question-head">
+            <span class="qid">Question 32</span>
+            <span class="tag">使用 Foundry 實作生成式 AI 應用程式與代理</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You need to create an AI agent in Microsoft Foundry that follows a specific role and behavior when responding to users.</p>
+              <p class="prompt">What should you configure?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>tokens per minute (TPM)</span></li>
+                <li class="correct"><span class="letter">B</span><span>system instructions</span></li>
+                <li><span class="letter">C</span><span>temperature</span></li>
+                <li><span class="letter">D</span><span>max completion tokens</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> B. system instructions</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你需要在 <span class="term-en">Microsoft Foundry</span> 中建立一個 AI 代理，讓它回應使用者時遵循特定角色與行為。</p>
+              <p class="prompt">你應該設定什麼？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span>每分鐘權杖數 (<span class="term-abbr">TPM</span>, <span class="term-en">tokens per minute</span>)</span></li>
+                <li class="correct"><span class="letter">B</span><span><span class="term-zh">系統指示</span> (<span class="term-en">system instructions</span>)</span></li>
+                <li><span class="letter">C</span><span><span class="term-en">temperature</span></span></li>
+                <li><span class="letter">D</span><span><span class="term-en">max completion tokens</span></span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>B。<span class="term-zh">系統指示</span> (<span class="term-en">system instructions</span>)</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>代理要遵循特定角色、目標、限制與回應方式，應設定 <span class="term-zh">系統指示</span> 或 <span class="term-zh">系統提示</span>。<span class="term-abbr">TPM</span> 是輸送量或配額概念，不是行為設定；<span class="term-en">temperature</span> 控制回應隨機性；<span class="term-en">max completion tokens</span> 控制輸出長度。題目關鍵是 role and behavior，因此答案是 system instructions。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="responsible-ai">
+          <header class="question-head">
+            <span class="qid">Question 33</span>
+            <span class="tag">描述負責任 AI 的原則</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> The Microsoft responsible AI principle of transparency requires that AI systems be explainable to users.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>Microsoft <span class="term-zh">負責任 AI</span> 原則中的 <span class="term-zh">透明度</span> (<span class="term-en">transparency</span>) 要求 AI 系統能向使用者解釋。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">透明度</span> 強調使用者應知道自己何時正在與 AI 互動，了解系統能做什麼、不能做什麼，以及輸出或預測如何在適當層級產生。保護敏感資料屬於 <span class="term-zh">隱私權與安全性</span>；降低決策偏差屬於 <span class="term-zh">公平性</span>；要求人工監督與最終責任屬於 <span class="term-zh">責任歸屬</span>。本題的 explainable to users 對應透明度。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="info-extraction-foundry">
+          <header class="question-head">
+            <span class="qid">Question 34</span>
+            <span class="tag">使用 Foundry 實作資訊擷取的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> A schema defines which fields to extract when analyzing content.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong><span class="term-zh">結構描述</span> (<span class="term-en">schema</span>) 會定義分析內容時要擷取哪些欄位。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>在 <span class="term-en">Azure Content Understanding</span> 中，<span class="term-zh">結構描述</span> 或 <span class="term-en">fieldSchema</span> 用來定義要從非結構化內容擷取出的結構化資料，例如欄位名稱、型別與擷取行為。關鍵字清單不能完整定義輸出欄位；只使用 OCR 只能擷取文字，無法定義結構化欄位；同步 API 呼叫描述的是請求模式，不是欄位擷取規格。因此答案是 schema。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="gen-ai-foundry">
+          <header class="question-head">
+            <span class="qid">Question 35</span>
+            <span class="tag">使用 Foundry 實作生成式 AI 應用程式與代理</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">No</span><span>An AI generative model is retrained before performing each user request.</span></li>
+                <li class="correct"><span class="letter">No</span><span>An AI agent responds by copying and pasting answers stored in a database.</span></li>
+                <li class="correct"><span class="letter">Yes</span><span>An AI agent uses a generative AI model to establish actions based on user input.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> No, No, Yes</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">否</span><span>生成式 AI 模型會在每次使用者要求前重新訓練。</span></li>
+                <li class="correct"><span class="letter">否</span><span>AI 代理是透過複製並貼上資料庫中儲存的答案來回應。</span></li>
+                <li class="correct"><span class="letter">是</span><span>AI 代理會使用生成式 AI 模型，根據使用者輸入決定行動。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：否、否、是。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>一般使用部署後的生成式 AI 模型時，模型執行的是 <span class="term-zh">推論</span>，不是每次要求前重新訓練，因此第一個敘述錯誤。AI 代理也不是單純複製資料庫答案；它會結合模型、系統指示、上下文，以及可用工具或資料來源，理解使用者輸入並產生回應或動作。第三個敘述正確，因為代理會利用生成式 AI 模型判斷下一步行動並產生結果。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="model-components">
+          <header class="question-head">
+            <span class="qid">Question 36</span>
+            <span class="tag">識別 AI 模型的組件與配置</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You need to compare the costs of large language models (LLMs) for a generative AI solution.</p>
+              <p class="prompt">What should you use in the Microsoft Foundry portal?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>Evaluator catalog</span></li>
+                <li class="correct"><span class="letter">B</span><span>Model leaderboard</span></li>
+                <li><span class="letter">C</span><span>Compliance</span></li>
+                <li><span class="letter">D</span><span>Tools</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> B. Model leaderboard</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你需要比較生成式 AI 解決方案中大型語言模型的成本。</p>
+              <p class="prompt">你應該在 <span class="term-en">Microsoft Foundry portal</span> 中使用什麼？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span>評估器目錄 (<span class="term-en">Evaluator catalog</span>)</span></li>
+                <li class="correct"><span class="letter">B</span><span>模型排行榜 (<span class="term-en">Model leaderboard</span>)</span></li>
+                <li><span class="letter">C</span><span>合規性 (<span class="term-en">Compliance</span>)</span></li>
+                <li><span class="letter">D</span><span>工具 (<span class="term-en">Tools</span>)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>B。模型排行榜 (<span class="term-en">Model leaderboard</span>)</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">Model leaderboard</span> 用來比較模型的品質、安全性、效能、輸送量與估計成本，因此適合用來比較大型語言模型成本。<span class="term-en">Evaluator catalog</span> 是選擇評估器來衡量模型或應用輸出的地方，不是成本比較工具；<span class="term-en">Compliance</span> 與治理合規有關；<span class="term-en">Tools</span> 是 Foundry 工具集合，不是模型成本比較排行榜。因此答案是 B。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="info-extraction-foundry">
+          <header class="question-head">
+            <span class="qid">Question 37</span>
+            <span class="tag">使用 Foundry 實作資訊擷取的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are developing an application that analyzes invoices by using Azure Content Understanding in Foundry Tools.</p>
+              <p class="prompt">You need to ensure that the application retrieves the analysis results after processing completes.</p>
+              <p class="prompt">How should you complete the Python code?</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> result = poller.result()</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在使用 <span class="term-en">Foundry Tools</span> 中的 <span class="term-en">Azure Content Understanding</span>，開發分析發票的應用程式。</p>
+              <p class="prompt">你需要確保應用程式在處理完成後取回分析結果。你應該如何完成 <span class="term-en">Python</span> 程式碼？</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong><span class="term-en">result = poller.result()</span></p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">Azure Content Understanding</span> 的分析流程使用 <span class="term-zh">長時間執行作業</span> 模式。呼叫 <span class="term-en">client.begin_analyze()</span> 後會取得 poller；當要等待處理完成並取得最終分析物件時，應呼叫 <span class="term-en">poller.result()</span>。狀態檢查只會查看作業狀態，wait 通常只是等待而不回傳完整結果，get_results 不是此程式碼模式中取得 begin_analyze 結果的方法。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="info-extraction-foundry">
+          <header class="question-head">
+            <span class="qid">Question 38</span>
+            <span class="tag">使用 Foundry 實作資訊擷取的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are developing an application that analyzes voicemail recordings by using Azure Content Understanding in Foundry Tools.</p>
+              <p class="prompt">You need to extract a transcript and structured information from the recordings. Which type of analyzer should you use?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>document analyzer</span></li>
+                <li><span class="letter">B</span><span>video analyzer</span></li>
+                <li class="correct"><span class="letter">C</span><span>audio analyzer</span></li>
+                <li><span class="letter">D</span><span>image analyzer</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> C. audio analyzer</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在使用 <span class="term-en">Foundry Tools</span> 中的 <span class="term-en">Azure Content Understanding</span>，開發分析語音留言錄音的應用程式。</p>
+              <p class="prompt">你需要從錄音中擷取逐字稿與結構化資訊。你應該使用哪一種分析器？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span>文件分析器 (<span class="term-en">document analyzer</span>)</span></li>
+                <li><span class="letter">B</span><span>影片分析器 (<span class="term-en">video analyzer</span>)</span></li>
+                <li class="correct"><span class="letter">C</span><span>音訊分析器 (<span class="term-en">audio analyzer</span>)</span></li>
+                <li><span class="letter">D</span><span>影像分析器 (<span class="term-en">image analyzer</span>)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>C。音訊分析器 (<span class="term-en">audio analyzer</span>)</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>語音留言錄音屬於音訊內容。若要從錄音中擷取逐字稿與結構化資訊，應使用 <span class="term-zh">音訊分析器</span>。文件分析器處理 PDF、表單或文件；影片分析器處理影片；影像分析器處理圖片。題目中的 voicemail recordings 與 transcript 都明確指向音訊分析情境，因此答案是 C。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="vision-foundry">
+          <header class="question-head">
+            <span class="qid">Question 39</span>
+            <span class="tag">透過使用 Foundry 實現具備電腦視覺與影像生成能力的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You have a Microsoft Foundry project that contains a vision-enabled model deployment.</p>
+              <p class="prompt">You need to develop an application that sends a message containing text and an image URL. The solution must ensure the quickest response time.</p>
+              <p class="prompt">Which message structure should you include in the request?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>a user message that includes only a text item and sends an image item in a separate request</span></li>
+                <li><span class="letter">B</span><span>a system message that includes both a text item and an image item in the content array</span></li>
+                <li><span class="letter">C</span><span>a system message that includes only a text item and sends an image item in a separate request</span></li>
+                <li class="correct"><span class="letter">D</span><span>a user message that includes both a text item and an image item in the content array</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> D. a user message that includes both a text item and an image item in the content array</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你有一個 <span class="term-en">Microsoft Foundry</span> 專案，其中包含支援視覺的模型部署。</p>
+              <p class="prompt">你要開發一個應用程式，傳送包含文字與圖片 URL 的訊息，且必須確保最快回應時間。要求中應包含哪一種訊息結構？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span>使用者訊息只包含文字項目，並在另一個要求中傳送圖片項目。</span></li>
+                <li><span class="letter">B</span><span>系統訊息在 content array 中同時包含文字項目與圖片項目。</span></li>
+                <li><span class="letter">C</span><span>系統訊息只包含文字項目，並在另一個要求中傳送圖片項目。</span></li>
+                <li class="correct"><span class="letter">D</span><span>使用者訊息在 content array 中同時包含文字項目與圖片項目。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>D。使用者訊息在 <span class="term-en">content array</span> 中同時包含文字項目與圖片項目。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>支援視覺的多模態模型可以在同一個使用者訊息中接收文字與圖片，例如 content array 同時包含 <span class="term-en">input_text</span> 與 <span class="term-en">input_image</span>。把文字與圖片分成兩個要求會增加往返時間，不符合最快回應時間。系統訊息主要用來設定模型或代理的行為與限制，不適合放使用者的圖片分析問題。因此最佳結構是 user message 中同時放文字與圖片內容項目。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="vision-foundry">
+          <header class="question-head">
+            <span class="qid">Question 40</span>
+            <span class="tag">透過使用 Foundry 實現具備電腦視覺與影像生成能力的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You need to build an AI solution that produces new product images based on written descriptions provided by users.</p>
+              <p class="prompt">Which AI workload should you use?</p>
+              <ul class="options" aria-label="English options">
+                <li class="correct"><span class="letter">A</span><span>image generation</span></li>
+                <li><span class="letter">B</span><span>image analysis</span></li>
+                <li><span class="letter">C</span><span>object detection</span></li>
+                <li><span class="letter">D</span><span>optical character recognition (OCR)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> A. image generation</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你需要建立一個 AI 解決方案，根據使用者提供的書面描述產生新的產品圖片。</p>
+              <p class="prompt">你應該使用哪一種 AI 工作負載？</p>
+              <ul class="options" aria-label="中文選項">
+                <li class="correct"><span class="letter">A</span><span><span class="term-zh">影像生成</span> (<span class="term-en">image generation</span>)</span></li>
+                <li><span class="letter">B</span><span><span class="term-zh">影像分析</span> (<span class="term-en">image analysis</span>)</span></li>
+                <li><span class="letter">C</span><span><span class="term-zh">物件偵測</span> (<span class="term-en">object detection</span>)</span></li>
+                <li><span class="letter">D</span><span><span class="term-zh">光學字元辨識</span> (<span class="term-abbr">OCR</span>, <span class="term-en">Optical Character Recognition</span>)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>A。<span class="term-zh">影像生成</span> (<span class="term-en">image generation</span>)</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>題目要求根據 written descriptions 產生 new product images，也就是從自然語言描述創造新的視覺內容，這正是 <span class="term-zh">影像生成</span> 工作負載。影像分析是解讀既有圖片；物件偵測是在既有圖片中找出並定位物件；<span class="term-abbr">OCR</span> 是從圖片或掃描文件擷取文字。因為目標是產生新的產品圖片，所以答案是 A。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="info-extraction-foundry">
+          <header class="question-head">
+            <span class="qid">Question 41</span>
+            <span class="tag">使用 Foundry 實作資訊擷取的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You have an Azure subscription.</p>
+              <p class="prompt">You need to use Azure Content Understanding in Foundry Tools to extract structured data from invoices. What should you provision?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>an Azure OpenAI resource</span></li>
+                <li class="correct"><span class="letter">B</span><span>a Microsoft Foundry resource</span></li>
+                <li><span class="letter">C</span><span>A Microsoft Foundry project</span></li>
+                <li><span class="letter">D</span><span>an Azure AI Search service</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> B. a Microsoft Foundry resource</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你有一個 Azure 訂用帳戶。你需要使用 <span class="term-en">Foundry Tools</span> 中的 <span class="term-en">Azure Content Understanding</span>，從發票擷取結構化資料。</p>
+              <p class="prompt">你應該佈建什麼？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span><span class="term-en">Azure OpenAI</span> 資源</span></li>
+                <li class="correct"><span class="letter">B</span><span><span class="term-en">Microsoft Foundry</span> 資源</span></li>
+                <li><span class="letter">C</span><span><span class="term-en">Microsoft Foundry</span> 專案</span></li>
+                <li><span class="letter">D</span><span><span class="term-en">Azure AI Search</span> 服務</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>B。<span class="term-en">Microsoft Foundry</span> 資源。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>若要在 <span class="term-en">Foundry Tools</span> 使用 <span class="term-en">Azure Content Understanding</span>，前置需求是建立支援區域中的 <span class="term-en">Microsoft Foundry</span> 資源。發票擷取屬於智慧文件處理與結構化資料擷取情境，Content Understanding 會將非結構化文件轉成結構化欄位。Azure OpenAI 資源主要用於模型呼叫；Foundry project 是專案工作區概念；Azure AI Search 用於索引與搜尋，不是啟用 Content Understanding 的必要資源。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="model-components">
+          <header class="question-head">
+            <span class="qid">Question 42</span>
+            <span class="tag">識別 AI 模型的組件與配置</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> After deploying a vision-enabled GPT model in Microsoft Foundry, you can configure an application to send requests to the endpoint of the model.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>在 <span class="term-en">Microsoft Foundry</span> 中部署支援視覺的 GPT 模型後，可以設定應用程式將要求傳送至模型的 <span class="term-zh">端點</span> (<span class="term-en">endpoint</span>)。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>應用程式要呼叫已部署模型，必須將要求送到部署模型的 <span class="term-zh">端點</span>，並搭配必要的驗證認證。<span class="term-en">Foundry playground</span> 是互動測試環境，不是正式應用程式要求的目標；evaluation pipeline 用於評估效能；training dataset 用於訓練或微調，不是推論要求的目標。因此正確完成句子的是 endpoint of the model。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="vision-foundry">
+          <header class="question-head">
+            <span class="qid">Question 43</span>
+            <span class="tag">透過使用 Foundry 實現具備電腦視覺與影像生成能力的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You have a Microsoft Foundry project that contains a model deployment.</p>
+              <p class="prompt">You are developing an application that sends an image and a user question to the model. You need to send both text and image content in the same request so the model can return an answer.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> Use a user message content array with {"type": "input_text"} for the question and {"type": "input_image"} for the image, then read response.output_text.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你有一個包含模型部署的 <span class="term-en">Microsoft Foundry</span> 專案。你正在開發應用程式，將圖片與使用者問題傳送給模型。</p>
+              <p class="prompt">你需要在同一個要求中傳送文字與圖片內容，讓模型回傳答案。程式碼應如何完成？</p>
+              <p class="prompt">注意：每個正確選擇皆計分。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>在使用者訊息的 <span class="term-en">content</span> 陣列中使用 <span class="term-en">input_text</span> 傳送文字問題，使用 <span class="term-en">input_image</span> 傳送圖片，並以 <span class="term-en">response.output_text</span> 讀取文字答案。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>多模態要求會把不同輸入拆成結構化內容項目。文字問題應放在 <span class="term-en">{"type": "input_text"}</span>，圖片應放在 <span class="term-en">{"type": "input_image"}</span>，且兩者都在同一個 user message 的 content array 中。<span class="term-en">output_text</span> 與 <span class="term-en">output_image</span> 不是使用者輸入內容項目；其中 <span class="term-en">response.output_text</span> 是模型回應後用來讀取文字輸出的屬性。本題重點是視覺模型的文字加圖片輸入。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="info-extraction-foundry">
+          <header class="question-head">
+            <span class="qid">Question 44</span>
+            <span class="tag">使用 Foundry 實作資訊擷取的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You are developing an application that processes voicemail recordings by using Azure Content Understanding in Foundry Tools.</p>
+              <p class="prompt">Which feature does Azure Content Understanding use to convert audio to text?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>Voice Live</span></li>
+                <li><span class="letter">B</span><span>key phrase extraction</span></li>
+                <li class="correct"><span class="letter">C</span><span>transcription</span></li>
+                <li><span class="letter">D</span><span>optical character recognition (OCR)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> C. transcription</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你正在使用 <span class="term-en">Foundry Tools</span> 中的 <span class="term-en">Azure Content Understanding</span>，開發處理語音留言錄音的應用程式。</p>
+              <p class="prompt"><span class="term-en">Azure Content Understanding</span> 會使用哪一項功能將音訊轉成文字？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span><span class="term-en">Voice Live</span></span></li>
+                <li><span class="letter">B</span><span><span class="term-zh">關鍵片語擷取</span> (<span class="term-en">key phrase extraction</span>)</span></li>
+                <li class="correct"><span class="letter">C</span><span><span class="term-zh">轉錄</span> (<span class="term-en">transcription</span>)</span></li>
+                <li><span class="letter">D</span><span><span class="term-zh">光學字元辨識</span> (<span class="term-abbr">OCR</span>, <span class="term-en">Optical Character Recognition</span>)</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>C。<span class="term-zh">轉錄</span> (<span class="term-en">transcription</span>)</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>音訊轉文字的步驟稱為 <span class="term-zh">轉錄</span>。在處理語音留言或客服錄音時，Content Understanding 會先將對話音訊轉成可搜尋、可分析的文字逐字稿，再進一步擷取結構化資訊。<span class="term-en">Voice Live</span> 是即時語音互動能力；關鍵片語擷取是在文字可用後找重要片語；<span class="term-abbr">OCR</span> 是從圖片或文件擷取文字，不適用音訊。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="gen-ai-foundry">
+          <header class="question-head">
+            <span class="qid">Question 45</span>
+            <span class="tag">使用 Foundry 實作生成式 AI 應用程式與代理</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">No</span><span>Evaluators in Microsoft Foundry replace the need for configuring token limits.</span></li>
+                <li class="correct"><span class="letter">Yes</span><span>Evaluators in Microsoft Foundry can assess the quality and safety of responses generated by a generative AI model.</span></li>
+                <li class="correct"><span class="letter">No</span><span>Evaluators in Microsoft Foundry can retrain a deployed generative AI model automatically when quality issues are detected.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> No, Yes, No</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">否</span><span><span class="term-en">Microsoft Foundry</span> 中的評估器可取代設定權杖限制的需求。</span></li>
+                <li class="correct"><span class="letter">是</span><span><span class="term-en">Microsoft Foundry</span> 中的評估器可以評估生成式 AI 模型回應的品質與安全性。</span></li>
+                <li class="correct"><span class="letter">否</span><span><span class="term-en">Microsoft Foundry</span> 中的評估器偵測到品質問題時，可以自動重新訓練已部署的生成式 AI 模型。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：否、是、否。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">評估器</span> (<span class="term-en">evaluators</span>) 用來衡量模型或代理輸出的品質、安全性與可靠性，不能取代 token limit、max completion tokens 等模型設定，所以第一個敘述錯誤。Foundry 的評估器可檢查流暢度、一致性、安全性、RAG 指標或代理特定指標，因此第二個敘述正確。評估器的角色是量測、報告與協助監控，不會在偵測到問題時自動重新訓練已部署模型，因此第三個敘述錯誤。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="model-components">
+          <header class="question-head">
+            <span class="qid">Question 46</span>
+            <span class="tag">識別 AI 模型的組件與配置</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You have a Microsoft Foundry project named project1 that contains an Azure OpenAI resource named Resource1.</p>
+              <p class="prompt">To Resource1, you deploy a gpt-4.1-mini model by using a model deployment named my-mini-gpt. You need to connect to my-mini-gpt from an application.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> base_url="https://project1.openai.azure.com/openai/v1/" and model="my-mini-gpt"</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你有一個名為 project1 的 <span class="term-en">Microsoft Foundry</span> 專案，其中包含名為 Resource1 的 <span class="term-en">Azure OpenAI</span> 資源。</p>
+              <p class="prompt">你在 Resource1 中使用名為 my-mini-gpt 的模型部署來部署 gpt-4.1-mini 模型。你需要從應用程式連線到 my-mini-gpt。程式碼應如何完成？</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong><span class="term-en">base_url="https://project1.openai.azure.com/openai/v1/"</span>，且 <span class="term-en">model="my-mini-gpt"</span>。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>端點空格應填入 <span class="term-en">project1</span>，形成 <span class="term-en">https://project1.openai.azure.com/openai/v1/</span>；模型參數則應填入模型部署名稱 <span class="term-en">my-mini-gpt</span>。雖然底層模型是 <span class="term-en">gpt-4.1-mini</span>，但呼叫部署時 <span class="term-en">model</span> 的值必須使用部署名稱，而不是基礎模型名稱。<span class="term-en">resource1</span> 是題幹中的 Azure OpenAI 資源名稱，但本題 PDF 的 Answer Area 明確要求將 project1 放入 base_url 空格。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="vision-foundry">
+          <header class="question-head">
+            <span class="qid">Question 47</span>
+            <span class="tag">透過使用 Foundry 實現具備電腦視覺與影像生成能力的 AI 解決方案</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">You have a Microsoft Foundry project that contains a vision-enabled model deployment.</p>
+              <p class="prompt">You are developing an application that sends images to the model. You need to ensure that the model can analyze the images.</p>
+              <p class="prompt">In which two formats can you provide the images?</p>
+              <ul class="options" aria-label="English options">
+                <li><span class="letter">A</span><span>a JSON document that describes the image content</span></li>
+                <li><span class="letter">B</span><span>a UTF-8 encoded text description of the image</span></li>
+                <li class="correct"><span class="letter">C</span><span>a publicly accessible URL of the image</span></li>
+                <li class="correct"><span class="letter">D</span><span>a base64 encoded image data string</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> C and D. a publicly accessible URL of the image; a base64 encoded image data string</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">你有一個 <span class="term-en">Microsoft Foundry</span> 專案，其中包含支援視覺的模型部署。你正在開發將圖片傳送給模型的應用程式。</p>
+              <p class="prompt">你需要確保模型可以分析圖片。可以用哪兩種格式提供圖片？</p>
+              <ul class="options" aria-label="中文選項">
+                <li><span class="letter">A</span><span>描述圖片內容的 JSON 文件</span></li>
+                <li><span class="letter">B</span><span>圖片的 UTF-8 編碼文字描述</span></li>
+                <li class="correct"><span class="letter">C</span><span>圖片的公開可存取 URL</span></li>
+                <li class="correct"><span class="letter">D</span><span><span class="term-en">base64</span> 編碼的圖片資料字串</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>C 與 D。圖片的公開可存取 URL；<span class="term-en">base64</span> 編碼圖片資料字串。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p>支援視覺的 Azure OpenAI 或 Microsoft Foundry 模型可透過圖片 URL 或 <span class="term-en">base64</span> 編碼圖片資料接收圖片輸入。JSON 文件或 UTF-8 文字描述只是描述圖片，不是實際圖片資料，模型無法據此進行視覺分析。題目問的是影像輸入格式，因此正確答案是公開圖片 URL 與 base64 encoded image data string。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="gen-ai-foundry">
+          <header class="question-head">
+            <span class="qid">Question 48</span>
+            <span class="tag">使用 Foundry 實作生成式 AI 應用程式與代理</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">Select the answer that correctly completes the sentence.</p>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> The Model catalog is used for comparing and deploying a wide range of models for generative AI development in Microsoft Foundry.</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請選出可以正確完成句子的答案。</p>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong><span class="term-zh">模型目錄</span> (<span class="term-en">Model catalog</span>) 用於在 <span class="term-en">Microsoft Foundry</span> 中比較並部署各種生成式 AI 開發可用的模型。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-en">Model catalog</span> 是在 Foundry portal 中探索、篩選、比較與部署模型的中心。它可涵蓋 Azure OpenAI、Mistral、Meta、Cohere、NVIDIA、Hugging Face 等不同提供者的模型，也可使用 benchmark metrics 比較模型並部署到端點。這題關鍵是 comparing and deploying a wide range of models，因此答案是 Model catalog。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="gen-ai-foundry">
+          <header class="question-head">
+            <span class="qid">Question 49</span>
+            <span class="tag">使用 Foundry 實作生成式 AI 應用程式與代理</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">What are two purposes of instructions when prompting a generative AI model?</p>
+              <p class="prompt">NOTE: Each correct answer presents part of the solution.</p>
+              <ul class="options" aria-label="English options">
+                <li class="correct"><span class="letter">A</span><span>defines constraints on the model's responses</span></li>
+                <li class="correct"><span class="letter">B</span><span>defines the agent's role and behavior</span></li>
+                <li><span class="letter">C</span><span>defines the Azure region where inference occurs</span></li>
+                <li><span class="letter">D</span><span>selects which model to use</span></li>
+                <li><span class="letter">E</span><span>defines the tokens per minute (TPM) allocation for the model</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> A and B. defines constraints on the model's responses; defines the agent's role and behavior</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">提示生成式 AI 模型時，instructions 有哪兩個用途？每個正確答案皆為解決方案的一部分。</p>
+              <ul class="options" aria-label="中文選項">
+                <li class="correct"><span class="letter">A</span><span>定義模型回應的限制</span></li>
+                <li class="correct"><span class="letter">B</span><span>定義代理的角色與行為</span></li>
+                <li><span class="letter">C</span><span>定義推論發生的 Azure 區域</span></li>
+                <li><span class="letter">D</span><span>選擇要使用的模型</span></li>
+                <li><span class="letter">E</span><span>定義模型的每分鐘權杖數 (<span class="term-abbr">TPM</span>) 配額</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>A 與 B。定義模型回應的限制；定義代理的角色與行為。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">指示</span> (<span class="term-en">instructions</span>) 或系統指示可定義代理或模型的目標、限制、角色與行為。例如要求模型不要輸出特定內容、使用指定語氣、扮演特定角色或遵守格式限制。Azure 區域、模型選擇與 <span class="term-abbr">TPM</span> 配額是資源、部署或配置層級設定，不是提示 instructions 的用途。因此正確答案是 A 與 B。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="question-card" data-category="responsible-ai">
+          <header class="question-head">
+            <span class="qid">Question 50</span>
+            <span class="tag">描述負責任 AI 的原則</span>
+          </header>
+          <div class="question-body">
+            <section class="section">
+              <h3>English Question</h3>
+              <p class="prompt">For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+              <p class="prompt">NOTE: Each correct selection is worth one point.</p>
+              <ul class="options" aria-label="English statements">
+                <li class="correct"><span class="letter">Yes</span><span>Human-in-the-loop practices provide accountability for AI-generated decisions.</span></li>
+                <li class="correct"><span class="letter">No</span><span>Deploying an AI system to a production environment eliminates the need for ongoing monitoring.</span></li>
+                <li class="correct"><span class="letter">Yes</span><span>Disclosing the team that designed and deployed an AI system provides accountability for the system's output.</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>Answer:</strong> Yes, No, Yes</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文題目</h3>
+              <p class="prompt">請判斷下列敘述是否正確。每個正確選擇皆計分。</p>
+              <ul class="options" aria-label="中文判斷">
+                <li class="correct"><span class="letter">是</span><span>人在迴圈中的實務做法，能為 AI 產生的決策提供責任歸屬。</span></li>
+                <li class="correct"><span class="letter">否</span><span>將 AI 系統部署到正式環境後，就不再需要持續監控。</span></li>
+                <li class="correct"><span class="letter">是</span><span>揭露設計與部署 AI 系統的團隊，有助於提供系統輸出的責任歸屬。</span></li>
+              </ul>
+              <div class="answer-box">
+                <p><strong>中文答案：</strong>依序為：是、否、是。</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>中文詳解</h3>
+              <p><span class="term-zh">責任歸屬</span> (<span class="term-en">accountability</span>) 表示人與組織仍需對 AI 系統及其影響負責。人在迴圈中 (<span class="term-en">human-in-the-loop</span>) 可保留人工監督與最終決策責任，因此第一個敘述正確。AI 系統部署到正式環境後仍需持續監控、改善與治理，不能因此停止監控，所以第二個敘述錯誤。公開或明確識別設計與部署團隊，有助於治理與責任追蹤，因此第三個敘述正確。</p>
+            </section>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll(".outline-button");
+    const cards = document.querySelectorAll(".question-card");
+    const questionTypeMap = {
+      1: { type: "單選題" },
+      2: { type: "下拉選單題", demo: "An AI workload that produces new content based on user input is an example of", answer: "generative AI", choices: ["content understanding", "generative AI", "information extraction", "text analysis"], demoZh: "根據使用者輸入產生新內容的 AI 工作負載，是下列哪一種例子？", answerZh: "生成式 AI", choicesZh: ["內容理解", "生成式 AI", "資訊擷取", "文字分析"] },
+      3: { type: "單選題" },
+      4: { type: "下拉選單題", demo: "Evaluating model outcomes across demographic groups to reduce bias is an example of", answer: "fairness", choices: ["accountability", "fairness", "privacy and security", "transparency"], demoZh: "跨人口族群評估模型結果以降低偏差，是下列哪一項負責任 AI 原則？", answerZh: "公平性", choicesZh: ["責任歸屬", "公平性", "隱私權與安全性", "透明度"] },
+      5: { type: "單選題" },
+      6: { type: "Yes / No 選項題", yesno: [["tool_choice = auto lets the model decide whether to call tools", "Yes"], ["tool_choice = none lets the model decide whether to call tools", "No"], ["tool_choice = required forces tool use", "Yes"]], yesnoZh: [["tool_choice = auto 讓模型決定是否呼叫工具", "Yes"], ["tool_choice = none 讓模型決定是否呼叫工具", "No"], ["tool_choice = required 會強制呼叫工具", "Yes"]] },
+      7: { type: "單選題" },
+      8: { type: "單選題" },
+      9: { type: "Yes / No 選項題", yesno: [["Generating a response to a user prompt occurs during inference", "Yes"], ["The model normally copies stored training documents directly", "No"], ["The model predicts the next token from learned patterns", "Yes"]], yesnoZh: [["針對使用者提示產生回應發生在推論階段", "Yes"], ["模型通常直接複製訓練資料中的文件", "No"], ["模型會根據學到的模式預測下一個權杖", "Yes"]] },
+      10: { type: "Yes / No 選項題", yesno: [["Foundry playground can send image and text to a multimodal model", "Yes"], ["Vision images can only be base64 data", "No"], ["Image prompts require a text-only model", "No"]], yesnoZh: [["Foundry playground 可將圖片與文字傳給多模態模型", "Yes"], ["視覺圖片只能以 base64 資料提供", "No"], ["圖片提示需要部署純文字模型", "No"]] },
+      11: { type: "下拉選單題", demo: "A vision-enabled Responses API request can include an image as", answer: "base64-encoded image data", choices: ["a base64-encoded image data", "a CSV file attachment", "an MP4 video stream", "a shared access signature (SAS) token"], demoZh: "支援視覺的 Responses API 要求可以用哪一種方式包含圖片？", answerZh: "base64 編碼圖片資料", choicesZh: ["base64 編碼圖片資料", "CSV 檔案附件", "MP4 影片串流", "共用存取簽章 SAS 權杖"] },
+      12: { type: "Yes / No 選項題", yesno: [["Overall accuracy alone guarantees fairness", "No"], ["Evaluating outputs across demographic groups supports fairness", "Yes"], ["Fairness means all users always get identical output", "No"]], yesnoZh: [["只看整體準確率即可保證公平性", "No"], ["跨人口族群評估輸出有助於公平性", "Yes"], ["公平性代表所有使用者永遠得到相同輸出", "No"]] },
+      13: { type: "程式碼補空題", code: "audio_config = speechsdk.audio.AudioOutputConfig(filename=\"output.wav\")", codeDemo: [
+        "import azure.cognitiveservices.speech as speechsdk",
+        "",
+        "speech_config = speechsdk.SpeechConfig(subscription=key, region=region)",
+        { prefix: "audio_config = speechsdk.audio.", answer: "AudioOutputConfig(filename=\"output.wav\")", choices: ["AudioOutputConfig(filename=\"output.wav\")", "AudioOutputConfig(stream)", "AudioStreamFormat(wave_stream_format=AudioStreamWaveFormat.PCM)"] },
+        "synthesizer = speechsdk.SpeechSynthesizer(",
+        "    speech_config=speech_config,",
+        "    audio_config=audio_config",
+        ")"
+      ] },
+      14: { type: "Yes / No 選項題", yesno: [["Voice Live returns only transcribed text", "No"], ["Voice Live requires separate STT and TTS implementations", "No"], ["Voice Live combines STT, reasoning, and TTS", "Yes"]], yesnoZh: [["Voice Live 只回傳轉錄文字", "No"], ["Voice Live 需要分別實作 STT 與 TTS", "No"], ["Voice Live 結合 STT、推理與 TTS", "Yes"]] },
+      15: { type: "單選題" },
+      16: { type: "單選題" },
+      17: { type: "Yes / No 選項題", yesno: [["You must fine-tune before deployment", "No"], ["You can test catalog models only after deployment", "No"], ["You can deploy only after retraining", "No"]], yesnoZh: [["部署前必須先微調模型", "No"], ["只有部署後才能測試模型目錄中的模型", "No"], ["只有重新訓練後才能部署模型", "No"]] },
+      18: { type: "程式碼補空題", code: "recognizer.recognize_once()", codeDemo: [
+        "import azure.cognitiveservices.speech as speechsdk",
+        "",
+        "speech_config = speechsdk.SpeechConfig(subscription=key, region=region)",
+        "audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True)",
+        "recognizer = speechsdk.SpeechRecognizer(",
+        "    speech_config=speech_config,",
+        "    audio_config=audio_config",
+        ")",
+        { prefix: "result = ", answer: "recognizer.recognize_once()", choices: ["recognizer.recognize_once()", "synthesizer.speak_text_async(text)", "recognizer.start_continuous_recognition()", "recognizer.start_keyword_recognition(model)"] }
+      ] },
+      19: { type: "單選題" },
+      20: { type: "下拉選單題", demo: "Solutions that detect and read text in scanned documents and images rely on", answer: "computer vision", choices: ["computer vision", "generative AI", "speech recognition", "text analysis"], demoZh: "能偵測並讀取掃描文件與影像中文字的解決方案，仰賴下列哪一種能力？", answerZh: "電腦視覺", choicesZh: ["電腦視覺", "生成式 AI", "語音辨識", "文字分析"] },
+      21: { type: "下拉選單題", demo: "Azure Content Understanding analysis is", answer: "asynchronous", choices: ["asynchronous", "synchronous", "returned only as unstructured plain text", "limited to OCR-only processing"], demoZh: "Azure Content Understanding 的分析流程屬於下列哪一種？", answerZh: "非同步", choicesZh: ["非同步", "同步", "只回傳非結構化純文字", "僅限 OCR 處理"] },
+      22: { type: "拖拉配對題", match: [["Scanned Invoice:", "document analyzer"], ["Voicemail recording:", "audio analyzer"]], matchChoices: ["audio analyzer", "document analyzer", "image analyzer", "video analyzer"] },
+      23: { type: "單選題" },
+      24: { type: "單選題" },
+      25: { type: "Yes / No 選項題", yesno: [["System prompts can authorize users", "No"], ["System prompts reduce TPM", "No"], ["System prompts guide model behavior", "Yes"]], yesnoZh: [["系統提示可用來授權使用者", "No"], ["系統提示可降低 TPM", "No"], ["系統提示會引導模型行為", "Yes"]] },
+      26: { type: "拖拉配對題", match: [["Avoid bias across demographic groups", "Fairness"], ["Encrypt data and restrict access", "Privacy and security"], ["Explain AI interaction and limitations", "Transparency"], ["Test under different conditions", "Reliability and safety"]], matchChoices: ["Accountability", "Fairness", "Privacy and security", "Reliability and safety", "Transparency"] },
+      27: { type: "單選題" },
+      28: { type: "Yes / No 選項題", yesno: [["Temperature is set before deploying a model", "No"], ["Model name routes requests to a deployment", "No"], ["After deployment, code and tools can interact with the model", "Yes"]], yesnoZh: [["Temperature 參數可在部署模型前設定", "No"], ["推論時模型名稱會路由到特定部署", "No"], ["部署後可用程式碼與測試工具和模型互動", "Yes"]] },
+      29: { type: "下拉選單題", demo: "Human reviewers oversee AI decisions and remain responsible for final output:", answer: "accountability", choices: ["accountability", "fairness", "privacy and security", "transparency"], demoZh: "人工審查者監督 AI 決策並對最終輸出負責，屬於下列哪一項原則？", answerZh: "責任歸屬", choicesZh: ["責任歸屬", "公平性", "隱私權與安全性", "透明度"] },
+      30: { type: "下拉選單題", demo: "To define an agent's role and behaviors, configure a", answer: "system prompt", choices: ["deployment slot", "embedding index", "fine tuning job", "system prompt"], demoZh: "若要定義代理的角色與行為，應設定下列哪一項？", answerZh: "系統提示", choicesZh: ["部署位置", "嵌入索引", "微調工作", "系統提示"] },
+      31: { type: "單選題" },
+      32: { type: "單選題" },
+      33: { type: "下拉選單題", demo: "The responsible AI principle of transparency requires that AI systems", answer: "be explainable to users", choices: ["be explainable to users", "protect sensitive user data", "reduce bias in decisions", "require human oversight"], demoZh: "負責任 AI 的透明度原則要求 AI 系統具備下列哪一項特性？", answerZh: "可向使用者解釋", choicesZh: ["可向使用者解釋", "保護敏感使用者資料", "降低決策偏差", "要求人工監督"] },
+      34: { type: "下拉選單題", demo: "The artifact that defines which fields to extract is a", answer: "schema", choices: ["a keyword list", "an OCR-only processing step", "a schema", "a synchronous API call"], demoZh: "定義分析內容時要擷取哪些欄位的項目是什麼？", answerZh: "結構描述", choicesZh: ["關鍵字清單", "僅 OCR 的處理步驟", "結構描述", "同步 API 呼叫"] },
+      35: { type: "Yes / No 選項題", yesno: [["A generative model is retrained before each request", "No"], ["An agent only copies stored database answers", "No"], ["An agent uses a generative model to determine actions", "Yes"]], yesnoZh: [["生成式模型會在每次要求前重新訓練", "No"], ["代理只會複製資料庫中儲存的答案", "No"], ["代理使用生成式模型根據輸入決定行動", "Yes"]] },
+      36: { type: "單選題" },
+      37: { type: "程式碼補空題", code: "result = poller.result()", codeDemo: [
+        "poller = client.begin_analyze(",
+        "    analyzer_id=\"invoice\",",
+        "    input_url=url",
+        ")",
+        { prefix: "result = poller.", answer: "result", suffix: "()", choices: ["result", "status", "wait", "operation_id"] }
+      ] },
+      38: { type: "單選題" },
+      39: { type: "單選題" },
+      40: { type: "單選題" },
+      41: { type: "單選題" },
+      42: { type: "下拉選單題", demo: "After deploying a vision-enabled GPT model in Microsoft Foundry, you can configure an application to send requests to the", answer: "endpoint of the model", choices: ["endpoint of the model", "evaluation pipeline of the model", "Foundry playground", "training dataset of the model"], demoZh: "在 Microsoft Foundry 中部署支援視覺的 GPT 模型後，可以設定應用程式將要求傳送至", answerZh: "模型端點", choicesZh: ["模型端點", "模型評估管線", "Foundry playground", "模型訓練資料集"] },
+      43: { type: "拖拉 / 程式碼補空題", code: "input=[\n  {\n    \"role\": \"user\",\n    \"content\": [\n      {\"type\": \"input_text\", \"text\": \"What is in this image? Provide 3 bullet points.\"},\n      {\"type\": \"input_image\", \"image_url\": image_url},\n    ],\n  }\n]\nprint(response.output_text)", codeDrag: {
+        choices: ["input_image", "input_text", "input_url", "output_image", "output_text"],
+        lines: [
+          "input=[",
+          "  {",
+          "    \"role\": \"user\",",
+          "    \"content\": [",
+          { prefix: "      {\"type\": \"", answer: "input_text", suffix: "\", \"text\": \"What is in this image? Provide 3 bullet points.\"}," },
+          { prefix: "      {\"type\": \"", answer: "input_image", suffix: "\", \"image_url\": image_url}," },
+          "    ],",
+          "  }",
+          "]",
+          "print(response.output_text)"
+        ]
+      } },
+      44: { type: "單選題" },
+      45: { type: "Yes / No 選項題", yesno: [["Evaluators replace token limit configuration", "No"], ["Evaluators assess response quality and safety", "Yes"], ["Evaluators automatically retrain deployed models", "No"]], yesnoZh: [["評估器可取代權杖限制設定", "No"], ["評估器可評估回應品質與安全性", "Yes"], ["評估器可在發現品質問題時自動重新訓練模型", "No"]] },
+      46: { type: "程式碼補空題", code: "base_url=\"https://project1.openai.azure.com/openai/v1/\"\nmodel=\"my-mini-gpt\"", codeDrag: {
+        choices: ["gpt-4.1-mini", "my-mini-gpt", "project1", "resource1"],
+        lines: [
+          "client = OpenAI(api_key=\"...\")",
+          { prefix: "base_url=\"https://", answer: "project1", suffix: ".openai.azure.com/openai/v1/\")" },
+          "response = client.responses.create(",
+          { prefix: "model=\"", answer: "my-mini-gpt", suffix: "\"," },
+          "..."
+        ]
+      } },
+      47: { type: "多選題", multi: ["a publicly accessible URL of the image", "a base64 encoded image data string"] },
+      48: { type: "下拉選單題", demo: "The", suffix: "is used for comparing and deploying a wide range of models for generative AI development in Microsoft Foundry.", answer: "Model catalog", choices: ["Model catalog", "Monitor page", "Service endpoints page", "Solution templates page"], demoZh: "下列哪一項用於在 Microsoft Foundry 中比較並部署各種生成式 AI 開發可用的模型？", answerZh: "模型目錄", choicesZh: ["模型目錄", "監視器頁面", "服務端點頁面", "解決方案範本頁面"] },
+      49: { type: "多選題", multi: ["defines constraints on the model's responses", "defines the agent's role and behavior"] },
+      50: { type: "Yes / No 選項題", yesno: [["Human-in-the-loop supports accountability", "Yes"], ["Production deployment eliminates monitoring", "No"], ["Disclosing the responsible team supports accountability", "Yes"]], yesnoZh: [["人在迴圈中有助於 AI 決策責任歸屬", "Yes"], ["部署到正式環境後即可免除持續監控", "No"], ["揭露負責設計與部署的團隊有助於責任歸屬", "Yes"]] }
+    };
+
+    function escapeText(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function buildDropdownDemo(prompt, answer, choices, title, placeholder, suffix = "") {
+      const allChoices = choices || [answer];
+      return `<div class="type-demo"><h4>${escapeText(title)}</h4><p class="mock-sentence"><span>${escapeText(prompt)}</span></p><div class="mock-dropdown"><div class="mock-select-field"><span>${escapeText(placeholder)}</span><span class="mock-arrow">▼</span></div><ul class="mock-options">${allChoices.map((choice) => `<li class="mock-option ${choice === answer || choice.includes(answer) ? "is-correct" : ""}">${escapeText(choice)}</li>`).join("")}</ul></div>${suffix ? `<p class="mock-sentence"><span>${escapeText(suffix)}</span></p>` : ""}</div>`;
+    }
+
+    function highlightCode(value) {
+      return escapeText(value)
+        .replace(/\b(import|from|as|client|response|result|poller|recognizer|synthesizer|audio_config|speech_config|model|base_url|api_key|input)\b/g, '<span class="code-keyword">$1</span>')
+        .replace(/\b(speechsdk|OpenAI|ContentUnderstandingClient|SpeechConfig|AudioConfig|SpeechRecognizer|SpeechSynthesizer)\b/g, '<span class="code-module">$1</span>')
+        .replace(/\b(begin_analyze|responses|create|print)\b/g, '<span class="code-call">$1</span>')
+        .replace(/(&quot;[^&]*?&quot;)/g, '<span class="code-string">$1</span>');
+    }
+
+    function buildCodeDropdown(answer, choices) {
+      return `<span class="code-dropdown"><span class="code-select-field"><span class="code-select-value">${highlightCode(answer)}</span><span class="code-select-arrow">▼</span></span><ul class="code-options">${choices.map((choice) => `<li class="code-option ${choice === answer ? "is-correct" : ""}">${highlightCode(choice)}</li>`).join("")}</ul></span>`;
+    }
+
+    function buildCodeFillDemo(meta) {
+      const lines = meta.codeDemo || [meta.code];
+      return `<div class="type-demo"><h4>程式碼補空示意：展開所有選項</h4><div class="code-fill-demo">${lines.map((line, index) => {
+        const lineContent = typeof line === "string"
+          ? highlightCode(line)
+          : `${highlightCode(line.prefix || "")}${buildCodeDropdown(line.answer, line.choices || [line.answer])}${highlightCode(line.suffix || "")}`;
+        return `<div class="code-fill-line"><span class="code-line-no">${index + 1}</span><span class="code-line-text">${lineContent}</span></div>`;
+      }).join("")}</div></div>`;
+    }
+
+    function buildDragMatchDemo(meta) {
+      const choices = meta.matchChoices || meta.match.map(([, right]) => right);
+      const sourceTitle = choices.some((choice) => choice.includes("analyzer")) ? "Analyzer Types" : "Draggable Choices";
+      return `<div class="type-demo"><h4>拖拉配對示意：完整選項與答案區</h4><div class="drag-match-demo"><div class="drag-bank"><p class="drag-heading">${escapeText(sourceTitle)}</p>${choices.map((choice) => `<div class="drag-item">${escapeText(choice)}</div>`).join("")}</div><div class="drop-area"><p class="drop-heading">Answer Area</p>${meta.match.map(([left, right]) => `<div class="drop-row"><div class="drop-target-label">${escapeText(left)}</div><div class="drop-answer">${escapeText(right)}</div></div>`).join("")}</div></div></div>`;
+    }
+
+    function buildCodeDragDemo(meta) {
+      return `<div class="type-demo"><h4>拖拉程式碼補空示意：完整 Values 與 Answer Area</h4><div class="drag-match-demo code-match-demo"><div class="drag-bank"><p class="drag-heading">Values</p>${meta.codeDrag.choices.map((choice) => `<div class="drag-item">${escapeText(choice)}</div>`).join("")}</div><div class="drop-area"><p class="drop-heading">Answer Area</p><div class="code-fill-demo">${meta.codeDrag.lines.map((line, index) => {
+        const lineContent = typeof line === "string"
+          ? highlightCode(line)
+          : `${highlightCode(line.prefix || "")}<span class="inline-drop-answer">${escapeText(line.answer)}</span>${highlightCode(line.suffix || "")}`;
+        return `<div class="code-fill-line"><span class="code-line-no">${index + 1}</span><span class="code-line-text">${lineContent}</span></div>`;
+      }).join("")}</div></div></div></div>`;
+    }
+
+    function enhanceYesNoOptions(list, answers, yesLabel, noLabel) {
+      if (!list || list.classList.contains("yesno-options")) return;
+      list.classList.add("yesno-options");
+      list.insertAdjacentHTML("afterbegin", `<li class="yesno-option-head" aria-hidden="true"><span></span><span>${escapeText(yesLabel)}</span><span>${escapeText(noLabel)}</span></li>`);
+      list.querySelectorAll("li").forEach((item, index) => {
+        if (item.classList.contains("yesno-option-head")) return;
+        const answer = answers[index - 1]?.[1];
+        item.insertAdjacentHTML("beforeend", `<span class="yesno-inline-choice ${answer === "Yes" ? "is-selected" : ""}" aria-label="${escapeText(yesLabel)}"></span><span class="yesno-inline-choice ${answer === "No" ? "is-selected" : ""}" aria-label="${escapeText(noLabel)}"></span>`);
+      });
+    }
+
+    function buildTypeDemo(meta) {
+      if (meta.demo) {
+        return buildDropdownDemo(meta.demo, meta.answer, meta.choices, "下拉選單示意：展開所有選項", "請選擇答案", meta.suffix);
+      }
+      if (meta.code) {
+        if (meta.codeDrag) return buildCodeDragDemo(meta);
+        return meta.codeDemo ? buildCodeFillDemo(meta) : `<div class="type-demo"><h4>程式碼補空示意</h4><pre class="code-answer">${escapeText(meta.code)}</pre></div>`;
+      }
+      if (meta.match) {
+        return buildDragMatchDemo(meta);
+      }
+      if (meta.multi) {
+        return `<div class="type-demo"><h4>多選答案示意</h4><ul class="demo-grid">${meta.multi.map((item) => `<li><span>正確選項</span><span class="demo-answer">${escapeText(item)}</span></li>`).join("")}</ul><span class="multi-note">本題需選取所有正確答案</span></div>`;
+      }
+      if (meta.yesno) {
+        return "";
+      }
+      return "";
+    }
+
+    function buildChineseTypeDemo(meta) {
+      if (meta.demoZh) {
+        return buildDropdownDemo(meta.demoZh, meta.answerZh, meta.choicesZh, "中文下拉選單示意：展開所有選項", "請選擇答案", meta.suffixZh);
+      }
+      if (meta.yesnoZh) {
+        return "";
+      }
+      return "";
+    }
+
+    function enhanceQuestionTypes() {
+      cards.forEach((card) => {
+        const idMatch = card.querySelector(".qid")?.textContent.match(/\d+/);
+        if (!idMatch) return;
+        const meta = questionTypeMap[Number(idMatch[0])];
+        if (!meta) return;
+        const head = card.querySelector(".question-head");
+        if (head && !head.querySelector(".type-chip")) {
+          head.insertAdjacentHTML("beforeend", `<span class="type-chip">${escapeText(meta.type)}</span>`);
+        }
+        const firstSection = card.querySelector(".section");
+        if (meta.yesno && firstSection) {
+          enhanceYesNoOptions(firstSection.querySelector(".options"), meta.yesno, "Yes", "No");
+        }
+        if (firstSection && !firstSection.querySelector(".type-demo")) {
+          const demo = buildTypeDemo(meta);
+          if (demo) {
+            const answerBox = firstSection.querySelector(".answer-box");
+            if (answerBox) answerBox.insertAdjacentHTML("beforebegin", demo);
+          }
+        }
+        const sections = card.querySelectorAll(".section");
+        const zhSection = Array.from(sections).find((section) => section.querySelector("h3")?.textContent.trim() === "中文題目");
+        if (meta.yesnoZh && zhSection) {
+          enhanceYesNoOptions(zhSection.querySelector(".options"), meta.yesnoZh, "是", "否");
+        }
+        if (zhSection && !zhSection.querySelector(".type-demo")) {
+          const zhDemo = buildChineseTypeDemo(meta);
+          if (zhDemo) {
+            const zhAnswerBox = zhSection.querySelector(".answer-box");
+            if (zhAnswerBox) zhAnswerBox.insertAdjacentHTML("beforebegin", zhDemo);
+          }
+        }
+      });
+    }
+
+    enhanceQuestionTypes();
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+        buttons.forEach((item) => item.classList.remove("is-active"));
+        button.classList.add("is-active");
+
+        cards.forEach((card) => {
+          const matched = filter === "all" || card.dataset.category === filter;
+          card.classList.toggle("hidden", !matched);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
