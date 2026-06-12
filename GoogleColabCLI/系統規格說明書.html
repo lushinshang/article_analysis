@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Colab CLI 語音轉錄工具箱 - 系統規格說明書</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Mermaid.js for Rendering Diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      theme: 'default',
+      startOnLoad: false,
+      securityLevel: 'loose',
+      themeVariables: { fontSize: '18px' },
+      flowchart: { useMaxWidth: false, htmlLabels: true, curve: 'basis' },
+      sequence: { useMaxWidth: false }
+    });
+
+    async function renderMermaidInSection(sectionId) {
+      const nodes = document.querySelectorAll(`#section-${sectionId} .mermaid:not([data-processed="true"])`);
+      if (nodes.length > 0) {
+        await mermaid.run({ nodes });
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg-primary: #f5f6fa;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #eef1f6;
+      --text-main: #1e2230;
+      --text-muted: #64748b;
+      --accent: #6366f1;
+      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      --success: #059669;
+      --warning: #b45309;
+      --error: #dc2626;
+      --border-color: #e1e4ea;
+      --sidebar-width: 280px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 側邊欄 Navigation Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+      z-index: 100;
+    }
+
+    .logo-area {
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 0.25rem;
+      font-weight: 600;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .nav-item {
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      color: var(--text-main);
+      background-color: var(--bg-tertiary);
+    }
+
+    .nav-item.active {
+      border-left: 4px solid var(--accent);
+      background-color: rgba(99, 102, 241, 0.15);
+    }
+
+    .nav-icon {
+      font-size: 1.2rem;
+    }
+
+    /* 主要內容區 Main Content Area */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex-grow: 1;
+      padding: 3rem 4rem;
+      max-width: 1200px;
+    }
+
+    header.doc-header {
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    header.doc-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    header.doc-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* 規格章節 Section Controls */
+    .section-content {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    .section-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 排版與卡片元素 UI Components */
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #334155;
+    }
+
+    p, ul, ol {
+      margin-bottom: 1.25rem;
+      color: #475569;
+    }
+
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* 高質感卡片 Card */
+    .card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* 強調提示 Alert Block */
+    .alert-block {
+      background-color: rgba(99, 102, 241, 0.1);
+      border-left: 4px solid var(--accent);
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .alert-block.warning {
+      background-color: rgba(245, 158, 11, 0.1);
+      border-left-color: var(--warning);
+    }
+
+    .alert-block-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--text-main);
+    }
+
+    /* 表格 Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+
+    th, td {
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--bg-tertiary);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) td {
+      background-color: rgba(15, 23, 42, 0.02);
+    }
+
+    /* 程式碼 Block */
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: var(--bg-tertiary);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: #e11d48;
+    }
+
+    pre code {
+      display: block;
+      padding: 1.25rem;
+      overflow-x: auto;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    /* Mermaid 渲染圖框 */
+    .diagram-container {
+      background-color: #f8f9fc;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+    }
+
+    .mermaid {
+      background-color: transparent !important;
+    }
+
+    /* 功能特徵徽章 Badge */
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-success { background-color: rgba(16, 185, 129, 0.15); color: var(--success); }
+    .badge-warning { background-color: rgba(245, 158, 11, 0.15); color: var(--warning); }
+    .badge-accent { background-color: rgba(99, 102, 241, 0.15); color: var(--accent); }
+
+    /* 手機版漢堡選單按鈕 */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 200;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    /* 手機版側邊欄遮罩 */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.4);
+      z-index: 90;
+    }
+
+    .sidebar-overlay.active {
+      display: block;
+    }
+
+    /* RWD：手機版響應式排版 (<=768px) */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .sidebar {
+        transform: translateX(-100%);
+        width: 80%;
+        max-width: 280px;
+        transition: transform 0.3s ease;
+        z-index: 100;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 0 0 24px rgba(15, 23, 42, 0.2);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 4.5rem 1.25rem 2rem;
+        max-width: 100%;
+      }
+
+      header.doc-header h1 {
+        font-size: 1.6rem;
+      }
+
+      header.doc-header p {
+        font-size: 0.95rem;
+      }
+
+      .card {
+        padding: 1.25rem;
+        overflow-x: auto;
+      }
+
+      .card-title {
+        font-size: 1.05rem;
+      }
+
+      table {
+        min-width: 560px;
+      }
+
+      .diagram-container {
+        padding: 1rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 手機版漢堡選單按鈕 -->
+  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="開啟選單">☰</button>
+  <!-- 手機版側邊欄遮罩 -->
+  <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo-area">
+      <div class="logo-title">COLAB TRANSCRIPT</div>
+      <div class="logo-subtitle">SYSTEM SPECS</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-item active" onclick="switchSection('prd')">
+        <span class="nav-icon">📋</span> PRD 產品需求文件
+      </li>
+      <li class="nav-item" onclick="switchSection('srs')">
+        <span class="nav-icon">🛠️</span> SRS 軟體規格說明
+      </li>
+      <li class="nav-item" onclick="switchSection('dfd')">
+        <span class="nav-icon">🔄</span> DFD 資料流圖
+      </li>
+      <li class="nav-item" onclick="switchSection('ssd')">
+        <span class="nav-icon">⏱️</span> SSD 系統循序圖
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    
+    <header class="doc-header">
+      <h1 id="doc-title-text">📋 產品需求文件 (PRD)</h1>
+      <p>Google Colab CLI 語音下載、字幕優先偵測、切割與 Whisper 一鍵轉錄自動化套件規格書</p>
+    </header>
+
+    <!-- SECTION 1: PRD -->
+    <section id="section-prd" class="section-content active">
+      <div class="card">
+        <div class="card-title">1. 專案背景與痛點</div>
+        <p>隨著長時間會議、課堂或聽證會影音檔案的增加，語音轉文字（STT）已成為日常工作流中的核心需求。OpenAI 開源的 Whisper 大模型（如 large-v3）具備極高的中文辨識率，但其對硬體運算（特別是 GPU 記憶體）有極高要求，一般使用者的本機電腦通常無法順暢運作。</p>
+        <p>本專案基於 <code>google-colab-cli</code> 的雲端運作基礎，設計出一套本地與雲端 VM 無縫協同的一鍵式工作流。使用者不需具備 Git 使用背景與程式開發經驗，只要執行一個簡單的指令，即可藉由 Google 免費/付費的雲端 GPU 算力完成高精度轉錄，並自動打包回傳結果。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">2. 使用者痛點與對應解決方案 (Feature Mapping)</div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 45%;">使用者痛點 (Pain Point)</th>
+              <th>對應解決方案 (Solution)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>GPU 配額不足無法啟動</strong><br><small>免費版 Google 帳號在熱門時段常搶不到 T4 GPU 算力，導致 VM 建立失敗而卡死。</small></td>
+              <td><span class="badge badge-success">GPU/CPU 自動降級機制</span><br>建立 GPU 會話若失敗，程式會自動以 CPU 重新部署，避免任務直接中斷。</td>
+            </tr>
+            <tr>
+              <td><strong>長音訊檔案大、傳輸慢、易爆雲端容量</strong><br><small>動輒幾百 MB 甚至上 GB 的原始音訊，如果轉無損 WAV 傳輸耗時，且易爆 Colab 根目錄的空間。</small></td>
+              <td><span class="badge badge-accent">雲端暫存大檔清理與可選切割</span><br>支援在本機引導音訊「切割時間」。雲端只下載原檔並轉 WAV，切出欲轉錄之小音訊後，<strong>即時刪除原始巨型 WAV</strong>，既省本機傳輸流量也防雲端洩漏。</td>
+            </tr>
+            <tr>
+              <td><strong>Whisper 載入大模型重複超時</strong><br><small>用 Shell 迴圈每次調用 Whisper 指令會重複下載與載入 3GB 大模型，造成嚴重的時間浪費。</small></td>
+              <td><span class="badge badge-accent">批次處理與模型載入優化</span><br>以 Python 腳本在雲端一次性載入 Whisper 模型，直接將多個 WAV 音訊作為 List 批次送入，只載入模型一次。</td>
+            </tr>
+            <tr>
+              <td><strong>忘記關機導致點數/額度浪費</strong><br><small>轉錄動輒數十分鐘，使用者離開電腦若未手動關機，VM 會一直扣點直到閒置超時自動中斷。</small></td>
+              <td><span class="badge badge-success">自動防忘關機安全網</span><br>無論轉錄任務成功、失敗、甚至是中斷退出，本機腳本一定會在結束前向雲端發送 <code>colab stop</code> 關機指令，絕不浪費多餘計費。</td>
+            </tr>
+            <tr>
+              <td><strong>不懂 Git 與虛擬環境設定的繁瑣步驟</strong><br><small>使用者不懂 <code>uv venv</code>, <code>source .venv/bin/activate</code> 等指令，經常因為沒在虛擬環境執行而出錯。</small></td>
+              <td><span class="badge badge-success">一鍵整合入口 run.sh</span><br>單一入口 <code>./run.sh</code>，自動建立虛擬環境與執行 <code>uv sync</code> 保持程式碼最新，不需手動啟用虛擬環境。</td>
+            </tr>
+            <tr>
+              <td><strong>YouTube 影片明明已有字幕，卻仍要花時間下載音訊並用 GPU 轉錄</strong><br><small>許多 YouTube 影片本身已附帶官方或自動產生的字幕，重新下載音訊並跑 Whisper 既浪費時間也浪費雲端算力。</small></td>
+              <td><span class="badge badge-accent">YouTube 字幕優先偵測</span><br>未選擇切割時，優先檢查並直接下載既有字幕（同時輸出 <code>.srt</code> 與 <code>.txt</code>），完全略過音訊下載與轉錄。</td>
+            </tr>
+            <tr>
+              <td><strong>手邊已有錄音檔，卻要先上傳到 Google Drive 取得分享連結才能處理</strong><br><small>使用者本機已有 <code>.m4a</code>/<code>.mp3</code>/<code>.mp4</code>/<code>.wav</code> 錄音檔，若仍須手動上傳雲端硬碟並設定分享權限才能餵給工具，流程繁瑣且耗時。</small></td>
+              <td><span class="badge badge-success">本地音訊直傳上傳 (sound/ 目錄)</span><br>將檔案放入本機 <code>sound/</code> 目錄並執行選單選項 2，透過 <code>colab upload</code> 直接傳送至雲端 VM 並就地轉換為 WAV，免去手動上傳雲端硬碟與產生分享連結的步驟。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title">3. 核心功能規格需求 (Functional Requirements)</div>
+        <ul>
+          <li><strong>FR1. 一鍵環境管理器 (run.sh)</strong>：
+            本機執行的 Shell 入口，必須自動檢測 <code>.venv</code>，若無則建立，並運行 <code>uv sync</code> 自動拉取最新開發分支與 CLI 軟體包，免除使用者手動同步。執行前會以 <code>colab sessions</code> 偵測雲端是否存在保留中的會話 (<code>dl-session</code>)，據此動態決定選單項目與編號（第二階段轉錄選項僅在偵測到保留會話時顯示）。</li>
+          <li><strong>FR1.5. 本地音訊直傳與轉檔 (run1_local.sh / process_audio.py --local)</strong>：
+            本機執行的 Shell 子流程，掃描 <code>sound/</code> 目錄下的 <code>.m4a</code>/<code>.mp3</code>/<code>.mp4</code>/<code>.wav</code> 檔案供使用者選擇全部或指定編號，透過 <code>colab upload</code> 將所選檔案傳送至雲端 VM 的 <code>/content/</code> 目錄，再以 <code>process_audio.py --local &lt;檔名...&gt;</code> 模式呼叫既有的 <code>convert_to_wav()</code> 轉換為 16kHz、16-bit Mono WAV，產出清單寫入 <code>output_files.txt</code>，與第一階段共用後續的會話保留／本地下載／自動關機流程。</li>
+          <li><strong>FR2. 音訊智能下載與轉換 (process_audio.py)</strong>：
+            雲端執行的 Python 腳本，必須支援普通 HTTP URL、Google Drive URL (自動抽取 File ID) 及 YouTube 網址；自動安裝 <code>ffmpeg</code> 及 <code>yt-dlp</code> 套件，並轉換音訊為 16kHz、16-bit Mono (單聲道) WAV。</li>
+          <li><strong>FR2.5. YouTube 字幕優先偵測與下載 (process_audio.py)</strong>：
+            當輸入為 YouTube 網址且使用者「未選擇切割」時，優先以 <code>yt-dlp</code> 檢查影片是否具備字幕，語言優先序為 <code>zh-TW &gt; zh-Hans &gt; zh-Hant &gt; zh &gt; en</code>（含手動字幕與自動字幕）。若有，直接下載字幕並同時輸出 <code>.srt</code> (含時間碼) 與 <code>.txt</code> (純文字) 兩種格式，<strong>完全略過音訊下載與 Whisper 轉錄</strong>；若無可用字幕或使用者已選擇切割，則一律走音訊下載流程。</li>
+          <li><strong>FR3. 多區段音訊切割與殘留清理 (process_audio.py)</strong>：
+            支援使用者設定多個時間區段（支援 24小時制數字如 1030 或標準時間格式 10:30:00），將基準時間與切割時間做相差毫秒計算，切出子音訊 WAV 檔案後，<strong>必須在雲端磁碟中刪除原始大型 WAV 檔</strong>。<strong>時間參數採「時鐘時間」語意</strong>：例如基準開始時間設為 <code>0000</code>，欲擷取前 7 分鐘則結束時間應輸入 <code>0007</code>（00:07）而非 <code>0700</code>；若結束時間換算後超過音訊實際長度，將自動裁切至音訊結尾（等同未切割，轉錄整段原始音訊）。</li>
+          <li><strong>FR4. 雲端 Whisper 智能轉錄與字幕分流 (transcribe_audio.py)</strong>：
+            優先讀取第一階段產出的 <code>output_files.txt</code> 清單，依副檔名分流：<code>.wav</code> 才載入 Whisper 模型進行轉錄，支援 GPU/CPU 智能適配（GPU 模式使用 <code>large-v3</code>，CPU 模式<strong>自動降級為 medium</strong> 避免計算超時），轉錄結果同時輸出 <code>.txt</code> (純文字) 與 <code>.srt</code> (含時間碼) 兩種格式，並透過 <strong>OpenCC (s2twp)</strong> 統一轉換為繁體中文（台灣慣用語）；<code>.srt</code>/<code>.txt</code>（字幕直出結果）則直接收錄至輸出目錄，<strong>不會載入 Whisper 模型</strong>。</li>
+          <li><strong>FR5. 動態轉錄超時安全閥 (run2.sh)</strong>：
+            在第二階段啟動時，本機須先發送一個 0.1 秒的探測命令取得雲端所有 <code>*.wav</code> 的總時間秒數，並套用公式 <code>Timeout = (總秒數 / 2) + 300</code> (下限 10 分鐘) 動態設定轉錄的 timeout；若偵測到總秒數為 0（純字幕模式，無 WAV），則改用 120 秒的固定短超時。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SRS -->
+    <section id="section-srs" class="section-content">
+      <div class="card">
+        <div class="card-title">1. 系統架構與部署模式</div>
+        <p>本系統基於本地與雲端 VM 的「分散式協同」架構。本地端透過 <code>google-colab-cli</code> 建立 Jupyter 連線，並以管道注入的方式直接發送 Python 代碼給雲端 VM 執行，因此本地端無需配置任何 Python 依賴（只需安裝 <code>uv</code>），所有的音訊處理與模型推論皆在 Google 雲端完成。</p>
+        <p>離線安裝包（位於 <code>installation/</code> 目錄）與 CLI 原始碼目錄完全解耦。使用者可直接複製 <code>installation/</code> 目錄到電腦的任意位置（如桌面），將其作為自包含的應用工具包使用。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">2. 外在軟體與系統元件依賴</div>
+        <table>
+          <thead>
+            <tr>
+              <th>元件名稱</th>
+              <th>部署位置</th>
+              <th>功用說明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>uv</code> (v0.11+)</td>
+              <td>本機電腦</td>
+              <td>高效 Python 虛擬環境與依賴套件管理工具。</td>
+            </tr>
+            <tr>
+              <td><code>google-colab-cli</code> (v0.5.9+)</td>
+              <td>本地虛擬環境</td>
+              <td>透過 Jupyter 與 Colab Control Plane 進行認證、VM 開關與代碼傳輸。</td>
+            </tr>
+            <tr>
+              <td><code>ffmpeg</code></td>
+              <td>雲端 VM</td>
+              <td>系統級音訊解碼、編碼與分割元件 (自動於 process_audio.py 中檢測並安裝)。</td>
+            </tr>
+            <tr>
+              <td><code>openai-whisper</code> (GPU/CPU)</td>
+              <td>雲端 VM</td>
+              <td>語音轉文字推論引擎 (自動於 transcribe_audio.py 中安裝與加載)。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title">3. 核心 Bug 修復規格明細 (Defect Fix Specifications)</div>
+        <p>為了確保整個下載與轉錄流程穩定，專案內部對原生 CLI 進行了以下修改：</p>
+        <h3>A. 目錄下載缺陷修復</h3>
+        <ul>
+          <li><strong>模組名稱</strong>：<code>colab_cli.commands.files.download</code></li>
+          <li><strong>問題描述</strong>：原本 <code>colab download -s session "remote_file" .</code> 時，若本地目的地為目錄 <code>.</code>，Contents API 會拋出 <code>IsADirectoryError</code> 錯誤。</li>
+          <li><strong>修復規格</strong>：引入 <code>os.path.isdir(local_path)</code> 檢測。若為目錄，自動將遠端檔案的 <code>os.path.basename</code> 結合，重新拼接為具體檔案路徑，確保正常下載。</li>
+        </ul>
+        <h3>B. 會話狀態回傳值修復</h3>
+        <ul>
+          <li><strong>模組名稱</strong>：<code>colab_cli.commands.session.status</code></li>
+          <li><strong>問題描述</strong>：當指定的會話（例如 <code>dl-session</code>）在伺服器端不存在時，<code>colab status -s dl-session</code> 雖印出 <code>Session not found</code>，但 Exit Code 卻回傳 <code>0</code>。這會導致 Shell 腳本的 <code>$?</code> 誤判會話依然活躍。</li>
+          <li><strong>修復規格</strong>：在找不到會話的分支中加入 <code>raise typer.Exit(1)</code>，確保向 Shell 回傳非零的錯誤碼，使得會話檢測腳本能正常攔截。</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">4. 系統限制與非功能性規格</div>
+        <ul>
+          <li><strong>雲端最大空閒限制 (Idle Timeout)</strong>：Colab 虛擬機在閒置（無程式碼執行）約 30 ~ 90 分鐘後會被自動回收。因此第一階段切割完且保留會話後，應盡快執行第二階段。</li>
+          <li><strong>檔案大小限制</strong>：支援高達 2GB 的原始影音下載。雲端下載過程超時限制為 600 秒 (10 分鐘)。</li>
+          <li><strong>轉錄超時保護</strong>：動態評估秒數大於 30 分鐘時，將自動放寬 <code>colab exec --timeout</code> 限制，最高可達 Colab 平台所容許的單次連線最大上限。</li>
+          <li><strong>雲端零殘留 (No Cloud Residue)</strong>：全程不掛載、不寫入使用者的 Google Drive；所有處理皆在 Colab VM 的暫存磁碟進行，<code>colab stop</code> 後該 VM 連同其上所有檔案與執行 log 一併銷毀，僅本機端會保留 <code>./whisper_output/</code> 下載結果。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DFD -->
+    <section id="section-dfd" class="section-content">
+      <div class="card">
+        <div class="card-title">1. DFD Level 0: 系統環境與資料流大綱</div>
+        <p>Level 0 展現了使用者、本地控制腳本、Google Colab 雲端 VM 與 Google Drive 之間的最高層資料交互結構。</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+            graph TD
+              User("使用者") -- "1.輸入網址/時間參數/執行選單" --> LocalCtrl["run.sh 本地控制端"]
+              LocalCtrl -- "2.建立與連線VM命令" --> ColabVM["Google Colab 雲端 VM"]
+              ColabVM -- "3.請求下載音檔" --> GDrive["Google Drive / 網路音源"]
+              GDrive -- "4.回傳原始音檔 (mp3/mp4)" --> ColabVM
+              ColabVM -- "5.回傳雲端狀態與檔案清單" --> LocalCtrl
+              LocalCtrl -- "6.下載壓縮文字檔/WAV" --> User
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">2. DFD Level 1: 第一階段資料流 (音訊處理)</div>
+        <p>Level 1 音訊下載與切割階段。描述了在第一階段中，輸入參數如何傳遞、檔案如何在雲端進行轉換、切割，以及原始大 WAV 檔案如何被刪除清理的細節。</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+            graph TD
+              User("使用者") -- "輸入網址/切割參數" --> InputP["1.1 參數解析與輸入引導"]
+              InputP -- "網址與區段參數" --> VMInit["1.2 雲端會話建立與連線"]
+              VMInit -- "Stdin Pipe 注入 Python 代碼" --> PyAudio["1.3 雲端音訊處理 process_audio.py"]
+
+              PyAudio -- "未切割 且 為 YouTube 網址" --> SubCheck{"1.3a 字幕優先偵測"}
+              SubCheck -- "偵測到中/英字幕" --> SubFiles["雲端字幕 .srt + .txt"]
+              SubFiles -- "檔名記錄" --> ListFile["1.4 輸出清單 output_files.txt"]
+
+              SubCheck -- "無字幕 / 已選切割 / 非YouTube" --> PyAudio2["1.3b 音訊下載與轉換"]
+              PyAudio2 -- "請求下載" --> GDrive["Google Drive / 網路"]
+              GDrive -- "下載 MP3/MP4 檔案" --> PyAudio2
+              PyAudio2 -- "調用 FFmpeg 轉換" --> WavLarge["雲端暫存大 WAV"]
+              WavLarge -- "計算基準差與切割" --> WavSmall["雲端切割子 WAV"]
+              PyAudio2 -- "執行 os.remove" --> WavLarge
+              WavSmall -- "檔名記錄" --> ListFile
+
+              subgraph "本機下載 (若選 n 不保留)"
+                ListFile --> Downloader["1.5 本地下載模組"]
+                WavSmall --> Downloader
+                SubFiles --> Downloader
+                Downloader -- "下載檔案到本機" --> LocalFolder["本地當前目錄"]
+              end
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">2.5 DFD Level 1: 本地音訊上傳資料流 (替代輸入路徑)</div>
+        <p>Level 1 本地上傳階段。描述了選單選項 2 的替代輸入路徑：使用者將音檔放入本機 <code>sound/</code> 目錄，工具透過 <code>colab upload</code> 將檔案直傳雲端 VM 後，再以 <code>process_audio.py --local</code> 模式就地轉換為 WAV，後續的清單輸出與下載/保留邏輯與第一階段相同。</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+            graph TD
+              User2("使用者") -- "將音檔放入 sound/ 並選擇選項2" --> ScanLocal["1.1L 掃描本機 sound/ 目錄"]
+              ScanLocal -- "選定的檔案清單" --> VMInit2["1.2L 雲端會話建立或連線"]
+              VMInit2 -- "colab upload 逐檔上傳" --> CloudFiles["雲端 /content/ 已上傳檔案"]
+              CloudFiles -- "Stdin Pipe 注入 --local 模式" --> PyAudioLocal["1.3L process_audio.py --local"]
+              PyAudioLocal -- "調用 convert_to_wav() / FFmpeg" --> WavSmall2["雲端轉換 WAV"]
+              WavSmall2 -- "檔名記錄" --> ListFile2["1.4L 輸出清單 output_files.txt"]
+
+              subgraph "本機下載 (若選 n 不保留)"
+                ListFile2 --> Downloader2["1.5L 本地下載模組"]
+                WavSmall2 --> Downloader2
+                Downloader2 -- "下載檔案到本機" --> LocalFolder2["本地當前目錄"]
+              end
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">3. DFD Level 1: 第二階段資料流 (語音轉錄)</div>
+        <p>Level 1 轉錄階段。描述了在會話被保留後，如何進行時長探測，動態控制超時，並在雲端使用 Whisper 模型將音訊轉為文字，最終下載與自動停機的過程。</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+            graph TD
+              User("使用者") -- "啟動轉錄 (選單動態顯示之選項，僅當會話保留時出現)" --> SessionCh["2.1 雙重會話活性檢測"]
+              SessionCh -- "活躍會話名稱" --> ProbeUnit["2.2 雲端時長探測"]
+              ProbeUnit -- "發送 wave.open 探測指令" --> WavSmall["雲端切割子 WAV"]
+              WavSmall -- "取得總秒數" --> ProbeUnit
+              ProbeUnit -- "計算出 Timeout 秒數" --> TranscribeRun["2.3 雲端轉錄 transcribe_audio.py"]
+              TranscribeRun -- "安裝套件並加載 Whisper" --> Model["Whisper 模型"]
+              WavSmall --> TranscribeRun
+              Model -- "語音推論" --> TextFiles["轉錄結果 .txt + .srt (OpenCC 簡轉繁)"]
+              TranscribeRun -- "調用 zip 壓縮" --> ZipFile["whisper_transcriptions.zip"]
+              ZipFile --> ZipDownload["2.4 本地打包下載與解壓"]
+              ZipDownload -- "下載並解壓" --> LocalOut["本地 whisper_output/"]
+              ZipDownload -- "下載完畢觸發" --> AutoStop["2.5 雲端會話銷毀 colab stop"]
+              AutoStop --> User
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: SSD -->
+    <section id="section-ssd" class="section-content">
+      <div class="card">
+        <div class="card-title">1. SSD 系統循序圖: 第一階段 (音訊下載與切割)</div>
+        <p>展示了本機使用者、本地控制腳本、Colab CLI 客戶端與雲端 VM 之間，在第一階段執行時的系統交互時序。</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+            sequenceDiagram
+              actor User as 使用者
+              participant Local as "本地入口 (run.sh/run1.sh)"
+              participant CLI as colab-cli
+              participant VM as 雲端虛擬機 (dl-session)
+              participant Net as 外部網路 (Google Drive)
+
+              User->>Local: 執行 ./run.sh 並選擇 1
+              Local->>User: 提示輸入 URL 與切割時間段
+              User-->>Local: 輸入網址與時間參數
+              Local->>CLI: 執行 colab new -s dl-session --gpu T4
+              alt GPU 配額充足
+                  CLI->>VM: 建立 T4 GPU 虛擬機
+                  VM-->>CLI: 建立成功 (READY)
+              else GPU 配額不足 (Precondition Failed)
+                  CLI-->>Local: 建立失敗 (412)
+                  Local->>CLI: 降級重試：colab new -s dl-session
+                  CLI->>VM: 建立 CPU 虛擬機
+                  VM-->>CLI: 建立成功 (READY)
+              end
+              Local->>CLI: 發送 process_audio.py (Stdin 注入)
+              CLI->>VM: colab exec -s dl-session
+              note over VM: 雲端 VM 安裝 ffmpeg, gdown, yt-dlp 等
+              alt 已選擇切割 (need_split = true)
+                  note over VM: 略過字幕檢查，直接走音訊流程
+                  VM->>Net: 請求下載原始音訊 (mp3/mp4)
+                  Net-->>VM: 下載音訊成功
+                  note over VM: 轉換成無損 WAV 格式
+                  note over VM: 根據輸入時間分割為子 WAV
+                  note over VM: 刪除原始巨型 WAV 檔以省空間
+              else 未選擇切割 (need_split = false)
+                  VM->>Net: 查詢 YouTube 字幕清單 (yt-dlp extract_info)
+                  alt 偵測到中/英字幕
+                      Net-->>VM: 回傳字幕語言清單
+                      VM->>Net: 下載字幕並轉出 .srt + .txt
+                      note over VM: 略過音訊下載與轉換
+                  else 無可用字幕 / 非 YouTube 網址
+                      VM->>Net: 請求下載原始音訊 (mp3/mp4)
+                      Net-->>VM: 下載音訊成功
+                      note over VM: 轉換成無損 WAV 格式
+                  end
+              end
+              VM-->>CLI: 回傳產出清單與檔案完成狀態
+              CLI-->>Local: 執行成功
+              Local->>User: 詢問「是否在雲端保留會話以進行轉錄？(y/n)」
+              alt 選擇 y (保留會話)
+                  User-->>Local: 輸入 y
+                  note over Local: 不進行下載，亦不關閉雲端 VM
+                  Local->>User: 提示會話已保留，請接著執行第二階段
+              else 選擇 n (不保留)
+                  User-->>Local: 輸入 n
+                  Local->>CLI: 下載清單與 WAV 檔案到本地
+                  CLI->>VM: 下載檔案
+                  VM-->>CLI: 傳輸檔案
+                  CLI-->>Local: 下載成功
+                  Local->>CLI: 關閉虛擬機 (colab stop)
+                  CLI->>VM: 釋放 VM 資源
+                  Local->>User: 下載成功並已關機，任務結束
+              end
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">1.5 SSD 系統循序圖: 本地音訊上傳與轉檔 (替代路徑)</div>
+        <p>展示了選單選項 2 的執行時序：本機掃描 <code>sound/</code> 目錄、上傳所選檔案至雲端 VM，並以 <code>--local</code> 模式轉換為 WAV，後續保留會話/下載/關機的分支與第一階段相同。</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+            sequenceDiagram
+              actor User as 使用者
+              participant Local as "本地入口 (run.sh/run1_local.sh)"
+              participant CLI as colab-cli
+              participant VM as 雲端虛擬機 (dl-session)
+
+              User->>Local: 執行 ./run.sh 並選擇 2
+              Local->>Local: 掃描 sound/ 目錄下的 .m4a/.mp3/.mp4/.wav 檔案
+              Local->>User: 列出檔案清單，詢問是否全部上傳或指定編號
+              User-->>Local: 輸入 y 或指定編號 (如 1,3)
+              Local->>CLI: 執行 colab new -s dl-session --gpu T4
+              alt GPU 配額充足
+                  CLI->>VM: 建立 T4 GPU 虛擬機
+                  VM-->>CLI: 建立成功 (READY)
+              else GPU 配額不足 (Precondition Failed)
+                  CLI-->>Local: 建立失敗 (412)
+                  Local->>CLI: 降級重試：colab new -s dl-session
+                  CLI->>VM: 建立 CPU 虛擬機
+                  VM-->>CLI: 建立成功 (READY)
+              end
+              loop 每個所選檔案
+                  Local->>CLI: colab upload 檔案 content/檔案
+                  CLI->>VM: 傳輸檔案至 /content/
+                  VM-->>CLI: 上傳完成
+              end
+              Local->>CLI: 發送 process_audio.py --local 檔案清單 (Stdin 注入)
+              CLI->>VM: colab exec -s dl-session
+              note over VM: 對所選檔案逐一呼叫 convert_to_wav() 轉為 WAV
+              VM-->>CLI: 回傳產出清單與檔案完成狀態
+              CLI-->>Local: 執行成功
+              Local->>User: 詢問「是否在雲端保留會話以進行轉錄？(y/n)」
+              alt 選擇 y (保留會話)
+                  User-->>Local: 輸入 y
+                  note over Local: 不進行下載，亦不關閉雲端 VM
+                  Local->>User: 提示會話已保留，請接著執行轉錄選項
+              else 選擇 n (不保留)
+                  User-->>Local: 輸入 n
+                  Local->>CLI: 下載清單與 WAV 檔案到本地
+                  CLI->>VM: 下載檔案
+                  VM-->>CLI: 傳輸檔案
+                  CLI-->>Local: 下載成功
+                  Local->>CLI: 關閉虛擬機 (colab stop)
+                  CLI->>VM: 釋放 VM 資源
+                  Local->>User: 下載成功並已關機，任務結束
+              end
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">2. SSD 系統循序圖: 第二階段 (雲端轉錄與下載)</div>
+        <p>展示了當會話已成功保留後，第二階段轉錄並將逐字稿同步回本地，最後自動關閉虛擬機的時序圖。</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+            sequenceDiagram
+              actor User as 使用者
+              participant Local as "本地入口 (run.sh/run2.sh)"
+              participant CLI as colab-cli
+              participant VM as 雲端虛擬機 (dl-session)
+
+              User->>Local: 執行 ./run.sh 並選擇轉錄選項 (僅當保留會話時顯示為 3)
+              Local->>CLI: 執行 colab sessions (檢查活性)
+              CLI-->>Local: 回傳會話清單 (確認 dl-session 存在)
+              Local->>CLI: 發送時長探測腳本 (Probe)
+              CLI->>VM: 執行輕量探測
+              note over VM: 讀取 *.wav 頭資訊計算總秒數
+              VM-->>CLI: 回傳總秒數
+              CLI-->>Local: 輸出秒數
+              note over Local: 計算 Timeout = (總秒數 / 2) + 300 秒<br/>(若總秒數為 0，純字幕模式則改用 120 秒)
+              Local->>CLI: 啟動轉錄 transcribe_audio.py (帶入動態超時)
+              CLI->>VM: colab exec -s dl-session --timeout $TIMEOUT
+              note over VM: 讀取 output_files.txt 清單
+              alt 清單中含有 .wav 檔案
+                  note over VM: 雲端 VM 安裝 openai-whisper
+                  alt 偵測為 GPU 虛擬機
+                      note over VM: 載入 Whisper 'large-v3' (3GB) 模型
+                  else 偵測為 CPU 虛擬機 (自動降級)
+                      note over VM: 載入 Whisper 'medium' (1.5GB) 模型
+                  end
+                  note over VM: 批次轉錄清單中所有 WAV 檔<br/>輸出 .txt + .srt 並以 OpenCC 簡轉繁
+              else 清單中僅含字幕 .srt/.txt
+                  note over VM: 略過 Whisper 安裝與模型載入<br/>直接收錄字幕檔
+              end
+              note over VM: 產生結果並打包成 whisper_transcriptions.zip
+              VM-->>CLI: 轉錄與壓縮完成
+              CLI-->>Local: 執行成功
+              Local->>CLI: 下載壓縮檔 (colab download 'content/whisper_transcriptions.zip' './whisper_transcriptions.zip')
+              CLI->>VM: 下載檔案
+              VM-->>CLI: 傳輸檔案
+              CLI-->>Local: 下載完成
+              Local->>Local: 本地自動解壓 zip 至 ./whisper_output/
+              Local->>CLI: 執行 colab stop -s dl-session (釋放虛擬機)
+              CLI->>VM: 終止會話並銷毀實例
+              Local->>User: 轉錄成功！逐字稿已儲存至 ./whisper_output/，VM 已自動關閉。
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // 手機版側邊欄開合控制
+    function toggleSidebar() {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.querySelector('.sidebar-overlay').classList.toggle('active');
+    }
+
+    // Section Switch Controller
+    function switchSection(sectionId) {
+      // 1. Update Navigation Menu UI
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => item.classList.remove('active'));
+      
+      // Select the clicked nav item based on the onclick attribute parameter
+      const clickedItem = Array.from(navItems).find(item => item.getAttribute('onclick').includes(sectionId));
+      if (clickedItem) clickedItem.classList.add('active');
+
+      // 2. Switch Active Section Panel
+      const sections = document.querySelectorAll('.section-content');
+      sections.forEach(section => section.classList.remove('active'));
+      
+      const targetSection = document.getElementById(`section-${sectionId}`);
+      if (targetSection) targetSection.classList.add('active');
+      renderMermaidInSection(sectionId);
+
+      // 3. Update Title Header Text
+      const titleText = document.getElementById('doc-title-text');
+      switch(sectionId) {
+        case 'prd':
+          titleText.innerHTML = "📋 產品需求文件 (PRD)";
+          break;
+        case 'srs':
+          titleText.innerHTML = "🛠️ 軟體規格說明 (SRS)";
+          break;
+        case 'dfd':
+          titleText.innerHTML = "🔄 資料流圖 (DFD)";
+          break;
+        case 'ssd':
+          titleText.innerHTML = "⏱️ 系統循序圖 (SSD)";
+          break;
+      }
+
+      // Scroll smoothly back to top of main content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // 手機版：切換頁面後自動收合側邊欄
+      document.querySelector('.sidebar').classList.remove('open');
+      document.querySelector('.sidebar-overlay').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
