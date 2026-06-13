@@ -392,7 +392,7 @@
         <p>事件發生後續曝光的細節，並未推翻前三個角度的核心結論，但揭露了三個更精細的結構性問題，直接影響企業在「前沿AI供應商風險評估」中應該追蹤的訊號種類。</p>
 
         <h4>4.1 威脅情報來源的質變：當「競爭對手的安全聲明」變成監管武器</h4>
-        <p>根據<a href="https://www.axios.com/2026/06/12/anthropic-trump-mythos-fable-national-security" target="_blank" rel="noopener">Axios的報導</a>，這次出口管制行動的起點，並非政府自身的測試或公開揭露的研究，而是<strong>另一家AI公司向政府聲稱自己成功越獄了Mythos</strong>。政府據此向Anthropic施壓要求暫緩發布未果，才升級為出口管制信函。Anthropic後續表示，其審視的是政府所依據的報告，且認為政府目前僅提供了<strong>口頭層級的證據</strong>（<a href="https://www.cnbc.com/2026/06/12/anthropic-disables-access-to-fable-5-and-mythos-5-to-comply-with-government-directive.html" target="_blank" rel="noopener">CNBC</a>）。</p>
+        <p>根據<a href="https://www.axios.com/2026/06/12/anthropic-trump-mythos-fable-national-security" target="_blank" rel="noopener">Axios的報導</a>，這次出口管制行動的起點，並非政府自身的測試或公開揭露的研究，而是<strong>另一家AI公司向政府聲稱自己成功越獄了Mythos</strong>。政府據此向Anthropic施壓要求暫緩發布未果，才升級為出口管制信函。Anthropic後續表示，其審視的是政府所依據的報告，且認為政府目前僅提供了<strong>口頭層級的證據</strong>（<a href="https://www.cnbc.com/2026/06/12/anthropic-disables-access-to-fable-5-and-mythos-5-to-comply-with-government-directive.html" target="_blank" rel="noopener">CNBC</a>）。值得注意的是，目前所有公開報導都<strong>沒有交代政府如何驗證這家競爭對手說法的真實性</strong>——報導只呈現了「政府基於這個口頭指控採取行動」這個結果，提出指控的競爭對手身分也未被公開，驗證過程本身完全是黑箱。</p>
         <p>把這條線拉直來看，傳統的漏洞情資來源，通常分三類：內部紅隊、外部研究者的負責任揭露（coordinated disclosure）、以及被野外利用後才被偵測到的威脅情資。<strong>這次事件示範了第四種來源：競爭對手向監管機關提出的能力聲明，且這個聲明不需要經過獨立驗證、不需要走負責任揭露流程，就足以觸發具有法律效力的存取終止指令</strong>。</p>
 
         <div class="table-wrap">
@@ -497,6 +497,17 @@
             </ul>
           </li>
         </ol>
+
+        <h4>依據與先例</h4>
+        <p>以上五點建議並非憑空推論，而是對應既有的風險管理方法論與Anthropic自身的營運紀錄：</p>
+        <ul>
+          <li><strong>方法論基礎</strong>：這套架構本質上是ISO 31000風險管理框架（風險識別→評估→應對→監控）與供應鏈風險管理（如ISO 28000、ISO 22301業務連續性管理）在「AI供應商依賴」這個新興風險類別上的具體應用。企業不需要發明新的治理工具——需要的是把「AI供應商」正式納入既有的供應鏈風險清冊與BCP情境庫，而這正是多數企業目前缺漏的一步。</li>
+          <li><strong>建議1（模型抽象層）</strong>：<a href="https://www.truefoundry.com/blog/llm-gateway" target="_blank" rel="noopener">LLM Gateway/AI Gateway架構</a>在2026年已被視為企業AI治理成熟度的指標之一，「投資抽象層以降低供應商鎖定」是業界普遍方向。</li>
+          <li><strong>建議2、5（冷待命備援、監管曝光度評估）</strong>：<a href="https://mitratech.com/resource-hub/blog/nist-ai-risk-management-framework-rmf/" target="_blank" rel="noopener">NIST AI風險管理框架（AI RMF）</a>的「Manage」功能明確涵蓋供應商SLA、模型更新政策與持續監控；美國BIS出口管制框架（<a href="https://www.sidley.com/en/insights/newsupdates/2025/01/new-us-export-controls-on-advanced-computing-items-and-artificial-intelligence-model-weights" target="_blank" rel="noopener">AI Diffusion Rule、AI Due Diligence Rule、ECCN 4E091</a>）已將「雙重用途AI能力」列為供應鏈審查項目，方向與建議5一致。</li>
+          <li><strong>建議3（合約條款）</strong>：<a href="https://www.genieai.co/blog/essential-clauses-every-saas-contract-must-include" target="_blank" rel="noopener">資料可攜性與SLA終止權</a>是現行SaaS合約的標準要素；但「監管行動通知義務」這項具體條款，目前並非業界既有慣例，屬於本報告基於這次事件提出的新建議，尚待市場驗證。</li>
+          <li><strong>建議4（桌面演練）</strong>：<a href="https://www.ncontracts.com/nsight-blog/9-steps-tabletop-bcp-test" target="_blank" rel="noopener">BCP桌面演練「假設核心供應商不可用」</a>是既有最佳實務，本次事件提供的新增情境是「供應商自身也不知道何時恢復」。</li>
+        </ul>
+        <p><strong>實務先例——不必等到下一次出口管制事件</strong>：即使排除這次的監管因素，Anthropic自身過去一年內已出現兩次值得參考的服務品質事件。2025年8月，使用者陸續回報Claude回應品質下降，<a href="https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues" target="_blank" rel="noopener">Anthropic事後調查發現是三個基礎設施錯誤所致</a>，且因評估方法過於寬鬆，花了數週才定位問題；2026年3至4月，<a href="https://www.infoq.com/news/2026/05/anthropic-claude-code-postmortem/" target="_blank" rel="noopener">Claude Code的輸出品質因三個內部變更（推理降級、快取錯誤、tokenizer迴歸）連續下降50天</a>，且是由外部使用者自行建立監測才被發現，Anthropic內部當時並未察覺。這兩起事件說明：<strong>單一供應商依賴的風險，不只來自監管這種極端尾部事件——日常的服務品質波動本身，就足以構成需要備援與演練的理由</strong>。建議2與建議4的適用情境，遠比「政府下架模型」更常發生。</p>
       </section>
 
       <section id="part3">
@@ -545,6 +556,17 @@
           <li><a href="https://www.techtimes.com/articles/318217/20260611/ai-regulation-push-amodei-demands-power-blocking-unsafe-models-anthropic-pledges-350-million.htm" target="_blank" rel="noopener">AI regulation push: Amodei demands power of blocking unsafe models, Anthropic pledges $350 million — Tech Times</a>（2026-06-11）</li>
           <li><a href="https://www.yahoo.com/news/articles/anthropic-ceo-dario-amodei-calls-054600996.html" target="_blank" rel="noopener">Anthropic CEO Dario Amodei calls... — Yahoo News</a>（2026-06-12後）</li>
           <li><a href="https://www.aol.com/articles/dario-amodei-anthropics-pentagon-spat-140110239.html" target="_blank" rel="noopener">Dario Amodei: Anthropic's Pentagon spat... — AOL</a>（2026-06-12後）</li>
+        </ol>
+
+        <h4>供應鏈風險管理與AI治理框架依據（「依據與先例」段落引用）</h4>
+        <ol start="13">
+          <li><a href="https://www.truefoundry.com/blog/llm-gateway" target="_blank" rel="noopener">What Is an LLM Gateway — TrueFoundry</a></li>
+          <li><a href="https://mitratech.com/resource-hub/blog/nist-ai-risk-management-framework-rmf/" target="_blank" rel="noopener">NIST AI Risk Management Framework and Third-Party Risk — Mitratech</a></li>
+          <li><a href="https://www.sidley.com/en/insights/newsupdates/2025/01/new-us-export-controls-on-advanced-computing-items-and-artificial-intelligence-model-weights" target="_blank" rel="noopener">New US Export Controls on Advanced Computing Items and AI Model Weights — Sidley</a>（2025-01）</li>
+          <li><a href="https://www.genieai.co/blog/essential-clauses-every-saas-contract-must-include" target="_blank" rel="noopener">Essential Clauses Every SaaS Contract Must Include — Genie AI</a></li>
+          <li><a href="https://www.ncontracts.com/nsight-blog/9-steps-tabletop-bcp-test" target="_blank" rel="noopener">9 Steps for a Successful BCP Tabletop Test — NContracts</a></li>
+          <li><a href="https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues" target="_blank" rel="noopener">A Postmortem of Three Recent Issues — Anthropic</a>（2025-09）</li>
+          <li><a href="https://www.infoq.com/news/2026/05/anthropic-claude-code-postmortem/" target="_blank" rel="noopener">Anthropic Traces Six Weeks of Claude Code Quality Complaints to Three Overlapping Product Changes — InfoQ</a>（2026-05）</li>
         </ol>
       </section>
 
