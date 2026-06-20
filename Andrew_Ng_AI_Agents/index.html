@@ -384,6 +384,53 @@
       font-size: 14px;
     }
 
+    /* 內容區塊（可展開） */
+    .content-section {
+      border: none;
+      margin: 32px 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    .section-header {
+      display: block;
+      cursor: pointer;
+      user-select: none;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .section-header h2 {
+      display: flex;
+      align-items: center;
+      margin: 0;
+    }
+
+    .content-section[open] .section-header h2::before {
+      content: '▼';
+      display: inline-block;
+      margin-right: 8px;
+      transform: rotate(0deg);
+      transition: transform 0.2s ease;
+      color: var(--secondary-color);
+      font-size: 0.85em;
+    }
+
+    .content-section:not([open]) .section-header h2::before {
+      content: '▶';
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--secondary-color);
+      font-size: 0.85em;
+    }
+
+    .section-content {
+      margin-top: 16px;
+      padding-left: 16px;
+      border-left: 3px solid var(--border-color);
+    }
+
     /* 時間軸手風琴 */
     .timeline-accordion {
       display: flex;
@@ -759,7 +806,12 @@
 - 🔗 <a href="https://www.youtube.com/watch?v=OaRhpwz_TGM">YouTube 原始影片</a>（The Future of AI Agents with Andrew Ng | Interrupt 26）<br/>
 - 🔗 <a href="https://www.langchain.com/">LangChain 官網</a></p>
 <hr/>
-<h2 id="_2">⏱️ 影片時間軸導航</h2>
+<details class="content-section">
+<summary class="section-header">
+  <h2 id="_2">⏱️ 影片時間軸導航</h2>
+</summary>
+
+<div class="section-content">
 <p>點擊展開或直接點擊時間跳轉：</p>
 
 <div class="timeline-accordion">
@@ -891,6 +943,8 @@
     </ul>
   </details>
 </div>
+</div>
+</details>
 <hr/>
 <h2 id="_3">📚 訪談背景</h2>
 <p><strong>訪談時間</strong>：2026 年某次大型 AI 產業會議（Year 2 回顧）<br/>
@@ -1264,7 +1318,12 @@
 - 20 年來從未被看過的 PDF 現在有價值，但找不到它們儲存在哪？</p>
 <p><strong>未來投資</strong>：數千萬級別的「資料架構現代化」項目，目標不是查詢速度，而是 <strong>AI 可訪問性</strong>。</p>
 <hr/>
-<h2 id="_35">📝 完整逐字稿（去除時間戳記，分段整理）</h2>
+<details class="content-section">
+<summary class="section-header">
+  <h2 id="_35">📝 完整逐字稿（去除時間戳記，分段整理）</h2>
+</summary>
+
+<div class="section-content">
 <h3 id="_36">開場致詞與背景</h3>
 <p>感謝你們邀請我回來參加第二年的活動。去年的爐邊談話在 YouTube 上反響很好，被讚最多、看最多，所以今年能再回來真是太棒了。</p>
 <p>過去一年裡，AI 領域發生了很多事。讓我談談什麼快於預期，什麼慢於預期。</p>
@@ -1474,6 +1533,8 @@
 <li>感謝，感謝大家。</li>
 </ul>
 <p>（觀眾鼓掌）</p>
+</div>
+</details>
 <hr/>
 <h2 id="_46">🎓 結語</h2>
 <p>這場訪談的價值不在於「告訴你未來會發生什麼」，而在於<strong>展露一個在 AI 時代領先的思想家是如何思考問題的</strong>。</p>
