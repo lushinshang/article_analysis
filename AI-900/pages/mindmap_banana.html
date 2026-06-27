@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-900 備考心智圖 - Banana 版本</title>
+  <meta name="description" content="專為 Microsoft Azure AI Fundamentals (AI-900) 考生設計的備考地圖投影片瀏覽器，專屬 Banana 版本心智圖的快速複習。">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0d0c07 0%, #1e1b0f 100%);
+      --panel-bg: rgba(30, 27, 15, 0.7);
+      --panel-border: rgba(251, 191, 36, 0.15);
+      --text-main: #fefbfc;
+      --text-muted: #9ca3af;
+      --accent: #fbbf24;
+      --accent-glow: rgba(251, 191, 36, 0.3);
+      --font-family: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    header {
+      background: rgba(30, 27, 15, 0.6);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--panel-border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-area h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-area p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .action-link {
+      background: rgba(251, 191, 36, 0.05);
+      border: 1px solid var(--panel-border);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-link:hover {
+      background: rgba(251, 191, 36, 0.15);
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      gap: 20px;
+    }
+
+    .viewer-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 24px;
+      height: 60vh;
+      min-height: 480px;
+    }
+
+    @media (max-width: 1024px) {
+      .viewer-container {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+    }
+
+    .slide-area {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(16px);
+    }
+
+    .slide-wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .slide-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      opacity: 0;
+      transform: scale(0.98);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .slide-image.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(30, 27, 15, 0.85);
+      border: 1px solid var(--panel-border);
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-arrow:hover {
+      background: var(--accent);
+      color: #000;
+      box-shadow: 0 0 15px var(--accent-glow);
+      border-color: var(--accent);
+    }
+
+    .nav-arrow.prev { left: 20px; }
+    .nav-arrow.next { right: 20px; }
+
+    .overlay-controls {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .control-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: rgba(30, 27, 15, 0.85);
+      border: 1px solid var(--panel-border);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      backdrop-filter: blur(8px);
+    }
+
+    .control-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent);
+    }
+
+    .control-btn.active-play {
+      color: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .info-sidebar {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .info-sidebar h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-left: 4px solid var(--accent);
+      padding-left: 8px;
+    }
+
+    .slide-num-indicator {
+      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 8px;
+      border-radius: 4px;
+      align-self: flex-start;
+      color: var(--text-muted);
+    }
+
+    .slide-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-top: 4px;
+    }
+
+    .slide-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .keyboard-tips {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.08);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .keyboard-tips kbd {
+      background: #4b4528;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 0.75rem;
+      font-family: inherit;
+    }
+
+    .thumbnail-bar {
+      width: 100%;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 16px;
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .thumbnail-list {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .thumbnail-list {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    .thumb-card {
+      border-radius: 8px;
+      border: 2px solid transparent;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+      background: #110e05;
+    }
+
+    .thumb-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+      transition: var(--transition);
+    }
+
+    .thumb-card span {
+      position: absolute;
+      bottom: 4px;
+      left: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(30, 27, 15, 0.9);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .thumb-card:hover img {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+
+    .thumb-card.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .thumb-card.active img {
+      opacity: 1;
+    }
+
+    .thumb-card.active span {
+      color: #fff;
+    }
+
+    .fullscreen-mode {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: 9999 !important;
+      background: #000 !important;
+      border-radius: 0 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-area">
+      <h1>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        AI-900 備考心智圖 (Banana 版)
+      </h1>
+      <p>Microsoft Azure AI Fundamentals 核心觀念視覺對照表</p>
+    </div>
+
+    <div class="nav-actions">
+      <a class="action-link" href="mindmap_gpt.html" style="color: #60a5fa; border-color: rgba(96, 165, 250, 0.25);">
+        切換到 GPT 版本 ➔
+      </a>
+      <a class="action-link" href="ai900_quiz_machine.html">
+        返回考前刷題機
+      </a>
+    </div>
+  </header>
+
+  <!-- Main View -->
+  <main>
+    <div class="viewer-container">
+      
+      <!-- Slide Presentation Panel -->
+      <section class="slide-area" id="slideArea" aria-label="投影片展示區">
+        <button class="nav-arrow prev" id="prevBtn" aria-label="上一張投影片" title="鍵盤左方向鍵">‹</button>
+        <button class="nav-arrow next" id="nextBtn" aria-label="下一張投影片" title="鍵盤右方向鍵">›</button>
+        
+        <div class="slide-wrapper" id="slideWrapper">
+          <img src="../assets/img/mindmap-banana/01.png" alt="投影片心智圖" class="slide-image active" id="mainSlide">
+        </div>
+
+        <div class="overlay-controls">
+          <button class="control-btn" id="playBtn" aria-label="自動播放" title="投影片播放/暫停">
+            <svg id="playIcon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+          <button class="control-btn" id="fullscreenBtn" aria-label="全螢幕模式" title="全螢幕檢視 (ESC退出)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Sidebar Information Panel -->
+      <aside class="info-sidebar" id="infoSidebar">
+        <h3>Banana 版觀念導覽</h3>
+        <div class="slide-num-indicator" id="slideNumIndicator">SLIDE 01 / 10</div>
+        
+        <div>
+          <h2 class="slide-title" id="slideTitle">載入中...</h2>
+        </div>
+        
+        <p class="slide-desc" id="slideDesc">正在解析對照表內容說明...</p>
+        
+        <div class="keyboard-tips">
+          💡 <b>鍵盤快捷操作：</b><br>
+          按 <kbd>←</kbd> 或 <kbd>→</kbd> 切換上/下一張<br>
+          按 <kbd>Space</kbd> 播放或暫停自動投影片
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Thumbnail Bar -->
+    <section class="thumbnail-bar" aria-label="縮圖導覽列">
+      <div class="thumbnail-list" id="thumbList"></div>
+    </section>
+  </main>
+
+  <script>
+    // 投影片標題與說明資料表
+    const SLIDE_DATA = [
+      {
+        title: "01. AI 領域總覽與備考引導",
+        desc: "全面梳理 AI-900 / AI-901 考試大綱架構。涵蓋人工智慧的核心工作負載、機器學習的基本概念、電腦視覺與自然語言處理的核心元件，以及生成式 AI 與 Azure OpenAI 最新的平台分佈。建議以此圖作為全局導讀，串接各單元概念。"
+      },
+      {
+        title: "02. 機器學習基礎概念",
+        desc: "解構監督式學習（有標籤）與非監督式學習（無標籤）的本質差異。深入理解『特徵 (Features)』作為輸入值，與『標籤 (Labels)』作為預測目標的對照關係，並引出迴歸、分類與叢集三大機器學習核心任務分類。"
+      },
+      {
+        title: "03. 機器學習演算法與模型評估",
+        desc: "全面探討迴歸模型（預測連續數值，如房價或用電量）與分類模型（預測離散類別，如疾病診斷）的常用評估指標。重點精讀混淆矩陣 (Confusion Matrix) 的 TP/TN/FP/FN 分佈，以及 R-squared、RMSE、準確率與召回率等考場必考選項。"
+      },
+      {
+        title: "04. 電腦視覺與影像辨識",
+        desc: "釐清電腦視覺的核心工作負載。重點區分『影像分類 (Classification)』（給整張圖貼標籤）與『物件偵測 (Object Detection)』（定位物件並回傳邊界框 Bounding Box 座標）。理解 OCR 在數位化醫療或發票擷取上的實務應用場景。"
+      },
+      {
+        title: "05. 臉部辨識與空間分析",
+        desc: "深度解剖 Azure AI Face 臉部服務的四大經典考點選項：臉部偵測 (屬性分析)、臉部驗證 (1:1 比對)、臉部識別 (1:N 識別)，與僅尋找外觀相似的 Find Similar。並介紹空間分析 (Spatial Analysis) 在實體店面追蹤人流軌跡的功能。"
+      },
+      {
+        title: "06. 自然語言處理與文本分析",
+        desc: "梳理文字分析服務 (Azure AI Language) 的高頻考點選項。包括用於提取核心大意的『關鍵片語擷取』、辨識人名/產品/組織的『具名實體辨識 (NER)』、將實體連結至維基百科的『實體連結 (Entity Linking)』，以及遮罩身分證/信用卡的『PII 偵測』。"
+      },
+      {
+        title: "07. 語音服務與翻譯技術",
+        desc: "深入學習 Azure AI Speech 語音服務（包含語音轉文字即時產生簡報字幕、文字轉語音語音合成、說話者識別）與 Azure AI Translator 翻譯服務（包括文字互譯與使用自訂字典進行訓練的 Custom Translator）。"
+      },
+      {
+        title: "08. 交談式 AI 與 Bot 服務",
+        desc: "解析如何使用會話語言理解 (CLU) 萃取使用者對話中的『意圖 (Intents)』與『實體 (Entities)』，並結合 Azure AI Bot Service 平台打造端對端的對話式智慧客服機器人解決方案。"
+      },
+      {
+        title: "09. 生成式 AI 與大語言模型",
+        desc: "解構以 Transformer 架構為基礎的生成式 AI 模型（如 GPT 文字生成、DALL-E 影像生成）。理解溫度參數 (Temperature) 對隨機性與確定性的控制邏輯，以及限制回應大小的 Max Tokens 等超參數調整選項。"
+      },
+      {
+        title: "10. 負責任 AI 規範與內容安全",
+        desc: "極高頻考點！熟記微軟負責任 AI 的六大準則案例：公平性（商務貸款/招聘防偏見）、可靠與安全（醫療系統測試）、隱私與安全（個資保護）、包容性（無障礙）、透明度（告知限制）、問責性（法律道德治理架構），以及 Azure AI Foundry 內建的內容篩選安全防護。"
+      }
+    ];
+
+    let currentSlideIndex = 0;
+    let autoplayInterval = null;
+    let isPlaying = false;
+
+    const mainSlide = document.getElementById("mainSlide");
+    const slideTitle = document.getElementById("slideTitle");
+    const slideDesc = document.getElementById("slideDesc");
+    const slideNumIndicator = document.getElementById("slideNumIndicator");
+    const thumbList = document.getElementById("thumbList");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const playBtn = document.getElementById("playBtn");
+    const playIcon = document.getElementById("playIcon");
+    const fullscreenBtn = document.getElementById("fullscreenBtn");
+    const slideArea = document.getElementById("slideArea");
+
+    // 初始化底部縮圖
+    function initThumbnails() {
+      thumbList.innerHTML = "";
+      for (let i = 0; i < 10; i++) {
+        const numStr = String(i + 1).padStart(2, '0');
+        const src = `../assets/img/mindmap-banana/${numStr}.png`;
+        
+        const card = document.createElement("div");
+        card.className = `thumb-card ${i === currentSlideIndex ? 'active' : ''}`;
+        card.dataset.index = i;
+        card.innerHTML = `
+          <img src="${src}" alt="Slide ${numStr} Thumbnail">
+          <span>${numStr}</span>
+        `;
+        
+        card.addEventListener("click", () => {
+          goToSlide(i);
+          stopAutoplay();
+        });
+        
+        thumbList.appendChild(card);
+      }
+    }
+
+    // 切換投影片
+    function goToSlide(index) {
+      currentSlideIndex = (index + 10) % 10;
+      const numStr = String(currentSlideIndex + 1).padStart(2, '0');
+      const newSrc = `../assets/img/mindmap-banana/${numStr}.png`;
+
+      mainSlide.classList.remove("active");
+      
+      setTimeout(() => {
+        mainSlide.src = newSrc;
+        mainSlide.onload = () => {
+          mainSlide.classList.add("active");
+        };
+
+        slideTitle.textContent = SLIDE_DATA[currentSlideIndex].title;
+        slideDesc.textContent = SLIDE_DATA[currentSlideIndex].desc;
+        slideNumIndicator.textContent = `SLIDE ${numStr} / 10`;
+
+        document.querySelectorAll(".thumb-card").forEach((card, idx) => {
+          card.classList.toggle("active", idx === currentSlideIndex);
+        });
+      }, 200);
+    }
+
+    function toggleAutoplay() {
+      if (isPlaying) stopAutoplay(); else startAutoplay();
+    }
+
+    function startAutoplay() {
+      isPlaying = true;
+      playBtn.classList.add("active-play");
+      playIcon.innerHTML = `<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>`;
+      autoplayInterval = setInterval(() => {
+        goToSlide(currentSlideIndex + 1);
+      }, 5000);
+    }
+
+    function stopAutoplay() {
+      isPlaying = false;
+      playBtn.classList.remove("active-play");
+      playIcon.innerHTML = `<polygon points="5 3 19 12 5 21 5 3"></polygon>`;
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") {
+        goToSlide(currentSlideIndex + 1);
+        stopAutoplay();
+      } else if (e.key === "ArrowLeft") {
+        goToSlide(currentSlideIndex - 1);
+        stopAutoplay();
+      } else if (e.key === " ") {
+        e.preventDefault();
+        toggleAutoplay();
+      }
+    });
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        slideArea.requestFullscreen().catch(err => {
+          alert(`無法啟用全螢幕模式: ${err.message}`);
+        });
+        slideArea.classList.add("fullscreen-mode");
+      } else {
+        document.exitFullscreen();
+        slideArea.classList.remove("fullscreen-mode");
+      }
+    }
+
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement) {
+        slideArea.classList.remove("fullscreen-mode");
+      }
+    });
+
+    prevBtn.addEventListener("click", () => { goToSlide(currentSlideIndex - 1); stopAutoplay(); });
+    nextBtn.addEventListener("click", () => { goToSlide(currentSlideIndex + 1); stopAutoplay(); });
+    playBtn.addEventListener("click", toggleAutoplay);
+    fullscreenBtn.addEventListener("click", toggleFullscreen);
+
+    initThumbnails();
+    goToSlide(0);
+  </script>
+</body>
+</html>
