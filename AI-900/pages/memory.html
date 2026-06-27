@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-900 重點整理</title>
+  <!-- 認證腳本 (Session Cookie) -->
+  <!-- <script src="../auth.js"></script> -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Noto+Sans+TC:wght@400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* High Contrast Theme for Seniors */
+      --bg: #f8f9fa;
+      /* Light background */
+      --glass: #ffffff;
+      --card: #ffffff;
+      --accent: #0066cc;
+      /* Deep Blue for high contrast */
+      --text: #1a1a1a;
+      /* Almost black for text */
+      --muted: #4a4a4a;
+      /* Darker gray for muted text */
+      --border: #dee2e6;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --radius: 12px;
+
+      /* Font Sizes - Larger for readability */
+      --font-base: 18px;
+      --font-lg: 20px;
+      --font-xl: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      padding: 24px;
+      font-size: var(--font-base);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1000px;
+      /* Limit width for reading execution */
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    /* Tabs - Clear Buttons */
+    .tabs {
+      position: sticky;
+      background: #ffffff;
+      padding: 0;
+      border-bottom: 2px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: flex-start;
+      /* Align to left */
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 10px 16px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 2px solid var(--border);
+      font-size: 24px;
+      cursor: pointer;
+      color: #004085;
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-right: auto;
+      /* Push links to right on mobile if needed, or keep left */
+    }
+
+    .nav-title {
+      display: none;
+      /* Hide title as requested */
+    }
+
+    @media (max-width: 900px) {
+      .nav-title {
+        max-width: 60%;
+        /* More logic for mobile */
+        font-size: 18px;
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      /* Reduced gap */
+      align-items: center;
+      flex-wrap: nowrap;
+      /* Prevent wrapping on desktop */
+      overflow-x: auto;
+      /* Allow horizontal scroll if needed on small desktops */
+      padding-bottom: 2px;
+      /* For scrollbar space */
+    }
+
+    /* Hide scrollbar for cleaner look */
+    .nav-links::-webkit-scrollbar {
+      height: 0px;
+      background: transparent;
+    }
+
+    .tab {
+      background: #f1f3f5;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      /* Smaller padding */
+      color: #333;
+      text-decoration: none;
+      font-size: 15px;
+      /* Smaller font */
+      font-weight: 600;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab:hover,
+    .tab.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 900px) {
+
+      /* Increased breakpoint for tablets */
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #fff;
+        border-top: 1px solid #eee;
+        padding: 16px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        max-height: 80vh;
+        align-items: stretch;
+        /* Stretch items to full width */
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .tab {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 8px;
+        font-size: 16px;
+        /* Larger font for mobile touch targets */
+        padding: 12px;
+      }
+
+      .nav-container {
+        flex-wrap: wrap;
+      }
+
+      .nav-title {
+        font-size: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 70%;
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 100px;
+      /* Prevent header overlapping */
+    }
+
+    section {
+      scroll-margin-top: 100px;
+      /* Prevent header overlapping for all sections */
+    }
+
+    h1 {
+      margin: 0 0 16px 0;
+      font-size: 32px;
+      color: #000;
+      font-weight: 700;
+    }
+
+    h2.section-title {
+      font-size: 26px;
+      color: #000;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    .chip {
+      background: #e7f5ff;
+      color: #004085;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 500;
+      font-size: 16px;
+      border: 1px solid #b8daff;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      background: #e7f5ff;
+      border: 1px solid #b8daff;
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: #004085;
+      /* Darker blue for contrast */
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .chip strong {
+      color: #002752;
+      /* Even darker for emphasis */
+      font-weight: 700;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 20px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      /* Single column for better readability on all devices */
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .mini {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .label {
+      color: #004085;
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 8px;
+      border-bottom: 2px solid #b8daff;
+      padding-bottom: 4px;
+    }
+
+    .small {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .checklist {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .checklist li {
+      display: block;
+      /* Stack content for readability */
+      font-size: 18px;
+      color: #333;
+      line-height: 1.6;
+      border-bottom: 1px solid #e9ecef;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+    }
+
+    .checklist li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .checklist li strong {
+      color: #000;
+      font-weight: 700;
+      background: #fff3cd;
+      /* Highlight background for key terms */
+      padding: 0 4px;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #e7f5ff;
+      border: 1px solid #b8daff;
+      font-size: 14px;
+      color: #004085;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .example {
+      font-size: 18px;
+      color: #004085;
+      background: #e7f5ff;
+      border: 2px solid #b8daff;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 24px;
+      display: none;
+    }
+
+    .example.show {
+      display: block;
+    }
+
+    .quiz-block label {
+      display: block;
+      margin: 12px 0;
+      padding: 12px;
+      background: #fff;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      color: #333;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+
+    .quiz-block label:hover {
+      background: #f8f9fa;
+      border-color: var(--accent);
+    }
+
+    .quiz-block input[type="radio"] {
+      transform: scale(1.5);
+      /* Larger radio buttons */
+      margin-right: 12px;
+    }
+
+    .quiz-block button {
+      margin-top: 16px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 18px;
+      cursor: pointer;
+      width: 100%;
+      /* Full width for easier tapping */
+    }
+
+    .quiz-block button:hover {
+      background: #0056b3;
+    }
+
+    .quiz-block .answer,
+    .quiz-block .exp {
+      margin-top: 16px;
+      font-size: 18px;
+      padding: 16px;
+      background: #fff;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #333;
+      font-size: 18px;
+      margin-top: 16px;
+    }
+
+    .table th,
+    .table td {
+      border: 2px solid #dee2e6;
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    .table th {
+      color: #000;
+      background: #e9ecef;
+      font-weight: 700;
+    }
+
+    footer {
+      color: #666;
+      font-size: 16px;
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 2px solid #dee2e6;
+    }
+
+    @media (max-width:640px) {
+      body {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .section-title {
+        font-size: 22px;
+      }
+
+      .tab {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+    <nav class="tabs">
+      <div class="nav-container">
+        <!-- Title removed -->
+        <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a class="tab" href="../index.html" style="background: #e9ecef; color: #1a1a1a; border-color: #dee2e6;">🏠 回首頁</a>
+          <a class="tab" href="#overview">概覽</a>
+          <a class="tab" href="#must-know">必考觀念</a>
+          <a class="tab" href="#must-memorize">必背重點</a>
+          <a class="tab" href="#patterns">常見題型</a>
+          <a class="tab" href="#service-map">服務速配</a>
+          <a class="tab" href="#sprint">衝刺</a>
+          <button id="toggle-examples" class="tab"
+            style="margin-left: auto; cursor: pointer; background: #0066cc; color: white; border-color: #0056b3; flex-grow: 0;">顯示例題</button>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero" id="overview">
+      <h1>AI-900 關鍵速讀 · 298 題精華</h1>
+      <p>這是一份針對 AI-900 考試的中文重點整理。我們分析了 298 道題目，將最常考的概念、最容易混淆的服務以及必背的關鍵字提取出來，助你快速通關。</p>
+      <div class="chips">
+        <span class="chip"><strong>298</strong> 題庫分析</span>
+        <span class="chip"><strong>熱門</strong> 文件智慧 (Document Intelligence)</span>
+        <span class="chip"><strong>熱門</strong> 負責任 AI (Responsible AI)</span>
+        <span class="chip"><strong>熱門</strong> Azure ML 工作 (Jobs)</span>
+        <span class="chip"><strong>新增</strong> 電腦視覺 (Computer Vision)</span>
+      </div>
+    </section>
+
+    <section id="must-know" class="card">
+      <h2 class="section-title"><span class="badge">1</span> 必考觀念</h2>
+      <div class="grid">
+        <!-- 觀念 1 -->
+        <div class="mini">
+          <div class="label">資料切分 (Data Split)</div>
+          <div class="label">ML 標準流程 (ML Operations)</div>
+          <ul class="checklist">
+            <li><strong>1. 準備 (Ingest)</strong>：收集資料。</li>
+            <li><strong>2. 清洗 (Clean)</strong>：去除非數值、補缺值 (Impute)、標準化 (Normalize)。</li>
+            <li><strong>3. 切分 (Split)</strong>：切成 70% 訓練 (Training) 、30% 考試 (Validation)。</li>
+            <li><strong>4. 訓練 (Train)</strong>：讓模型看題庫學找答案。</li>
+            <li><strong>5. 評估 (Evaluate)</strong>：拿沒看過的考試卷測驗準度。</li>
+          </ul>
+          <div class="small"
+            style="background:rgba(255,255,255,0.05); padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); margin: 6px 0;">
+            <strong>資料切分補充：</strong><br>通常隨機按「列 (rows)」切，確保每一列資料完整。
+          </div>
+          <div class="example">
+            <strong>例題 ID 2</strong><br>
+            機器學習專案中，如何切割訓練與評估資料？
+            <form class="quiz-block" data-answer="B">
+              <label><input type="radio" name="q2" value="A"> 使用特徵（features）來訓練，使用標籤（labels）來評估。</label>
+              <label><input type="radio" name="q2" value="B"> 隨機將資料按列（rows）分割，一部分用於訓練，一部分用於評估。</label>
+              <label><input type="radio" name="q2" value="C"> 使用標籤（labels）來訓練，使用特徵（features）來評估。</label>
+              <label><input type="radio" name="q2" value="D"> 隨機將資料按欄（columns）分割，一部分用於訓練，一部分用於評估。</label>
+              <button type="button" class="check">送出</button>
+              <div class="answer" hidden>正確：B。</div>
+              <div class="exp" hidden>說明：必須按「列」切分以保留完整的特徵+標籤組合；按欄切分會讓資料破碎。</div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 觀念 2 -->
+        <div class="mini">
+          <div class="label">分類 vs 回歸 vs 分群</div>
+          <ul class="checklist">
+            <li>
+              <strong>分類 (Classification)</strong>：預測類別。<br>
+              <span style="display:block; margin-top:4px; font-size:0.9em; color:#a0aec0;">&bull; 指標：Accuracy,
+                Precision, Recall, F1, AUC<br>&bull; 損失：Cross-Entropy (交叉熵)</span>
+            </li>
+            <li>
+              <strong>回歸 (Regression)</strong>：預測數值。<br>
+              <span style="display:block; margin-top:4px; font-size:0.9em; color:#a0aec0;">&bull; 指標：MAE, MSE, RMSE,
+                R²<br>&bull; 損失：MSE (均方誤差)</span>
+            </li>
+            <li>
+              <strong>分群 (Clustering)</strong>：自動分組。<br>
+              <span style="display:block; margin-top:4px; font-size:0.9em; color:#a0aec0;">&bull; 指標：Silhouette (輪廓係數),
+                Elbow (手肘法)<br>&bull; 距離：Euclidean (歐基里德)</span>
+            </li>
+            <li style="border-top: 1px dashed rgba(255,255,255,0.1); margin-top: 6px; padding-top: 8px;">
+              <strong>優化與調校 (Optimization)</strong>
+              <span style="display:block; margin-top:4px; font-size:0.9em; color:#a0aec0;">
+                &bull; <strong>防過擬合 (Overfitting)</strong>：L1/L2 Regularization (正規化), Dropout。<br>
+                &bull; <strong>梯度異常</strong>：用 ReLU (防消失), Batch Norm, Clipping (防爆炸)。
+              </span>
+            </li>
+          </ul>
+          <div class="small"
+            style="background:rgba(255,255,255,0.05); padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); margin: 6px 0;">
+            <strong style="color:#50d2c2">指標 (Metrics)</strong>：考試分數，越高越好 (如 Accuracy)。<br>
+            <strong style="color:#ffb3b3">損失 (Loss)</strong>：答錯的代價，越低越好 (如 MSE)。
+          </div>
+          <div class="example">
+            <strong>例題 ID 59</strong><br>
+            建立 K-means 分群模型時，所有特徵的資料類型必須是？
+            <form class="quiz-block" data-answer="C">
+              <label><input type="radio" name="q59" value="A"> Boolean (布林)</label>
+              <label><input type="radio" name="q59" value="B"> Integer (整數)</label>
+              <label><input type="radio" name="q59" value="C"> Numeric (數值)</label>
+              <label><input type="radio" name="q59" value="D"> Text (文字)</label>
+              <button type="button" class="check">送出</button>
+              <div class="answer" hidden>正確：C (Numeric)。</div>
+              <div class="exp" hidden>說明：K-means 依靠計算距離，只有數值才能運算距離。文字需轉向量。</div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 觀念 3 -->
+        <div class="mini">
+          <div class="label">混淆矩陣 (Confusion Matrix)</div>
+          <ul class="checklist">
+            <li><strong>TP (真陽性)</strong>：有病，測出有病 (正確)。</li>
+            <li><strong>TN (真陰性)</strong>：沒病，測出沒病 (正確)。</li>
+            <li><strong>FP (偽陽性)</strong>：沒病，誤測有病 (誤報/False Alarm)。</li>
+            <li><strong>FN (偽陰性)</strong>：有病，誤測沒病 (漏報/Miss)。</li>
+            <li style="border-top: 1px dashed rgba(255,255,255,0.1); margin-top: 6px; padding-top: 8px;"><strong>準確率
+                (Accuracy)</strong>：整體考幾分？所有預測正確（TP+TN）佔總數的比例。</li>
+            <li><strong>召回率 (Recall)</strong>：有無漏網之魚？實際是「Yes」的，被你抓出多少？(TP / TP+FN)</li>
+            <li><strong>精準率 (Precision)</strong>：是否亂槍打鳥？你說是「Yes」的，有多少是真的？(TP / TP+FP)</li>
+          </ul>
+          <div class="example">
+            <strong>例題 ID 58</strong><br>
+            如何減少分類模型的 False Positives (偽陽性)？
+            <form class="quiz-block" data-answer="D">
+              <label><input type="radio" name="q58" value="A"> 將測試資料包含在訓練資料中 (Include test data in training
+                data)</label>
+              <label><input type="radio" name="q58" value="B"> 增加訓練疊代次數 (Increase training iterations)</label>
+              <label><input type="radio" name="q58" value="C"> 修改閾值以偏向偽陽性 (Modify threshold favor of false
+                positives)</label>
+              <label><input type="radio" name="q58" value="D"> 修改閾值以偏向偽陰性 (Modify threshold favor of false
+                negatives)</label>
+              <button type="button" class="check">送出</button>
+              <div class="answer" hidden>正確：D。</div>
+              <div class="exp" hidden>說明：提高判斷門檻會減少偽陽性，但副作用是增加偽陰性 (Trade-off)。</div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 觀念 4 -->
+        <div class="mini">
+          <div class="label">負責任 AI (Responsible AI)</div>
+          <ul class="checklist">
+            <li><strong>公平性 (Fairness)</strong>：不歧視性別/種族。</li>
+            <li><strong>可靠安全 (Reliability)</strong>：容錯、錯誤處理。</li>
+            <li><strong>透明性 (Transparency)</strong>：可解釋、可理解原因。</li>
+            <li><strong>隱私安全 (Privacy)</strong>：保護數據資料。</li>
+            <li><strong>包容性 (Inclusiveness)</strong>：無障礙。</li>
+            <li><strong>當責性 (Accountability)</strong>：人要負責。</li>
+          </ul>
+          <div class="example">
+            <strong>例題 ID 60</strong><br>
+            貸款 App 需「記錄核准或拒絕的原因」並告知申請人？
+            <form class="quiz-block" data-answer="A">
+              <label><input type="radio" name="q60" value="A"> 透明度 (Transparency)</label>
+              <label><input type="radio" name="q60" value="B"> 包容性 (Inclusiveness)</label>
+              <label><input type="radio" name="q60" value="C"> 公平性 (Fairness)</label>
+              <label><input type="radio" name="q60" value="D"> 當責性 (Accountability)</label>
+              <button type="button" class="check">送出</button>
+              <div class="answer" hidden>正確：A。</div>
+              <div class="exp" hidden>說明：解釋「為什麼」是透明度的核心。</div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 觀念 5 -->
+        <div class="mini">
+          <div class="label">Automated ML vs Designer</div>
+          <ul class="checklist">
+            <li><strong>Automated ML (AutoML)</strong>：自動化！適合不懂演算法的人。只需提供資料，它自動幫你試演算法與參數。支援分類、回歸、時間序列預測。</li>
+            <li><strong>Azure ML Designer</strong>：視覺化！拖拉 (Drag-and-drop) 模組來建立管線。不需寫程式碼 (No-code)。</li>
+          </ul>
+          <div class="example">
+            <strong>例題 ID 139</strong><br>
+            您需要使用 Azure Machine Learning 訓練回歸模型，且您不具備 Python 或 R 的技能，應使用哪種開發選項？
+            <form class="quiz-block" data-answer="D">
+              <label><input type="radio" name="q139" value="A"> Jupyter Notebooks</label>
+              <label><input type="radio" name="q139" value="B"> Python scripts</label>
+              <label><input type="radio" name="q139" value="C"> Automated ML</label>
+              <label><input type="radio" name="q139" value="D"> Azure Machine Learning designer</label>
+              <button type="button" class="check">送出</button>
+              <div class="answer" hidden>正確：D。</div>
+              <div class="exp" hidden>說明：題目強調「不具備程式技能」，且要自己「訓練模型」，Designer 的拖拉介面最適合。AutoML 雖然也自動，但 Designer 是視覺化建構流程的首選。
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 觀念 6 -->
+        <div class="mini">
+          <div class="label">推論管線與端點 (Inference)</div>
+          <ul class="checklist">
+            <li><strong>即時推論 (Real-time)</strong>：需要馬上得到結果。部署到 AKS 或 Managed Online Endpoint。</li>
+            <li><strong>批次推論 (Batch)</strong>：累積一堆資料，離線一次處理。部署到 Batch Endpoint。</li>
+          </ul>
+          <div class="example">
+            <strong>例題 ID 72</strong><br>
+            您使用 Designer 建立並發佈了推論管線。若要從應用程式取用該管線，需要哪兩項資訊？
+            <form class="quiz-block" data-answer="CD">
+              <label><input type="checkbox" name="q72" value="A"> 模型名稱 (Model name)</label>
+              <label><input type="checkbox" name="q72" value="B"> 訓練端點 (Training endpoint)</label>
+              <label><input type="checkbox" name="q72" value="C"> Authentication key (驗證金鑰)</label>
+              <label><input type="checkbox" name="q72" value="D"> REST endpoint (REST 端點)</label>
+              <button type="button" class="check">送出</button>
+              <div class="answer" hidden>正確：C, D。</div>
+              <div class="exp" hidden>說明：要呼叫 Web Service，必須要有網址 (REST endpoint) 和鑰匙 (Key)。</div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 觀念 7 -->
+        <div class="mini">
+          <div class="label">AutoML 模型集成 (Ensemble Methods)</div>
+          <p class="small">AutoML 會自動結合多個演算法來提升準確度，主要有兩種手段：</p>
+          <ul class="checklist">
+            <li><strong>Voting Ensemble (投票集成)</strong>：採用「加權平均 (Weighted Average)」的方式。就像三個臭皮匠，投票表決 (Soft Voting)。</li>
+            <li><strong>Stacking Ensemble (堆疊集成)</strong>：訓練一個「元模型 (Meta-model)」來整合其他模型的預測。就像請一個諸葛亮來統整大家的意見。</li>
+          </ul>
+          <div class="example">
+            <strong>模擬試題 (自製)</strong><br>
+            Azure Automated ML 使用哪種集成技術，是透過訓練一個額外的「元模型 (Meta-model)」來優化多個模型的預測結果？
+            <form class="quiz-block" data-answer="B">
+              <label><input type="radio" name="q_new_1" value="A"> 投票集成 (Voting Ensemble)</label>
+              <label><input type="radio" name="q_new_1" value="B"> 堆疊集成 (Stacking Ensemble)</label>
+              <label><input type="radio" name="q_new_1" value="C"> 正規化 (Normalization)</label>
+              <label><input type="radio" name="q_new_1" value="D"> 正則化 (Regularization)</label>
+              <button type="button" class="check">送出</button>
+              <div class="answer" hidden>正確：B。</div>
+              <div class="exp" hidden>說明：Stacking 的核心就是訓練一個 Meta-model 來決定如何組合；Voting 則是計算加權平均。</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="must-memorize" class="card">
+      <h2 class="section-title"><span class="badge">2</span> 必背重點（關鍵字服務對應）</h2>
+      <div class="grid">
+        <div class="mini">
+          <div class="label">Computer Vision (電腦視覺)</div>
+          <ul class="checklist">
+            <li><strong>收據 (Receipts)、發票</strong> → <span class="pill">Document Intelligence</span></li>
+            <li><strong>人臉、表情、身份驗證</strong> → <span class="pill">Face API</span></li>
+            <li><strong>一般物件偵測、描述圖片</strong> → <span class="pill">Computer Vision</span></li>
+            <li><strong>自訂商標、特定的花種</strong> → <span class="pill">Custom Vision</span></li>
+          </ul>
+          <div class="example">
+            <strong>例題 ID 53</strong><br>
+            使用「預建收據模型 (Prebuilt receipt model)」應選擇哪項服務？
+            <form class="quiz-block" data-answer="A">
+              <label><input type="radio" name="q53" value="A"> Azure AI 服務 (Azure AI Services)</label>
+              <label><input type="radio" name="q53" value="B"> Azure 機器學習 (Azure Machine Learning)</label>
+              <label><input type="radio" name="q53" value="C"> 電腦視覺 (Computer Vision)</label>
+              <label><input type="radio" name="q53" value="D"> 自訂視覺 (Custom Vision)</label>
+              <button type="button" class="check">送出</button>
+              <div class="answer" hidden>正確：A。</div>
+              <div class="exp" hidden>說明：Document Intelligence 屬於 Azure AI Services 家族；Computer Vision 無收據模型。</div>
+            </form>
+          </div>
+        </div>
+
+        <div class="mini">
+          <div class="label">Azure Machine Learning (AML)</div>
+          <ul class="checklist">
+            <li><strong>Workspace</strong>：最上層資源。</li>
+            <li><strong>Job</strong>：執行的任務單位 (執行訓練腳本)。</li>
+            <li><strong>Compute Instance</strong>：開發用 (單機)。</li>
+            <li><strong>Compute Cluster</strong>：訓練用 (多節點)。</li>
+            <li><strong>Inference Cluster (AKS)</strong>：生產環境即時推論。</li>
+          </ul>
+          <div class="example">
+            <strong>例題 ID 47</strong><br>
+            使用 Azure ML Studio 用 Automated ML 建模型前，必須最先建立什麼？
+            <form class="quiz-block" data-answer="A">
+              <label><input type="radio" name="q47" value="A"> 機器學習工作區 (A Machine Learning workspace)</label>
+              <label><input type="radio" name="q47" value="B"> 設計器管線 (A designer pipeline)</label>
+              <label><input type="radio" name="q47" value="C"> 已註冊的資料集 (A registered dataset)</label>
+              <label><input type="radio" name="q47" value="D"> Jupyter notebook</label>
+              <button type="button" class="check">送出</button>
+              <div class="answer" hidden>正確：A。</div>
+              <div class="exp" hidden>說明：Workspace 是所有資源的容器，是第一步。</div>
+            </form>
+          </div>
+        </div>
+
+        <div class="mini">
+          <div class="label">Azure OpenAI / GenAI</div>
+          <ul class="checklist">
+            <li><strong>Limited Access</strong>：因負責任 AI 原則，使用前需申請批准。</li>
+            <li><strong>Fine-tuning</strong>：拿自己的資料對現有模型進行微調。</li>
+            <li><strong>Capabilities</strong>：生成、摘要、分類、翻譯、寫程式。</li>
+          </ul>
+          <div class="example">
+            <strong>例題 ID 109</strong><br>
+            使用 Azure OpenAI 之前必須做什麼？
+            <form class="quiz-block" data-answer="B">
+              <label><input type="radio" name="q109" value="A"> 承諾最低消費 (Commit to minimum expenditure)</label>
+              <label><input type="radio" name="q109" value="B"> 根據預期用途獲得批准 (Obtain approval based on intended
+                usage)</label>
+              <label><input type="radio" name="q109" value="C"> 支付預付款 (Pay an upfront fee)</label>
+              <button type="button" class="check">送出</button>
+              <div class="answer" hidden>正確：B。</div>
+              <div class="exp" hidden>說明：基於負責任 AI 原則，微軟實施受限存取 (Limited Access) 政策。</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="patterns" class="card">
+      <h2 class="section-title"><span class="badge">3</span> 常見題型速查</h2>
+      <div class="grid">
+        <div class="mini">
+          <div class="label">負責任 AI 關鍵字配對</div>
+          <ul class="checklist">
+            <li><strong>貸款核准 / 解釋原因 (Loan approval / Explaining)</strong> → <span class="pill">Transparency (透明)</span>
+            </li>
+            <li><strong>種族 / 性別 / 偏見 (Race / Gender / Bias)</strong> → <span class="pill">Fairness (公平)</span></li>
+            <li><strong>錯誤處理 / 缺失值 (Error handling / Missing values)</strong> → <span class="pill">Reliability
+                (可靠)</span></li>
+            <li><strong>螢幕報讀軟體 / 無障礙 (Screen reader / Accessibility)</strong> → <span class="pill">Inclusiveness
+                (包容)</span></li>
+          </ul>
+        </div>
+        <div class="mini">
+          <div class="label">部署環境選擇</div>
+          <ul class="checklist">
+            <li><strong>測試 / 開發</strong> → <span class="pill">Compute Instance</span></li>
+            <li><strong>即時 / 大量 / 線上 (Real-time)</strong> → <span class="pill">AKS / Managed Endpoint</span></li>
+            <li><strong>非即時 / 批量 (Batch)</strong> → <span class="pill">Batch Endpoint</span></li>
+          </ul>
+        </div>
+        <div class="mini">
+          <div class="label">NLP 任務</div>
+          <ul class="checklist">
+            <li><strong>情緒 (Sentiment) / 關鍵詞</strong> → <span class="pill">Text Analytics</span></li>
+            <li><strong>聊天機器人</strong> → <span class="pill">Bot Service + QnA Maker</span></li>
+            <li><strong>理解意圖 (Intent)</strong> → <span class="pill">LUIS / CLU</span></li>
+            <li><strong>翻譯</strong> → <span class="pill">Translator</span></li>
+          </ul>
+        </div>
+
+        <div class="mini" style="grid-column: span 2;">
+          <div class="label">生成式 AI (Generative AI)</div>
+          <ul class="checklist">
+            <li><strong>LLM (大型語言模型)</strong>：核心是「文字」。輸入 Prompt，輸出也是文字。</li>
+            <li><strong>接地 (Grounding)</strong>：把知識貼到 Prompt 裡，減少幻覺。</li>
+            <li><strong>DALL-E</strong>：畫圖 (Create)、修圖 (Modify)。非分析圖片！</li>
+            <li><strong>Content Filtering</strong>：過濾仇恨、暴力等不當內容。</li>
+          </ul>
+          <div class="grid" style="grid-template-columns: 1fr 1fr; margin-top: 10px; gap: 10px;">
+            <div class="example" style="margin-top:0;">
+              <strong>例題 ID 298</strong><br>
+              接地輸入 (grounding input) 應提供什麼給 AI？
+              <form class="quiz-block" data-answer="B">
+                <label><input type="radio" name="q298" value="B"> 文字 (text)</label>
+                <label><input type="radio" name="q298" value="C"> PDF 文件</label>
+                <button type="button" class="check">送出</button>
+                <div class="answer" hidden>正確：B (text)。</div>
+              </form>
+            </div>
+            <div class="example" style="margin-top:0;">
+              <strong>例題 ID 296</strong><br>
+              如何識別仇恨言論回應？
+              <form class="quiz-block" data-answer="C">
+                <label><input type="radio" name="q296" value="A"> Prompt engineering</label>
+                <label><input type="radio" name="q296" value="C"> Content filtering</label>
+                <button type="button" class="check">送出</button>
+                <div class="answer" hidden>正確：C。</div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="service-map" class="card">
+      <h2 class="section-title"><span class="badge">4</span> 服務速配表</h2>
+      <div class="grid">
+        <div class="mini" style="grid-column: span 2; min-width:100%;">
+          <table class="table">
+            <tr>
+              <th width="30%">需求情境</th>
+              <th>推薦服務</th>
+            </tr>
+            <tr>
+              <td>辨識照片中的物件、品牌、地標</td>
+              <td>Azure AI Computer Vision</td>
+            </tr>
+            <tr>
+              <td>從駕照、收據、發票中提取欄位資料</td>
+              <td>Azure AI Document Intelligence (Form Recognizer)</td>
+            </tr>
+            <tr>
+              <td>判斷使用者評論的情緒 (正向/負向)</td>
+              <td>Azure AI Language (Sentiment Analysis)</td>
+            </tr>
+            <tr>
+              <td>偵測個人識別資訊 (PII) 如電話、Email</td>
+              <td>Azure AI Language (PII Detection)</td>
+            </tr>
+            <tr>
+              <td>打造能回答 FAQ 的聊天機器人</td>
+              <td>Azure AI Bot Service + Question Answering</td>
+            </tr>
+            <tr>
+              <td>將現有的資料庫內容變成可搜尋的索引</td>
+              <td>Azure AI Search (Cognitive Search)</td>
+            </tr>
+            <tr>
+              <td>訓練自訂的圖像分類模型 (如分辨瑕疵品)</td>
+              <td>Azure AI Custom Vision</td>
+            </tr>
+            <tr>
+              <td>自動生成文案、摘要文章、寫程式</td>
+              <td>Azure OpenAI Service</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="sprint" class="card">
+      <h2 class="section-title"><span class="badge">5</span> 考前衝刺清單</h2>
+      <ul class="small" style="margin:0; padding-left:18px; line-height:1.65;">
+        <li>Responsible AI 六原則能背出並舉例。</li>
+        <li>看到題幹先判斷資料型態，再對應服務（速配表）。</li>
+        <li>會從混淆矩陣抓 TP/FP/FN/TN，算 Precision/Recall/F1。</li>
+        <li>AutoML 支援分類/回歸/時序，不支援分群；Designer 是拖拉，Notebook 自寫程式。</li>
+        <li>部署：CI 測試、Cluster/AKS 線上、Batch 離線大量。</li>
+        <li>OpenAI：記住資源名+部署名+API 版本，內容安全要過 Moderation。</li>
+      </ul>
+    </section>
+
+    <footer>更新時間：2026-02-11</footer>
+  </main>
+
+  <script>
+    // Menu Toggle Logic
+    document.querySelector('.menu-toggle').addEventListener('click', function () {
+      document.getElementById('navLinks').classList.toggle('active');
+    });
+
+    // Close menu when clicking a LINK (exclude button)
+    document.querySelectorAll('.nav-links a.tab').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 900) { // Updated to match CSS media query
+          document.getElementById('navLinks').classList.remove('active');
+        }
+      });
+    });
+
+    // Toggle Examples Logic
+    const toggleBtn = document.getElementById('toggle-examples');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function () {
+        const examples = document.querySelectorAll('.example');
+        const btn = this;
+
+        // Check state based on the first example's class
+        // Default start: no 'show' class.
+        let isCurrentlyShowing = false;
+        if (examples.length > 0) {
+          isCurrentlyShowing = examples[0].classList.contains('show');
+        }
+
+        // Toggle
+        const shouldShow = !isCurrentlyShowing;
+
+        examples.forEach(el => {
+          if (shouldShow) {
+            el.style.display = 'block'; // Ensure display
+            el.classList.add('show');
+          } else {
+            el.style.display = 'none'; // Ensure hide
+            el.classList.remove('show');
+          }
+        });
+
+        btn.textContent = shouldShow ? '隱藏例題' : '顯示例題';
+      });
+    }
+
+    // Quiz Logic
+    document.querySelectorAll('.quiz-block .check').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const form = btn.closest('.quiz-block');
+        const answer = form.dataset.answer;
+        const isMulti = form.querySelectorAll('input[type=checkbox]').length > 0;
+        let correct = false;
+
+        if (isMulti) {
+          const chosen = Array.from(form.querySelectorAll('input[type=checkbox]:checked')).map(i => i.value).sort().join('');
+          correct = chosen === answer;
+        } else {
+          const chosen = form.querySelector('input[type=radio]:checked');
+          if (!chosen) { alert('請先選一個答案'); return; }
+          correct = chosen.value === answer;
+        }
+
+        const ansEl = form.querySelector('.answer');
+        const expEl = form.querySelector('.exp');
+        ansEl.hidden = false; expEl.hidden = false;
+
+        // Colors updated for Light Theme
+        ansEl.style.color = correct ? '#0066cc' : '#dc3545';
+
+        let prefix = correct ? '答對！' : '答錯。';
+        // Clean up previous prefix if exists
+        let text = ansEl.textContent.replace(/^答(對|錯)[！。]\s*/, '').replace(/^正確[：:]?/, '');
+        ansEl.textContent = prefix + ' ' + text;
+      });
+    });
+  </script>
+</body>
+
+</html>
