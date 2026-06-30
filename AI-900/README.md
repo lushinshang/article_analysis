@@ -4,6 +4,20 @@
 
 本系統已完全優化為標準靜態網頁架構，支援手機與桌面端 RWD 瀏覽，適合隨身閱讀並可直接部署至 GitHub Pages 上線使用。
 
+另外也包含 AI-900 十輪模擬評量的復盤筆記：
+
+- `pages/ai900_review_2026-06-28.html`：第一輪錯題復盤。
+- `pages/ai900_review_2026-06-28_round2.html`：第二輪錯題復盤。
+- `pages/ai900_review_2026-06-28_round3.html`：第三輪錯題復盤。
+- `pages/ai900_review_2026-06-29_round4.html`：第四輪錯題復盤。
+- `pages/ai900_review_2026-06-29_round5.html`：第五輪錯題復盤。
+- `pages/ai900_review_2026-06-29_round6.html`：第六輪錯題復盤。
+- `pages/ai900_review_2026-06-29_round7.html`：第七輪錯題復盤。
+- `pages/ai900_review_2026-06-30_round8.html`：第八輪錯題復盤。
+- `pages/ai900_review_2026-06-30_round9.html`：第九輪錯題復盤。
+- `pages/ai900_review_2026-06-30_round10.html`：第十輪滿分復盤。
+- `pages/ai900_review_2026-06-28_combined.html`：十輪綜合復盤總頁。
+
 ---
 
 ## 📂 目錄檔案結構
@@ -31,6 +45,17 @@
     ├── AI-900_part2_119題.html  # 精選考題 (II)。第二部分 119 題，著重電腦視覺與 NLP。
     ├── AI-900_part3_88題.html   # 精選考題 (III)。第三部分 88 題考前衝刺。
     ├── AI-900_part4.html        # 重點整理。歸納負責任 AI、機器學習類型與指標。
+    ├── ai900_review_2026-06-28.html           # 第一輪錯題復盤。
+    ├── ai900_review_2026-06-28_round2.html     # 第二輪錯題復盤。
+    ├── ai900_review_2026-06-28_round3.html     # 第三輪錯題復盤。
+    ├── ai900_review_2026-06-29_round4.html     # 第四輪錯題復盤。
+    ├── ai900_review_2026-06-29_round5.html     # 第五輪錯題復盤。
+    ├── ai900_review_2026-06-29_round6.html     # 第六輪錯題復盤。
+    ├── ai900_review_2026-06-29_round7.html     # 第七輪錯題復盤。
+    ├── ai900_review_2026-06-30_round8.html     # 第八輪錯題復盤。
+    ├── ai900_review_2026-06-30_round9.html     # 第九輪錯題復盤。
+    ├── ai900_review_2026-06-30_round10.html    # 第十輪滿分復盤。
+    ├── ai900_review_2026-06-28_combined.html   # 十輪綜合復盤總頁。
     └── articles/                # 備考筆記系列文章。
         └── 《AI-900》...         # 13 篇深度觀念解析與心得分享 HTML。
 ```
@@ -45,7 +70,8 @@
    - 點擊「上一張」/「下一張」按鈕，或使用鍵盤 **左 / 右方向鍵** 進行切換。
    - 支援全螢幕瀏覽模式與下方縮圖快速跳轉。
 4. **返回首頁**：在任何子網頁的最上方或明顯處，皆有提供 `🏠 回到首頁主選單` 連結，可快速返回。
-5. **部署至 GitHub Pages**：
+5. **復盤筆記**：直接開啟 `pages/ai900_review_2026-06-28_combined.html` 可查看十輪綜合復盤；若要看單輪明細，依序開啟 `round2`、`round3`、`pages/ai900_review_2026-06-29_round4.html`、`pages/ai900_review_2026-06-29_round5.html`、`pages/ai900_review_2026-06-29_round6.html`、`pages/ai900_review_2026-06-29_round7.html`、`pages/ai900_review_2026-06-30_round8.html`、`pages/ai900_review_2026-06-30_round9.html` 或 `pages/ai900_review_2026-06-30_round10.html`。
+6. **部署至 GitHub Pages**：
    - 本專案已完全採用純前端靜態技術，無須任何後端與資料庫。
    - 直接將本專案目錄推送到您的 GitHub 儲存庫，並在 Settings -> Pages 中啟用，即可隨時隨地用手機進行刷題與複習。
 
