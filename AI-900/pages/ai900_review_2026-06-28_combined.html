@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-900 綜合復盤筆記 - 十輪版</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --soft: #f1f5f9;
+      --text: #172033;
+      --muted: #5b677a;
+      --border: #dbe3ef;
+      --blue: #0f6cbd;
+      --green: #0f8a5f;
+      --amber: #b7791f;
+      --red: #c24132;
+      --purple: #6d4aff;
+      --shadow: 0 12px 32px rgba(21, 32, 54, 0.08);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans TC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.75;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .top-line {
+      height: 6px;
+      background: linear-gradient(90deg, #0f6cbd, #14a38b, #6d4aff);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .home-link,
+    .detail-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: #334155;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(21, 32, 54, 0.04);
+    }
+
+    .home-link {
+      margin-bottom: 20px;
+      padding: 9px 14px;
+    }
+
+    .detail-link {
+      padding: 10px 12px;
+      color: #0f3d66;
+    }
+
+    header,
+    .panel,
+    .stat,
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    header {
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e7f2ff;
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 900px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .stats,
+    .grid {
+      display: grid;
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .stat,
+    .card,
+    .panel { padding: 18px; }
+
+    .stat strong {
+      display: block;
+      color: #0f172a;
+      font-size: 1.65rem;
+      line-height: 1.2;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .panel { margin-bottom: 24px; padding: 24px; }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 1.45rem;
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      line-height: 1.4;
+    }
+
+    .card p { margin: 0; color: #334155; }
+
+    .round-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .list li {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #f8fafc;
+      padding: 12px 14px;
+      font-weight: 700;
+    }
+
+    .topic {
+      border-left: 6px solid var(--blue);
+    }
+
+    .topic.ml { border-left-color: var(--purple); }
+    .topic.nlp { border-left-color: var(--green); }
+    .topic.genai { border-left-color: var(--amber); }
+    .topic.risk { border-left-color: var(--red); }
+
+    .compare {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .compare th,
+    .compare td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .compare th {
+      background: #eaf1f8;
+      color: #0f172a;
+      font-weight: 900;
+    }
+
+    .compare tr:last-child td { border-bottom: 0; }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #334155;
+      font-size: 0.86rem;
+      font-weight: 900;
+    }
+
+    .callout {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #f8fbff;
+      padding: 16px;
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #0f172a;
+      font-size: 1.02rem;
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 16px;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .stats,
+      .grid { grid-template-columns: 1fr; }
+
+      header,
+      .panel { padding: 18px; }
+
+      .compare {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-line"></div>
+  <main class="page">
+    <a class="home-link" href="../index.html">回到首頁主選單</a>
+
+    <header>
+      <div class="eyebrow">AI-900 Review Notebook</div>
+      <h1>AI-900 綜合復盤筆記</h1>
+      <p class="lead">整合 2026/06/28 至 2026/06/30 十輪 Microsoft Learn 練習評量。分數從 68% 提升到最新 100%，第十輪 50 題全對並通過所有區段。現在重點是維持題型辨識速度，避免考前再把穩定概念複雜化。</p>
+      <div class="round-links">
+        <a class="detail-link" href="ai900_review_2026-06-28.html">第一輪明細：68%</a>
+        <a class="detail-link" href="ai900_review_2026-06-28_round2.html">第二輪明細：80%</a>
+        <a class="detail-link" href="ai900_review_2026-06-28_round3.html">第三輪明細：80%</a>
+        <a class="detail-link" href="ai900_review_2026-06-29_round4.html">第四輪明細：84%</a>
+        <a class="detail-link" href="ai900_review_2026-06-29_round5.html">第五輪明細：92%</a>
+        <a class="detail-link" href="ai900_review_2026-06-29_round6.html">第六輪明細：82%</a>
+        <a class="detail-link" href="ai900_review_2026-06-29_round7.html">第七輪明細：96%</a>
+        <a class="detail-link" href="ai900_review_2026-06-30_round8.html">第八輪明細：92%</a>
+        <a class="detail-link" href="ai900_review_2026-06-30_round9.html">第九輪明細：98%</a>
+        <a class="detail-link" href="ai900_review_2026-06-30_round10.html">第十輪明細：100%</a>
+      </div>
+    </header>
+
+    <section class="stats" aria-label="綜合摘要">
+      <div class="stat"><strong>68%</strong><span>第一輪</span></div>
+      <div class="stat"><strong>80%</strong><span>第二輪</span></div>
+      <div class="stat"><strong>80%</strong><span>第三輪</span></div>
+      <div class="stat"><strong>84%</strong><span>第四輪</span></div>
+      <div class="stat"><strong>92%</strong><span>第五輪</span></div>
+      <div class="stat"><strong>82%</strong><span>第六輪</span></div>
+      <div class="stat"><strong>96%</strong><span>第七輪</span></div>
+      <div class="stat"><strong>92%</strong><span>第八輪</span></div>
+      <div class="stat"><strong>98%</strong><span>第九輪</span></div>
+      <div class="stat"><strong>100%</strong><span>第十輪</span></div>
+    </section>
+
+    <section class="panel">
+      <h2>十輪節奏</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>第一輪：概念底盤不穩</h3>
+          <p>回歸/叢集、資料集、Designer 推斷管線、Vision vs OCR、Language vs Translator/Speech、系統訊息與 RBAC 這些都還在混。</p>
+        </article>
+        <article class="card">
+          <h3>第二輪：基礎補起來</h3>
+          <p>回歸、AutoML、Speech to text、Azure Language 的常見功能與生成式 AI 基本題都開始穩定，剩下的是服務邊界與流程題。</p>
+        </article>
+        <article class="card">
+          <h3>第三輪：錯題更集中</h3>
+          <p>這一輪主要卡在 Azure Speech vs Language、Vision/Face 細節、Azure ML 發佈流程、實體連結，以及 Responsible AI 的包容性和透明度。</p>
+        </article>
+        <article class="card">
+          <h3>第四輪：達到 84%</h3>
+          <p>已通過所有區段。剩下的 8 題主要是多選題邊界、Face vs Vision、AutoML 監督式模型、實體安全情境與 Azure OpenAI RBAC。</p>
+        </article>
+        <article class="card">
+          <h3>第五輪：達到 92%</h3>
+          <p>服務邊界大幅穩定。錯題只剩 4 題，集中在叢集/分類、訓練前資料切分，以及 GPT 理解與生成自然語言。</p>
+        </article>
+        <article class="card">
+          <h3>第六輪：回落到 82%</h3>
+          <p>舊陷阱回頭：語意分割、數據挖掘、公平性、回歸/分類、Designer 訓練模組、影像描述、實體連結與生成式 AI 場景。</p>
+        </article>
+        <article class="card">
+          <h3>第七輪：達到 96%</h3>
+          <p>已通過所有區段。大多數舊錯點已修正，只剩 Vision 多選、回歸驗證方向、Face 身分匹配這三個固定陷阱。</p>
+        </article>
+        <article class="card">
+          <h3>第八輪：維持 92%</h3>
+          <p>持續通過所有區段。最新錯題集中在 Vision 雙選、糖尿病邏輯斯迴歸、訓練前切資料、Translator 文字到文字。</p>
+        </article>
+        <article class="card">
+          <h3>第九輪：達到 98%</h3>
+          <p>只剩 1 題錯題。第八輪的糖尿病、訓練前切資料、Translator 文字到文字都已修正，剩 Azure ML Designer 資料轉換多選。</p>
+        </article>
+        <article class="card">
+          <h3>第十輪：達到 100%</h3>
+          <p>50 題全對，完成時間 9 分鐘。Vision、ML、NLP、Responsible AI、Generative AI / Foundry 的固定陷阱已穩定。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>第十輪滿分確認</h2>
+      <div class="grid">
+        <article class="card topic">
+          <h3>Vision 雙選已修正</h3>
+          <p>Azure Vision in Foundry Tools 包含 OCR 與空間分析；實體辨識、關鍵片語、情感分析都屬於 Language。</p>
+        </article>
+        <article class="card topic cv">
+          <h3>糖尿病機率已修正</h3>
+          <p>題目雖寫機率數值，但患病風險是分類決策場景，所以選邏輯斯迴歸。</p>
+        </article>
+        <article class="card topic ml">
+          <h3>回歸驗證方向已穩</h3>
+          <p>用特徵產生標籤預測，再與實際標籤值比較；驗證集本身具有已知特徵與標籤。</p>
+        </article>
+        <article class="card topic nlp">
+          <h3>Designer 流程已穩</h3>
+          <p>Studio 訓練是作業，Designer 訓練是管線，Designer 部署預測服務是推斷管線。</p>
+        </article>
+        <article class="card topic risk">
+          <h3>NLP 邊界已穩</h3>
+          <p>支援問題資料用關鍵片語 + NER，實體更多資訊用實體連結，內容篩選在安全系統層。</p>
+        </article>
+        <article class="card topic genai">
+          <h3>Foundry 題已穩</h3>
+          <p>Foundry 是建構、測試、部署生成式 AI 的平台；模型目錄用來發現與比較模型；Azure OpenAI 常考 RBAC。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>考前最後保留提醒</h2>
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>題型線索</th>
+            <th>正解</th>
+            <th>白話記法</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Azure ML Designer 資料轉換模組</td>
+            <td><span class="pill">清缺值 + 標準化 + 選欄位</span></td>
+            <td>第九輪錯題，第十輪未再出現；考前仍要硬背，評估模型不是資料轉換</td>
+          </tr>
+          <tr>
+            <td>Azure Vision in Foundry Tools 雙選</td>
+            <td><span class="pill">OCR + 空間分析</span></td>
+            <td>實體辨識、關鍵片語、情感分析都不是 Vision</td>
+          </tr>
+          <tr>
+            <td>糖尿病患病機率</td>
+            <td><span class="pill">邏輯斯迴歸</span></td>
+            <td>機率若服務於是否患病/是否屬於某類，仍是分類模型</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>十輪已穩定的部分</h2>
+      <div class="grid">
+        <article class="callout">
+          <strong>NLP</strong>
+          <div class="stack">
+            <div>情感分析、翻譯、關鍵片語、具名實體辨識、語言偵測，這幾個已經可以穩定分清楚。</div>
+            <div>看到人名、地名、組織，就先想 NER；看到要外部連結才想到實體連結。</div>
+          </div>
+        </article>
+        <article class="callout">
+          <strong>電腦視覺</strong>
+          <div class="stack">
+            <div>OCR、物件偵測、臉部屬性、影像描述信賴分數、Custom Vision 都已經形成固定答案。</div>
+            <div>邊界框是物件偵測；像素級分類是語意分割；自己訓練圖片模型是 Custom Vision。</div>
+          </div>
+        </article>
+        <article class="callout">
+          <strong>機器學習</strong>
+          <div class="stack">
+            <div>分類、回歸、叢集、特徵與標籤、訓練與驗證流程已經大致穩定。</div>
+            <div>數值預測 = 回歸；類別預測 = 分類；沒有標籤找群組 = 叢集。</div>
+          </div>
+        </article>
+        <article class="callout">
+          <strong>生成式 AI / Foundry</strong>
+          <div class="stack">
+            <div>系統訊息、內容篩選、透明度、公平性、Embeddings、Foundry 模型目錄、Azure OpenAI RBAC 都已經抓到核心。</div>
+            <div>Foundry 平台是建構/測試/部署；模型目錄才是發現與比較模型。</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>考前最後口訣</h2>
+      <ul class="list">
+        <li>Speech 處理聲音；Language 處理文字；Translator 處理翻譯。</li>
+        <li>Vision 看圖，Face 看臉，Custom Vision 是自己訓練圖片模型。</li>
+        <li>物件偵測 = 邊界框；語意分割 = 像素分類；影像描述 = 短語 + 信賴分數。</li>
+        <li>NER 找人名地名組織；實體連結給外部資訊；關鍵片語抓重點。</li>
+        <li>回歸預測數值，分類預測類別，叢集找相似群組。</li>
+        <li>訓練 = Job；Designer 起手 = 建立管線；AutoML 發佈 = 部署到端點。</li>
+        <li>透明度是講清楚目的與限制；公平性是處理偏見；包容性是讓所有人都能受益。</li>
+        <li>Foundry 是整個平台；模型目錄是發現與比較模型；Azure OpenAI 常考 RBAC。</li>
+      </ul>
+    </section>
+
+    <footer>AI-900 綜合復盤筆記，整合十輪 Microsoft Learn 練習評量。</footer>
+  </main>
+</body>
+</html>

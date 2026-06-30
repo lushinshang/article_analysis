@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-900 第九輪錯題復盤 - 98%</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #5b677a;
+      --border: #dbe3ef;
+      --blue: #0f6cbd;
+      --green: #0f8a5f;
+      --amber: #b7791f;
+      --red: #c24132;
+      --purple: #6d4aff;
+      --shadow: 0 12px 32px rgba(21, 32, 54, 0.08);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans TC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.75;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .top-line {
+      height: 6px;
+      background: linear-gradient(90deg, #0f6cbd, #14a38b, #6d4aff);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .home-link,
+    .detail-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: #334155;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(21, 32, 54, 0.04);
+    }
+
+    .home-link {
+      margin-bottom: 20px;
+      padding: 9px 14px;
+    }
+
+    .detail-link {
+      padding: 10px 12px;
+      color: #0f3d66;
+    }
+
+    header,
+    .panel,
+    .stat,
+    .card,
+    .wrong-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    header {
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e7f2ff;
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 920px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .round-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .stats,
+    .grid {
+      display: grid;
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .stat,
+    .card,
+    .panel { padding: 18px; }
+
+    .stat strong {
+      display: block;
+      color: #0f172a;
+      font-size: 1.65rem;
+      line-height: 1.2;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .panel { margin-bottom: 24px; padding: 24px; }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 1.45rem;
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      line-height: 1.4;
+    }
+
+    .card p { margin: 0; color: #334155; }
+
+    .wrong-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .wrong-card {
+      border-left: 6px solid var(--red);
+      padding: 20px;
+    }
+
+    .wrong-card.ml { border-left-color: var(--purple); }
+    .wrong-card.genai { border-left-color: var(--amber); }
+
+    .wrong-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .qno { color: #0f172a; font-weight: 900; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #334155;
+      font-size: 0.83rem;
+      font-weight: 900;
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .answer-box {
+      border-radius: var(--radius);
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: #fbfdff;
+    }
+
+    .answer-box strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+    }
+
+    .answer-box.user strong { color: var(--red); }
+    .answer-box.correct strong { color: var(--green); }
+
+    .why,
+    .note {
+      margin: 12px 0 0;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      font-weight: 700;
+    }
+
+    .why {
+      background: #eef7ff;
+      border: 1px solid #bfdbfe;
+      color: #173b63;
+    }
+
+    .note {
+      background: #fff8e6;
+      border: 1px solid #f4d78c;
+      color: #6b4b14;
+    }
+
+    .memory-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .memory-list li {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      font-weight: 700;
+    }
+
+    .memory-list b { color: var(--blue); }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 16px;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .stats,
+      .grid,
+      .answer-row,
+      .memory-list { grid-template-columns: 1fr; }
+
+      header,
+      .panel,
+      .wrong-card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-line"></div>
+  <main class="page">
+    <a class="home-link" href="../index.html">回到首頁主選單</a>
+
+    <header>
+      <div class="eyebrow">Microsoft Learn Practice Assessment</div>
+      <h1>AI-900 第九輪錯題復盤</h1>
+      <p class="lead">評量日期：2026 年 6 月 30 日。本輪分數 98%，完成時間 15 分鐘，已通過所有區段。第八輪的固定陷阱大多修正，只剩 Azure ML Designer 資料轉換模組多選題。</p>
+      <div class="round-links">
+        <a class="detail-link" href="ai900_review_2026-06-28_combined.html">回到綜合復盤</a>
+        <a class="detail-link" href="ai900_review_2026-06-30_round8.html">第八輪明細</a>
+        <a class="detail-link" href="ai900_review_2026-06-29_round7.html">第七輪明細</a>
+      </div>
+    </header>
+
+    <section class="stats" aria-label="評量摘要">
+      <div class="stat"><strong>98%</strong><span>本輪分數</span></div>
+      <div class="stat"><strong>49/50</strong><span>答對題數</span></div>
+      <div class="stat"><strong>1</strong><span>錯題數</span></div>
+      <div class="stat"><strong>15 分</strong><span>完成時間</span></div>
+    </section>
+
+    <section class="panel">
+      <h2>本輪結果怎麼看</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>已接近滿分狀態</h3>
+          <p>第九輪 98%，錯題只剩 1 題。現在重點不是再擴張內容，而是避免多選題手滑。</p>
+        </article>
+        <article class="card">
+          <h3>第八輪固定陷阱已修正</h3>
+          <p>糖尿病邏輯斯迴歸、訓練前切資料、Translator 文字到文字，本輪都沒有再失分。</p>
+        </article>
+        <article class="card">
+          <h3>唯一錯點是資料轉換</h3>
+          <p>Azure ML Designer 資料轉換三件套：清缺值、標準化、選欄位。評估模型不屬於資料轉換。</p>
+        </article>
+        <article class="card">
+          <h3>多選題策略</h3>
+          <p>遇到「哪三個」先列出類別邊界，再排除不是同一類的選項，避免把評估/訓練混進轉換。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>本輪錯題明細</h2>
+      <div class="wrong-list">
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q19</span><span class="tag">Data Transformation</span></div>
+          <h3>Azure Machine Learning Designer 中包含哪三個資料轉換模組？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>清除遺漏資料、評估模型、標準化</div>
+            <div class="answer-box correct"><strong>正確答案</strong>清除遺漏資料、標準化、選取資料行</div>
+          </div>
+          <div class="why">資料轉換是在整理輸入資料：處理遺漏值、縮放數值、選出要用的欄位。評估模型是訓練後測量模型表現，不是資料轉換。</div>
+          <p class="note">口訣：資料轉換三件套 = 清缺值 + 標準化 + 選欄位。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>本輪明顯補強成功</h2>
+      <ul class="memory-list">
+        <li><b>ML 修正成功</b>：糖尿病機率已選邏輯斯迴歸，回歸驗證方向、Studio 作業、Designer 管線/推斷管線都答對。</li>
+        <li><b>Vision / Face</b>：OCR、Face 一對多/一對一、Face 屬性、Custom Vision、影像描述信賴分數都穩。</li>
+        <li><b>NLP</b>：關鍵片語 + NER、實體辨識/實體連結、Speech 字幕、情感分析、語音辨識都穩。</li>
+        <li><b>Responsible AI</b>：透明度、公平性、包容、內容篩選安全系統、NIST 第一階段都穩。</li>
+        <li><b>Generative AI / Foundry</b>：GPT、影像生成、Foundry 平台與目標族群、Azure OpenAI in Foundry Models 都穩。</li>
+      </ul>
+    </section>
+
+    <footer>AI-900 第九輪錯題復盤，分數 98%，錯題只剩 1 題。</footer>
+  </main>
+</body>
+</html>

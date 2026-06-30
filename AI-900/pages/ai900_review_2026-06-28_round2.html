@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-900 第二輪錯題復盤 - 80%</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --soft: #f1f5f9;
+      --text: #172033;
+      --muted: #5b677a;
+      --border: #dbe3ef;
+      --blue: #0f6cbd;
+      --green: #0f8a5f;
+      --amber: #b7791f;
+      --red: #c24132;
+      --purple: #6d4aff;
+      --shadow: 0 12px 32px rgba(21, 32, 54, 0.08);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans TC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.75;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .top-line {
+      height: 6px;
+      background: linear-gradient(90deg, #0f6cbd, #14a38b, #6d4aff);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: #334155;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(21, 32, 54, 0.04);
+    }
+
+    header,
+    .panel,
+    .stat,
+    .wrong-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    header {
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e7f2ff;
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 860px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .stat { padding: 18px; }
+
+    .stat strong {
+      display: block;
+      color: #0f172a;
+      font-size: 1.65rem;
+      line-height: 1.2;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .panel {
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 1.45rem;
+      line-height: 1.3;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fbfdff;
+      padding: 16px;
+    }
+
+    .mini h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+
+    .mini p { margin: 0; color: #334155; }
+
+    .success-list,
+    .memory-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .success-list li,
+    .memory-list li {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #f8fafc;
+      padding: 12px 14px;
+      font-weight: 700;
+    }
+
+    .wrong-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .wrong-card {
+      border-left: 6px solid var(--red);
+      padding: 20px;
+    }
+
+    .wrong-card.cv { border-left-color: var(--blue); }
+    .wrong-card.ml { border-left-color: var(--purple); }
+    .wrong-card.nlp { border-left-color: var(--green); }
+    .wrong-card.genai { border-left-color: var(--amber); }
+
+    .wrong-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .qno {
+      color: #0f172a;
+      font-weight: 900;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #334155;
+      font-size: 0.83rem;
+      font-weight: 900;
+    }
+
+    .wrong-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+      line-height: 1.45;
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .answer-box {
+      border-radius: var(--radius);
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: #fbfdff;
+    }
+
+    .answer-box strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+    }
+
+    .answer-box.user strong { color: var(--red); }
+    .answer-box.correct strong { color: var(--green); }
+
+    .why,
+    .note {
+      margin: 12px 0 0;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      font-weight: 700;
+    }
+
+    .why {
+      background: #eef7ff;
+      border: 1px solid #bfdbfe;
+      color: #173b63;
+    }
+
+    .note {
+      background: #fff8e6;
+      border: 1px solid #f4d78c;
+      color: #6b4b14;
+    }
+
+    .compare {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .compare th,
+    .compare td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .compare th {
+      background: #eaf1f8;
+      color: #0f172a;
+      font-weight: 900;
+    }
+
+    .compare tr:last-child td { border-bottom: 0; }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 16px;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .stats,
+      .grid,
+      .answer-row {
+        grid-template-columns: 1fr;
+      }
+
+      header,
+      .panel,
+      .wrong-card {
+        padding: 18px;
+      }
+
+      .compare {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-line"></div>
+  <main class="page">
+    <a class="home-link" href="../index.html">回到首頁主選單</a>
+
+    <header>
+      <div class="eyebrow">Microsoft Learn Practice Assessment</div>
+      <h1>AI-900 第二輪錯題復盤</h1>
+      <p class="lead">本輪 50 題達到 80%。這份筆記只保留真正需要再補的錯題與高頻混淆點，重點是把服務邊界、Azure ML 流程、Responsible AI 和 Foundry 題型拆清楚。</p>
+    </header>
+
+    <section class="stats" aria-label="評量摘要">
+      <div class="stat"><strong>80%</strong><span>本輪分數</span></div>
+      <div class="stat"><strong>40/50</strong><span>答對題數</span></div>
+      <div class="stat"><strong>10</strong><span>錯題數</span></div>
+      <div class="stat"><strong>85%+</strong><span>下一輪目標</span></div>
+    </section>
+
+    <section class="panel">
+      <h2>本輪主要弱點</h2>
+      <div class="grid">
+        <article class="mini">
+          <h3>Vision / Face 服務細分</h3>
+          <p>Azure Vision、Azure Face、Custom Vision、Language 功能邊界仍是高風險區。</p>
+        </article>
+        <article class="mini">
+          <h3>Azure ML 流程</h3>
+          <p>訓練是作業，部署才是 ACI/AKS；AutoML 監督式不含叢集。</p>
+        </article>
+        <article class="mini">
+          <h3>NLP 實體功能</h3>
+          <p>找出實體是具名實體辨識；提供線上更多資訊是實體連結。</p>
+        </article>
+        <article class="mini">
+          <h3>Foundry vs 模型目錄</h3>
+          <p>Foundry 是建構、測試、部署平台；模型目錄才是發現與比較模型。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>已補強成功的舊錯題</h2>
+      <ul class="success-list">
+        <li>回歸 vs 叢集：數值預測選回歸，相似分組選叢集。</li>
+        <li>AutoML 前置資料集：建立 AutoML 回合需要資料集。</li>
+        <li>Speech to text：通用模型最佳化於會話與聽寫。</li>
+        <li>Azure Language 功能：實體連結、PII 偵測、情感分析已答對。</li>
+        <li>系統訊息：角色、語氣、限制、格式都歸系統訊息。</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>錯題逐題復盤</h2>
+      <div class="wrong-list">
+        <article class="wrong-card cv">
+          <div class="wrong-top"><span class="qno">Q6</span><span class="tag">Azure Vision</span></div>
+          <h3>Azure Vision in Foundry Tools 包含哪兩項 AI 工作負載功能？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>實體辨識、OCR</div>
+            <div class="answer-box correct"><strong>正確答案</strong>OCR、空間分析</div>
+          </div>
+          <div class="why">Vision 是看圖；Language 是看文字。實體辨識、關鍵片語、情感分析都屬於 Azure Language，不是 Azure Vision。</div>
+          <p class="note">口訣：Vision = OCR + 空間分析 + 影像；Language = 實體 + 關鍵片語 + 情感。</p>
+        </article>
+
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q16</span><span class="tag">Azure ML</span></div>
+          <h3>使用 Azure Machine Learning 訓練迴歸模型，應該在 Studio 建立什麼？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>Azure 容器實例</div>
+            <div class="answer-box correct"><strong>正確答案</strong>作業 Job</div>
+          </div>
+          <div class="why">訓練模型時要建立作業。Azure Container Instances 和 AKS 是模型訓練完成後的部署目標。</div>
+          <p class="note">口訣：訓練是 Job；部署才是 ACI/AKS。</p>
+        </article>
+
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q18</span><span class="tag">AutoML</span></div>
+          <h3>Automated ML 可訓練哪三種監督式機器學習模型？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>分類、叢集、回歸</div>
+            <div class="answer-box correct"><strong>正確答案</strong>分類、回歸、時間序列預測</div>
+          </div>
+          <div class="why">題目強調監督式模型。叢集是非監督式，不能放進這組答案。</div>
+          <p class="note">口訣：AutoML 監督式三件套 = 分類 + 回歸 + 時間序列預測。</p>
+        </article>
+
+        <article class="wrong-card cv">
+          <div class="wrong-top"><span class="qno">Q22</span><span class="tag">Computer Vision</span></div>
+          <h3>哪個電腦視覺服務在輸出中提供邊界座標？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>語意分割</div>
+            <div class="answer-box correct"><strong>正確答案</strong>物件偵測</div>
+          </div>
+          <div class="why">邊界座標就是框出物件位置。語意分割不是畫框，而是把每個像素分類。</div>
+          <p class="note">口訣：框出位置 = 物件偵測；每個像素分類 = 語意分割。</p>
+        </article>
+
+        <article class="wrong-card cv">
+          <div class="wrong-top"><span class="qno">Q26</span><span class="tag">Azure Vision</span></div>
+          <h3>Azure Vision 支援哪兩個專門領域模型？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>動物、汽車</div>
+            <div class="answer-box correct"><strong>正確答案</strong>名人、地標</div>
+          </div>
+          <div class="why">這題不是問 Vision 能看到什麼，而是問內建的專門領域模型。</div>
+          <p class="note">口訣：Azure Vision 專門領域模型 = 名人 + 地標。</p>
+        </article>
+
+        <article class="wrong-card cv">
+          <div class="wrong-top"><span class="qno">Q28</span><span class="tag">Azure Face</span></div>
+          <h3>Face Detect API 判斷戴眼鏡或頭巾，應使用哪項功能？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>臉部識別</div>
+            <div class="answer-box correct"><strong>正確答案</strong>臉部屬性</div>
+          </div>
+          <div class="why">眼鏡、面具、頭飾是臉上的特徵或配件，屬於臉部屬性。臉部識別是在問這個人是誰。</div>
+          <p class="note">口訣：配件 = 臉部屬性；這個人是誰 = 臉部識別。</p>
+        </article>
+
+        <article class="wrong-card nlp">
+          <div class="wrong-top"><span class="qno">Q31</span><span class="tag">Knowledge Base</span></div>
+          <h3>哪些檔案可匯入，產生 Microsoft Foundry 代理知識庫？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>CSV、DOC</div>
+            <div class="answer-box correct"><strong>正確答案</strong>DOC、PDF</div>
+          </div>
+          <div class="why">這題考文件型知識庫。CSV 是表格資料，不是這題要的文件匯入格式。</div>
+          <p class="note">口訣：知識庫吃文件，先記 DOC + PDF。</p>
+        </article>
+
+        <article class="wrong-card nlp">
+          <div class="wrong-top"><span class="qno">Q37</span><span class="tag">Azure Language</span></div>
+          <h3>要線上提供更多關於文字實體的資訊，該用什麼？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>具名實體辨識</div>
+            <div class="answer-box correct"><strong>正確答案</strong>實體連結</div>
+          </div>
+          <div class="why">具名實體辨識只是找出人名、地名、組織。實體連結會釐清實體身分，並提供線上更多資訊。</div>
+          <p class="note">口訣：找出來 = NER；連出去 = Entity Linking。</p>
+        </article>
+
+        <article class="wrong-card genai">
+          <div class="wrong-top"><span class="qno">Q42</span><span class="tag">Responsible AI</span></div>
+          <h3>確保使用者了解生成式 AI 解決方案目的與輸出影響，應減輕哪種風險？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>偏見或不公平結果</div>
+            <div class="answer-box correct"><strong>正確答案</strong>缺乏透明度</div>
+          </div>
+          <div class="why">題目不是問有沒有偏袒某些族群，而是問使用者是否理解目的、使用方式與輸出影響。</div>
+          <p class="note">口訣：目的、使用方式、限制、影響要講清楚 = 透明度；族群差別待遇 = 公平性。</p>
+        </article>
+
+        <article class="wrong-card genai">
+          <div class="wrong-top"><span class="qno">Q48</span><span class="tag">Microsoft Foundry</span></div>
+          <h3>哪句話最準確描述 Microsoft Foundry？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>用於發現與比較 Azure 中可用的生成式 AI 模型</div>
+            <div class="answer-box correct"><strong>正確答案</strong>整合建構、測試及部署生成式 AI 解決方案的工具與服務</div>
+          </div>
+          <div class="why">發現與比較模型是「模型目錄」的功能；Foundry 平台本身範圍更大，是端對端開發平台。</div>
+          <p class="note">口訣：Foundry 平台 = 建構 + 測試 + 部署；模型目錄 = 發現 + 比較模型。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>服務邊界速查</h2>
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>服務/概念</th>
+            <th>看到這些線索就選它</th>
+            <th>容易誤選</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Azure Vision</td>
+            <td>OCR、影像描述、物件偵測、空間分析、名人、地標</td>
+            <td>實體辨識、情感分析</td>
+          </tr>
+          <tr>
+            <td>Azure Face</td>
+            <td>臉部屬性、臉部矩形、臉部標記點、臉部識別</td>
+            <td>一般物件偵測</td>
+          </tr>
+          <tr>
+            <td>Custom Vision</td>
+            <td>自己訓練影像分類或物件偵測模型</td>
+            <td>一般 Azure Vision</td>
+          </tr>
+          <tr>
+            <td>Azure Language</td>
+            <td>情感分析、具名實體辨識、實體連結、PII、關鍵片語、語言偵測</td>
+            <td>Azure Vision、Content Safety</td>
+          </tr>
+          <tr>
+            <td>Azure ML</td>
+            <td>訓練模型建立 Job；Designer 先建管線；部署用 ACI/AKS</td>
+            <td>把部署目標當訓練作業</td>
+          </tr>
+          <tr>
+            <td>Microsoft Foundry</td>
+            <td>建構、測試、部署、管理 AI 應用與代理</td>
+            <td>模型目錄的發現與比較</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>考前 60 秒速記</h2>
+      <ul class="memory-list">
+        <li>Vision 看圖；Language 看文字；Face 看臉；Custom Vision 自己訓練圖片模型。</li>
+        <li>框出位置是物件偵測；每個像素分類是語意分割；整張圖貼標籤是影像分類。</li>
+        <li>Azure Vision 專門領域模型只記：名人 + 地標。</li>
+        <li>AutoML 監督式三件套：分類、回歸、時間序列預測。</li>
+        <li>訓練模型是 Job；部署模型才是 ACI/AKS。</li>
+        <li>找出實體是 NER；提供更多線上資訊是實體連結。</li>
+        <li>目的、限制、輸出影響要讓使用者知道，就是透明度。</li>
+        <li>Foundry 平台是建構、測試、部署；模型目錄才是發現、比較模型。</li>
+      </ul>
+    </section>
+
+    <footer>AI-900 第二輪錯題復盤筆記，依 Microsoft Learn 練習評量結果整理。</footer>
+  </main>
+</body>
+</html>

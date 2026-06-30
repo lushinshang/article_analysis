@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-900 第十輪滿分復盤 - 100%</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #5b677a;
+      --border: #dbe3ef;
+      --blue: #0f6cbd;
+      --green: #0f8a5f;
+      --amber: #b7791f;
+      --purple: #6d4aff;
+      --shadow: 0 12px 32px rgba(21, 32, 54, 0.08);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans TC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.75;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .top-line { height: 6px; background: linear-gradient(90deg, #0f6cbd, #14a38b, #6d4aff); }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .home-link,
+    .detail-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: #334155;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(21, 32, 54, 0.04);
+    }
+
+    .home-link { margin-bottom: 20px; padding: 9px 14px; }
+    .detail-link { padding: 10px 12px; color: #0f3d66; }
+
+    header,
+    .panel,
+    .stat,
+    .card,
+    .confirm-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    header {
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e7f8ef;
+      color: var(--green);
+      font-size: 0.86rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 920px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .round-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .stats,
+    .grid,
+    .confirm-list {
+      display: grid;
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .confirm-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .stat,
+    .card,
+    .panel { padding: 18px; }
+
+    .stat strong {
+      display: block;
+      color: #0f172a;
+      font-size: 1.65rem;
+      line-height: 1.2;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .panel { margin-bottom: 24px; padding: 24px; }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 1.45rem;
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      line-height: 1.4;
+    }
+
+    .card p,
+    .confirm-card p { margin: 0; color: #334155; }
+
+    .confirm-card {
+      border-left: 6px solid var(--green);
+      padding: 18px;
+    }
+
+    .confirm-card.ml { border-left-color: var(--purple); }
+    .confirm-card.cv { border-left-color: var(--blue); }
+    .confirm-card.genai { border-left-color: var(--amber); }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #334155;
+      font-size: 0.83rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .why {
+      margin: 12px 0 0;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      font-weight: 700;
+      background: #eef7ff;
+      border: 1px solid #bfdbfe;
+      color: #173b63;
+    }
+
+    .memory-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .memory-list li {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      font-weight: 700;
+    }
+
+    .memory-list b { color: var(--blue); }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 16px;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .stats,
+      .grid,
+      .confirm-list,
+      .memory-list { grid-template-columns: 1fr; }
+
+      header,
+      .panel,
+      .confirm-card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-line"></div>
+  <main class="page">
+    <a class="home-link" href="../index.html">回到首頁主選單</a>
+
+    <header>
+      <div class="eyebrow">Microsoft Learn Practice Assessment</div>
+      <h1>AI-900 第十輪滿分復盤</h1>
+      <p class="lead">評量日期：2026 年 6 月 30 日。本輪分數 100%，完成時間 9 分鐘，50 題全對並通過所有區段。這一輪不是補洞，而是確認前幾輪固定陷阱已經穩定。</p>
+      <div class="round-links">
+        <a class="detail-link" href="ai900_review_2026-06-28_combined.html">回到綜合復盤</a>
+        <a class="detail-link" href="ai900_review_2026-06-30_round9.html">第九輪明細</a>
+        <a class="detail-link" href="ai900_review_2026-06-30_round8.html">第八輪明細</a>
+      </div>
+    </header>
+
+    <section class="stats" aria-label="評量摘要">
+      <div class="stat"><strong>100%</strong><span>本輪分數</span></div>
+      <div class="stat"><strong>50/50</strong><span>答對題數</span></div>
+      <div class="stat"><strong>0</strong><span>錯題數</span></div>
+      <div class="stat"><strong>9 分</strong><span>完成時間</span></div>
+    </section>
+
+    <section class="panel">
+      <h2>本輪結果怎麼看</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>已達滿分狀態</h3>
+          <p>第十輪 100%，代表主要服務邊界、ML 流程與生成式 AI 題型都能穩定辨識。</p>
+        </article>
+        <article class="card">
+          <h3>固定陷阱已修正</h3>
+          <p>Vision 雙選、糖尿病邏輯斯迴歸、回歸驗證方向、Face 匹配與 Designer 推斷管線都答對。</p>
+        </article>
+        <article class="card">
+          <h3>不需要再擴張大量筆記</h3>
+          <p>現在的策略是保持題型辨識速度，避免把不同服務或不同 ML 階段混在同一題。</p>
+        </article>
+        <article class="card">
+          <h3>最後保留多選警覺</h3>
+          <p>第九輪錯過的資料轉換三件套本輪未再出現，考前仍要保留：清缺值、標準化、選欄位。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>滿分確認項目</h2>
+      <div class="confirm-list">
+        <article class="confirm-card cv">
+          <span class="tag">Vision</span>
+          <h3>Azure Vision 雙選</h3>
+          <p>Azure Vision in Foundry Tools 包含 OCR 與空間分析；實體辨識、關鍵片語、情感分析屬於 Language。</p>
+          <div class="why">口訣：Vision 雙選 = OCR + 空間分析。</div>
+        </article>
+        <article class="confirm-card ml">
+          <span class="tag">Machine Learning</span>
+          <h3>糖尿病機率題</h3>
+          <p>雖然題目寫「機率的數值」，但用途是判斷患病/風險類別，所以選邏輯斯迴歸。</p>
+          <div class="why">口訣：是否患病、是否高風險 = 邏輯斯迴歸。</div>
+        </article>
+        <article class="confirm-card ml">
+          <span class="tag">Regression</span>
+          <h3>回歸驗證方向</h3>
+          <p>驗證集用已知特徵產生標籤預測，再與實際標籤值比較；不是用標籤去預測特徵。</p>
+          <div class="why">口訣：特徵進去，標籤出來，拿實際標籤驗證。</div>
+        </article>
+        <article class="confirm-card ml">
+          <span class="tag">Designer</span>
+          <h3>部署預測服務</h3>
+          <p>使用 Azure Machine Learning Designer 從新訓練模型部署預測服務，先建立推斷管線。</p>
+          <div class="why">口訣：Designer 訓練 = 管線；Designer 部署 = 推斷管線。</div>
+        </article>
+        <article class="confirm-card cv">
+          <span class="tag">Face</span>
+          <h3>一對多與一對一臉部匹配</h3>
+          <p>一對多用臉部識別，一對一用臉部驗證；臉部屬性只用來判斷眼鏡、頭巾等特徵。</p>
+          <div class="why">口訣：識別找是誰，驗證比是不是同一人，屬性看配件。</div>
+        </article>
+        <article class="confirm-card">
+          <span class="tag">Language</span>
+          <h3>支援問題資料分析</h3>
+          <p>常見問題與主題用關鍵片語擷取；人員、產品、地點、組織用具名實體辨識。</p>
+          <div class="why">口訣：問題重點 = 關鍵片語；人地物 = NER。</div>
+        </article>
+        <article class="confirm-card genai">
+          <span class="tag">Responsible GenAI</span>
+          <h3>內容篩選層級</h3>
+          <p>抑制有害提示與回應的內容篩選屬於安全系統層，不是模型層或使用者體驗層。</p>
+          <div class="why">口訣：內容篩選、傷害分類、攔截提示回應 = 安全系統。</div>
+        </article>
+        <article class="confirm-card genai">
+          <span class="tag">Foundry</span>
+          <h3>模型目錄與 Azure OpenAI</h3>
+          <p>Foundry 模型目錄用來發現、比較模型；Azure OpenAI in Foundry Models 常考存取 GPT 與 RBAC。</p>
+          <div class="why">口訣：模型目錄 = 找模型比模型；Azure OpenAI = GPT + RBAC。</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>考前最後保留提醒</h2>
+      <ul class="memory-list">
+        <li><b>資料轉換三件套</b>：清除遺漏資料、將資料標準化、選取資料集中的資料行。</li>
+        <li><b>Vision 雙選</b>：OCR + 空間分析；實體/關鍵/情感全部踢去 Language。</li>
+        <li><b>Translator vs Speech</b>：Translator = 文字到文字；Speech = 語音轉文字、文字轉語音。</li>
+        <li><b>糖尿病機率</b>：看到患病機率與類別決策，選邏輯斯迴歸，不選線性回歸。</li>
+        <li><b>Designer 流程</b>：訓練先建立管線；部署預測服務先建立推斷管線。</li>
+        <li><b>Studio 訓練</b>：使用 Azure Machine Learning Studio 訓練模型要建立作業。</li>
+      </ul>
+    </section>
+
+    <footer>AI-900 第十輪滿分復盤，分數 100%，50 題全對。</footer>
+  </main>
+</body>
+</html>

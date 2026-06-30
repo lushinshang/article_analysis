@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-900 錯題復盤筆記 - 2026-06-28</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --surface-soft: #f1f5f9;
+      --text: #172033;
+      --muted: #5b677a;
+      --border: #dbe3ef;
+      --blue: #0f6cbd;
+      --green: #0f8a5f;
+      --amber: #b7791f;
+      --red: #c24132;
+      --purple: #6d4aff;
+      --shadow: 0 12px 32px rgba(21, 32, 54, 0.08);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans TC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.75;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .top-line {
+      height: 6px;
+      background: linear-gradient(90deg, #0f6cbd, #14a38b, #6d4aff);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: #334155;
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(21, 32, 54, 0.04);
+    }
+
+    header {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e7f2ff;
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 820px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 22px rgba(21, 32, 54, 0.05);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.55rem;
+      line-height: 1.2;
+      color: #0f172a;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 22px rgba(21, 32, 54, 0.05);
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 1.45rem;
+      line-height: 1.3;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .focus-card {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .focus-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .focus-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .wrong-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .wrong-card {
+      border: 1px solid var(--border);
+      border-left: 6px solid var(--red);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(21, 32, 54, 0.05);
+    }
+
+    .wrong-card.ml { border-left-color: var(--purple); }
+    .wrong-card.cv { border-left-color: var(--blue); }
+    .wrong-card.nlp { border-left-color: var(--green); }
+    .wrong-card.genai { border-left-color: var(--amber); }
+
+    .wrong-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .qno {
+      color: #0f172a;
+      font-weight: 900;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #334155;
+      font-size: 0.83rem;
+      font-weight: 800;
+    }
+
+    .wrong-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+      line-height: 1.45;
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .answer-box {
+      border-radius: var(--radius);
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: #fbfdff;
+    }
+
+    .answer-box strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+    }
+
+    .answer-box.user strong {
+      color: var(--red);
+    }
+
+    .answer-box.correct strong {
+      color: var(--green);
+    }
+
+    .note {
+      margin: 12px 0 0;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      background: #fff8e6;
+      color: #6b4b14;
+      border: 1px solid #f4d78c;
+      font-weight: 600;
+    }
+
+    .plain-study {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .plain-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fbfdff;
+      padding: 16px;
+    }
+
+    .plain-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+
+    .plain-card p {
+      margin: 0 0 8px;
+      color: #334155;
+    }
+
+    .plain-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .teacher-tip {
+      border-left: 4px solid var(--blue);
+      background: #eef7ff;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      color: #173b63;
+      font-weight: 700;
+    }
+
+    .refs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .ref-link {
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: #f8fafc;
+      color: #0f3d66;
+      font-weight: 800;
+    }
+
+    .why {
+      margin: 12px 0 0;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      background: #eef7ff;
+      border: 1px solid #bfdbfe;
+      color: #173b63;
+    }
+
+    .why strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .compare {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .compare th,
+    .compare td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .compare th {
+      background: #eaf1f8;
+      color: #0f172a;
+      font-weight: 900;
+    }
+
+    .compare tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .memory-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .memory-list li {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      font-weight: 700;
+    }
+
+    .memory-list b {
+      color: var(--blue);
+    }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 16px;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .stats,
+      .focus-grid,
+      .plain-study,
+      .refs,
+      .answer-row,
+      .memory-list {
+        grid-template-columns: 1fr;
+      }
+
+      header,
+      .panel,
+      .wrong-card {
+        padding: 18px;
+      }
+
+      .compare {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .home-link,
+      .top-line {
+        display: none;
+      }
+
+      header,
+      .panel,
+      .stat,
+      .wrong-card {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-line"></div>
+  <main class="page">
+    <a class="home-link" href="../index.html">回到首頁主選單</a>
+
+    <header>
+      <div class="eyebrow">Microsoft Learn Practice Assessment</div>
+      <h1>AI-900 錯題復盤筆記</h1>
+      <p class="lead">評量日期：2026 年 6 月 28 日。這份筆記把本次錯題整理成考前可快速複習的知識點，重點放在容易混淆的服務、工作負載、模型流程與生成式 AI 概念。</p>
+    </header>
+
+    <section class="stats" aria-label="評量摘要">
+      <div class="stat">
+        <strong>68%</strong>
+        <span>本次分數</span>
+      </div>
+      <div class="stat">
+        <strong>50</strong>
+        <span>總題數</span>
+      </div>
+      <div class="stat">
+        <strong>16</strong>
+        <span>需復盤題數</span>
+      </div>
+      <div class="stat">
+        <strong>80%+</strong>
+        <span>下一輪目標</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>本次優先補強區塊</h2>
+      <div class="focus-grid">
+        <article class="focus-card">
+          <h3>機器學習基本原理</h3>
+          <p>回歸、特徵與標籤、訓練集/驗證集、AutoML 資料集，以及 Designer 推斷管線。</p>
+        </article>
+        <article class="focus-card">
+          <h3>電腦視覺服務差異</h3>
+          <p>OCR、物件偵測、語意分割、Azure Vision 預先訓練模型所省略的流程。</p>
+        </article>
+        <article class="focus-card">
+          <h3>NLP、Speech 與 Azure AI Services</h3>
+          <p>Azure Language、Translator、Speech、整合資源、語言偵測回傳值與 Speech to text 場景。</p>
+        </article>
+        <article class="focus-card">
+          <h3>生成式 AI 與 Responsible AI</h3>
+          <p>透明度、系統訊息、Embeddings、Azure OpenAI in Foundry Models 與 RBAC。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>白話補課：先把題目翻成人話</h2>
+      <div class="plain-study">
+        <article class="plain-card">
+          <h3>1. 回歸、分類、叢集怎麼分？</h3>
+          <p>先問自己：「我要模型猜的是什麼？」如果答案是價格、數量、分數這種數字，就是回歸。如果答案是貓/狗、通過/不通過、正面/負面這種類別，就是分類。如果題目說要把相似的人或資料自動分成幾群，而且沒有先給答案，就是叢集。</p>
+          <p class="teacher-tip">考場口訣：數字 = 回歸；類別 = 分類；相似分組 = 叢集。</p>
+        </article>
+        <article class="plain-card">
+          <h3>2. 訓練集、驗證集為什麼都有標籤？</h3>
+          <p>訓練集像「有答案的習題」，模型靠它學。驗證集像「另一份有答案的小考」，用來檢查模型有沒有真的學會。所以兩者都要有已知特徵和已知標籤。真正上線預測時，才會只有特徵、讓模型猜標籤。</p>
+          <p class="teacher-tip">看到 Training / Validation dataset，記得：都有已知特徵 + 已知標籤。</p>
+        </article>
+        <article class="plain-card">
+          <h3>3. OCR、物件偵測、語意分割差在哪？</h3>
+          <p>OCR 是「讀圖裡的字」，例如手寫簽名、醫療紀錄、招牌文字。物件偵測是「找圖裡有什麼，而且在哪裡」，例如找牲畜、車輛、貨架商品。語意分割更細，是把每個像素都分到某一類。</p>
+          <p class="teacher-tip">考場口訣：讀字 OCR；找位置物件偵測；切像素語意分割。</p>
+        </article>
+        <article class="plain-card">
+          <h3>4. Azure Language 不等於所有語言相關服務</h3>
+          <p>Azure Language 主要處理文字分析，例如情感分析、實體連結、PII 偵測、語言偵測。Translator 和 Speech 是另外的服務。題目若問「單一端點和金鑰存取 Translator + Speech」，不要選 Azure Language，要選整合式的 Foundry / Azure AI Services 類資源。</p>
+          <p class="teacher-tip">Language = 文字分析；Translator = 翻譯；Speech = 語音。</p>
+        </article>
+        <article class="plain-card">
+          <h3>5. 生成式 AI 的幾個高頻字</h3>
+          <p>系統訊息是拿來設定模型的角色、限制、語氣、格式。Embeddings 是把文字變成向量，所以能做語意搜尋、分類、相似度比較。Azure OpenAI in Foundry Models 的存取控制，考場常用 Azure RBAC。</p>
+          <p class="teacher-tip">限制風格 = 系統訊息；比較相似 = Embeddings；權限管理 = RBAC。</p>
+        </article>
+        <article class="plain-card">
+          <h3>6. Responsible AI 先看關鍵字</h3>
+          <p>題目說「讓使用者知道目的、限制、影響」，就是透明度。題目說醫療資料、個資，就是隱私權與安全性。題目說自駕、機械、人身安全，就是可靠性與安全性。題目說法律、道德、誰負責，就是問責。</p>
+          <p class="teacher-tip">目的限制 = 透明度；個資 = 隱私；人身安全 = 可靠安全；法律道德 = 問責。</p>
+        </article>
+      </div>
+      <div class="refs" aria-label="教材參考">
+        <a class="ref-link" href="AI-900_part4.html">教材參考：Part 4 重點整理</a>
+        <a class="ref-link" href="memory.html">教材參考：關鍵速讀整理</a>
+        <a class="ref-link" href="articles/《AI-900》證照考試準備心得與筆記分享_-_系列文章.html">教材參考：系列文章目錄</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>錯題逐題復盤</h2>
+      <div class="wrong-list">
+        <article class="wrong-card genai">
+          <div class="wrong-top"><span class="qno">Q6</span><span class="tag">Responsible AI</span></div>
+          <h3>哪個原則會提高對 AI 解決方案限制的認識？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>可靠性和安全性</div>
+            <div class="answer-box correct"><strong>正確答案</strong>透明度</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>可靠性和安全性是在問「系統會不會出錯、會不會傷人」。這題問的是「大家知不知道 AI 的限制」，重點是把事情講清楚，所以是透明度。</div>
+          <p class="note">記憶點：只要題目出現「目的、運作方式、限制、影響要讓使用者了解」，優先選透明度。</p>
+        </article>
+
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q11</span><span class="tag">Machine Learning</span></div>
+          <h3>根據功能預測與專案相關聯的數值標籤，是哪種演算法？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>聚類</div>
+            <div class="answer-box correct"><strong>正確答案</strong>回歸</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>題目說要預測「數值標籤」。只要模型最後要猜一個數字，例如價格、數量、分數、溫度，就是回歸。叢集是沒有答案時，把相似資料自動分群。</div>
+          <p class="note">記憶點：數值預測是回歸；類別預測是分類；把相似資料分組才是叢集。</p>
+        </article>
+
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q12</span><span class="tag">Regression</span></div>
+          <h3>多重線性回歸模型應滿足哪個假設，以避免誤導性預測？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>標籤彼此獨立</div>
+            <div class="answer-box correct"><strong>正確答案</strong>功能彼此獨立</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>多元線性回歸是用很多個輸入欄位去預測一個答案。這些輸入欄位如果彼此高度重複，模型會被誤導，所以題目考的是「特徵彼此獨立」。</div>
+          <p class="note">記憶點：多元線性回歸是一個標籤對多個特徵；考的是特徵之間不要高度相依。</p>
+        </article>
+
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q14</span><span class="tag">Dataset</span></div>
+          <h3>回歸演算法中，驗證資料集的特徵與標籤具備什麼特性？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>未知的特徵值和已知的標籤值</div>
+            <div class="answer-box correct"><strong>正確答案</strong>已知特徵值與標籤值</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>驗證集不是正式上線資料，而是有答案的小考。你要知道正確答案，才知道模型猜得準不準，所以特徵和標籤都要已知。</div>
+          <p class="note">記憶點：訓練與驗證都需要已知特徵和已知標籤；真正預測時才是只給特徵、模型輸出標籤。</p>
+        </article>
+
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q15</span><span class="tag">Dataset</span></div>
+          <h3>回歸演算法中，訓練資料集的特徵與標籤具備什麼特性？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>未知的特徵值和已知的標籤值</div>
+            <div class="answer-box correct"><strong>正確答案</strong>已知特徵值與標籤值</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>訓練模型就像教學生做題目。學生要看題目，也要看答案，才知道規則。因此訓練資料一定同時有輸入特徵和正確標籤。</div>
+          <p class="note">記憶點：訓練資料一定是已知輸入與已知答案，模型才能學習特徵和標籤之間的關係。</p>
+        </article>
+
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q18</span><span class="tag">AutoML</span></div>
+          <h3>建立自動化 ML 模型時，在 Azure Machine Learning studio 應先建立哪個資源？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>工作區</div>
+            <div class="answer-box correct"><strong>正確答案</strong>資料集</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>這題容易被「先建立工作區」騙到。題目已經說你在 Azure Machine Learning studio 建立 AutoML 模型，通常代表工作區環境已經有了。AutoML 回合真正需要先準備的是資料集。</div>
+          <p class="note">記憶點：能進入 Studio 代表工作區通常已存在；建立 AutoML 回合的前置重點是資料集。</p>
+        </article>
+
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q19</span><span class="tag">Designer</span></div>
+          <h3>使用 Azure Machine Learning designer 從新訓練模型部署預測服務，應先做什麼？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>新增訓練模組</div>
+            <div class="answer-box correct"><strong>正確答案</strong>建立推斷管線</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>題目說「新訓練的模型」和「部署預測服務」，表示訓練已經做完了。接下來要讓外部丟資料進來拿預測結果，所以要建立推斷管線。</div>
+          <p class="note">記憶點：訓練完成後要部署服務，流程會從訓練管線轉成推斷管線。</p>
+        </article>
+
+        <article class="wrong-card cv">
+          <div class="wrong-top"><span class="qno">Q22</span><span class="tag">Computer Vision</span></div>
+          <h3>哪個程序可讓你使用物件偵測？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>從手稿中擷取文字</div>
+            <div class="answer-box correct"><strong>正確答案</strong>在田野中追蹤牲畜</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>手稿是文字，所以是 OCR。追蹤牲畜要在畫面中找到動物，通常還要知道牠在哪個位置，這就是物件偵測。</div>
+          <p class="note">記憶點：影像文字是 OCR；找出影像中的物件與位置，例如牲畜、人、車，才是物件偵測。</p>
+        </article>
+
+        <article class="wrong-card cv">
+          <div class="wrong-top"><span class="qno">Q25</span><span class="tag">Azure Vision</span></div>
+          <h3>Azure Vision 在 Foundry Tools 中消除了機器學習流程的哪三個環節？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>Azure 資源供應配置、評估模型、推斷</div>
+            <div class="answer-box correct"><strong>正確答案</strong>選擇模型、評估模型、訓練模型</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>Azure Vision 是現成服務，像是微軟已經幫你訓練好的模型。你不用自己挑模型、訓練模型、評估模型；但你還是要建立 Azure 資源，也還是會拿圖片去做推斷。</div>
+          <p class="note">記憶點：預先訓練服務省掉模型選擇、訓練、評估；使用時仍要建立資源，也仍要進行推斷。</p>
+        </article>
+
+        <article class="wrong-card nlp">
+          <div class="wrong-top"><span class="qno">Q34</span><span class="tag">Language Detection</span></div>
+          <h3>Azure Language 語言偵測會回傳哪三個值？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>周框方塊座標、語言名稱、分數</div>
+            <div class="answer-box correct"><strong>正確答案</strong>ISO 639-1 程式碼、語言名稱、分數</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>語言偵測只看文字屬於哪種語言，所以會回傳語言名稱、語言代碼和信心分數。周框方塊是畫在圖片上的座標，屬於電腦視覺。</div>
+          <p class="note">記憶點：語言偵測回傳語言資訊；周框方塊座標屬於視覺任務，例如物件偵測。</p>
+        </article>
+
+        <article class="wrong-card nlp">
+          <div class="wrong-top"><span class="qno">Q35</span><span class="tag">Speech</span></div>
+          <h3>語音轉文字 API 的通用語言模型針對哪兩個案例最佳化？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>聽寫、發音</div>
+            <div class="answer-box correct"><strong>正確答案</strong>會話、聽寫</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>通用 Speech to text 模型主要是處理一般人講話和口述內容，也就是會話與聽寫。發音評量比較像專門用途，不是通用模型的標準最佳化場景。</div>
+          <p class="note">記憶點：Speech to text 通用模型記「會話 + 聽寫」；發音、特定聲音或語言情境通常要自訂模型。</p>
+        </article>
+
+        <article class="wrong-card nlp">
+          <div class="wrong-top"><span class="qno">Q36</span><span class="tag">Azure AI Services</span></div>
+          <h3>哪個 Azure 資源能用單一端點和金鑰存取 Translator 與 Speech？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>Azure Language in Foundry Tools</div>
+            <div class="answer-box correct"><strong>正確答案</strong>Microsoft Foundry</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>Azure Language 是文字分析服務，不是萬用入口。題目同時提到 Translator 和 Speech，而且強調單一端點與金鑰，表示要選整合式資源。</div>
+          <p class="note">記憶點：Azure Language 只對應語言服務；Translator 與 Speech 要想成整合式 Azure AI Services / Foundry 資源。</p>
+        </article>
+
+        <article class="wrong-card nlp">
+          <div class="wrong-top"><span class="qno">Q37</span><span class="tag">Azure Language</span></div>
+          <h3>Foundry Tools 中 Azure Language 包含哪些三個功能？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>Content Moderator、實體連結、情感分析</div>
+            <div class="answer-box correct"><strong>正確答案</strong>實體連結、PII 偵測、情感分析</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>Azure Language 在 AI-900 常考的是文字本身的理解與擷取，例如情感、實體、個資。Content Moderator/Content Safety 是內容安全審核，不是 Azure Language 的核心文字分析功能。</div>
+          <p class="note">記憶點：Azure Language 常考功能是情感分析、關鍵片語、語言偵測、實體辨識/連結、PII；Content Moderator 是內容安全/審核類。</p>
+        </article>
+
+        <article class="wrong-card genai">
+          <div class="wrong-top"><span class="qno">Q39</span><span class="tag">Prompt Engineering</span></div>
+          <h3>哪個項目可用來識別產生 AI 模型回應的條件約束和樣式？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>數據關聯</div>
+            <div class="answer-box correct"><strong>正確答案</strong>系統訊息</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>如果你要模型「扮演誰、用什麼語氣、不要做什麼、輸出格式長怎樣」，這些規則通常放在系統訊息。資料關聯不是用來控制回答風格的設定。</div>
+          <p class="note">記憶點：控制角色、語氣、限制、輸出格式，通常是系統訊息；它設定模型回應的上下文。</p>
+        </article>
+
+        <article class="wrong-card genai">
+          <div class="wrong-top"><span class="qno">Q44</span><span class="tag">Embeddings</span></div>
+          <h3>哪個技術可以搜尋、分類並比較文本來源的相似性？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>機器學習</div>
+            <div class="answer-box correct"><strong>正確答案</strong>嵌入技術</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>Embeddings 會把文字轉成數字向量。文字意思越接近，向量距離通常越近，所以可以拿來做語意搜尋、分類、比較相似度。</div>
+          <p class="note">記憶點：相似度搜尋、語意搜尋、比較文字接近程度，關鍵字就是 Embeddings。</p>
+        </article>
+
+        <article class="wrong-card genai">
+          <div class="wrong-top"><span class="qno">Q48</span><span class="tag">Azure OpenAI</span></div>
+          <h3>在 Foundry 模型中使用 Azure OpenAI 支援哪種安全能力？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>自訂防火牆規則</div>
+            <div class="answer-box correct"><strong>正確答案</strong>Azure role-based access control (RBAC)</div>
+          </div>
+          <div class="why"><strong>白話理解</strong>題目問的是 Azure OpenAI in Foundry Models 支援的安全能力。AI-900 這類題常把「誰可以使用、誰可以管理」對應到 Azure RBAC。</div>
+          <p class="note">記憶點：Azure 服務的權限管理優先想到 RBAC；題目問「誰能存取、誰能操作」就是 RBAC。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>易混淆對照表</h2>
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>題目線索</th>
+            <th>應選答案</th>
+            <th>不要誤選</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>預測價格、數量、溫度等數值</td>
+            <td>回歸</td>
+            <td>叢集、分類</td>
+          </tr>
+          <tr>
+            <td>把相似資料分組，但沒有既定標籤</td>
+            <td>叢集</td>
+            <td>回歸</td>
+          </tr>
+          <tr>
+            <td>讀取影像、掃描文件、手寫文字中的文字</td>
+            <td>OCR</td>
+            <td>物件偵測</td>
+          </tr>
+          <tr>
+            <td>找出影像中的物件與位置</td>
+            <td>物件偵測</td>
+            <td>OCR、影像分類</td>
+          </tr>
+          <tr>
+            <td>語言偵測回傳值</td>
+            <td>語言名稱、ISO 639-1、分數</td>
+            <td>周框方塊座標</td>
+          </tr>
+          <tr>
+            <td>文字相似度、語意搜尋、比較文本</td>
+            <td>Embeddings</td>
+            <td>一般機器學習</td>
+          </tr>
+          <tr>
+            <td>限制模型回答風格、角色、格式</td>
+            <td>系統訊息</td>
+            <td>資料關聯</td>
+          </tr>
+          <tr>
+            <td>讓使用者理解目的、限制、影響</td>
+            <td>透明度</td>
+            <td>可靠性和安全性</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>考前 30 秒速記</h2>
+      <ul class="memory-list">
+        <li><b>數值</b>預測等於回歸。</li>
+        <li><b>類別</b>預測等於分類。</li>
+        <li><b>相似分組</b>等於叢集。</li>
+        <li><b>影像讀字</b>等於 OCR。</li>
+        <li><b>影像找物件位置</b>等於物件偵測。</li>
+        <li><b>每個像素分類</b>等於語意分割。</li>
+        <li><b>文字相似度</b>等於 Embeddings。</li>
+        <li><b>回答風格限制</b>等於系統訊息。</li>
+        <li><b>目的與限制說清楚</b>等於透明度。</li>
+        <li><b>權限控管</b>等於 Azure RBAC。</li>
+      </ul>
+    </section>
+
+    <footer>AI-900 錯題復盤筆記，依 Microsoft Learn 練習評量結果整理。</footer>
+  </main>
+</body>
+</html>

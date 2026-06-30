@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-900 第五輪錯題復盤 - 92%</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #5b677a;
+      --border: #dbe3ef;
+      --blue: #0f6cbd;
+      --green: #0f8a5f;
+      --amber: #b7791f;
+      --red: #c24132;
+      --purple: #6d4aff;
+      --shadow: 0 12px 32px rgba(21, 32, 54, 0.08);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans TC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.75;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .top-line {
+      height: 6px;
+      background: linear-gradient(90deg, #0f6cbd, #14a38b, #6d4aff);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .home-link,
+    .detail-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: #334155;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(21, 32, 54, 0.04);
+    }
+
+    .home-link {
+      margin-bottom: 20px;
+      padding: 9px 14px;
+    }
+
+    .detail-link {
+      padding: 10px 12px;
+      color: #0f3d66;
+    }
+
+    header,
+    .panel,
+    .stat,
+    .card,
+    .wrong-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    header {
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e7f2ff;
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 920px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .round-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .stats,
+    .grid {
+      display: grid;
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .stat,
+    .card,
+    .panel { padding: 18px; }
+
+    .stat strong {
+      display: block;
+      color: #0f172a;
+      font-size: 1.65rem;
+      line-height: 1.2;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .panel { margin-bottom: 24px; padding: 24px; }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 1.45rem;
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      line-height: 1.4;
+    }
+
+    .card p { margin: 0; color: #334155; }
+
+    .wrong-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .wrong-card {
+      border-left: 6px solid var(--red);
+      padding: 20px;
+    }
+
+    .wrong-card.ml { border-left-color: var(--purple); }
+    .wrong-card.genai { border-left-color: var(--amber); }
+
+    .wrong-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .qno { color: #0f172a; font-weight: 900; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #334155;
+      font-size: 0.83rem;
+      font-weight: 900;
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .answer-box {
+      border-radius: var(--radius);
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: #fbfdff;
+    }
+
+    .answer-box strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+    }
+
+    .answer-box.user strong { color: var(--red); }
+    .answer-box.correct strong { color: var(--green); }
+
+    .why,
+    .note {
+      margin: 12px 0 0;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      font-weight: 700;
+    }
+
+    .why {
+      background: #eef7ff;
+      border: 1px solid #bfdbfe;
+      color: #173b63;
+    }
+
+    .note {
+      background: #fff8e6;
+      border: 1px solid #f4d78c;
+      color: #6b4b14;
+    }
+
+    .memory-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .memory-list li {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      font-weight: 700;
+    }
+
+    .memory-list b { color: var(--blue); }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 16px;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .stats,
+      .grid,
+      .answer-row,
+      .memory-list { grid-template-columns: 1fr; }
+
+      header,
+      .panel,
+      .wrong-card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-line"></div>
+  <main class="page">
+    <a class="home-link" href="../index.html">回到首頁主選單</a>
+
+    <header>
+      <div class="eyebrow">Microsoft Learn Practice Assessment</div>
+      <h1>AI-900 第五輪錯題復盤</h1>
+      <p class="lead">評量日期：2026 年 6 月 29 日。本輪分數 92%，錯題只剩 4 題。大部分 Azure AI 服務邊界已穩，剩下需要最後校正的是叢集/分類判斷、訓練前資料切分，以及 GPT 模型能力邊界。</p>
+      <div class="round-links">
+        <a class="detail-link" href="ai900_review_2026-06-28_combined.html">回到綜合復盤</a>
+        <a class="detail-link" href="ai900_review_2026-06-29_round4.html">第四輪明細</a>
+        <a class="detail-link" href="ai900_review_2026-06-28_round3.html">第三輪明細</a>
+      </div>
+    </header>
+
+    <section class="stats" aria-label="評量摘要">
+      <div class="stat"><strong>92%</strong><span>本輪分數</span></div>
+      <div class="stat"><strong>46/50</strong><span>答對題數</span></div>
+      <div class="stat"><strong>4</strong><span>錯題數</span></div>
+      <div class="stat"><strong>16 分</strong><span>完成時間</span></div>
+    </section>
+
+    <section class="panel">
+      <h2>本輪結果怎麼看</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>服務邊界大幅穩定</h3>
+          <p>Speech、Vision、Face、Language、Translator、Foundry、Azure OpenAI RBAC 這些前幾輪常錯的題型，本輪大多答對。</p>
+        </article>
+        <article class="card">
+          <h3>ML 基本分類仍要盯</h3>
+          <p>叢集和分類的差別還會被題目語氣干擾。先找「有沒有標籤」和「輸出是群組還是類別」。</p>
+        </article>
+        <article class="card">
+          <h3>流程題只剩資料切分</h3>
+          <p>訓練模型前要先拆訓練集與驗證集。清除遺漏值是資料轉換，不是這題的流程答案。</p>
+        </article>
+        <article class="card">
+          <h3>生成式 AI 要分模型能力</h3>
+          <p>GPT 是理解與產生自然語言。語音、字幕、方言偵測不是 GPT 這題的答案。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>本輪 4 題錯題明細</h2>
+      <div class="wrong-list">
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q13</span><span class="tag">Clustering</span></div>
+          <h3>不依賴定型和驗證標籤，將資料集分割成群組，是哪種演算法？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>分類</div>
+            <div class="answer-box correct"><strong>正確答案</strong>叢集</div>
+          </div>
+          <div class="why">題目說不依賴標籤，並且要把資料分成群組，這就是非監督式的叢集。</div>
+          <p class="note">口訣：沒有標籤 + 找相似群組 = 叢集。</p>
+        </article>
+
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q14</span><span class="tag">Classification</span></div>
+          <h3>測量 Twitter 貼文使用者情緒，應是哪種機器學習服務？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>叢集</div>
+            <div class="answer-box correct"><strong>正確答案</strong>分類</div>
+          </div>
+          <div class="why">情緒會被分成正面、負面或中性，這些是預先定義的類別。</div>
+          <p class="note">口訣：正面/負面/中性 = 分類。</p>
+        </article>
+
+        <article class="wrong-card ml">
+          <div class="wrong-top"><span class="qno">Q17</span><span class="tag">Training Flow</span></div>
+          <h3>準備資料集和訓練模型之前，應該先做什麼？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>清除遺漏的資料</div>
+            <div class="answer-box correct"><strong>正確答案</strong>分割成訓練集和驗證集</div>
+          </div>
+          <div class="why">訓練集用來訓練模型，驗證集保留下來評估模型。清理遺漏資料是資料轉換步驟。</div>
+          <p class="note">口訣：訓練前先切資料；驗證集是訓練後小考。</p>
+        </article>
+
+        <article class="wrong-card genai">
+          <div class="wrong-top"><span class="qno">Q43</span><span class="tag">GPT</span></div>
+          <h3>GPT 模型的兩項功能是什麼？</h3>
+          <div class="answer-row">
+            <div class="answer-box user"><strong>你的答案</strong>偵測語言的特定方言、理解自然語言</div>
+            <div class="answer-box correct"><strong>正確答案</strong>建立自然語言、理解自然語言</div>
+          </div>
+          <div class="why">GPT 的核心能力是理解自然語言並產生自然語言。方言偵測不屬於 GPT 這題的功能。</div>
+          <p class="note">口訣：GPT = 理解自然語言 + 建立自然語言。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>本輪明顯補強成功</h2>
+      <ul class="memory-list">
+        <li><b>AutoML</b>：分類、回歸、時間序列預測已答對，沒有再混入叢集。</li>
+        <li><b>Vision / Face</b>：一般物件與場景選 Vision；人物臉部特徵選 Face。</li>
+        <li><b>NLP</b>：支援問題資料選關鍵片語 + NER；實體更多資訊選實體連結。</li>
+        <li><b>Foundry</b>：Microsoft Foundry 平台、模型目錄、Azure OpenAI RBAC 都已答對。</li>
+        <li><b>Responsible AI</b>：透明度、包容、問責、公平性、醫療資料隱私都已穩定。</li>
+        <li><b>Generative AI</b>：DALL-E、Embeddings、系統訊息、生成式 AI 常見場景都已答對。</li>
+      </ul>
+    </section>
+
+    <footer>AI-900 第五輪錯題復盤，分數 92%，錯題剩 4 題。</footer>
+  </main>
+</body>
+</html>
