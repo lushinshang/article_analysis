@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國際 AI 安全治理政策脈動深度導讀</title>
+  <meta name="description" content="引述國家資通安全研究院資安週報第51期，導讀115年上半年國際 AI 安全治理政策發展脈動。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fffdf7;
+      --ink: #23272f;
+      --muted: #68707d;
+      --line: #dfe5df;
+      --mint: #d9f2df;
+      --sky: #dbeeff;
+      --coral: #ffe0d7;
+      --sun: #fff2c7;
+      --green: #26734d;
+      --blue: #285f92;
+      --red: #a34b3d;
+      --gold: #8a6415;
+      --shadow: 0 12px 34px rgba(31, 43, 52, 0.09);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255, 253, 247, 0.94), rgba(247, 250, 248, 0.98)),
+        radial-gradient(circle at 10% 0%, rgba(217, 242, 223, 0.7), transparent 28%),
+        radial-gradient(circle at 90% 14%, rgba(255, 224, 215, 0.65), transparent 30%);
+      font-family: "M PLUS Rounded 1c", "Noto Sans TC", system-ui, sans-serif;
+      line-height: 1.72;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    img { max-width: 100%; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 42px 0 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border: 1px solid #b9d7c0;
+      background: #eff9f0;
+      color: #27583b;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      max-width: 920px;
+      margin: 18px 0 14px;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+
+    .lead {
+      max-width: 820px;
+      margin: 0;
+      color: #4a525f;
+      font-size: clamp(1.05rem, 2vw, 1.24rem);
+    }
+
+    .source-line {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(300px, 1.05fr);
+      gap: 28px;
+      align-items: start;
+      padding: 34px 0 8px;
+    }
+
+    .summary {
+      padding: 22px;
+      border: 1px solid #cad9ce;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow);
+    }
+
+    .summary h2,
+    .takeaway h2,
+    .refs h2 {
+      margin: 0 0 12px;
+      font-size: 1.28rem;
+      line-height: 1.25;
+    }
+
+    .summary ol {
+      margin: 0;
+      padding-left: 1.35rem;
+    }
+
+    .summary li { margin: 0 0 10px; }
+    .summary li:last-child { margin-bottom: 0; }
+
+    figure {
+      margin: 0;
+    }
+
+    .figure-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .figure-box img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      border-radius: 6px;
+      cursor: zoom-in;
+      background: #fffdf7;
+    }
+
+    figcaption {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 247, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav .wrap {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    .nav a {
+      flex: 0 0 auto;
+      padding: 7px 10px;
+      border: 1px solid #d7dfd9;
+      border-radius: 8px;
+      background: #fff;
+      color: #33404b;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    main {
+      padding: 30px 0 48px;
+    }
+
+    .article {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .article h2 {
+      margin: 42px 0 16px;
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      line-height: 1.24;
+      text-wrap: balance;
+    }
+
+    .article h3 {
+      margin: 28px 0 10px;
+      font-size: 1.22rem;
+      line-height: 1.35;
+    }
+
+    .article p {
+      margin: 0 0 18px;
+      font-size: 1.03rem;
+    }
+
+    .band {
+      width: min(960px, 100%);
+      margin: 34px auto;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .lens-grid,
+    .trend-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .mini {
+      border: 1px solid #dfe7e0;
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfdfb;
+    }
+
+    .mini h3 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+    }
+
+    .mini p {
+      margin: 0;
+      color: #4b5661;
+      font-size: 0.95rem;
+      line-height: 1.62;
+    }
+
+    .callout {
+      margin: 26px 0;
+      padding: 18px;
+      border-left: 6px solid #67a778;
+      border-radius: 8px;
+      background: #f1faf3;
+    }
+
+    .callout p { margin-bottom: 0; }
+
+    .rule-list {
+      margin: 12px 0 0;
+      padding-left: 1.2rem;
+    }
+
+    .rule-list li { margin-bottom: 8px; }
+
+    .takeaway {
+      width: min(960px, calc(100% - 32px));
+      margin: 20px auto 54px;
+      padding: 24px;
+      border: 1px solid #d7dfd9;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #f5fbf6, #fff8ed);
+      box-shadow: var(--shadow);
+    }
+
+    .refs {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto 60px;
+    }
+
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .ref {
+      min-height: 126px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .ref strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #33404b;
+      line-height: 1.45;
+    }
+
+    .ref span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 36px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(20, 24, 28, 0.88);
+      cursor: zoom-out;
+    }
+
+    .lightbox.is-open { display: flex; }
+
+    .lightbox img {
+      max-width: 96vw;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.44);
+      background: #fff;
+    }
+
+    .lightbox-hint {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 860px) {
+      .top-grid,
+      .lens-grid,
+      .trend-grid,
+      .ref-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { padding-top: 30px; }
+      .summary { padding: 18px; }
+      .article { max-width: 100%; }
+      .article h2 { margin-top: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">資安週報第 51 期深度導讀</span>
+      <h1>國際 AI 安全治理政策脈動：從原則宣示走向可稽核的代理治理</h1>
+      <p class="lead">
+        這篇導讀引述國家資通安全研究院《資安週報第 51 期》的焦點文章「115年上半年國際 AI 安全治理政策發展脈動」，用資安治理與 AI 應用規劃的角度，整理各國 AI 主權、治理工具落地、代理型 AI 風險與台灣下一步。
+      </p>
+      <p class="source-line">
+        原文 PDF：<a href="https://download.nics.nat.gov.tw/api/v4/file-service/UploadFile/newsletter/20260702/%E8%B3%87%E5%AE%89%E9%80%B1%E5%A0%B1-%E7%AC%AC51%E6%9C%9F(%E6%A0%B8%E5%AE%9A).pdf" target="_blank" rel="noopener">國家資通安全研究院資安週報第 51 期</a>。文中 115 年為民國紀年，約當西元 2026 年。
+      </p>
+    </div>
+  </header>
+
+  <section class="wrap top-grid" aria-label="摘要與總覽圖">
+    <div class="summary">
+      <h2>前頭摘要</h2>
+      <ol>
+        <li>國際 AI 治理已從「要不要管」進入「誰來驗證、怎麼稽核、如何持續監控」的制度落地期。</li>
+        <li>美國、歐盟、韓國、日本路線不同，但共同核心是 AI 主權：算力、資料、標準、測試量能與供應鏈自主。</li>
+        <li>AISI 類型機構正在成為 AI 安全驗證基礎設施，把模型能力、紅隊測試與政策決策接起來。</li>
+        <li>有限護欄無法保證完整安全；務實治理要把部署後監控、回饋、再設計納入生命週期。</li>
+        <li>代理型 AI 讓風險從「內容輸出」擴大到「工具調用、資料存取、外部執行與權限濫用」。</li>
+      </ol>
+    </div>
+
+    <figure class="figure-box">
+      <img src="ai_governance_overview.png" alt="國際 AI 安全治理三主線資訊圖：AI 主權、治理落地、代理型 AI 與台灣下一步">
+      <figcaption>圖 1：以資訊圖表整理資安週報第 51 期焦點文章的三條主線與台灣可優先布局方向。</figcaption>
+    </figure>
+  </section>
+
+  <nav class="nav" aria-label="章節導覽">
+    <div class="wrap">
+      <a href="#sovereignty">AI 主權</a>
+      <a href="#implementation">治理落地</a>
+      <a href="#monitoring">持續監控</a>
+      <a href="#agentic">代理型 AI</a>
+      <a href="#taiwan">台灣應對</a>
+      <a href="#refs">依據網址</a>
+    </div>
+  </nav>
+
+  <main>
+    <article class="article">
+      <h2 id="sovereignty">第一個轉折：AI 治理不再只是倫理題，而是主權題</h2>
+      <p>
+        過去談 AI 治理，常停在倫理原則、透明、負責任、公平這類語彙。但《資安週報第 51 期》抓到的上半年政策脈動，重點不是各國又多寫了幾份宣言，而是問題已往下沉到制度層：用什麼機制確認安全、誰擁有測試能力、國家是否掌握足夠的算力與標準話語權。
+      </p>
+      <p>
+        美國的路線偏向自願協作與國安導向，不另設繁重的預先審查；歐盟一邊簡化《AI Act》合規負擔，一邊推科技主權與資料中心容量布局；韓國與日本則把治理嵌入法律、行政流程、CAIO 與政府採購指引。表面上，這是三種不同的監管哲學；深一層看，都是在回答同一個問題：當 AI 成為基礎設施，國家能不能掌握它的風險、供應鏈與評估能力？
+      </p>
+
+      <section class="band" aria-label="三種治理路線">
+        <h2>三種路線，收斂到同一件事</h2>
+        <div class="lens-grid">
+          <div class="mini">
+            <h3>美國：國安導向</h3>
+            <p>以既有聯邦機關、自律標準與國家安全測試協作，降低強制授權負擔，同時把前沿模型風險納入國安視野。</p>
+          </div>
+          <div class="mini">
+            <h3>歐盟：合規加主權</h3>
+            <p>簡化中小企業合規壓力，同時推動科技主權套案，降低對境外供應商與基礎設施的依賴。</p>
+          </div>
+          <div class="mini">
+            <h3>韓日：流程嵌入</h3>
+            <p>透過 AI 基本法、CAIO、採購指引與行政責任分工，把治理從口號變成可執行流程。</p>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="implementation">第二個轉折：治理工具開始從原則宣示走向落地</h2>
+      <p>
+        原文第二節最值得讀的地方，是它把「治理落地」拆成兩個層次：一個是企業與政府機關能照著做的操作規範，另一個是國家要投資的量測能力。前者像韓國的高影響 AI 判定與透明標示案例集、日本生成式 AI 採購與利用指引 2.0；後者則是英國、美國、日本、澳洲等地的 AI 安全研究機構，也就是 AISI 類型組織。
+      </p>
+      <p>
+        AISI 的角色很關鍵。它不是一般智庫，也不只是學術研究室，而是把模型能力、紅隊競賽、多步驟網路攻擊評測、部署前國安測試與跨國合作串起來的「安全驗證基礎設施」。換句話說，政策制定者未來不能只問「這個模型看起來有沒有問題」，而要問「我們有沒有能力測出它在特定場景中的能力邊界與失控風險」。
+      </p>
+
+      <h2 id="monitoring">第三個轉折：有限護欄不是無用，而是不能被當成完整答案</h2>
+      <p>
+        資安週報引用 NIST 研究指出，任何有限的 guardrails 規則集都存在可規避的對抗性提示。這句話很容易被誤讀成「護欄沒用」。比較精準的理解是：部署前的提示詞規則、內容過濾與安全護欄仍然必要，但它們無法承擔「完整防護」這種不合理期待。
+      </p>
+      <p>
+        因此，治理重心要從一次性的部署前審查，轉向部署後監控、回饋、再設計與事件應變。這很像傳統資安從「架好防火牆就結束」演進到 SOC、EDR、弱點管理與持續偵測。AI 系統也需要同樣的生命週期治理：設計時預留監管能力，訓練與微調時管理資料風險，部署後持續觀測模型行為，出事後能快速回溯與修正。
+      </p>
+
+      <div class="callout">
+        <p><strong>導讀重點：</strong>真正成熟的 AI 治理，不是承諾「永遠不會出錯」，而是能證明組織知道風險在哪裡、如何監測、誰負責處理，以及系統如何在回饋後變得更穩健。</p>
+      </div>
+
+      <h2 id="agentic">第四個轉折：代理型 AI 把治理焦點從「說什麼」推進到「做什麼」</h2>
+      <p>
+        代理型 AI 是本章最值得警覺的政策標的。傳統生成式 AI 的治理，常聚焦在回答是否錯誤、是否有偏見、是否洩漏個資；但代理型 AI 具備自主規劃、工具調用、資料讀取與外部執行能力，風險就不只是「它說錯了」，而是「它用誰的權限做了什麼事，做完能不能追得回來」。
+      </p>
+      <p>
+        這也是為什麼新加坡發布代理專屬治理框架，澳洲與五眼聯盟提醒最小權限與 human-in-the-loop，NIST NCCoE 概念文件把既有身分協定與 MCP 納入代理治理討論。這些政策訊號共同指向一個基本判斷：Agent 不能只被當成一段提示詞或一個聊天視窗，它應被視為具行動能力的數位主體，必須有身分、授權、權限隔離、工具呼叫紀錄與可稽核軌跡。
+      </p>
+
+      <figure class="figure-box band">
+        <img src="agent_security_chart.jpg" alt="代理型 AI 安全防禦機制資訊圖表">
+        <figcaption>圖 2：代理型 AI 的安全設計可從最小權限、工具調用治理、MCP 類授權架構與可稽核紀錄切入。這張圖是本專案既有生圖成果。</figcaption>
+      </figure>
+
+      <h3>Agents Rule of Two 的治理含意</h3>
+      <p>
+        原文提到，德國 BSI 查核表援引 Meta 提出的 Agents Rule of Two，作為代理權限隔離參考。它的精神不是製造新名詞，而是用很直覺的方式提醒系統設計者：不要讓單一代理同時握有過多危險能力。
+      </p>
+      <ol class="rule-list">
+        <li>讀取機敏資料，例如內部文件、個資、金流或營運資料。</li>
+        <li>接收不可信輸入，例如外部網頁、客戶提示詞、未知附件或第三方內容。</li>
+        <li>對外執行有副作用的動作，例如寄信、改設定、寫入資料庫、呼叫交易 API。</li>
+      </ol>
+      <p>
+        一個代理若同時握有其中兩項以上，間接提示注入與權限濫用的破壞半徑就會急速放大。實務上，較穩健的作法是拆分代理、限制工具權限、加入人工核准節點，並讓每次工具呼叫都可追蹤。
+      </p>
+
+      <h2 id="taiwan">台灣下一步：不要只問要不要立法，要問配套制度怎麼長出來</h2>
+      <p>
+        週報小結指出，我國也在同一波浪潮上，人工智慧基本法已公布施行；接下來的課題不是「要不要立法」，而是如何落實。對台灣而言，這句話的重量很重。因為台灣同時是高科技供應鏈核心、政府數位服務使用者、關鍵基礎設施防護者，也會是繁體中文 AI 應用的重要場域。
+      </p>
+      <p>
+        從資安與 AI 應用規劃角度看，台灣比較務實的優先順序，不是一次追求龐大完整制度，而是先建立可驗證、可稽核、可逐步擴充的骨架：高影響 AI 風險分類、政府採購與導入規範、部署後監控框架、代理型 AI 的身分與授權規則，以及 SBOM for AI 類透明揭露格式。這些工具不必一開始就完美，但必須能讓組織知道自己用了什麼、風險在哪裡、誰能處理、如何回溯。
+      </p>
+    </article>
+  </main>
+
+  <section class="takeaway" aria-label="心得總結與未來趨勢預判">
+    <h2>心得總結與未來趨勢預判</h2>
+    <p>
+      這篇週報真正要提醒台灣的，不是「國外又有新法規」，而是 AI 治理的競爭點正在改變。未來有治理能力的國家與組織，將不是文件寫得最多，而是能把模型能力測出來、把代理權限管起來、把供應鏈攤開來、把部署後行為持續監控起來。
+    </p>
+    <div class="trend-grid">
+      <div class="mini">
+        <h3>趨勢一：AISI 能力會成為政策基礎</h3>
+        <p>AI 安全研究與測試量能將逐步影響採購、國安預警、模型導入與跨國互信。</p>
+      </div>
+      <div class="mini">
+        <h3>趨勢二：代理權限治理會變成標配</h3>
+        <p>Agent 導入會更重視身分、授權、最小權限、人工介入與工具呼叫稽核。</p>
+      </div>
+      <div class="mini">
+        <h3>趨勢三：SBOM for AI 會進入稽核語言</h3>
+        <p>它目前仍是共通揭露格式的發展方向，但很可能成為未來採購、事故應變與供應鏈治理的重要參考。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="refs" id="refs" aria-label="引述文獻與依據網址">
+    <h2>引述文獻與依據網址</h2>
+    <div class="ref-grid">
+      <div class="ref"><strong>資安週報第 51 期 PDF</strong><span>國家資通安全研究院，本導讀主要引述來源。</span><a href="https://download.nics.nat.gov.tw/api/v4/file-service/UploadFile/newsletter/20260702/%E8%B3%87%E5%AE%89%E9%80%B1%E5%A0%B1-%E7%AC%AC51%E6%9C%9F(%E6%A0%B8%E5%AE%9A).pdf" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>國際資安政策法制觀測</strong><span>國家資通安全研究院長期追蹤各國政策動態。</span><a href="https://www.nics.nat.gov.tw/core_business/information_security_information_sharing/International_Cybersecurity_Policy_Observation/" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>美國白宮 AI 創新與安全行政命令</strong><span>2026 年 6 月 2 日。</span><a href="https://www.whitehouse.gov/presidentialactions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>歐盟 Digital Omnibus on AI 談判立場</strong><span>歐盟理事會，2026 年 3 月 13 日。</span><a href="https://www.consilium.europa.eu/en/press/pressreleases/2026/03/13/council-agrees-position-to-streamline-rules-on-artificial-intelligence/" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>歐盟歐洲科技主權包裹</strong><span>歐盟執委會，2026 年 6 月 3 日。</span><a href="https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1187" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>韓國人工智慧基本法</strong><span>MSIT，2026 年 1 月 22 日施行。</span><a href="https://www.msit.go.kr/eng/bbs/view.do?bbsSeqNo=42&mId=4&mPid=2&nttSeqNo=1071&pageIndex=&sCode=eng&searchOpt=ALL&searchTxt=" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>日本 J-AISI Chief AI Officer 指引</strong><span>2026 年 3 月。</span><a href="https://aisi.go.jp/assets/pdf/caio-guidebook.pdf" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>日本數位廳生成式 AI 採購與利用指引</strong><span>DS-920 2.0 版，2026 年 6 月 12 日。</span><a href="https://www.digital.go.jp/resources/standard_guidelines" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>UK AISI 多步驟網路攻擊評測</strong><span>Measuring AI Agents' Progress on Multi-Step Cyber Attack Scenarios。</span><a href="https://www.aisi.gov.uk/research/measuring-ai-agents-progress-on-multi-step-cyber-attack-scenarios" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>CAISI 與前沿模型國安測試協議</strong><span>NIST，2026 年 5 月 5 日。</span><a href="https://www.nist.gov/news-events/news/2026/05/caisi-signsagreements-regarding-frontier-ai-national-security-testing" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>英國與澳洲 AI 安全研究院合作</strong><span>2026 年 5 月 25 日。</span><a href="https://www.gov.uk/government/news/uk-and-australia-pact-on-fast-moving-ai-security-risks" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>NIST 有限護欄與持續監控新聞稿</strong><span>2026 年 6 月 9 日。</span><a href="https://www.nist.gov/news-events/news/2026/06/nist-mathematical-proof-supports-transition-continuous-monitor-and-update" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>UK AISI Loss of Oversight</strong><span>AI 系統監管、稽核、監測挑戰。</span><a href="https://www.aisi.gov.uk/research/loss-of-oversight-how-aisystems-may-become-harder-to-audit-monitor-and-investigate" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>新加坡 IMDA 代理型 AI 治理框架</strong><span>2026 年 1 月 22 日。</span><a href="https://www.imda.gov.sg/resources/press-releases-factsheetsand-speeches/press-releases/2026/new-model-ai-governance-framework-for-agentic-ai" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>澳洲 ACSC 審慎導入代理式 AI</strong><span>五眼聯盟相關機構共同發布，2026 年 5 月 1 日。</span><a href="https://www.cyber.gov.au/businessgovernment/secure-design/artificial-intelligence/careful-adoption-of-agentic-ai-services" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>NIST NCCoE AI Agent 身分與授權</strong><span>概念文件，2026 年 2 月 5 日。</span><a href="https://csrc.nist.gov/pubs/other/2026/02/05/accelerating-the-adoption-of-software-and-ai-agent/ipd" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>Meta Agents Rule of Two</strong><span>原文作為 BSI 查核表援引的代理權限隔離參考。</span><a href="https://ai.meta.com/blog/practical-ai-agent-security/" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>日本 Project YATA-Shield</strong><span>日本 NCO 聯合 14 省廳，2026 年 5 月 18 日。</span><a href="https://www.cyber.go.jp/pdf/press/20260518_AI_CS_Package.pdf" target="_blank" rel="noopener">前往來源</a></div>
+      <div class="ref"><strong>CISA AI 軟體物料清單最低要素</strong><span>Software Bill of Materials for Artificial Intelligence - Minimum Elements。</span><a href="https://www.cisa.gov/resources-tools/resources/software-bill-materials-ai-minimum-elements" target="_blank" rel="noopener">前往來源</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">本導讀為學習與政策研析用途，內容依據國家資通安全研究院《資安週報第 51 期》焦點文章整理。</div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <span class="lightbox-hint">點擊或按 Esc 關閉</span>
+    <img src="" alt="">
+  </div>
+
+  <script>
+    (function () {
+      var lightbox = document.getElementById("lightbox");
+      var lightboxImg = lightbox.querySelector("img");
+      function openLightbox(img) {
+        lightboxImg.src = img.currentSrc || img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+      }
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImg.src = "";
+      }
+      document.querySelectorAll("figure img").forEach(function (img) {
+        img.addEventListener("click", function () { openLightbox(img); });
+      });
+      lightbox.addEventListener("click", closeLightbox);
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeLightbox();
+      });
+    })();
+  </script>
+</body>
+</html>
